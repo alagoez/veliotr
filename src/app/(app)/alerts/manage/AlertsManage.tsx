@@ -10,12 +10,12 @@ export function AlertsManage() {
 
   return (
     <div className="mx-auto max-w-[680px] px-5 py-6">
-      <h1 className="font-display text-xl font-semibold">Uyarıları Yönet</h1>
+      <h1 className="font-display text-2xl font-bold tracking-tight">Uyarıları Yönet</h1>
       <p className="mt-1 text-sm text-muted">
         Takip ettiğin bir kanal viral video çıkardığında ne zaman haber verelim?
       </p>
 
-      <div className="mt-6 rounded-xl border border-edge-soft bg-surface p-5">
+      <div className="mt-6 glass-panel p-5">
         <div className="flex items-center gap-3">
           <span className="flex h-10 w-10 items-center justify-center rounded-full bg-pos/15 text-pos">
             <BellRing size={18} />

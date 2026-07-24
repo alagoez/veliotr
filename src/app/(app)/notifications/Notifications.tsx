@@ -11,7 +11,7 @@ export function Notifications() {
     <div className="mx-auto max-w-[760px] px-5 py-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="font-display text-xl font-semibold">Bildirimler</h1>
+          <h1 className="font-display text-2xl font-bold tracking-tight">Bildirimler</h1>
           <p className="mt-1 text-sm text-muted">
             Takip ettiğin kanallardan viral sinyaller ve sistem mesajları.
           </p>

@@ -13,8 +13,8 @@ import type {
 } from "@/lib/types";
 
 const SORTS: { v: SearchSort; label: string }[] = [
-  { v: "outlier", label: "Outlier skoru" },
-  { v: "upload-date", label: "Yükleme tarihi" },
+  { v: "outlier", label: "Outlier" },
+  { v: "upload-date", label: "Yeni" },
   { v: "relevance", label: "Alaka" },
 ];
 
@@ -31,6 +31,7 @@ export function HomeFeed() {
   const [showFilters, setShowFilters] = useState(false);
   const [qInput, setQInput] = useState("");
   const abortRef = useRef<AbortController | null>(null);
+  const searchRef = useRef<HTMLInputElement>(null);
 
   const fetchPage = useCallback(
     async (
@@ -78,6 +79,18 @@ export function HomeFeed() {
     return () => clearTimeout(t);
   }, [filters, sort, seed, fetchPage]);
 
+  // ⌘K / Ctrl+K → aramaya odaklan
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") {
+        e.preventDefault();
+        searchRef.current?.focus();
+      }
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, []);
+
   const submitSearch = (e: React.FormEvent) => {
     e.preventDefault();
     setSeed(undefined);
@@ -98,61 +111,76 @@ export function HomeFeed() {
       </div>
 
       <div className="min-w-0 flex-1">
-        {/* Üst çubuk */}
+        {/* Araç çubuğu */}
         <div className="app-toolbar flex flex-wrap items-center gap-2.5">
-          <form onSubmit={submitSearch} className="relative min-w-0 flex-1">
+          <form onSubmit={submitSearch} className="relative min-w-[220px] flex-1">
             <Search
               size={15}
-              className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-faint"
+              className="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 text-faint"
             />
             <input
+              ref={searchRef}
               value={qInput}
               onChange={(e) => setQInput(e.target.value)}
-              placeholder="Fikir, konu veya kanal ara... (örn: 'temettü', 'kamp', 'rank')"
-              className="search-command w-full rounded-2xl border border-edge bg-surface py-3 pl-10 pr-3 text-sm outline-none placeholder:text-faint focus:border-brand/60"
+              placeholder="Fikir, konu veya kanal ara..."
+              className="search-command w-full rounded-2xl border border-edge bg-surface py-3 pl-10 pr-14 outline-none placeholder:text-faint focus:border-brand/60"
             />
+            <span className="kbd">⌘K</span>
           </form>
 
-          <select
-            value={sort}
-            onChange={(e) => {
-              setSeed(undefined);
-              setSort(e.target.value as SearchSort);
-            }}
-            className="rounded-xl border border-edge bg-surface px-3 py-2.5 text-sm outline-none focus:border-brand/60"
-          >
+          <div className="segmented" role="group" aria-label="Sıralama">
             {SORTS.map((s) => (
-              <option key={s.v} value={s.v}>
+              <button
+                key={s.v}
+                aria-pressed={sort === s.v}
+                onClick={() => {
+                  setSeed(undefined);
+                  setSort(s.v);
+                }}
+              >
                 {s.label}
-              </option>
+              </button>
             ))}
-          </select>
+          </div>
 
           <button
             onClick={() => setSeed(Math.floor(Math.random() * 1e9))}
-            className="flex items-center gap-1.5 rounded-xl border border-edge bg-surface px-3 py-2.5 text-sm text-muted transition-colors hover:text-ink"
+            className="icon-btn"
             title="Rastgele karıştır"
           >
-            <Shuffle size={15} />
+            <Shuffle size={15} className="spin-on-hover" />
           </button>
 
           <button
             onClick={() => setShowFilters((v) => !v)}
-            className="flex items-center gap-1.5 rounded-xl border border-edge bg-surface px-3 py-2.5 text-sm text-muted transition-colors hover:text-ink lg:hidden"
+            className="icon-btn lg:hidden"
           >
             <SlidersHorizontal size={15} />
             Filtreler
           </button>
         </div>
 
-        {/* Sonuç sayısı */}
-        <p className="mt-3 text-xs text-faint">
-          {loading ? "Aranıyor..." : `${fmtPlain(total)} video bulundu`}
-        </p>
+        {/* Sonuç satırı */}
+        <div className="mt-2 flex items-center gap-2 text-xs text-faint">
+          <span className="live-dot" aria-hidden />
+          {loading ? (
+            "İndeks taranıyor..."
+          ) : (
+            <>
+              <span className="num text-muted">{fmtPlain(total)}</span> video
+              {filters.q && (
+                <>
+                  <span>·</span>
+                  <span className="text-muted">&quot;{filters.q}&quot;</span>
+                </>
+              )}
+            </>
+          )}
+        </div>
 
         {/* Hata */}
         {error && (
-          <div className="mt-4 rounded-xl border border-warn/30 bg-warn/10 p-4 text-sm text-warn">
+          <div className="glass-panel mt-4 border-warn/30 p-4 text-sm text-warn">
             {error}
           </div>
         )}
@@ -161,14 +189,15 @@ export function HomeFeed() {
         {loading ? (
           <div className="video-grid mt-4 grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-3">
             {Array.from({ length: 9 }).map((_, i) => (
-              <div key={i} className="skeleton aspect-[4/3] rounded-xl" />
+              <div key={i} className="skeleton aspect-[4/3] rounded-2xl" />
             ))}
           </div>
         ) : videos.length === 0 && !error ? (
-          <div className="mt-16 text-center">
-            <p className="text-lg font-medium">Sonuç yok</p>
-            <p className="mt-1 text-sm text-muted">
-              Filtreleri genişletmeyi veya farklı bir anahtar kelime denemeyi düşün.
+          <div className="mt-20 flex flex-col items-center text-center">
+            <div className="radar-empty" aria-hidden />
+            <p className="mt-5 font-display text-lg font-semibold">Radar temiz — sonuç yok</p>
+            <p className="mt-1 max-w-xs text-sm text-muted">
+              Filtreleri gevşetmeyi veya farklı bir anahtar kelime denemeyi düşün.
             </p>
           </div>
         ) : (
@@ -181,10 +210,10 @@ export function HomeFeed() {
 
         {/* Daha fazla */}
         {hasMore && !loading && (
-          <div className="mt-6 flex justify-center">
+          <div className="mt-7 flex justify-center">
             <button
               onClick={() => fetchPage(filters, sort, page + 1, seed, true)}
-              className="rounded-xl border border-edge bg-surface px-6 py-2.5 text-sm font-medium text-muted transition-colors hover:border-brand/50 hover:text-ink"
+              className="icon-btn px-7"
             >
               Daha fazla yükle
             </button>

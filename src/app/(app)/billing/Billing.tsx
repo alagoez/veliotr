@@ -47,84 +47,95 @@ export function Billing() {
   };
 
   return (
-    <div className="mx-auto max-w-[860px] px-5 py-6">
-      <h1 className="font-display text-xl font-semibold">Abonelik</h1>
+    <div className="mx-auto max-w-[880px] px-6 py-7">
+      <h1 className="font-display text-2xl font-bold tracking-tight">Abonelik</h1>
       <p className="mt-1 text-sm text-muted">
         Sıradaki videon patlamaya hazır mı? İzlenmeyen video çekme kısır döngüsünü kır.
       </p>
 
       {status === "success" && (
-        <div className="mt-4 rounded-xl border border-pos/40 bg-pos/10 p-4 text-sm text-pos">
-          Ödeme tamamlandı. Aboneliğin webhook ile doğrulanıyor; birkaç saniye içinde Pro durumun güncellenecek.
+        <div className="glass-panel mt-4 border-pos/40 p-4 text-sm text-pos">
+          Ödeme tamamlandı. Aboneliğin webhook ile doğrulanıyor; birkaç saniye içinde
+          Pro durumun güncellenecek.
         </div>
       )}
       {status === "cancelled" && (
-        <div className="mt-4 rounded-xl border border-warn/30 bg-warn/10 p-4 text-sm text-warn">
+        <div className="glass-panel mt-4 border-warn/30 p-4 text-sm text-warn">
           Ödeme iptal edildi. Fikrini değiştirirsen buradayız.
         </div>
       )}
       {notice && (
-        <div className="mt-4 rounded-xl border border-glow/30 bg-glow/10 p-4 text-sm text-glow">
+        <div className="glass-panel mt-4 border-glow/30 p-4 text-sm text-glow">
           {notice}
         </div>
       )}
 
-      <div className="mt-6 grid gap-4 sm:grid-cols-2">
-        {/* Yıllık */}
-        <div className="relative rounded-2xl border border-brand/50 bg-surface p-6">
-          <span className="absolute -top-3 left-5 rounded-full bg-brand px-3 py-1 text-[11px] font-semibold text-white">
-            {brand.pricing.discountBadge}
-          </span>
-          <p className="text-sm font-medium text-muted">Pro Yıllık</p>
-          <p className="mt-2">
-            <span className="font-display text-3xl font-bold">
-              {brand.pricing.currency}
-              {brand.pricing.annualMonthly}
-            </span>
-            <span className="text-sm text-muted">/ay</span>
-          </p>
-          <p className="text-xs text-faint">
-            yıllık {brand.pricing.currency}
-            {brand.pricing.annualTotal.toLocaleString("tr-TR")} ·{" "}
-            <s>
-              {brand.pricing.currency}
-              {brand.pricing.monthly}/ay
-            </s>
-          </p>
-          <ul className="mt-4 flex flex-col gap-2">
-            {FEATURES.map((f) => (
-              <li key={f} className="flex items-center gap-2 text-sm text-ink/90">
-                <Check size={14} className="text-pos" />
-                {f}
-              </li>
-            ))}
-          </ul>
-          <button
-            onClick={() => checkout("annual")}
-            disabled={busy !== null}
-            className="mt-5 flex w-full items-center justify-center gap-2 rounded-xl bg-brand py-3 text-sm font-semibold text-white transition-colors hover:bg-brand-soft disabled:opacity-50"
-          >
-            <Zap size={15} />
-            {busy === "annual" ? "Yönlendiriliyor..." : "HEMEN BAŞLA"}
-          </button>
-          <p className="mt-2 text-center text-[11px] text-faint">*İstediğin zaman iptal et</p>
+      <div className="mt-7 grid gap-5 sm:grid-cols-2">
+        {/* Yıllık — dönen ışık kenarlığı */}
+        <div className="price-hero">
+          <div className="p-7">
+            <div className="flex items-center justify-between">
+              <p className="text-sm font-semibold text-muted">Pro Yıllık</p>
+              <span className="rounded-full bg-gradient-to-r from-brand to-glow px-3 py-1 text-[11px] font-extrabold text-black">
+                {brand.pricing.discountBadge}
+              </span>
+            </div>
+            <p className="mt-3">
+              <span className="num font-display text-4xl font-bold">
+                {brand.pricing.currency}
+                {brand.pricing.annualMonthly}
+              </span>
+              <span className="text-sm text-muted">/ay</span>
+            </p>
+            <p className="num mt-0.5 text-xs text-faint">
+              yıllık {brand.pricing.currency}
+              {brand.pricing.annualTotal.toLocaleString("tr-TR")} ·{" "}
+              <s>
+                {brand.pricing.currency}
+                {brand.pricing.monthly}/ay
+              </s>
+            </p>
+            <ul className="mt-5 flex flex-col gap-2.5">
+              {FEATURES.map((f) => (
+                <li key={f} className="flex items-center gap-2.5 text-sm text-ink/90">
+                  <span className="flex h-4.5 w-4.5 items-center justify-center rounded-full bg-pos/15">
+                    <Check size={11} className="text-pos" />
+                  </span>
+                  {f}
+                </li>
+              ))}
+            </ul>
+            <button
+              onClick={() => checkout("annual")}
+              disabled={busy !== null}
+              className="mt-6 flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-brand to-glow py-3.5 text-sm font-extrabold text-black transition-transform hover:scale-[1.015] active:scale-95 disabled:opacity-50"
+            >
+              <Zap size={15} />
+              {busy === "annual" ? "Yönlendiriliyor..." : "HEMEN BAŞLA"}
+            </button>
+            <p className="mt-2 text-center text-[11px] text-faint">
+              *İstediğin zaman iptal et
+            </p>
+          </div>
         </div>
 
         {/* Aylık */}
-        <div className="rounded-2xl border border-edge bg-surface p-6">
-          <p className="text-sm font-medium text-muted">Pro Aylık</p>
-          <p className="mt-2">
-            <span className="font-display text-3xl font-bold">
+        <div className="glass-panel p-7">
+          <p className="text-sm font-semibold text-muted">Pro Aylık</p>
+          <p className="mt-3">
+            <span className="num font-display text-4xl font-bold">
               {brand.pricing.currency}
               {brand.pricing.monthly}
             </span>
             <span className="text-sm text-muted">/ay</span>
           </p>
-          <p className="text-xs text-faint">taahhüt yok</p>
-          <ul className="mt-4 flex flex-col gap-2">
+          <p className="mt-0.5 text-xs text-faint">taahhüt yok</p>
+          <ul className="mt-5 flex flex-col gap-2.5">
             {FEATURES.map((f) => (
-              <li key={f} className="flex items-center gap-2 text-sm text-ink/90">
-                <Check size={14} className="text-pos" />
+              <li key={f} className="flex items-center gap-2.5 text-sm text-ink/90">
+                <span className="flex h-4.5 w-4.5 items-center justify-center rounded-full bg-pos/15">
+                  <Check size={11} className="text-pos" />
+                </span>
                 {f}
               </li>
             ))}
@@ -132,15 +143,17 @@ export function Billing() {
           <button
             onClick={() => checkout("monthly")}
             disabled={busy !== null}
-            className="mt-5 w-full rounded-xl border border-edge bg-raised py-3 text-sm font-semibold text-ink transition-colors hover:border-brand/50 disabled:opacity-50"
+            className="icon-btn mt-6 w-full py-3.5 text-sm font-bold"
           >
             {busy === "monthly" ? "Yönlendiriliyor..." : "HEMEN BAŞLA"}
           </button>
-          <p className="mt-2 text-center text-[11px] text-faint">*İstediğin zaman iptal et</p>
+          <p className="mt-2 text-center text-[11px] text-faint">
+            *İstediğin zaman iptal et
+          </p>
         </div>
       </div>
 
-      <p className="mt-6 text-center text-xs text-faint">
+      <p className="mt-7 text-center text-xs text-faint">
         İlk ayını riske girmeden dene — bir döner parasına.
       </p>
     </div>

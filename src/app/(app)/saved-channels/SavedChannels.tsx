@@ -51,7 +51,7 @@ export function SavedChannels() {
     <div className="mx-auto max-w-[1000px] px-5 py-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="font-display text-xl font-semibold">Kanallarım</h1>
+          <h1 className="font-display text-2xl font-bold tracking-tight">Kanallarım</h1>
           <p className="mt-1 text-sm text-muted">
             Rakiplerini tek yerden izle — viral video çıkınca haberin olsun.
           </p>
@@ -85,7 +85,7 @@ export function SavedChannels() {
             return (
               <div
                 key={t.id}
-                className="rounded-xl border border-edge-soft bg-surface p-4"
+                className="glass-panel p-4"
               >
                 <div className="flex items-center gap-3">
                   <span className="flex h-10 w-10 items-center justify-center rounded-full bg-brand/15 text-sm font-semibold text-brand-soft">

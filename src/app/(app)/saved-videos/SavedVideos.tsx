@@ -20,7 +20,7 @@ export function SavedVideos() {
 
   return (
     <div className="mx-auto max-w-[1200px] px-5 py-6">
-      <h1 className="font-display text-xl font-semibold">Kaydedilenler</h1>
+      <h1 className="font-display text-2xl font-bold tracking-tight">Kaydedilenler</h1>
       <p className="mt-1 text-sm text-muted">
         Tüm araştırman tek yerde — klasörler, etiketler ve notlarla.
       </p>
@@ -100,7 +100,7 @@ export function SavedVideos() {
           {shown.map((s) => (
             <div
               key={s.id}
-              className="flex gap-4 rounded-xl border border-edge-soft bg-surface p-3 max-sm:flex-col"
+              className="glass-panel flex gap-4 p-3 max-sm:flex-col"
             >
               <div className="w-56 shrink-0 max-sm:w-full">
                 <Thumb video={s.video} />

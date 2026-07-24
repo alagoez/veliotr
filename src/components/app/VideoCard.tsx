@@ -1,17 +1,18 @@
 "use client";
 
 import { useState } from "react";
-import { Bookmark, BookmarkCheck, Radar, ExternalLink } from "lucide-react";
+import { Bookmark, BookmarkCheck, Radar, ExternalLink, Flame } from "lucide-react";
 import { Thumb } from "@/components/app/Thumb";
 import { SaveMenu } from "@/components/app/SaveMenu";
 import { fmtCompact, fmtMultiplier, fmtRelative } from "@/lib/format";
 import { isSaved, isTracked, useStore } from "@/lib/store";
 import type { Video } from "@/lib/types";
 
-function multiplierTone(x: number): string {
-  if (x >= 10) return "bg-pos/15 text-pos border-pos/40";
-  if (x >= 3) return "bg-glow/10 text-glow border-glow/30";
-  return "bg-raised text-muted border-edge";
+function multiplierTier(x: number): string {
+  if (x >= 50) return "mult-hot";
+  if (x >= 10) return "mult-high";
+  if (x >= 3) return "mult-warm";
+  return "mult-cold";
 }
 
 export function VideoCard({ video }: { video: Video }) {
@@ -22,53 +23,65 @@ export function VideoCard({ video }: { video: Video }) {
 
   const ytSearch = `https://www.youtube.com/results?search_query=${encodeURIComponent(video.title)}`;
 
+  // Medyan kıyas çubuğu: log ölçekte izlenme / (medyan × 50) → 0-100%
+  // (50x = çubuk dolu; işaret çizgisi = medyanın konumu)
+  const ratio = video.medianViews > 0 ? video.views / video.medianViews : 0;
+  const fillPct = Math.min(100, Math.max(4, (Math.log10(Math.max(ratio, 0.1)) + 1) * (100 / (Math.log10(50) + 1))));
+  const medianPct = (1 * 100) / (Math.log10(50) + 1); // ratio=1 noktası
+
   return (
-    <div className="video-card group relative flex flex-col gap-2.5 rounded-2xl border border-edge-soft bg-surface p-2.5 transition-colors hover:border-edge hover:bg-raised/60">
+    <div className="video-card group relative flex flex-col gap-2.5 rounded-2xl border border-edge-soft bg-surface p-2.5">
       <Thumb video={video} />
 
-      <div className="flex items-start justify-between gap-2">
-        <h3 className="line-clamp-2 text-[13.5px] font-medium leading-snug" title={video.title}>
+      <div className="flex items-start justify-between gap-2 px-0.5">
+        <h3 className="line-clamp-2 text-[13.5px] font-semibold leading-snug" title={video.title}>
           {video.title}
         </h3>
         <span
-          className={`shrink-0 rounded-full border px-2 py-0.5 text-xs font-semibold ${multiplierTone(video.outlierScore)}`}
+          className={`mult-badge shrink-0 ${multiplierTier(video.outlierScore)}`}
           title="Çarpan: izlenme ÷ kanal medyanı"
         >
+          {video.outlierScore >= 50 && <Flame size={11} />}
           {fmtMultiplier(video.outlierScore)}
         </span>
       </div>
 
-      <div className="text-xs text-muted">
-        <span className="text-ink/80">{video.channelTitle}</span>
+      <div className="px-0.5 text-xs text-muted">
+        <span className="font-medium text-ink/85">{video.channelTitle}</span>
         <span className="mx-1 text-faint">·</span>
-        {fmtCompact(video.subscribers)} abone
+        <span className="num">{fmtCompact(video.subscribers)}</span> abone
       </div>
 
-      <div className="flex items-center justify-between text-xs text-muted">
-        <span>
-          <span className="font-medium text-ink/90">{fmtCompact(video.views)}</span> izlenme
-          <span className="mx-1 text-faint">·</span>
-          <span title="Kanal medyanı">{fmtCompact(video.medianViews)} medyan</span>
-        </span>
-        <span>{fmtRelative(video.publishedAt)}</span>
+      {/* Medyan kıyası: bu video, kanal normalinin neresinde? */}
+      <div className="px-0.5" title={`Kanal medyanı: ${fmtCompact(video.medianViews)} izlenme`}>
+        <div className="vs-bar">
+          <i style={{ width: `${fillPct}%` }} />
+          <b style={{ left: `${medianPct}%` }} />
+        </div>
+        <div className="mt-1.5 flex items-center justify-between text-xs text-muted">
+          <span>
+            <span className="num font-semibold text-ink/90">{fmtCompact(video.views)}</span> izlenme
+            <span className="mx-1 text-faint">·</span>
+            <span className="num text-faint">{fmtCompact(video.medianViews)} medyan</span>
+          </span>
+          <span className="text-faint">{fmtRelative(video.publishedAt)}</span>
+        </div>
       </div>
 
-      <div className="mt-0.5 flex items-center gap-1.5">
+      <div className="card-actions mt-0.5 flex items-center gap-1.5">
         <div className="relative">
           <button
             onClick={() => setMenuOpen((v) => !v)}
-            className={`flex items-center gap-1.5 rounded-lg border px-2.5 py-1.5 text-xs font-medium transition-colors ${
+            className={`flex items-center gap-1.5 rounded-lg border px-2.5 py-1.5 text-xs font-semibold transition-all active:scale-95 ${
               saved
                 ? "border-brand/50 bg-brand/15 text-brand-soft"
-                : "border-edge bg-raised text-muted hover:text-ink"
+                : "border-edge bg-raised text-muted hover:border-brand/40 hover:text-ink"
             }`}
           >
             {saved ? <BookmarkCheck size={14} /> : <Bookmark size={14} />}
             {saved ? "Kaydedildi" : "Kaydet"}
           </button>
-          {menuOpen && (
-            <SaveMenu video={video} onClose={() => setMenuOpen(false)} />
-          )}
+          {menuOpen && <SaveMenu video={video} onClose={() => setMenuOpen(false)} />}
         </div>
 
         <button
@@ -95,10 +108,10 @@ export function VideoCard({ video }: { video: Video }) {
               });
             }
           }}
-          className={`flex items-center gap-1.5 rounded-lg border px-2.5 py-1.5 text-xs font-medium transition-colors ${
+          className={`flex items-center gap-1.5 rounded-lg border px-2.5 py-1.5 text-xs font-semibold transition-all active:scale-95 ${
             tracked
               ? "border-glow/40 bg-glow/10 text-glow"
-              : "border-edge bg-raised text-muted hover:text-ink"
+              : "border-edge bg-raised text-muted hover:border-glow/40 hover:text-ink"
           }`}
           title={tracked ? "Takibi bırak" : "Kanalı takip et"}
         >
@@ -110,7 +123,7 @@ export function VideoCard({ video }: { video: Video }) {
           href={ytSearch}
           target="_blank"
           rel="noreferrer"
-          className="ml-auto flex items-center gap-1 rounded-lg border border-edge bg-raised px-2 py-1.5 text-xs text-muted transition-colors hover:text-ink"
+          className="ml-auto flex items-center gap-1 rounded-lg border border-edge bg-raised px-2 py-1.5 text-xs text-muted transition-all hover:text-ink active:scale-95"
           title="YouTube'da aç"
         >
           <ExternalLink size={13} />

@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { Send, Sparkles, Folder as FolderIcon } from "lucide-react";
+import { Send, Folder as FolderIcon } from "lucide-react";
 import { useStore } from "@/lib/store";
 import type { ChatMessage } from "@/lib/types";
 
@@ -23,7 +23,7 @@ const FOLDER_PROMPTS = [
   "Buradaki ortak paketleme kalıpları neler?",
 ];
 
-/** Basit markdown → HTML olmadan güvenli render: satırlar + bold */
+/** Basit güvenli render: satırlar + bold */
 function renderContent(text: string) {
   return text.split("\n").map((line, i) => {
     const parts = line.split(/(\*\*[^*]+\*\*)/g).map((p, j) =>
@@ -92,13 +92,18 @@ export function IdeaValidator() {
   const prompts = folderId ? FOLDER_PROMPTS : GENERAL_PROMPTS;
 
   return (
-    <div className="mx-auto flex h-screen max-w-[860px] flex-col px-5 py-6">
+    <div className="mx-auto flex h-screen max-w-[880px] flex-col px-6 py-7">
       <div className="flex items-center justify-between gap-3">
-        <div>
-          <h1 className="font-display text-xl font-semibold">Fikir Doğrulayıcı</h1>
-          <p className="mt-1 text-sm text-muted">
-            Video indeksine ve klasörlerine dayanan yapay zekâ araştırma asistanı.
-          </p>
+        <div className="flex items-center gap-3">
+          <span className="ai-orb shrink-0" aria-hidden />
+          <div>
+            <h1 className="font-display text-xl font-bold tracking-tight">
+              Fikir Doğrulayıcı
+            </h1>
+            <p className="mt-0.5 text-sm text-muted">
+              İndeksine ve klasörlerine dayanan araştırma asistanı.
+            </p>
+          </div>
         </div>
         <div className="flex items-center gap-2">
           <FolderIcon size={14} className="text-faint" />
@@ -119,18 +124,18 @@ export function IdeaValidator() {
       </div>
 
       {/* Mesajlar */}
-      <div className="mt-4 flex-1 overflow-y-auto rounded-xl border border-edge-soft bg-surface/50 p-4">
+      <div className="glass-panel mt-4 flex-1 overflow-y-auto p-4">
         {messages.length === 0 ? (
           <div className="flex h-full flex-col items-center justify-center">
-            <Sparkles size={28} className="text-brand-soft" />
-            <p className="mt-3 text-sm font-medium">Ne araştırmak istersin?</p>
-            <div className="mt-4 flex max-w-md flex-wrap justify-center gap-2">
+            <p className="font-display text-base font-semibold">
+              Ne araştırmak istersin?
+            </p>
+            <p className="mt-1 text-xs text-faint">
+              Bir öneri seç ya da kendi sorunu yaz.
+            </p>
+            <div className="mt-5 flex max-w-md flex-wrap justify-center gap-2">
               {prompts.map((p) => (
-                <button
-                  key={p}
-                  onClick={() => send(p)}
-                  className="rounded-full border border-edge bg-raised px-3 py-1.5 text-xs text-muted transition-colors hover:border-brand/50 hover:text-ink"
-                >
+                <button key={p} onClick={() => send(p)} className="chip">
                   {p}
                 </button>
               ))}
@@ -141,18 +146,20 @@ export function IdeaValidator() {
             {messages.map((m, i) => (
               <div
                 key={i}
-                className={`max-w-[85%] rounded-2xl px-4 py-3 text-sm leading-relaxed ${
-                  m.role === "user"
-                    ? "self-end bg-brand/20 text-ink"
-                    : "self-start border border-edge-soft bg-raised text-ink/90"
+                className={`max-w-[85%] px-4 py-3 text-sm leading-relaxed ${
+                  m.role === "user" ? "bubble-user" : "bubble-ai"
                 }`}
               >
                 {renderContent(m.content)}
               </div>
             ))}
             {busy && (
-              <div className="max-w-[85%] self-start rounded-2xl border border-edge-soft bg-raised px-4 py-3 text-sm text-muted">
-                Düşünüyor<span className="animate-pulse">...</span>
+              <div className="bubble-ai flex max-w-[85%] items-center gap-2.5 px-4 py-3.5">
+                <span className="typing-dots" aria-label="Yazıyor">
+                  <i />
+                  <i />
+                  <i />
+                </span>
               </div>
             )}
             <div ref={bottomRef} />
@@ -176,12 +183,12 @@ export function IdeaValidator() {
               ? "Bu klasör hakkında soru sor..."
               : "Örn: Finans nişinde Shorts için 5 video fikri öner"
           }
-          className="w-full rounded-xl border border-edge bg-surface px-4 py-3 text-sm outline-none placeholder:text-faint focus:border-brand/60"
+          className="search-command w-full rounded-2xl border border-edge bg-surface px-4 py-3 text-sm outline-none placeholder:text-faint focus:border-brand/60"
         />
         <button
           type="submit"
           disabled={busy || !input.trim()}
-          className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-brand text-white transition-colors hover:bg-brand-soft disabled:opacity-40"
+          className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-brand to-glow text-black transition-transform hover:scale-105 active:scale-95 disabled:opacity-40"
         >
           <Send size={16} />
         </button>
