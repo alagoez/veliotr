@@ -52,6 +52,69 @@ function seededShuffle<T>(arr: T[], seed: number): T[] {
   return a;
 }
 
+/** "Benzer videolar": başlıktan anlamlı anahtar kelimeler çıkar (TR stopword'süz). */
+const TR_STOPWORDS = new Set([
+  "ve", "ile", "için", "bir", "bu", "şu", "o", "ne", "nasıl", "neden", "en",
+  "çok", "daha", "mi", "mı", "mu", "mü", "da", "de", "ki", "ya", "the", "a",
+  "an", "of", "to", "in", "on", "for", "and", "or", "is", "are", "my", "your",
+]);
+
+export function extractKeywords(title: string, max = 3): string[] {
+  return [...new Set(
+    norm(title)
+      .replace(/[^\p{L}\p{N}\s]/gu, " ")
+      .split(/\s+/)
+      .filter((w) => w.length >= 4 && !TR_STOPWORDS.has(w)),
+  )]
+    .sort((a, b) => b.length - a.length)
+    .slice(0, max);
+}
+
+/** Tek video getir (player + benzer kaynağı için). */
+export async function getVideoById(id: string): Promise<Video | null> {
+  if (!isSupabaseConfigured()) {
+    return getDemoDataset().videos.find((v) => v.id === id) ?? null;
+  }
+  const { createServerSupabase } = await import("@/lib/supabase/server");
+  const supabase = await createServerSupabase();
+  const { data } = await supabase
+    .from("videos")
+    .select(
+      "id, channel_id, title, thumb_url, published_at, duration_sec, is_short, views, likes, comments, engagement, outlier_score, views_per_day, views_to_subs, channels!inner(title, handle, subscribers, median_views, niche_slug)",
+    )
+    .eq("id", id)
+    .maybeSingle();
+  if (!data) return null;
+  const r = data as unknown as {
+    id: string; channel_id: string; title: string; thumb_url: string | null;
+    published_at: string; duration_sec: number; is_short: boolean;
+    views: number; likes: number; comments: number; engagement: number;
+    outlier_score: number; views_per_day: number; views_to_subs: number;
+    channels: { title: string; handle: string; subscribers: number; median_views: number; niche_slug: string };
+  };
+  return {
+    id: r.id,
+    channelId: r.channel_id,
+    channelTitle: r.channels.title,
+    channelHandle: r.channels.handle,
+    subscribers: r.channels.subscribers,
+    medianViews: r.channels.median_views,
+    nicheSlug: r.channels.niche_slug,
+    title: r.title,
+    thumbUrl: r.thumb_url,
+    publishedAt: r.published_at,
+    durationSec: r.duration_sec,
+    isShort: r.is_short,
+    views: r.views,
+    likes: r.likes,
+    comments: r.comments,
+    engagement: r.engagement,
+    outlierScore: r.outlier_score,
+    viewsPerDay: r.views_per_day,
+    viewsToSubs: r.views_to_subs,
+  };
+}
+
 export function searchDemo(req: SearchRequest): SearchResponse {
   const { videos } = getDemoDataset();
   const f = req.filters;
@@ -59,7 +122,23 @@ export function searchDemo(req: SearchRequest): SearchResponse {
   const [from, to] = dateCut(f.datePreset);
   const nowY = Date.now();
 
+  // Benzer videolar modu: kaynak başlığından anahtar kelime eşleşmesi
+  let similarSource: { id: string; title: string } | undefined;
+  let similarKeywords: string[] = [];
+  if (f.similarTo) {
+    const src = videos.find((v) => v.id === f.similarTo);
+    if (src) {
+      similarSource = { id: src.id, title: src.title };
+      similarKeywords = extractKeywords(src.title);
+    }
+  }
+
   let out = videos.filter((v) => {
+    if (similarSource) {
+      if (v.id === similarSource.id) return false;
+      const t0 = norm(v.title);
+      if (!similarKeywords.some((k) => t0.includes(k))) return false;
+    }
     if (f.niche && v.nicheSlug !== f.niche) return false;
     if (f.isShort !== undefined && v.isShort !== f.isShort) return false;
     const t = new Date(v.publishedAt).getTime();
@@ -123,6 +202,7 @@ export function searchDemo(req: SearchRequest): SearchResponse {
     page: req.page,
     hasMore: start + pageSize < out.length,
     demo: true,
+    similarSource,
   };
 }
 
@@ -143,6 +223,20 @@ export async function searchSupabase(req: SearchRequest): Promise<SearchResponse
       "id, channel_id, title, thumb_url, published_at, duration_sec, is_short, views, likes, comments, engagement, outlier_score, views_per_day, views_to_subs, channels!inner(title, handle, subscribers, median_views, niche_slug)",
       { count: "exact" },
     );
+
+  // Benzer videolar modu
+  let similarSource: { id: string; title: string } | undefined;
+  if (f.similarTo) {
+    const src = await getVideoById(f.similarTo);
+    if (src) {
+      similarSource = { id: src.id, title: src.title };
+      const kws = extractKeywords(src.title).map((k) => k.replace(/[%,()"]/g, ""));
+      if (kws.length) {
+        qb = qb.or(kws.map((k) => `title.ilike.%${k}%`).join(","));
+      }
+      qb = qb.neq("id", src.id);
+    }
+  }
 
   if (f.q) qb = qb.ilike("title", `%${f.q}%`);
   if (f.niche) qb = qb.eq("channels.niche_slug", f.niche);
@@ -226,6 +320,7 @@ export async function searchSupabase(req: SearchRequest): Promise<SearchResponse
     page: req.page,
     hasMore: from + pageSize < (count ?? 0),
     demo: false,
+    similarSource,
   };
 }
 

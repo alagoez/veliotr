@@ -1,7 +1,8 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
-import { Search, Shuffle, SlidersHorizontal } from "lucide-react";
+import { useSearchParams } from "next/navigation";
+import { Search, Shuffle, SlidersHorizontal, X } from "lucide-react";
 import { FilterPanel } from "@/components/app/FilterPanel";
 import { VideoCard } from "@/components/app/VideoCard";
 import { fmtPlain } from "@/lib/format";
@@ -18,8 +19,21 @@ const SORTS: { v: SearchSort; label: string }[] = [
   { v: "relevance", label: "Alaka" },
 ];
 
-export function HomeFeed() {
-  const [filters, setFilters] = useState<SearchFilters>({});
+type Props = {
+  /** Kilitli başlangıç filtreleri (örn. Shorts görünümü: { isShort: true }) */
+  initialFilters?: SearchFilters;
+  heading?: string;
+  subheading?: string;
+};
+
+export function HomeFeed({ initialFilters, heading, subheading }: Props = {}) {
+  const params = useSearchParams();
+  const similarParam = params.get("similar") ?? undefined;
+  const [filters, setFilters] = useState<SearchFilters>({
+    ...initialFilters,
+    similarTo: similarParam,
+  });
+  const [similarSource, setSimilarSource] = useState<{ id: string; title: string } | null>(null);
   const [sort, setSort] = useState<SearchSort>("outlier");
   const [seed, setSeed] = useState<number | undefined>(undefined);
   const [videos, setVideos] = useState<Video[]>([]);
@@ -62,6 +76,7 @@ export function HomeFeed() {
         setTotal(data.total);
         setPage(data.page);
         setHasMore(data.hasMore);
+        setSimilarSource(data.similarSource ?? null);
       } catch (e) {
         if ((e as Error).name !== "AbortError") {
           setError((e as Error).message);
@@ -97,6 +112,12 @@ export function HomeFeed() {
     setFilters((f) => ({ ...f, q: qInput.trim() || undefined }));
   };
 
+  const clearSimilar = () => {
+    setSimilarSource(null);
+    setFilters((f) => ({ ...f, similarTo: undefined }));
+    window.history.replaceState(null, "", window.location.pathname);
+  };
+
   return (
     <div className="app-feed mx-auto flex max-w-[1520px] gap-7 px-6 py-7 max-lg:flex-col">
       {/* Filtre paneli */}
@@ -111,6 +132,13 @@ export function HomeFeed() {
       </div>
 
       <div className="min-w-0 flex-1">
+        {heading && (
+          <div className="mb-3">
+            <h1 className="font-display text-2xl font-bold tracking-tight">{heading}</h1>
+            {subheading && <p className="mt-1 text-sm text-muted">{subheading}</p>}
+          </div>
+        )}
+
         {/* Araç çubuğu */}
         <div className="app-toolbar flex flex-wrap items-center gap-2.5">
           <form onSubmit={submitSearch} className="relative min-w-[220px] flex-1">
@@ -161,7 +189,7 @@ export function HomeFeed() {
         </div>
 
         {/* Sonuç satırı */}
-        <div className="mt-2 flex items-center gap-2 text-xs text-faint">
+        <div className="mt-2 flex flex-wrap items-center gap-2 text-xs text-faint">
           <span className="live-dot" aria-hidden />
           {loading ? (
             "İndeks taranıyor..."
@@ -175,6 +203,13 @@ export function HomeFeed() {
                 </>
               )}
             </>
+          )}
+          {similarSource && (
+            <button onClick={clearSimilar} className="chip !text-glow" title="Benzer modundan çık">
+              Benzerleri: &quot;{similarSource.title.slice(0, 42)}
+              {similarSource.title.length > 42 ? "…" : ""}&quot;
+              <X size={11} />
+            </button>
           )}
         </div>
 

@@ -10,6 +10,10 @@ export async function proxy(request: NextRequest) {
     || request.nextUrl.pathname.startsWith("/billing")
     || request.nextUrl.pathname.startsWith("/idea-validator")
     || request.nextUrl.pathname.startsWith("/alerts")
+    || request.nextUrl.pathname.startsWith("/shorts")
+    || request.nextUrl.pathname.startsWith("/databases")
+    || request.nextUrl.pathname.startsWith("/player")
+    || request.nextUrl.pathname.startsWith("/learn")
     || request.nextUrl.pathname.startsWith("/getting-started");
   if (!url || !key) {
     if (process.env.NODE_ENV === "production" && isProtected && process.env.DEMO_MODE !== "true") {

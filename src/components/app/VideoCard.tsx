@@ -1,7 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { Bookmark, BookmarkCheck, Radar, ExternalLink, Flame } from "lucide-react";
+import Link from "next/link";
+import { Bookmark, BookmarkCheck, Radar, ExternalLink, Flame, Copy } from "lucide-react";
 import { Thumb } from "@/components/app/Thumb";
 import { SaveMenu } from "@/components/app/SaveMenu";
 import { fmtCompact, fmtMultiplier, fmtRelative } from "@/lib/format";
@@ -31,11 +32,15 @@ export function VideoCard({ video }: { video: Video }) {
 
   return (
     <div className="video-card group relative flex flex-col gap-2.5 rounded-2xl border border-edge-soft bg-surface p-2.5">
-      <Thumb video={video} />
+      <Link href={`/player/${video.id}`} aria-label={`${video.title} — incele`}>
+        <Thumb video={video} />
+      </Link>
 
       <div className="flex items-start justify-between gap-2 px-0.5">
         <h3 className="line-clamp-2 text-[13.5px] font-semibold leading-snug" title={video.title}>
-          {video.title}
+          <Link href={`/player/${video.id}`} className="hover:text-brand-soft">
+            {video.title}
+          </Link>
         </h3>
         <span
           className={`mult-badge shrink-0 ${multiplierTier(video.outlierScore)}`}
@@ -119,11 +124,18 @@ export function VideoCard({ video }: { video: Video }) {
           {tracked ? "Takipte" : "Takip et"}
         </button>
 
+        <Link
+          href={`/home?similar=${encodeURIComponent(video.id)}`}
+          className="ml-auto flex items-center gap-1 rounded-lg border border-edge bg-raised px-2 py-1.5 text-xs text-muted transition-all hover:border-brand/40 hover:text-ink active:scale-95"
+          title="Benzer videoları gör"
+        >
+          <Copy size={13} />
+        </Link>
         <a
           href={ytSearch}
           target="_blank"
           rel="noreferrer"
-          className="ml-auto flex items-center gap-1 rounded-lg border border-edge bg-raised px-2 py-1.5 text-xs text-muted transition-all hover:text-ink active:scale-95"
+          className="flex items-center gap-1 rounded-lg border border-edge bg-raised px-2 py-1.5 text-xs text-muted transition-all hover:text-ink active:scale-95"
           title="YouTube'da aç"
         >
           <ExternalLink size={13} />

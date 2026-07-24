@@ -67,6 +67,8 @@ export type SearchFilters = {
   includeKeywords?: string[];
   excludeKeywords?: string[];
   excludeChannels?: string[];
+  /** Bu video ID'sine benzer videoları getir ("Benzer videoları gör") */
+  similarTo?: string;
 };
 
 export type SearchSort = "outlier" | "upload-date" | "relevance";
@@ -85,6 +87,8 @@ export type SearchResponse = {
   page: number;
   hasMore: boolean;
   demo: boolean;
+  /** similarTo istendiyse kaynak video bilgisi */
+  similarSource?: { id: string; title: string };
 };
 
 export type Folder = {

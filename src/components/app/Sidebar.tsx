@@ -4,10 +4,13 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
   Compass,
+  Zap as ShortsIcon,
+  Library,
   Bookmark,
   Radar,
   Bell,
   Sparkles,
+  BookOpen,
   CreditCard,
   LogIn,
   Zap,
@@ -18,10 +21,13 @@ import { BrandLogo } from "@/components/BrandLogo";
 
 export const NAV = [
   { href: "/home", label: "Keşfet", icon: Compass },
+  { href: "/shorts", label: "Shorts Radarı", icon: ShortsIcon },
+  { href: "/databases", label: "Hazır Listeler", icon: Library },
   { href: "/saved-videos", label: "Kaydedilenler", icon: Bookmark },
   { href: "/saved-channels", label: "Kanallarım", icon: Radar },
   { href: "/notifications", label: "Bildirimler", icon: Bell },
   { href: "/idea-validator", label: "Fikir Doğrulayıcı", icon: Sparkles },
+  { href: "/learn", label: "Kaynak Kasası", icon: BookOpen },
   { href: "/billing", label: "Abonelik", icon: CreditCard },
 ] as const;
 
