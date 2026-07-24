@@ -1,0 +1,27 @@
+[
+  {
+    "niche": "oyun",
+    "_comment": "Buraya gerçek Türk kanal ID'lerini ekleyin (UC... formatında). Kanal ID: kanal sayfası → Hakkında → Kanal ID paylaş. Örnekler placeholder'dır.",
+    "channelIds": []
+  },
+  {
+    "niche": "finans",
+    "channelIds": []
+  },
+  {
+    "niche": "yemek",
+    "channelIds": []
+  },
+  {
+    "niche": "vlog",
+    "channelIds": []
+  },
+  {
+    "niche": "teknoloji",
+    "channelIds": []
+  },
+  {
+    "niche": "egitim",
+    "channelIds": []
+  }
+]
