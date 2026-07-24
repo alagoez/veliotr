@@ -147,12 +147,31 @@ export async function searchSupabase(req: SearchRequest): Promise<SearchResponse
   if (f.q) qb = qb.ilike("title", `%${f.q}%`);
   if (f.niche) qb = qb.eq("channels.niche_slug", f.niche);
   if (f.isShort !== undefined) qb = qb.eq("is_short", f.isShort);
-  if (f.multiplier?.min !== undefined) qb = qb.gte("outlier_score", f.multiplier.min);
-  if (f.multiplier?.max !== undefined) qb = qb.lte("outlier_score", f.multiplier.max);
-  if (f.views?.min !== undefined) qb = qb.gte("views", f.views.min);
-  if (f.views?.max !== undefined) qb = qb.lte("views", f.views.max);
-  if (f.durationSec?.min !== undefined) qb = qb.gte("duration_sec", f.durationSec.min);
-  if (f.durationSec?.max !== undefined) qb = qb.lte("duration_sec", f.durationSec.max);
+
+  const applyRange = (column: string, range?: { min?: number; max?: number }) => {
+    if (range?.min !== undefined) qb = qb.gte(column, range.min);
+    if (range?.max !== undefined) qb = qb.lte(column, range.max);
+  };
+  applyRange("outlier_score", f.multiplier);
+  applyRange("views", f.views);
+  applyRange("duration_sec", f.durationSec);
+  applyRange("views_to_subs", f.viewsToSubs);
+  applyRange("likes", f.likes);
+  applyRange("comments", f.comments);
+  applyRange("engagement", f.engagement ? { min: f.engagement.min === undefined ? undefined : f.engagement.min / 100, max: f.engagement.max === undefined ? undefined : f.engagement.max / 100 } : undefined);
+  applyRange("channels.subscribers", f.subscribers);
+  applyRange("channels.median_views", f.medianViews);
+  applyRange("channels.total_views", f.channelTotalViews);
+  applyRange("channels.video_count", f.channelVideoCount);
+  if (f.includeKeywords?.length) {
+    for (const keyword of f.includeKeywords) qb = qb.ilike("title", `%${keyword}%`);
+  }
+  if (f.excludeKeywords?.length) {
+    for (const keyword of f.excludeKeywords) qb = qb.not("title", "ilike", `%${keyword}%`);
+  }
+  if (f.excludeChannels?.length) {
+    for (const channel of f.excludeChannels) qb = qb.not("channels.title", "ilike", `%${channel}%`);
+  }
   const [dFrom, dTo] = dateCut(f.datePreset);
   if (dFrom > 0) qb = qb.gte("published_at", new Date(dFrom).toISOString());
   qb = qb.lte("published_at", new Date(dTo).toISOString());

@@ -7,6 +7,17 @@ export function isSupabaseConfigured(): boolean {
   );
 }
 
+export function isDemoMode(): boolean {
+  return process.env.DEMO_MODE === "true"
+    || (process.env.NODE_ENV !== "production" && !isSupabaseConfigured());
+}
+
+export function isProductionReady(): boolean {
+  return isSupabaseConfigured()
+    && Boolean(process.env.SUPABASE_SERVICE_ROLE_KEY)
+    && Boolean(process.env.NEXT_PUBLIC_APP_URL);
+}
+
 export function isGeminiConfigured(): boolean {
   return Boolean(process.env.GEMINI_API_KEY);
 }

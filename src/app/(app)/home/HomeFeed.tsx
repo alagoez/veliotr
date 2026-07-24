@@ -85,7 +85,7 @@ export function HomeFeed() {
   };
 
   return (
-    <div className="mx-auto flex max-w-[1400px] gap-6 px-5 py-6 max-lg:flex-col">
+    <div className="app-feed mx-auto flex max-w-[1520px] gap-7 px-6 py-7 max-lg:flex-col">
       {/* Filtre paneli */}
       <div className={`${showFilters ? "" : "max-lg:hidden"}`}>
         <FilterPanel
@@ -99,7 +99,7 @@ export function HomeFeed() {
 
       <div className="min-w-0 flex-1">
         {/* Üst çubuk */}
-        <div className="flex flex-wrap items-center gap-2.5">
+        <div className="app-toolbar flex flex-wrap items-center gap-2.5">
           <form onSubmit={submitSearch} className="relative min-w-0 flex-1">
             <Search
               size={15}
@@ -109,7 +109,7 @@ export function HomeFeed() {
               value={qInput}
               onChange={(e) => setQInput(e.target.value)}
               placeholder="Fikir, konu veya kanal ara... (örn: 'temettü', 'kamp', 'rank')"
-              className="w-full rounded-xl border border-edge bg-surface py-2.5 pl-9 pr-3 text-sm outline-none placeholder:text-faint focus:border-brand/60"
+              className="search-command w-full rounded-2xl border border-edge bg-surface py-3 pl-10 pr-3 text-sm outline-none placeholder:text-faint focus:border-brand/60"
             />
           </form>
 
@@ -159,7 +159,7 @@ export function HomeFeed() {
 
         {/* Izgara */}
         {loading ? (
-          <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
+          <div className="video-grid mt-4 grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-3">
             {Array.from({ length: 9 }).map((_, i) => (
               <div key={i} className="skeleton aspect-[4/3] rounded-xl" />
             ))}
@@ -172,7 +172,7 @@ export function HomeFeed() {
             </p>
           </div>
         ) : (
-          <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
+          <div className="video-grid mt-4 grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-3">
             {videos.map((v) => (
               <VideoCard key={v.id} video={v} />
             ))}

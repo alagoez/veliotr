@@ -78,7 +78,7 @@ export function FilterPanel({ filters, onChange }: Props) {
   const patch = (p: Partial<SearchFilters>) => onChange({ ...filters, ...p });
 
   return (
-    <div className="flex w-64 shrink-0 flex-col gap-4 max-lg:w-full">
+    <div className="filter-panel flex w-64 shrink-0 flex-col gap-4 max-lg:w-full">
       <div className="flex items-center justify-between">
         <h2 className="text-sm font-semibold">Filtreler</h2>
         <button

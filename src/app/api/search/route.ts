@@ -1,27 +1,26 @@
 import { search } from "@/lib/search";
-import type { SearchRequest } from "@/lib/types";
+import { checkRateLimit, RateLimitError, requestIdentifier } from "@/lib/rate-limit";
+import { SearchRequestSchema } from "@/lib/validators";
+import { getCurrentUser } from "@/lib/auth";
+import { isDemoMode } from "@/lib/env";
 
 export async function POST(request: Request) {
-  let body: SearchRequest;
   try {
-    body = (await request.json()) as SearchRequest;
-  } catch {
-    return Response.json({ error: "Geçersiz istek gövdesi" }, { status: 400 });
-  }
-
-  const req: SearchRequest = {
-    filters: body.filters ?? {},
-    sort: body.sort ?? "outlier",
-    page: Math.max(0, body.page ?? 0),
-    pageSize: Math.min(48, Math.max(6, body.pageSize ?? 24)),
-    seed: body.seed,
-  };
-
-  try {
-    const res = await search(req);
-    return Response.json(res);
-  } catch (e) {
-    const msg = e instanceof Error ? e.message : "Bilinmeyen hata";
-    return Response.json({ error: msg }, { status: 500 });
+    const user = isDemoMode() ? null : await getCurrentUser();
+    if (!isDemoMode() && !user) {
+      return Response.json({ error: "auth_required" }, { status: 401 });
+    }
+    checkRateLimit(`search:${user?.id ?? requestIdentifier(request)}`, 60);
+    const parsed = SearchRequestSchema.safeParse(await request.json());
+    if (!parsed.success) {
+      return Response.json({ error: "Geçersiz arama parametreleri", details: parsed.error.flatten() }, { status: 400 });
+    }
+    return Response.json(await search(parsed.data));
+  } catch (error) {
+    if (error instanceof RateLimitError) {
+      return Response.json({ error: error.message }, { status: 429, headers: { "Retry-After": String(Math.ceil((error.resetAt - Date.now()) / 1000)) } });
+    }
+    const message = error instanceof Error ? error.message : "Bilinmeyen hata";
+    return Response.json({ error: message }, { status: 500 });
   }
 }

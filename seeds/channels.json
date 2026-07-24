@@ -1,27 +1,92 @@
 [
   {
     "niche": "oyun",
-    "_comment": "Buraya gerçek Türk kanal ID'lerini ekleyin (UC... formatında). Kanal ID: kanal sayfası → Hakkında → Kanal ID paylaş. Örnekler placeholder'dır.",
-    "channelIds": []
+    "channelIds": [
+      "UC7wvcJ4QUZFjKDfScJFd1jg",
+      "UChEDLjBMCK342E_gRg42tWg",
+      "UCsg2PxxJXdQA6LrM9dNUCHQ",
+      "UCryxjf0P9pNlq-i-aXdUiaQ",
+      "UCfZrY2Mc9MAHVuGfaQtuSkQ",
+      "UCe2i8QyJ4bPw7EowHzip9hw",
+      "UC-GPb1IbDOzMKxy4C9nIO7w",
+      "UCFye04tUGVskE6QWD4VOfLA",
+      "UCHQX_o2j2XfOjju5cB1XYwA",
+      "UCZ88qRrHvkF6y6ME8h8ijZQ"
+    ]
   },
   {
     "niche": "finans",
-    "channelIds": []
+    "channelIds": [
+      "UCLmd4dMIqKoOaMnrBW_bRkQ",
+      "UCyadoycYsg0MoecdrVqhRKQ",
+      "UCy2a5mSg_5CzBgqLBjwygtw",
+      "UCUzm9dBsZJb70lk6ezH4iUQ",
+      "UCMDPryRSIBE0hRlkJ492YRQ",
+      "UCQuF2GkdW0hY4nR2QyYT4Nw",
+      "UC2n7FaAFNuIpR9Ul3R_MGuw",
+      "UCr0qY2sMUT0JzehTwKS3tzw",
+      "UCr2hIol-w6RcAPTAWJirDDA",
+      "UCXOp8v1ic4Cn3XxR0L2rtyQ"
+    ]
   },
   {
     "niche": "yemek",
-    "channelIds": []
+    "channelIds": [
+      "UCeh3XQszWO6lLdKz_SZmm1Q",
+      "UCFMJh-GNxSZf153Ba5NhZmg",
+      "UCAx49MknYjuIYKdrnAHf6EQ",
+      "UCjYiVeswCisEpqOZDoFJEZg",
+      "UCs8rNcXI79m3r4u08ErwVSw",
+      "UCCG3HkdfniJlPl63fX1qcTQ",
+      "UC4_wTN-Jui5mQZGR_JBqg_A",
+      "UCdNP9ogVxI55nlqWDKWEizQ",
+      "UCWPHgv3zD2bI0I7-h4hqnow",
+      "UCglSYzE1BYSdvVz7u2ygwKw"
+    ]
   },
   {
     "niche": "vlog",
-    "channelIds": []
+    "channelIds": [
+      "UCwVgEN45h4Q5hXKqdCxhFBQ",
+      "UCWrHGz7EwG81FhLgTXGQDzg",
+      "UCPuSacyAz-OVK-bM1pegdKA",
+      "UCf_YZw6NsesmfShRJD_xDcg",
+      "UCK47nYYveCRcb-UXVpc2yAg",
+      "UCP4yuIaQBsK-Ysoa0_GigTQ",
+      "UCSpVoj--x1GY2dVQdOQyvaw",
+      "UCqsx7V99KKiKE5ql2GmkoEQ",
+      "UClyH-hhkDG_bmVcEMergFCg",
+      "UCFpwq0pbGJ7mIjJ-Ce1zc2w"
+    ]
   },
   {
     "niche": "teknoloji",
-    "channelIds": []
+    "channelIds": [
+      "UC-gs6ml23jQKvLC86LzpQ0g",
+      "UCu_1Euokgg3uS9nHwGeC76g",
+      "UCleeGHYm74udRpj3-krDfdA",
+      "UCVU6uUg4snljBqkbQ8fkBWw",
+      "UCSo_it8y_WM0dLlvuOs34Zg",
+      "UCHj5MzwIZGujsfrb4VlphTQ",
+      "UCDOXP4Ba6OlMzLLd5SOGaxA",
+      "UCYt9nXKzDdLSBbngvpGnZTw",
+      "UCF6eulZ18rZaDD3l7ExX3-w",
+      "UCQDBv9q_7NAxcmYzuHj7H_Q"
+    ]
   },
   {
     "niche": "egitim",
-    "channelIds": []
+    "channelIds": [
+      "UCJR-zSbzJP0N7V7OK73jdUQ",
+      "UCrzbedlioa53HplXTnUpWoQ",
+      "UCstJcPjAsj5Q3ks3IpFbkuw",
+      "UCDPPs6ma3aNvFRiLkzUrveA",
+      "UC2Ni2Iyk0teeNitaP_LcjmQ",
+      "UC5pivY9xQEn-vWwCW4Okhzw",
+      "UCDyfKPimZJOPxgAxGJ3LCqA",
+      "UC58zXANihlqcfY8IGlCjKKQ",
+      "UCpuAfwQGx1LQjZk2JXtpbsQ",
+      "UCYt9nXKzDdLSBbngvpGnZTw"
+    ]
   }
 ]

@@ -58,6 +58,10 @@ create index if not exists idx_videos_published on videos (published_at desc);
 create index if not exists idx_videos_channel on videos (channel_id);
 create index if not exists idx_videos_title_trgm on videos using gin (title gin_trgm_ops);
 create index if not exists idx_channels_niche on channels (niche_slug);
+create index if not exists idx_videos_views on videos (views desc);
+create index if not exists idx_videos_engagement on videos (engagement desc);
+create index if not exists idx_videos_channel_published on videos (channel_id, published_at desc);
+create index if not exists idx_view_snapshots_captured on view_snapshots (captured_at desc);
 
 -- ============ Kullanıcı alanı (RLS) ============
 
@@ -166,7 +170,7 @@ create policy "snapshots okunur" on view_snapshots for select to authenticated u
 do $$
 declare t text;
 begin
-  foreach t in array array['profiles','folders','saved_videos','channel_lists','tracked_channels','alerts','notifications','chats']
+  foreach t in array array['folders','saved_videos','channel_lists','tracked_channels','alerts','notifications','chats']
   loop
     execute format('alter table %I enable row level security', t);
     execute format(
@@ -176,10 +180,19 @@ begin
   end loop;
 end $$;
 
--- profiles: user_id yerine id kolonu kullanır — özel politika
-drop policy if exists "profiles sahibi" on profiles;
+-- profiles: user_id yerine id kolonu kullanır — ayrı politika
+alter table profiles enable row level security;
+drop policy if exists "profil sahibi" on profiles;
 create policy "profil sahibi" on profiles for all to authenticated
   using (id = auth.uid()) with check (id = auth.uid());
+
+-- İçerik tablolarında anon okuma yerine authenticated kullanıcı erişimi tercih edilir.
+drop policy if exists "niches okunur" on niches;
+drop policy if exists "channels okunur" on channels;
+drop policy if exists "videos okunur" on videos;
+create policy "niches okunur" on niches for select to authenticated using (true);
+create policy "channels okunur" on channels for select to authenticated using (true);
+create policy "videos okunur" on videos for select to authenticated using (true);
 
 alter table chat_messages enable row level security;
 create policy "chat mesajı sahibi" on chat_messages for all to authenticated

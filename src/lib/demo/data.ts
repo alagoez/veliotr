@@ -20,84 +20,36 @@ function rng(seed: number) {
 }
 
 export const NICHES = [
-  { slug: "oyun", name: "Oyun" },
-  { slug: "finans", name: "Finans & Borsa" },
-  { slug: "yemek", name: "Yemek" },
-  { slug: "vlog", name: "Vlog & Yaşam" },
-  { slug: "teknoloji", name: "Teknoloji" },
-  { slug: "egitim", name: "Eğitim" },
+  { slug: "oyun", name: "Gaming" },
+  { slug: "finans", name: "Business & Finance" },
+  { slug: "yemek", name: "Food & Cooking" },
+  { slug: "vlog", name: "Travel & Adventure" },
+  { slug: "teknoloji", name: "Technology & AI" },
+  { slug: "egitim", name: "Education & Science" },
+  { slug: "fitness", name: "Fitness & Wellness" },
+  { slug: "entertainment", name: "Entertainment" },
 ] as const;
 
 const CHANNEL_NAMES: Record<string, string[]> = {
-  oyun: [
-    "Oyun Delisi", "Pixel Efe", "GG Kaan", "Zort Gaming", "Loot Peri",
-    "Ramazan Oynuyor", "Klavye Savaşçısı", "Efsane Co-op",
-  ],
-  finans: [
-    "Borsa Günlüğü", "Parayı Konuşalım", "Yatırımcı Baba", "Temettü Avcısı",
-    "Kripto Pusula", "Finans Atölyesi", "Bütçe Ustası", "Ekonomi Sohbetleri",
-  ],
-  yemek: [
-    "Anne Mutfağı", "Şef Deniz", "Tarif Kazanı", "Sokak Lezzetleri TR",
-    "Tatlı Krizi", "Mangal Kardeşler", "Pratik Tarifler", "Mutfak Sırları",
-  ],
-  vlog: [
-    "Bi Gün Böyle", "Yolda Olmak", "Ada Vlog", "Kamptayız",
-    "Şehirde Yaşam", "Merve Günlükleri", "Rutinlerim", "Uzak Yollar",
-  ],
-  teknoloji: [
-    "Teknoloji Masası", "İncelemeci", "Donanım Delisi", "Yazılım Sohbeti",
-    "Mobil Dünya", "Kutu Açılımı TR", "Ucuz Teknoloji", "Yapay Zeka Günlüğü",
-  ],
-  egitim: [
-    "10 Dakikada Öğren", "Sınav Koçu", "İngilizce Kampı", "Tarih Anlatıyorum",
-    "Matematik Sever", "Kariyer Rehberi", "Kitap Kulübü", "Bilim Kurdu",
-  ],
+  oyun: ["Pixel Forge", "Game Theory Lab", "Level Up Daily", "The Speedrun", "Cozy Gamer", "Critical Hit", "Noob to Pro", "The Quest Log"],
+  finans: ["The Market Brief", "Money Explained", "Modern Millennial", "Build in Public", "The Founder Files", "Wealth Signals", "Finance Simplified", "The Growth Room"],
+  yemek: ["Basics with Babish", "The Food Lab", "Home Plate", "Street Food Atlas", "Quick Bites", "The Dessert Room", "Chef's Table", "One Pan Kitchen"],
+  vlog: ["Wander Theory", "Lost with Purpose", "Urban Nomad", "The Great Detour", "Van Life Stories", "Passport Ready", "Hidden Routes", "Weekend Atlas"],
+  teknoloji: ["Marques Brownlee", "The Verge", "Fireship", "AI Explained", "Circuit Breaker", "Future Tools", "Build With Me", "Tech Unpacked"],
+  egitim: ["Kurzgesagt", "Veritasium", "CrashCourse", "The Knowledge Project", "Simple History", "The Science Desk", "Study With Me", "Learn With Leon"],
+  fitness: ["Hybrid Calisthenics", "Mind Pump", "Yoga With Adriene", "The Running Channel", "Strong Habits", "Wellness Reset", "Mobility Lab", "Train Smart"],
+  entertainment: ["Vox Pop", "The Daily Drop", "Culture Decode", "Screen Talk", "The Creator Studio", "Story Mode", "Internet Historian", "Late Night Lab"],
 };
 
 const TITLE_TEMPLATES: Record<string, string[]> = {
-  oyun: [
-    "Bu oyunda HERKESİN yaptığı hata", "24 saat boyunca sadece {X} oynadım",
-    "Efsane geri dönüş: {X} rekoru kırdık", "Yeni güncelleme her şeyi değiştirdi",
-    "1 TL'lik hesapla turnuva kazanmak", "Kimsenin bilmediği 7 hile (yasal)",
-    "Bu taktikle rank atlamak ÇOK kolay", "Oyunun en zor bölümünü bitirdim",
-    "Çaylak vs Efsane oyuncu farkı", "Bu ayarları AÇMADAN oynama",
-  ],
-  finans: [
-    "Aylık {X} TL temettü nasıl kurulur?", "Bu hisseyi herkes konuşuyor, neden?",
-    "Enflasyona karşı 5 gerçek koruma", "25 yaşında emeklilik planı yaptım",
-    "1.000 TL ile yatırıma başlamak", "Bankaların söylemediği gerçek",
-    "Portföyümü açıklıyorum (%{X} getiri)", "Kirada mı oturmalı, ev mi almalı?",
-    "Asgari ücretle birikim mümkün mü?", "Bu hatayı yapan parasını eritiyor",
-  ],
-  yemek: [
-    "Orijinal {X} tarifi (lokanta sırrı)", "3 malzemeyle efsane tatlı",
-    "1 tavuktan 4 öğün çıkarmak", "Bunu bir kere yapan vazgeçemiyor",
-    "Annemin 40 yıllık hamur sırrı", "5 dakikada kahvaltı sofrası",
-    "Ustasından adım adım {X}", "Evde ilk kez yapanlar için {X}",
-    "Bu yöntemle et LOKUM gibi oluyor", "Ramazan menüsü: 7 günlük plan",
-  ],
-  vlog: [
-    "Her şeyi bırakıp köye taşındık", "İstanbul'da 1 gün / 100 TL",
-    "Yalnız kamp: fırtınaya yakalandım", "Ev turu: 45 m² stüdyo dönüşümü",
-    "Sabah 5'te kalkmak hayatımı değiştirdi", "30 gün şekersiz yaşadım",
-    "Türkiye'nin en ucuz tatil rotası", "Minimalist oldum: 100 eşyayla yaşam",
-    "İşimi bıraktım, işte olanlar", "Bir haftalık gerçek market alışverişi",
-  ],
-  teknoloji: [
-    "{X} inceleme: Almadan önce izle", "Bu telefonu kimse önermiyor ama...",
-    "20.000 TL altı en iyi kurulum", "Yapay zeka ile 1 günde web sitesi",
-    "iPhone vs Android: 2026 finali", "Bu uygulamaları hemen sil",
-    "Ucuza kurduğum oyun bilgisayarı", "5 yıllık laptop'u uçurdum",
-    "Herkesin kullandığı ama bilmediği özellik", "Kutudan çıkan sürpriz: {X}",
-  ],
-  egitim: [
-    "İngilizceyi 6 ayda böyle öğrendim", "Sınavda çıkacak 20 kritik soru",
-    "Not tutma yöntemim (üniversite)", "Ezber değil: kalıcı öğrenme tekniği",
-    "10 dakikada {X} konusu bitiyor", "Hoca anlatmıyor ama bu çıkıyor",
-    "CV'nizde bu hata varsa elenirsiniz", "Günde 1 saatle dil öğrenmek",
-    "Bu kitabı okumadan mezun olma", "Odaklanamayanlar için 5 teknik",
-  ],
+  oyun: ["The mistake every player makes", "I played {X} for 24 hours", "We broke the impossible record", "The update changed everything", "Beginner vs pro: the real difference", "7 secrets nobody tells you", "I tried the hardest challenge", "Never play without these settings"],
+  finans: ["How I built a second income stream", "The money rule nobody taught me", "I tested 5 side hustles", "What successful founders do differently", "The truth about passive income", "I invested $1,000 for 30 days", "This market signal is impossible to ignore", "How to grow from zero"],
+  yemek: ["The original {X} recipe", "3 ingredients, restaurant results", "I cooked every version of this dish", "The secret chefs never share", "One pan, five incredible meals", "The viral recipe actually tested", "Street food worth traveling for", "The easiest dinner you will make"],
+  vlog: ["I found the city nobody talks about", "48 hours with only $100", "The most underrated road trip", "I moved abroad for 30 days", "This place looks unreal", "The travel mistake everyone makes", "A local guide to hidden gems", "I took the long way home"],
+  teknoloji: ["{X} review: before you buy", "I tested the internet's favorite AI tools", "The best setup under $1,000", "This feature changes everything", "I built a website in one day", "The apps I deleted immediately", "What nobody tells you about AI", "The future is closer than you think"],
+  egitim: ["The science behind {X}", "I learned a new skill in 30 days", "10 ideas that changed how I think", "The study method that finally worked", "What school forgot to teach us", "The simple explanation nobody gives", "I tested the most popular technique", "The history behind the headline"],
+  fitness: ["I tried the routine for 30 days", "The workout mistake holding you back", "What happens when you walk daily", "The simplest plan that actually works", "I tested 5 recovery hacks", "Build strength without a gym", "The science of better sleep", "One habit that changed my energy"],
+  entertainment: ["The story behind the viral moment", "I watched every version so you don't have to", "What this trend really means", "The creator formula decoded", "The internet's strangest rabbit hole", "This ending changed everything", "The cultural moment explained", "I tried the challenge everyone is talking about"],
 };
 
 function pick<T>(r: () => number, arr: readonly T[]): T {
@@ -156,7 +108,7 @@ export function getDemoDataset(): Dataset {
         const publishedAt = new Date(now - ageDays * DAY).toISOString();
         const title = pick(r, TITLE_TEMPLATES[niche.slug]).replace(
           "{X}",
-          pick(r, ["Efsane", "İskender", "Zam", "RTX 5070", "Türev", "Sarma", "Karadeniz", "Fizik", "Valorant", "%42"]),
+          pick(r, ["Legendary", "AI", "The $100 Challenge", "RTX 5090", "The Hidden Rule", "Street Food", "The 30-Day Experiment", "Speedrun", "%42"]),
         );
 
         channelVideos.push({

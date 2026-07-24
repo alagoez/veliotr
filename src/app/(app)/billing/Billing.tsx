@@ -12,7 +12,7 @@ const FEATURES = [
   "Sınırsız rakip takibi",
   "Viral uyarıları",
   "Fikir Doğrulayıcı (AI)",
-  "Varoluş Krizi Geçir",
+  "Öncelikli veri güncellemeleri",
 ];
 
 export function Billing() {
@@ -55,7 +55,7 @@ export function Billing() {
 
       {status === "success" && (
         <div className="mt-4 rounded-xl border border-pos/40 bg-pos/10 p-4 text-sm text-pos">
-          Ödeme başarılı! {brand.name} Pro aktif — iyi araştırmalar 🎉
+          Ödeme tamamlandı. Aboneliğin webhook ile doğrulanıyor; birkaç saniye içinde Pro durumun güncellenecek.
         </div>
       )}
       {status === "cancelled" && (

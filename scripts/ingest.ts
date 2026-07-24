@@ -22,6 +22,9 @@ const MODE =
   process.env.INGEST_MODE === "mock" || process.argv.includes("--mock")
     ? "mock"
     : "live";
+
+/** Çarpan hesabı için minimum kanal medyanı — altındaki kanallarda skor 0 kalır. */
+const MIN_MEDIAN_BASE = 500;
 const API = "https://www.googleapis.com/youtube/v3";
 const KEY = process.env.YOUTUBE_API_KEY;
 
@@ -52,14 +55,33 @@ function parseDuration(iso: string): number {
   return (Number(m[1] ?? 0) * 3600) + (Number(m[2] ?? 0) * 60) + Number(m[3] ?? 0);
 }
 
-async function yt<T>(path: string, params: Record<string, string>): Promise<T> {
-  const qs = new URLSearchParams({ ...params, key: KEY! });
-  const res = await fetch(`${API}/${path}?${qs}`);
-  if (!res.ok) {
-    const body = await res.text();
-    throw new Error(`YouTube API ${path} ${res.status}: ${body.slice(0, 300)}`);
+async function withRetry<T>(operation: () => PromiseLike<T>, label: string, attempts = 3): Promise<T> {
+  let lastError: unknown;
+  for (let attempt = 1; attempt <= attempts; attempt += 1) {
+    try { return await operation(); }
+    catch (error) {
+      lastError = error;
+      if (attempt < attempts) await new Promise((resolve) => setTimeout(resolve, 500 * attempt));
+    }
   }
-  return res.json() as Promise<T>;
+  throw new Error(`${label} başarısız: ${lastError instanceof Error ? lastError.message : String(lastError)}`);
+}
+
+async function dbWrite(operation: () => PromiseLike<{ error: { message: string } | null }>, label: string) {
+  const result = await withRetry(operation, label);
+  if (result.error) throw new Error(`${label}: ${result.error.message}`);
+}
+
+async function yt<T>(path: string, params: Record<string, string>): Promise<T> {
+  return withRetry(async () => {
+    const qs = new URLSearchParams({ ...params, key: KEY! });
+    const res = await fetch(`${API}/${path}?${qs}`);
+    if (!res.ok) {
+      const body = await res.text();
+      throw new Error(`YouTube API ${path} ${res.status}: ${body.slice(0, 300)}`);
+    }
+    return res.json() as Promise<T>;
+  }, `YouTube ${path}`);
 }
 
 type YtChannel = {
@@ -152,8 +174,11 @@ async function ingestLive() {
         );
         const med = median((mature.length >= 10 ? mature : parsed).map((v) => v.views));
         const subs = Number(ch.statistics.subscriberCount ?? 0);
+        // Medyan tabanı: çok düşük medyanlı kanallarda (ör. 200 izlenme) çarpan
+        // anlamsız şişer (5000x) ve sıralamayı kirletir → skor bazı yoksa 0.
+        const scoreBase = med >= MIN_MEDIAN_BASE ? med : 0;
 
-        await db.from("channels").upsert({
+        await dbWrite(() => db.from("channels").upsert({
           id: ch.id,
           title: ch.snippet.title,
           handle: ch.snippet.customUrl ?? null,
@@ -167,7 +192,7 @@ async function ingestLive() {
           uploads_playlist: uploads,
           median_views: med,
           last_synced_at: new Date().toISOString(),
-        });
+        }), "channel upsert");
 
         const rows = parsed.map((v) => {
           const ageDays = Math.max((now - new Date(v.publishedAt).getTime()) / DAY, 1);
@@ -183,17 +208,17 @@ async function ingestLive() {
             likes: v.likes,
             comments: v.comments,
             engagement: v.views > 0 ? (v.likes + v.comments) / v.views : 0,
-            outlier_score: med > 0 ? Math.round((v.views / med) * 10) / 10 : 0,
+            outlier_score: scoreBase > 0 ? Math.round((v.views / scoreBase) * 10) / 10 : 0,
             views_per_day: Math.round(v.views / ageDays),
             views_to_subs: subs > 0 ? Math.round((v.views / subs) * 100) / 100 : 0,
             updated_at: new Date().toISOString(),
           };
         });
         if (rows.length) {
-          await db.from("videos").upsert(rows);
-          await db.from("view_snapshots").insert(
+          await dbWrite(() => db.from("videos").upsert(rows), "videos upsert");
+          await dbWrite(() => db.from("view_snapshots").insert(
             rows.map((r) => ({ video_id: r.id, views: r.views })),
-          );
+          ), "view snapshots insert");
         }
         totalVideos += rows.length;
         console.log(`✓ ${ch.snippet.title}: ${rows.length} video (medyan ${med})`);
@@ -211,12 +236,12 @@ async function ingestMock() {
   const { getDemoDataset, NICHES } = await import("../src/lib/demo/data");
   const { channels, videos } = getDemoDataset();
 
-  await db.from("niches").upsert(
+  await dbWrite(() => db.from("niches").upsert(
     NICHES.map((n, i) => ({ id: i + 1, slug: n.slug, name: n.name })),
     { onConflict: "slug" },
-  );
+  ), "niches upsert");
 
-  await db.from("channels").upsert(
+  await dbWrite(() => db.from("channels").upsert(
     channels.map((c) => ({
       id: c.id,
       title: c.title,
@@ -229,11 +254,11 @@ async function ingestMock() {
       median_views: c.medianViews,
       last_synced_at: new Date().toISOString(),
     })),
-  );
+  ), "channels upsert");
 
   for (let i = 0; i < videos.length; i += 500) {
     const batch = videos.slice(i, i + 500);
-    await db.from("videos").upsert(
+    await dbWrite(() => db.from("videos").upsert(
       batch.map((v) => ({
         id: v.id,
         channel_id: v.channelId,
@@ -250,7 +275,7 @@ async function ingestMock() {
         views_to_subs: Math.round(v.viewsToSubs * 100) / 100,
         updated_at: new Date().toISOString(),
       })),
-    );
+    ), "videos upsert");
   }
   console.log(`Mock veri basıldı: ${channels.length} kanal, ${videos.length} video.`);
 }

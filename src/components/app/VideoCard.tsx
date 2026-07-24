@@ -23,7 +23,7 @@ export function VideoCard({ video }: { video: Video }) {
   const ytSearch = `https://www.youtube.com/results?search_query=${encodeURIComponent(video.title)}`;
 
   return (
-    <div className="group relative flex flex-col gap-2 rounded-xl border border-edge-soft bg-surface p-2.5 transition-colors hover:border-edge hover:bg-raised/60">
+    <div className="video-card group relative flex flex-col gap-2.5 rounded-2xl border border-edge-soft bg-surface p-2.5 transition-colors hover:border-edge hover:bg-raised/60">
       <Thumb video={video} />
 
       <div className="flex items-start justify-between gap-2">

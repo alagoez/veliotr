@@ -44,10 +44,10 @@ const DEFAULTS: StoreShape = {
   alertThreshold: 3,
 };
 
-function read(): StoreShape {
+function read(key = KEY): StoreShape {
   if (typeof window === "undefined") return DEFAULTS;
   try {
-    const raw = window.localStorage.getItem(KEY);
+    const raw = window.localStorage.getItem(key);
     if (!raw) return DEFAULTS;
     return { ...DEFAULTS, ...(JSON.parse(raw) as Partial<StoreShape>) };
   } catch {
@@ -55,30 +55,53 @@ function read(): StoreShape {
   }
 }
 
-function write(next: StoreShape) {
-  window.localStorage.setItem(KEY, JSON.stringify(next));
+function write(next: StoreShape, key = KEY) {
+  window.localStorage.setItem(key, JSON.stringify(next));
   window.dispatchEvent(new CustomEvent(EVT));
 }
 
 export function useStore() {
   const [state, setState] = useState<StoreShape>(DEFAULTS);
   const [hydrated, setHydrated] = useState(false);
+  const [storageKey, setStorageKey] = useState(KEY);
 
   useEffect(() => {
-    setState(read());
-    setHydrated(true);
-    const onChange = () => setState(read());
+    const active = { current: true };
+    void (async () => {
+      try {
+        const response = await fetch("/api/store", { cache: "no-store" });
+        const data = (await response.json()) as { state?: StoreShape | null; userId?: string | null };
+        const key = data.userId ? `${KEY}:${data.userId}` : KEY;
+        if (!active.current) return;
+        setStorageKey(key);
+        const next = data.state ? { ...DEFAULTS, ...data.state } : read(key);
+        setState(next);
+        write(next, key);
+      } catch {
+        if (active.current) setState(read());
+      } finally {
+        if (active.current) setHydrated(true);
+      }
+    })();
+    const onChange = () => setState(read(storageKey));
     window.addEventListener(EVT, onChange);
     window.addEventListener("storage", onChange);
     return () => {
+      active.current = false;
       window.removeEventListener(EVT, onChange);
       window.removeEventListener("storage", onChange);
     };
-  }, []);
+  }, [storageKey]);
 
   const update = useCallback((fn: (s: StoreShape) => StoreShape) => {
-    write(fn(read()));
-  }, []);
+    const next = fn(read(storageKey));
+    write(next, storageKey);
+    void fetch("/api/store", {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(next),
+    });
+  }, [storageKey]);
 
   const createFolder = useCallback(
     (name: string): string => {
