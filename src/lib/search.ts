@@ -41,6 +41,15 @@ function norm(s: string): string {
   return s.toLocaleLowerCase("tr-TR");
 }
 
+/**
+ * LIKE joker karakterlerini kaçır.
+ * Kaçırılmazsa "q=%" veya "q=_" tüm tabloyu tarayan bir sorguya dönüşür
+ * (veri sızıntısı değil ama ucuz bir DB-CPU tüketim yolu).
+ */
+export function likeEscape(value: string): string {
+  return value.replace(/[\\%_]/g, (c) => `\\${c}`);
+}
+
 function seededShuffle<T>(arr: T[], seed: number): T[] {
   const a = [...arr];
   let s = seed >>> 0;
@@ -234,7 +243,10 @@ export async function searchSupabase(
     .from("videos")
     .select(
       "id, channel_id, title, thumb_url, published_at, duration_sec, is_short, views, likes, comments, engagement, outlier_score, views_per_day, views_to_subs, channels!inner(title, handle, subscribers, median_views, niche_slug)",
-      { count: "exact" },
+      // "exact" her aramada tam tarama yaptırır (derin sayfalamayla pahalı).
+      // "estimated": küçük sonuç kümelerinde kesin sayar, büyükte planlayıcı
+      // tahminine düşer — UI doğruluğu korunur, maliyet sınırlanır.
+      { count: "estimated" },
     );
 
   if (req.idSet?.length) qb = qb.in("id", req.idSet);
@@ -245,7 +257,13 @@ export async function searchSupabase(
     const src = await getVideoById(f.similarTo, opts);
     if (src) {
       similarSource = { id: src.id, title: src.title };
-      const kws = extractKeywords(src.title).map((k) => k.replace(/[%,()"]/g, ""));
+      // .or() postgrest-js'in HAM filtre kaçış deliğidir: dize olduğu gibi
+      // eklenir, yani "," "." "(" ")" yapısaldır. Kara liste yerine BEYAZ liste:
+      // yalnızca harf ve rakam bırakılır (extractKeywords ileride değişse bile
+      // buradan yapısal karakter geçemez).
+      const kws = extractKeywords(src.title)
+        .map((k) => k.replace(/[^\p{L}\p{N}]/gu, ""))
+        .filter(Boolean);
       if (kws.length) {
         qb = qb.or(kws.map((k) => `title.ilike.%${k}%`).join(","));
       }
@@ -253,7 +271,7 @@ export async function searchSupabase(
     }
   }
 
-  if (f.q) qb = qb.ilike("title", `%${f.q}%`);
+  if (f.q) qb = qb.ilike("title", `%${likeEscape(f.q)}%`);
   if (f.niche) qb = qb.eq("channels.niche_slug", f.niche);
   if (f.isShort !== undefined) qb = qb.eq("is_short", f.isShort);
 
@@ -273,13 +291,13 @@ export async function searchSupabase(
   applyRange("channels.total_views", f.channelTotalViews);
   applyRange("channels.video_count", f.channelVideoCount);
   if (f.includeKeywords?.length) {
-    for (const keyword of f.includeKeywords) qb = qb.ilike("title", `%${keyword}%`);
+    for (const keyword of f.includeKeywords) qb = qb.ilike("title", `%${likeEscape(keyword)}%`);
   }
   if (f.excludeKeywords?.length) {
-    for (const keyword of f.excludeKeywords) qb = qb.not("title", "ilike", `%${keyword}%`);
+    for (const keyword of f.excludeKeywords) qb = qb.not("title", "ilike", `%${likeEscape(keyword)}%`);
   }
   if (f.excludeChannels?.length) {
-    for (const channel of f.excludeChannels) qb = qb.not("channels.title", "ilike", `%${channel}%`);
+    for (const channel of f.excludeChannels) qb = qb.not("channels.title", "ilike", `%${likeEscape(channel)}%`);
   }
   const [dFrom, dTo] = dateCut(f.datePreset);
   if (dFrom > 0) qb = qb.gte("published_at", new Date(dFrom).toISOString());

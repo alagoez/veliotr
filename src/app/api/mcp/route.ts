@@ -132,13 +132,24 @@ async function callTool(name: string, args: Record<string, unknown>): Promise<st
 function checkAuth(request: Request): { ok: boolean; reason?: string } {
   const key = process.env.MCP_API_KEY;
   if (!key) {
-    if (process.env.NODE_ENV === "production") {
-      return { ok: false, reason: "mcp_disabled" };
-    }
-    return { ok: true }; // yalnızca yerel geliştirme
+    // NODE_ENV'e güvenme: staging/yanlış yapılandırılmış konteynerde
+    // "production" olmayabilir ve uç nokta açılırdı. Anahtarsız erişim
+    // yalnızca gerçekten yerel makinede mümkün.
+    return isLocalRequest(request)
+      ? { ok: true }
+      : { ok: false, reason: "mcp_disabled" };
   }
   const header = request.headers.get("authorization") ?? "";
   return { ok: timingSafeEqual(header, `Bearer ${key}`) };
+}
+
+function isLocalRequest(request: Request): boolean {
+  try {
+    const host = new URL(request.url).hostname;
+    return host === "localhost" || host === "127.0.0.1" || host === "[::1]";
+  } catch {
+    return false;
+  }
 }
 
 /** Sabit süreli karşılaştırma — anahtar tahmininde zamanlama sızıntısını engeller. */

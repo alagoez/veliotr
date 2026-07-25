@@ -8,7 +8,7 @@
  *             npm run pseo -- 3       → sıradaki 3 makale
  * Cron: .github/workflows/pseo.yml (her gece 1 makale üretip commit'ler)
  */
-import { existsSync, mkdirSync, writeFileSync, readdirSync } from "node:fs";
+import { mkdirSync, writeFileSync, readdirSync } from "node:fs";
 import { join } from "node:path";
 
 const KEY = process.env.GEMINI_API_KEY;

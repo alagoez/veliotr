@@ -12,7 +12,6 @@ import {
   Sparkles,
   BookOpen,
   CreditCard,
-  LogIn,
   Zap,
 } from "lucide-react";
 import { brand } from "@/config/brand";
