@@ -31,6 +31,13 @@ function rpcError(id: RpcRequest["id"], code: number, message: string) {
   return Response.json({ jsonrpc: "2.0", id: id ?? null, error: { code, message } });
 }
 
+/** limit:"abc" → Number() NaN üretip PostgREST'e range(NaN,NaN) gönderiyordu. */
+function clampLimit(raw: unknown): number {
+  const n = Number(raw ?? 10);
+  if (!Number.isFinite(n)) return 10;
+  return Math.min(24, Math.max(1, Math.floor(n)));
+}
+
 function videoLine(v: Video): string {
   return `- [${v.id}] "${v.title}" | ${v.channelTitle} (${fmtCompact(v.subscribers)} abone) | ${fmtCompact(v.views)} izlenme | çarpan ${fmtMultiplier(v.outlierScore)} | ${v.isShort ? "Shorts" : "uzun"} | ${v.nicheSlug}`;
 }
@@ -88,7 +95,7 @@ async function callTool(name: string, args: Record<string, unknown>): Promise<st
           filters,
           sort: (args.sort as SearchSort) ?? "outlier",
           page: 0,
-          pageSize: Math.min(24, Math.max(1, Number(args.limit ?? 10))),
+          pageSize: clampLimit(args.limit),
         },
         { admin: true },
       );

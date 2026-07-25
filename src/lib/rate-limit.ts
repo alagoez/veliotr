@@ -1,8 +1,13 @@
 type Bucket = { count: number; resetAt: number };
 
 const buckets = new Map<string, Bucket>();
+const MAX_BUCKETS = 20_000;
 
-/** Development-safe limiter. Production uses a bounded in-memory limiter until Redis is configured. */
+/**
+ * Süreç-içi hız sınırlayıcı.
+ * Not: çok örnekli (serverless) dağıtımda örnek başına sayar; kesin sınır için
+ * Redis/Upstash'e taşınmalı. Yine de kötüye kullanımı anlamlı ölçüde yavaşlatır.
+ */
 export function checkRateLimit(
   identifier: string,
   limit = 30,
@@ -21,11 +26,20 @@ export function checkRateLimit(
     throw new RateLimitError(bucket.resetAt);
   }
 
-  // Prevent an unbounded process-local map in long-running dev processes.
-  if (buckets.size > 10_000) {
-    for (const key of Array.from(buckets.keys())) {
-      const value = buckets.get(key);
-      if (value && value.resetAt <= now) buckets.delete(key);
+  // Belleği sınırla. Yalnızca süresi dolanları silmek yetmez: saldırgan tek
+  // pencerede binlerce CANLI kova açabilir; o durumda eski kod hiçbir şey
+  // silmeyip her istekte 10.000+ elemanlı dizi geziyordu (CPU + bellek DoS).
+  if (buckets.size > MAX_BUCKETS) {
+    for (const [key, value] of buckets) {
+      if (value.resetAt <= now) buckets.delete(key);
+    }
+    if (buckets.size > MAX_BUCKETS) {
+      let removed = 0;
+      const excess = buckets.size - MAX_BUCKETS;
+      for (const key of buckets.keys()) {
+        buckets.delete(key); // Map ekleme sırasını korur → en eski önce düşer
+        if (++removed >= excess) break;
+      }
     }
   }
 
@@ -39,7 +53,24 @@ export class RateLimitError extends Error {
   }
 }
 
+/**
+ * İstemci kimliği.
+ * X-Forwarded-For'un SOLDAKİ girdisi istemci tarafından uydurulabilir; her
+ * istekte farklı bir değer göndererek sınır tamamen atlanabiliyordu. Bu yüzden
+ * önce platformun güvenilir başlıkları denenir, XFF'te ise en SAĞDAKİ
+ * (bize en yakın proxy'nin yazdığı) hop kullanılır.
+ */
 export function requestIdentifier(request: Request): string {
-  const forwarded = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim();
-  return forwarded || request.headers.get("x-real-ip") || "anonymous";
+  const trusted =
+    request.headers.get("x-vercel-forwarded-for") ??
+    request.headers.get("cf-connecting-ip") ??
+    request.headers.get("x-real-ip");
+  if (trusted) return trusted.trim();
+
+  const chain = request.headers.get("x-forwarded-for");
+  if (chain) {
+    const hops = chain.split(",").map((h) => h.trim()).filter(Boolean);
+    if (hops.length > 0) return hops[hops.length - 1];
+  }
+  return "anonymous";
 }

@@ -1,4 +1,5 @@
 import { isDemoMode, isProductionReady, isSupabaseConfigured } from "@/lib/env";
+import { checkRateLimit, RateLimitError, requestIdentifier } from "@/lib/rate-limit";
 
 export const dynamic = "force-dynamic";
 
@@ -14,6 +15,15 @@ function isDetailAllowed(request: Request): boolean {
 }
 
 export async function GET(request: Request) {
+  try {
+    checkRateLimit(`health:${requestIdentifier(request)}`, 20);
+  } catch (e) {
+    if (e instanceof RateLimitError) {
+      return Response.json({ status: "rate_limited" }, { status: 429 });
+    }
+    throw e;
+  }
+
   const detailed = isDetailAllowed(request);
   const configured = isSupabaseConfigured();
   const productionReady = isProductionReady();
@@ -58,9 +68,11 @@ export async function GET(request: Request) {
       process.env.SUPABASE_SERVICE_ROLE_KEY!,
       { auth: { autoRefreshToken: false, persistSession: false } },
     );
+    // "exact" her istekte tam tarama yapar (kimliksiz DB-CPU amplifikasyonu);
+    // sağlık kontrolü için tahmini sayım yeterli.
     const { count, error } = await admin
       .from("videos")
-      .select("id", { count: "exact", head: true });
+      .select("id", { count: "estimated", head: true });
 
     if (error) {
       return Response.json(

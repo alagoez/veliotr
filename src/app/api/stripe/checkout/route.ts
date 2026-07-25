@@ -1,6 +1,7 @@
 import { isDemoMode, isStripeConfigured, isSupabaseConfigured } from "@/lib/env";
 import { getCurrentUser } from "@/lib/auth";
 import { allowedOrigin } from "@/lib/security";
+import { checkRateLimit, RateLimitError } from "@/lib/rate-limit";
 import { CheckoutRequestSchema } from "@/lib/validators";
 
 export async function POST(request: Request) {
@@ -9,6 +10,16 @@ export async function POST(request: Request) {
   if (isSupabaseConfigured()) {
     const user = await getCurrentUser();
     if (!user) return Response.json({ error: "auth_required", message: "Ödeme için giriş yapın." }, { status: 401 });
+
+    // Stripe API kotasını tüketen oturum spam'ini engelle
+    try {
+      checkRateLimit(`checkout:${user.id}`, 10);
+    } catch (e) {
+      if (e instanceof RateLimitError) {
+        return Response.json({ error: e.message }, { status: 429 });
+      }
+      throw e;
+    }
 
     const parsed = CheckoutRequestSchema.safeParse(await request.json().catch(() => ({})));
     if (!parsed.success) return Response.json({ error: "Geçersiz plan" }, { status: 400 });

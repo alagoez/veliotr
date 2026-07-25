@@ -18,6 +18,7 @@ import {
 import { brand } from "@/config/brand";
 import { useStore } from "@/lib/store";
 import { BrandLogo } from "@/components/BrandLogo";
+import { SignOutButton } from "@/components/app/SignOutButton";
 
 export const NAV = [
   { href: "/home", label: "Keşfet", icon: Compass },
@@ -91,16 +92,9 @@ export function Sidebar() {
         </div>
       </div>
 
-      <div className="border-t border-edge-soft px-5 py-3.5">
-        <Link
-          href="/signin"
-          className="flex items-center gap-2 text-xs font-semibold text-muted transition-colors hover:text-ink"
-        >
-          <LogIn size={14} /> Hesapla giriş yap
-        </Link>
-        <p className="mt-2 text-[10.5px] leading-relaxed text-faint">
-          {brand.name} Stüdyo
-        </p>
+      <div className="flex items-center justify-between border-t border-edge-soft px-5 py-3.5">
+        <SignOutButton />
+        <span className="text-[10.5px] text-faint">{brand.name} Stüdyo</span>
       </div>
     </aside>
   );

@@ -12,6 +12,13 @@ export type Post = {
   body: string;
 };
 
+/** Frontmatter LLM tarafindan yazilir: aci parantezleri (JSON-LD script
+ *  bloguna girer) ve satir ayiricilari temizlenir. */
+const UNSAFE_META = new RegExp(
+  "[<>" + String.fromCharCode(0x2028) + String.fromCharCode(0x2029) + "]",
+  "g",
+);
+
 const DIR = join(process.cwd(), "content", "blog");
 
 function parseFrontmatter(raw: string): { meta: Record<string, string>; body: string } {
@@ -20,7 +27,14 @@ function parseFrontmatter(raw: string): { meta: Record<string, string>; body: st
   const meta: Record<string, string> = {};
   for (const line of m[1].split(/\r?\n/)) {
     const i = line.indexOf(":");
-    if (i > 0) meta[line.slice(0, i).trim()] = line.slice(i + 1).trim();
+    // Frontmatter LLM tarafından yazılıyor; açı parantezleri ve satır ayırıcı
+    // kontrol karakterleri baştan temizlenir (başlık/açıklama JSON-LD'ye girer).
+    if (i > 0) {
+      meta[line.slice(0, i).trim()] = line
+        .slice(i + 1)
+        .trim()
+        .replace(UNSAFE_META, "");
+    }
   }
   return { meta, body: m[2].trim() };
 }
@@ -72,10 +86,12 @@ export function extractFaq(body: string): { q: string; a: string }[] {
  */
 function safeHref(raw: string): string {
   const url = raw.trim();
+  // Ters eğik çizgi tarayıcıda "/" gibi çözülür: "/\evil.com" → https://evil.com/
+  if (url.includes("\\")) return "#";
   const allowed =
     /^https?:\/\//i.test(url) || /^mailto:/i.test(url) || /^\/(?!\/)/.test(url) || /^#/.test(url);
   if (!allowed) return "#";
-  return url.replace(/["'<>`\s]/g, encodeURIComponent);
+  return url.replace(/["'<>`\s]/g, (c) => encodeURIComponent(c));
 }
 
 function inline(s: string): string {

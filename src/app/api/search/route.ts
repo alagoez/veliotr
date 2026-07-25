@@ -20,7 +20,8 @@ export async function POST(request: Request) {
     if (error instanceof RateLimitError) {
       return Response.json({ error: error.message }, { status: 429, headers: { "Retry-After": String(Math.ceil((error.resetAt - Date.now()) / 1000)) } });
     }
-    const message = error instanceof Error ? error.message : "Bilinmeyen hata";
-    return Response.json({ error: message }, { status: 500 });
+    // Ham PostgREST hatası sızdırılmaz (sütun/kısıt adları keşif bilgisidir).
+    console.error("[search] hata:", error);
+    return Response.json({ error: "Arama şu anda yapılamıyor." }, { status: 500 });
   }
 }

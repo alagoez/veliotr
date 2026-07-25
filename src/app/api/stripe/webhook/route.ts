@@ -20,23 +20,42 @@ export async function POST(request: Request) {
 
   const { createClient } = await import("@supabase/supabase-js");
   const admin = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.SUPABASE_SERVICE_ROLE_KEY!);
+
+  // Olayı "sahiplen": aynı olayın paralel/tekrar teslimini engeller.
   const { error: eventError } = await admin.from("stripe_events").insert({ id: event.id, event_type: event.type });
   if (eventError?.code === "23505") return Response.json({ received: true, duplicate: true });
   if (eventError) return Response.json({ error: "Webhook event kaydedilemedi" }, { status: 500 });
+
+  /**
+   * İşlem başarısız olursa sahiplenme kaydını GERİ AL.
+   * Aksi halde Stripe'ın tekrar denemesi "duplicate" dalına düşüp 200 dönüyor
+   * ve olay kalıcı olarak kayboluyordu (ödeyen müşteri 'active' olmuyor ya da
+   * iptal işlenmediği için erişim süresiz açık kalıyordu).
+   */
+  const fail = async (message: string) => {
+    await admin.from("stripe_events").delete().eq("id", event.id);
+    return Response.json({ error: message }, { status: 500 });
+  };
+
   switch (event.type) {
     case "checkout.session.completed": {
       const session = event.data.object;
       if (!session.subscription) break;
+      // Gecikmeli ödeme yöntemlerinde bu olay 'unpaid' durumda da tetiklenir;
+      // para yerleşmeden 'active' vermeyiz.
+      const paid =
+        session.payment_status === "paid" || session.payment_status === "no_payment_required";
       const { error } = await admin.from("subscriptions").upsert({
         stripe_subscription_id: String(session.subscription),
         stripe_customer_id: session.customer ? String(session.customer) : null,
         user_id: session.client_reference_id || session.metadata?.user_id || null,
         user_email: session.customer_details?.email ?? null,
-        status: "active",
-        price_id: null,
+        status: paid ? "active" : "incomplete",
+        // price_id BİLEREK yazılmıyor: subscription.updated'ın yazdığı planı
+        // null ile ezmesin (upsert aynı anahtarda çakışıyor).
         updated_at: new Date().toISOString(),
       }, { onConflict: "stripe_subscription_id" });
-      if (error) return Response.json({ error: "Abonelik kaydedilemedi" }, { status: 500 });
+      if (error) return fail("Abonelik kaydedilemedi");
       break;
     }
     case "customer.subscription.updated":
@@ -54,7 +73,7 @@ export async function POST(request: Request) {
         cancel_at_period_end: subscription.cancel_at_period_end,
         updated_at: new Date().toISOString(),
       }, { onConflict: "stripe_subscription_id" });
-      if (error) return Response.json({ error: "Abonelik güncellenemedi" }, { status: 500 });
+      if (error) return fail("Abonelik güncellenemedi");
       break;
     }
     default:

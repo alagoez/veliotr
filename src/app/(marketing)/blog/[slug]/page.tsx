@@ -5,6 +5,27 @@ import { ArrowLeft, ArrowRight } from "lucide-react";
 import { brand } from "@/config/brand";
 import { extractFaq, getPost, getPosts, renderMarkdown } from "@/lib/blog";
 
+/**
+ * JSON-LD gömme güvenliği.
+ * JSON.stringify "<" karakterini KAÇIRMAZ; HTML ayrıştırıcısı ise ilk literal
+ * "</script" ile script bloğunu kapatır. pSEO cron'u LLM çıktısını incelemeden
+ * commit'lediği için başlık/açıklama/SSS metinleri güvenilmezdir ve
+ * "</script><script>…" ile blok kırılabilirdi (kanıtlandı). U+2028/2029 de
+ * JS'te satır sonu sayıldığı için kaçırılır.
+ */
+function safeJsonLd(value: unknown): string {
+  // "\" karakterini kod noktasindan uretiyoruz: kaynakta ters egik
+  // cizgi kacisi katmanlari karisip sessizce no-op'a donusmesin.
+  const BS = String.fromCharCode(92);
+  const LINE_SEP = String.fromCharCode(0x2028);
+  const PARA_SEP = String.fromCharCode(0x2029);
+  return JSON.stringify(value)
+    .split("<").join(BS + "u003c")
+    .split(LINE_SEP).join(BS + "u2028")
+    .split(PARA_SEP).join(BS + "u2029");
+}
+
+
 export function generateStaticParams() {
   return getPosts().map((p) => ({ slug: p.slug }));
 }
@@ -55,7 +76,7 @@ export default async function BlogPostPage({
     <main className="mx-auto max-w-2xl px-6 py-16">
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(jsonLd) }}
       />
       <Link
         href="/blog"

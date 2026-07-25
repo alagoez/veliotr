@@ -7,9 +7,14 @@ export function isSupabaseConfigured(): boolean {
   );
 }
 
+/**
+ * Demo modu — API kimlik doğrulamasını atlar, bu yüzden production'da
+ * ASLA açılamaz. DEMO_MODE=true ile canlıya çıkılsa bile burada kapanır;
+ * aksi halde sayfalar kilitli görünürken tüm JSON uçları anonime açık kalırdı.
+ */
 export function isDemoMode(): boolean {
-  return process.env.DEMO_MODE === "true"
-    || (process.env.NODE_ENV !== "production" && !isSupabaseConfigured());
+  if (process.env.NODE_ENV === "production") return false;
+  return process.env.DEMO_MODE === "true" || !isSupabaseConfigured();
 }
 
 export function isProductionReady(): boolean {

@@ -78,7 +78,9 @@ export function useStore() {
         setState(next);
         write(next, key);
       } catch {
-        if (active.current) setState(read());
+        // Hata durumunda da isim alanlı anahtardan oku — global anahtara
+        // düşmek paylaşılan cihazda başka kullanıcının verisini yükler.
+        if (active.current) setState(read(storageKey));
       } finally {
         if (active.current) setHydrated(true);
       }
