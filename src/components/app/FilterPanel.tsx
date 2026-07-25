@@ -1,7 +1,7 @@
 "use client";
 
 import { RotateCcw } from "lucide-react";
-import { NICHES } from "@/lib/demo/data";
+import { NICHE_CATALOG as NICHES } from "@/config/niches";
 import type { RangeFilter, SearchFilters } from "@/lib/types";
 
 type Props = {

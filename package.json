@@ -14,7 +14,9 @@
     "ingest:mock": "tsx --env-file-if-exists=.env.local scripts/ingest.ts --mock",
     "embed": "tsx --env-file-if-exists=.env.local scripts/embed.mts",
     "pseo": "tsx --env-file-if-exists=.env.local scripts/pseo.mts",
-    "migrate": "tsx --env-file-if-exists=.env.local scripts/migrate.mts"
+    "migrate": "tsx --env-file-if-exists=.env.local scripts/migrate.mts",
+    "discover": "tsx --env-file-if-exists=.env.local scripts/discover-channels.mts",
+    "sync-niches": "tsx --env-file-if-exists=.env.local scripts/sync-niches.mts"
   },
   "dependencies": {
     "@google/genai": "^2.13.0",

@@ -35,7 +35,22 @@ const QUERIES: Record<string, { tr: string[]; en: string[] }> = {
   vlog: { tr: ["vlog", "gezi"], en: ["day in my life"] },
   teknoloji: { tr: ["telefon inceleme", "yapay zeka"], en: ["tech review"] },
   egitim: { tr: ["nasıl yapılır", "ingilizce öğrenme"], en: ["study tips"] },
+  makyaj: { tr: ["makyaj", "cilt bakımı", "makyaj önerileri"], en: ["makeup tutorial"] },
+  oto: { tr: ["araba inceleme", "otomobil test", "modifiye araba"], en: ["car review"] },
+  spor: { tr: ["antrenman programı", "evde spor", "fitness"], en: ["home workout"] },
+  komedi: { tr: ["komedi skeç", "komik video", "eğlence"], en: ["comedy sketch"] },
+  muzik: { tr: ["cover şarkı", "gitar dersi", "akustik"], en: ["song cover"] },
+  saglik: { tr: ["sağlıklı beslenme", "diyet", "kilo verme"], en: ["health tips"] },
+  moda: { tr: ["kombin önerileri", "moda", "stil"], en: ["fashion lookbook"] },
+  gelisim: { tr: ["kişisel gelişim", "motivasyon", "verimlilik"], en: ["self improvement"] },
+  cocuk: { tr: ["çocuk şarkıları", "eğitici çocuk videoları", "çocuk oyunları"], en: ["nursery rhymes"] },
 };
+
+// Sadece belirli nişleri işle: `npm run discover -- makyaj,oto,spor`
+const nicheFilter = process.argv[2]?.split(",").map((s) => s.trim()).filter(Boolean);
+const activeNiches = nicheFilter?.length
+  ? Object.fromEntries(Object.entries(QUERIES).filter(([n]) => nicheFilter.includes(n)))
+  : QUERIES;
 
 const MIN_SUBS_TR = 10_000; // TR: küçük ama gerçek kanallar da girsin (küçük kanal outlier'ı özelliği)
 const MIN_SUBS_GLOBAL = 200_000; // Global: sadece büyük/izlenen kanallar
@@ -65,7 +80,7 @@ type ChannelItem = {
 const publishedAfter = new Date(Date.now() - 30 * 86400000).toISOString();
 const found = new Map<string, { niche: string; global: boolean }>();
 
-for (const [niche, q] of Object.entries(QUERIES)) {
+for (const [niche, q] of Object.entries(activeNiches)) {
   for (const [lang, queries] of [["tr", q.tr], ["en", q.en]] as const) {
     for (const query of queries) {
       const res = await yt<{ items: SearchItem[] }>("search", {
@@ -125,6 +140,7 @@ const { data: healthy } = await db
   .gte("median_views", 500);
 const healthySet = new Set((healthy ?? []).map((c) => c.id));
 
+const existingNiches = new Set(existing.map((s) => s.niche));
 const merged = existing.map((s) => {
   const kept = s.channelIds.filter((id) => healthySet.has(id));
   const fresh = (accepted[s.niche] ?? [])
@@ -133,6 +149,14 @@ const merged = existing.map((s) => {
   console.log(`${s.niche}: korunan ${kept.length} + yeni ${fresh.length}`);
   return { niche: s.niche, channelIds: [...kept, ...fresh] };
 });
+
+// Seed dosyasında olmayan YENİ nişleri ekle
+for (const [niche, ids2] of Object.entries(accepted)) {
+  if (existingNiches.has(niche)) continue;
+  const fresh = ids2.slice(0, MAX_NEW_PER_NICHE);
+  console.log(`${niche}: YENİ niş — ${fresh.length} kanal`);
+  merged.push({ niche, channelIds: fresh });
+}
 
 writeFileSync(seedPath, JSON.stringify(merged, null, 2) + "\n", "utf8");
 const total = merged.reduce((a, s) => a + s.channelIds.length, 0);

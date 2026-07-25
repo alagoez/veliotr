@@ -5,7 +5,7 @@
  * videoları global indeksten süzer.
  */
 import { createAdminSupabase } from "@/lib/supabase/admin";
-import { NICHES } from "@/lib/demo/data";
+import { nicheName } from "@/config/niches";
 
 /** Vektör ortalaması + L2 normalizasyon (kosinüs araması için). */
 export function buildProfileVector(embeddings: number[][]): number[] | null {
@@ -58,6 +58,5 @@ export async function detectNiche(profileVector: number[]): Promise<DetectedNich
       bestCount = count;
     }
   }
-  const name = NICHES.find((n) => n.slug === best)?.name ?? best;
-  return { slug: best, name, confidence: Math.round((bestCount / total) * 100) / 100 };
+  return { slug: best, name: nicheName(best), confidence: Math.round((bestCount / total) * 100) / 100 };
 }

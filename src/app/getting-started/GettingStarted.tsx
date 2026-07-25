@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { MonitorPlay, Sparkles, ArrowRight, Loader2, Flame } from "lucide-react";
 import { useStore } from "@/lib/store";
-import { NICHES } from "@/lib/demo/data";
+import { NICHE_CATALOG as NICHES } from "@/config/niches";
 
 type ConnectResult = {
   channelId: string;
