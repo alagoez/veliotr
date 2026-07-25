@@ -55,21 +55,43 @@ function parseDuration(iso: string): number {
   return (Number(m[1] ?? 0) * 3600) + (Number(m[2] ?? 0) * 60) + Number(m[3] ?? 0);
 }
 
-async function withRetry<T>(operation: () => PromiseLike<T>, label: string, attempts = 3): Promise<T> {
+async function withRetry<T>(operation: () => PromiseLike<T>, label: string, attempts = 5): Promise<T> {
   let lastError: unknown;
   for (let attempt = 1; attempt <= attempts; attempt += 1) {
     try { return await operation(); }
     catch (error) {
       lastError = error;
-      if (attempt < attempts) await new Promise((resolve) => setTimeout(resolve, 500 * attempt));
+      if (attempt < attempts) await new Promise((resolve) => setTimeout(resolve, 800 * attempt * attempt));
     }
   }
   throw new Error(`${label} başarısız: ${lastError instanceof Error ? lastError.message : String(lastError)}`);
 }
 
 async function dbWrite(operation: () => PromiseLike<{ error: { message: string } | null }>, label: string) {
-  const result = await withRetry(operation, label);
-  if (result.error) throw new Error(`${label}: ${result.error.message}`);
+  // Supabase timeout'u exception değil `error` alanı olarak döner; hatayı
+  // exception'a çevirip withRetry'ın geri çekilmesinden faydalan.
+  await withRetry(async () => {
+    const result = await operation();
+    if (result.error) throw new Error(result.error.message);
+    return result;
+  }, label);
+}
+
+/**
+ * videos tablosunda HNSW embedding indeksi var; büyük upsert'ler indeks
+ * güncellemesi yüzünden statement timeout'a düşüyor. Küçük partiler + retry
+ * ile yaz (bulk-load deseninin ingest karşılığı).
+ */
+const WRITE_CHUNK = 20;
+async function dbWriteChunked<T>(
+  rows: T[],
+  fn: (chunk: T[]) => PromiseLike<{ error: { message: string } | null }>,
+  label: string,
+) {
+  for (let i = 0; i < rows.length; i += WRITE_CHUNK) {
+    const chunk = rows.slice(i, i + WRITE_CHUNK);
+    await dbWrite(() => fn(chunk), `${label} [${i}-${i + chunk.length}]`);
+  }
 }
 
 async function yt<T>(path: string, params: Record<string, string>): Promise<T> {
@@ -215,10 +237,12 @@ async function ingestLive() {
           };
         });
         if (rows.length) {
-          await dbWrite(() => db.from("videos").upsert(rows), "videos upsert");
-          await dbWrite(() => db.from("view_snapshots").insert(
+          await dbWriteChunked(rows, (chunk) => db.from("videos").upsert(chunk), "videos upsert");
+          await dbWriteChunked(
             rows.map((r) => ({ video_id: r.id, views: r.views })),
-          ), "view snapshots insert");
+            (chunk) => db.from("view_snapshots").insert(chunk),
+            "view snapshots insert",
+          );
         }
         totalVideos += rows.length;
         console.log(`✓ ${ch.snippet.title}: ${rows.length} video (medyan ${med})`);

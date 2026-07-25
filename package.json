@@ -16,7 +16,8 @@
     "pseo": "tsx --env-file-if-exists=.env.local scripts/pseo.mts",
     "migrate": "tsx --env-file-if-exists=.env.local scripts/migrate.mts",
     "discover": "tsx --env-file-if-exists=.env.local scripts/discover-channels.mts",
-    "sync-niches": "tsx --env-file-if-exists=.env.local scripts/sync-niches.mts"
+    "sync-niches": "tsx --env-file-if-exists=.env.local scripts/sync-niches.mts",
+    "verify-niches": "tsx --env-file-if-exists=.env.local scripts/verify-niches.mts"
   },
   "dependencies": {
     "@google/genai": "^2.13.0",

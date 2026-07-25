@@ -29,21 +29,66 @@ const db = createClient(
 
 // Niş başına arama sorguları: TR (dil=tr) + global (dil=en)
 const QUERIES: Record<string, { tr: string[]; en: string[] }> = {
-  oyun: { tr: ["oyun", "minecraft türkçe", "valorant türkçe"], en: ["gaming"] },
-  finans: { tr: ["borsa", "yatırım", "dolar altın"], en: ["investing"] },
-  yemek: { tr: ["yemek tarifi", "kolay tarif"], en: ["recipe"] },
-  vlog: { tr: ["vlog", "gezi"], en: ["day in my life"] },
-  teknoloji: { tr: ["telefon inceleme", "yapay zeka"], en: ["tech review"] },
-  egitim: { tr: ["nasıl yapılır", "ingilizce öğrenme"], en: ["study tips"] },
-  makyaj: { tr: ["makyaj", "cilt bakımı", "makyaj önerileri"], en: ["makeup tutorial"] },
-  oto: { tr: ["araba inceleme", "otomobil test", "modifiye araba"], en: ["car review"] },
-  spor: { tr: ["antrenman programı", "evde spor", "fitness"], en: ["home workout"] },
-  komedi: { tr: ["komedi skeç", "komik video", "eğlence"], en: ["comedy sketch"] },
-  muzik: { tr: ["cover şarkı", "gitar dersi", "akustik"], en: ["song cover"] },
-  saglik: { tr: ["sağlıklı beslenme", "diyet", "kilo verme"], en: ["health tips"] },
-  moda: { tr: ["kombin önerileri", "moda", "stil"], en: ["fashion lookbook"] },
-  gelisim: { tr: ["kişisel gelişim", "motivasyon", "verimlilik"], en: ["self improvement"] },
-  cocuk: { tr: ["çocuk şarkıları", "eğitici çocuk videoları", "çocuk oyunları"], en: ["nursery rhymes"] },
+  oyun: {
+    tr: ["oyun", "minecraft türkçe", "valorant türkçe", "roblox türkçe", "gta 5 türkçe", "cs2 türkçe", "mobil oyun", "oyun inceleme", "pubg türkçe", "fifa fc türkçe"],
+    en: ["gaming", "gameplay"],
+  },
+  finans: {
+    tr: ["borsa", "yatırım", "dolar altın", "kripto para", "temettü hisse", "ekonomi analiz", "girişimcilik", "e-ticaret para kazanma", "emeklilik birikim", "faiz enflasyon"],
+    en: ["investing", "personal finance"],
+  },
+  yemek: {
+    tr: ["yemek tarifi", "kolay tarif", "tatlı tarifi", "hamur işi", "et yemekleri", "çorba tarifi", "diyet yemek", "kahvaltılık", "pratik yemek", "sokak lezzetleri"],
+    en: ["recipe", "cooking"],
+  },
+  vlog: {
+    tr: ["vlog", "gezi", "günlük vlog", "kamp vlog", "yurtdışı yaşam", "ev turu", "minimalizm", "seyahat rehberi", "köy hayatı", "günlük rutin"],
+    en: ["day in my life", "travel vlog"],
+  },
+  teknoloji: {
+    tr: ["telefon inceleme", "yapay zeka", "bilgisayar toplama", "laptop inceleme", "yazılım öğrenme", "kulaklık inceleme", "akıllı ev", "kamera inceleme", "teknoloji haber", "oyun bilgisayarı"],
+    en: ["tech review", "ai tools"],
+  },
+  egitim: {
+    tr: ["nasıl yapılır", "ingilizce öğrenme", "matematik konu anlatımı", "yks hazırlık", "tarih anlatımı", "fizik dersi", "kimya dersi", "üniversite tercih", "bilim belgesel", "kodlama dersi"],
+    en: ["study tips", "science explained"],
+  },
+  makyaj: {
+    tr: ["makyaj", "cilt bakımı", "makyaj önerileri", "günlük makyaj", "makyaj ürünleri", "saç bakımı", "kaş şekillendirme", "ruj denemesi", "cilt bakım rutini", "kozmetik inceleme"],
+    en: ["makeup tutorial", "skincare routine"],
+  },
+  oto: {
+    tr: ["araba inceleme", "otomobil test", "modifiye araba", "sıfır araba", "ikinci el araba", "motosiklet inceleme", "araç bakımı", "otomobil fiyatları", "elektrikli araba", "araba tamiri"],
+    en: ["car review", "car mods"],
+  },
+  spor: {
+    tr: ["antrenman programı", "evde spor", "fitness", "kas geliştirme", "koşu antrenman", "yoga dersi", "futbol analiz", "basketbol antrenman", "kilo verme egzersiz", "spor beslenmesi"],
+    en: ["home workout", "gym training"],
+  },
+  komedi: {
+    tr: ["komedi skeç", "komik video", "eğlence", "stand up", "parodi video", "komik anlar", "şaka videosu", "eğlenceli challenge", "mizah", "komik montaj"],
+    en: ["comedy sketch", "funny video"],
+  },
+  muzik: {
+    tr: ["cover şarkı", "gitar dersi", "akustik", "piyano dersi", "şarkı sözleri", "türkü", "rap müzik", "müzik prodüksiyon", "bağlama dersi", "canlı performans"],
+    en: ["song cover", "music tutorial"],
+  },
+  saglik: {
+    tr: ["sağlıklı beslenme", "diyet", "kilo verme", "doktor tavsiyeleri", "uyku düzeni", "psikoloji sağlık", "bitkisel tedavi", "vitamin takviye", "hamilelik", "diş sağlığı"],
+    en: ["health tips", "nutrition"],
+  },
+  moda: {
+    tr: ["kombin önerileri", "moda", "stil", "kıyafet alışverişi", "gardırop düzeni", "tesettür kombin", "ayakkabı önerileri", "moda trendleri", "vintage stil", "aksesuar"],
+    en: ["fashion lookbook", "outfit ideas"],
+  },
+  gelisim: {
+    tr: ["kişisel gelişim", "motivasyon", "verimlilik", "kariyer tavsiyeleri", "kitap özeti", "zaman yönetimi", "iletişim becerileri", "hedef belirleme", "özgüven", "alışkanlık"],
+    en: ["self improvement", "productivity"],
+  },
+  cocuk: {
+    tr: ["çocuk şarkıları", "eğitici çocuk videoları", "çocuk oyunları", "masal anlatımı", "çocuk etkinlikleri", "bebek bakımı", "çocuk gelişimi", "boyama etkinliği", "okul öncesi eğitim", "aile çocuk"],
+    en: ["nursery rhymes", "kids learning"],
+  },
 };
 
 // Sadece belirli nişleri işle: `npm run discover -- makyaj,oto,spor`
@@ -52,10 +97,20 @@ const activeNiches = nicheFilter?.length
   ? Object.fromEntries(Object.entries(QUERIES).filter(([n]) => nicheFilter.includes(n)))
   : QUERIES;
 
+/**
+ * Kota penceresi: search.list çağrısı 100 birim, günlük limit 10.000.
+ * QUERY_OFFSET/QUERY_LIMIT ile sorgu listesinin bir dilimi işlenir; böylece
+ * geniş sorgu setleri güne yayılabilir (cron her gün farklı dilimi alır).
+ */
+const Q_OFFSET = Number(process.env.QUERY_OFFSET ?? 0);
+const Q_LIMIT = Number(process.env.QUERY_LIMIT ?? 99);
+const slice = <T,>(arr: T[]) => arr.slice(Q_OFFSET, Q_OFFSET + Q_LIMIT);
+
 const MIN_SUBS_TR = 10_000; // TR: küçük ama gerçek kanallar da girsin (küçük kanal outlier'ı özelliği)
 const MIN_SUBS_GLOBAL = 200_000; // Global: sadece büyük/izlenen kanallar
 const MIN_VIDEO_COUNT = 15;
-const MAX_NEW_PER_NICHE = 30;
+// Ölçek turu: niş başına hedef kanal sayısı (env ile ayarlanır)
+const MAX_NEW_PER_NICHE = Number(process.env.MAX_NEW_PER_NICHE ?? 30);
 
 // Kurum / TV / haber / marka-reklam / klon eleme
 // (marka kanalları reklam kampanyalarıyla satın alınmış izlenme aldığı için
@@ -81,7 +136,7 @@ const publishedAfter = new Date(Date.now() - 30 * 86400000).toISOString();
 const found = new Map<string, { niche: string; global: boolean }>();
 
 for (const [niche, q] of Object.entries(activeNiches)) {
-  for (const [lang, queries] of [["tr", q.tr], ["en", q.en]] as const) {
+  for (const [lang, queries] of [["tr", slice(q.tr)], ["en", slice(q.en)]] as const) {
     for (const query of queries) {
       const res = await yt<{ items: SearchItem[] }>("search", {
         part: "snippet",
