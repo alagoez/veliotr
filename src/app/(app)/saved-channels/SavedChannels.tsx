@@ -2,14 +2,60 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { Radar, Trash2, TrendingUp } from "lucide-react";
+import { Radar, Trash2, TrendingUp, Plus, Loader2 } from "lucide-react";
 import { fmtCompact } from "@/lib/format";
 import { useStore } from "@/lib/store";
 import type { SearchResponse, Video } from "@/lib/types";
 
+type TrackResult = {
+  channel?: { id: string; title: string; handle: string | null; subscribers: number; medianViews: number };
+  videoCount?: number;
+  message?: string;
+  error?: string;
+};
+
 export function SavedChannels() {
   const store = useStore();
   const [viralByChannel, setViralByChannel] = useState<Record<string, Video[]>>({});
+  const [addUrl, setAddUrl] = useState("");
+  const [adding, setAdding] = useState(false);
+  const [addMsg, setAddMsg] = useState<{ ok: boolean; text: string } | null>(null);
+
+  const addChannel = async () => {
+    if (!addUrl.trim() || adding) return;
+    setAdding(true);
+    setAddMsg(null);
+    try {
+      const res = await fetch("/api/track-channel", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ url: addUrl.trim() }),
+      });
+      const data = (await res.json()) as TrackResult;
+      if (!res.ok || !data.channel) {
+        setAddMsg({ ok: false, text: data.message ?? "Kanal eklenemedi." });
+        return;
+      }
+      store.trackChannel({
+        id: data.channel.id,
+        title: data.channel.title,
+        handle: data.channel.handle ?? "",
+        avatarUrl: null,
+        nicheSlug: "",
+        subscribers: data.channel.subscribers,
+        totalViews: 0,
+        videoCount: data.videoCount ?? 0,
+        publishedAt: new Date().toISOString(),
+        medianViews: data.channel.medianViews,
+      });
+      setAddMsg({ ok: true, text: data.message ?? "Kanal eklendi." });
+      setAddUrl("");
+    } catch {
+      setAddMsg({ ok: false, text: "Bağlantı hatası — tekrar dene." });
+    } finally {
+      setAdding(false);
+    }
+  };
 
   // Takip edilen kanalların taze outlier'larını kontrol et (uyarı önizlemesi)
   useEffect(() => {
@@ -62,6 +108,30 @@ export function SavedChannels() {
         >
           Uyarıları yönet
         </Link>
+      </div>
+
+      {/* Rakip ekle — canlı indekse çeker (her nişin dolması bu) */}
+      <div className="mt-5">
+        <div className="flex gap-2">
+          <input
+            value={addUrl}
+            onChange={(e) => setAddUrl(e.target.value)}
+            onKeyDown={(e) => e.key === "Enter" && addChannel()}
+            placeholder="Rakip kanal / video linki veya @kullanıcı adı yapıştır..."
+            className="search-command w-full rounded-xl border border-edge bg-surface px-4 py-2.5 text-sm outline-none placeholder:text-faint focus:border-brand/60"
+          />
+          <button
+            onClick={addChannel}
+            disabled={adding || !addUrl.trim()}
+            className="flex shrink-0 items-center gap-1.5 rounded-xl bg-gradient-to-r from-brand to-glow px-4 py-2.5 text-sm font-bold text-black transition-transform hover:scale-[1.02] active:scale-95 disabled:opacity-50"
+          >
+            {adding ? <Loader2 size={15} className="animate-spin" /> : <Plus size={15} />}
+            {adding ? "Çekiliyor..." : "Ekle"}
+          </button>
+        </div>
+        {addMsg && (
+          <p className={`mt-2 text-xs ${addMsg.ok ? "text-pos" : "text-warn"}`}>{addMsg.text}</p>
+        )}
       </div>
 
       {!store.hydrated ? null : store.tracked.length === 0 ? (

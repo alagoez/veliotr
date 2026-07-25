@@ -22,11 +22,13 @@ export const SearchRequestSchema = z.object({
     excludeChannels: z.array(z.string().trim().min(1).max(80)).max(10).optional(),
     similarTo: z.string().trim().max(100).optional(),
     semanticBlend: z.number().min(0).max(1).optional(),
+    nicheRelevant: z.boolean().optional(),
   }).default({}),
   sort: z.enum(["outlier", "upload-date", "relevance"]).default("outlier"),
   page: z.number().int().min(0).max(10_000).default(0),
   pageSize: z.number().int().min(6).max(48).default(24),
   seed: z.number().int().optional(),
+  profileVector: z.array(z.number()).length(768).optional(),
 });
 
 export const ChatRequestSchema = z.object({

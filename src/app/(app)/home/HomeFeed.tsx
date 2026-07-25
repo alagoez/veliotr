@@ -2,10 +2,11 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useSearchParams } from "next/navigation";
-import { Search, Shuffle, SlidersHorizontal, X } from "lucide-react";
+import { Search, Shuffle, SlidersHorizontal, X, Sparkles } from "lucide-react";
 import { FilterPanel } from "@/components/app/FilterPanel";
 import { VideoCard } from "@/components/app/VideoCard";
 import { fmtPlain } from "@/lib/format";
+import { useStore } from "@/lib/store";
 import type {
   SearchFilters,
   SearchResponse,
@@ -28,11 +29,18 @@ type Props = {
 
 export function HomeFeed({ initialFilters, heading, subheading }: Props = {}) {
   const params = useSearchParams();
+  const store = useStore();
   const similarParam = params.get("similar") ?? undefined;
+  const isMainFeed = !initialFilters && !similarParam;
   const [filters, setFilters] = useState<SearchFilters>({
     ...initialFilters,
     similarTo: similarParam,
   });
+  // Kişiselleştirme türetilmiş: override null = store varsayılanını izle
+  const [override, setOverride] = useState<boolean | null>(null);
+  const hasProfile = Boolean(store.profile?.vector?.length || store.niche);
+  const personalize = isMainFeed && (override ?? Boolean(store.personalize && hasProfile));
+  const nicheLabel = store.profile?.nicheName ?? null;
   const [similarSource, setSimilarSource] = useState<{ id: string; title: string } | null>(null);
   const [sort, setSort] = useState<SearchSort>("outlier");
   const [seed, setSeed] = useState<number | undefined>(undefined);
@@ -54,6 +62,7 @@ export function HomeFeed({ initialFilters, heading, subheading }: Props = {}) {
       p: number,
       sd: number | undefined,
       append: boolean,
+      profileVector?: number[],
     ) => {
       abortRef.current?.abort();
       const ctrl = new AbortController();
@@ -64,7 +73,13 @@ export function HomeFeed({ initialFilters, heading, subheading }: Props = {}) {
         const res = await fetch("/api/search", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ filters: f, sort: s, page: p, seed: sd }),
+          body: JSON.stringify({
+            filters: f,
+            sort: s,
+            page: p,
+            seed: sd,
+            profileVector: f.nicheRelevant ? profileVector : undefined,
+          }),
           signal: ctrl.signal,
         });
         if (!res.ok) {
@@ -88,11 +103,29 @@ export function HomeFeed({ initialFilters, heading, subheading }: Props = {}) {
     [],
   );
 
-  // Filtre/sıralama değişince baştan yükle (debounce)
+  // Efektif filtreler: kişiselleştirme açıksa niş kısıtını türet (state'e yazmadan)
+  const usesVector = personalize && Boolean(store.profile?.vector?.length);
+  const effectiveFilters: SearchFilters = usesVector
+    ? { ...filters, nicheRelevant: true, niche: undefined }
+    : personalize && store.niche
+      ? { ...filters, niche: store.niche, nicheRelevant: undefined }
+      : { ...filters, nicheRelevant: undefined };
+  const profileVec = usesVector ? store.profile?.vector : undefined;
+  // Debounce fetch tetikleyicisi için sabit imza
+  const effKey = JSON.stringify(effectiveFilters);
+
+  // Filtre/sıralama/kişiselleştirme değişince baştan yükle (debounce)
   useEffect(() => {
-    const t = setTimeout(() => fetchPage(filters, sort, 0, seed, false), 250);
+    const t = setTimeout(() => fetchPage(effectiveFilters, sort, 0, seed, false, profileVec), 250);
     return () => clearTimeout(t);
-  }, [filters, sort, seed, fetchPage]);
+    // effKey efektif filtreleri; profileVec vektör kimliğini temsil eder
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [effKey, sort, seed, fetchPage, usesVector]);
+
+  const togglePersonalize = () => {
+    setSeed(undefined);
+    setOverride(!personalize);
+  };
 
   // ⌘K / Ctrl+K → aramaya odaklan
   useEffect(() => {
@@ -136,6 +169,24 @@ export function HomeFeed({ initialFilters, heading, subheading }: Props = {}) {
           <div className="mb-3">
             <h1 className="font-display text-2xl font-bold tracking-tight">{heading}</h1>
             {subheading && <p className="mt-1 text-sm text-muted">{subheading}</p>}
+          </div>
+        )}
+
+        {/* Kişisel niş toggle — profil varsa */}
+        {isMainFeed && hasProfile && (
+          <div className="mb-3 flex items-center gap-2">
+            <div className="segmented" role="group" aria-label="Kapsam">
+              <button aria-pressed={personalize} onClick={() => !personalize && togglePersonalize()}>
+                <Sparkles size={13} className="mr-1 inline" />
+                Nişim{nicheLabel ? ` · ${nicheLabel}` : ""}
+              </button>
+              <button aria-pressed={!personalize} onClick={() => personalize && togglePersonalize()}>
+                Tümü
+              </button>
+            </div>
+            {personalize && (
+              <span className="text-xs text-faint">Sana özel: sektöründe patlayan videolar</span>
+            )}
           </div>
         )}
 
@@ -268,7 +319,7 @@ export function HomeFeed({ initialFilters, heading, subheading }: Props = {}) {
         {hasMore && !loading && (
           <div className="mt-7 flex justify-center">
             <button
-              onClick={() => fetchPage(filters, sort, page + 1, seed, true)}
+              onClick={() => fetchPage(effectiveFilters, sort, page + 1, seed, true, profileVec)}
               className="icon-btn px-7"
             >
               Daha fazla yükle

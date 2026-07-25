@@ -19,6 +19,14 @@ import type {
 const KEY = "viralab-store-v1";
 const EVT = "viralab-store-changed";
 
+export type ConceptProfile = {
+  channelId: string;
+  channelTitle: string;
+  nicheSlug: string | null;
+  nicheName: string | null;
+  vector: number[]; // 768d — nicheRelevant aramada kullanılır
+};
+
 export type StoreShape = {
   folders: Folder[];
   saved: SavedVideo[];
@@ -26,6 +34,10 @@ export type StoreShape = {
   notifications: AppNotification[];
   alertThreshold: number;
   niche?: string;
+  /** Onboarding'de kanal bağlanınca oluşan kişiselleştirme çapası */
+  profile?: ConceptProfile | null;
+  /** Keşfet varsayılan olarak kişisel niş mi göstersin (profil varsa) */
+  personalize?: boolean;
 };
 
 const DEFAULTS: StoreShape = {
@@ -247,6 +259,22 @@ export function useStore() {
     [update],
   );
 
+  const setProfile = useCallback(
+    (profile: ConceptProfile | null) =>
+      update((s) => ({
+        ...s,
+        profile,
+        niche: profile?.nicheSlug ?? s.niche,
+        personalize: profile ? true : s.personalize,
+      })),
+    [update],
+  );
+
+  const setPersonalize = useCallback(
+    (on: boolean) => update((s) => ({ ...s, personalize: on })),
+    [update],
+  );
+
   return {
     ...state,
     hydrated,
@@ -262,6 +290,8 @@ export function useStore() {
     markAllRead,
     setAlertThreshold,
     setNiche,
+    setProfile,
+    setPersonalize,
   };
 }
 

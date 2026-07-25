@@ -71,6 +71,8 @@ export type SearchFilters = {
   similarTo?: string;
   /** Birebir↔Geniş: 0 = tam eşleşme, 1 = tamamen anlamsal (Gemini embedding) */
   semanticBlend?: number;
+  /** Nişime uygun: global indeksi kullanıcı kanal profiline yakın videolarla sınırla */
+  nicheRelevant?: boolean;
 };
 
 export type SearchSort = "outlier" | "upload-date" | "relevance";
@@ -83,6 +85,8 @@ export type SearchRequest = {
   seed?: number; // rastgele butonu için
   /** Dahili: sonuçları bu ID kümesiyle sınırla (semantik arama; API'den gelmez) */
   idSet?: string[];
+  /** Kullanıcı kanal concept profili (768d) — nicheRelevant için */
+  profileVector?: number[];
 };
 
 export type SearchResponse = {

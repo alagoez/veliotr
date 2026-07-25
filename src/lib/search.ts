@@ -417,11 +417,50 @@ async function searchSemantic(
   }
 }
 
+/**
+ * Nişime uygun: kullanıcı kanal profiline (concept vektörü) en yakın videoları
+ * global indeksten süz, sonra normal filtre+sıralamayı o bölgede uygula.
+ * Velio'nun personalizasyonu = paylaşılan indeks üzerinde sorgu-anı semantik filtre.
+ */
+async function searchByProfile(
+  req: SearchRequest,
+  opts?: SearchOpts,
+): Promise<SearchResponse | null> {
+  if (!req.profileVector?.length) return null;
+  try {
+    const supabase = await getClient(opts);
+    // Sıkı komşuluk: profil güçlüyse (çok videolu kanal) bu bölge gerçekten
+    // kullanıcının nişidir; gevşek tutmak outlier sıralamasında komşu-niş
+    // gürültüsü taşır. 300 iyi bir denge.
+    const { data: matches, error } = await supabase.rpc("match_videos", {
+      query_embedding: JSON.stringify(req.profileVector),
+      match_count: 300,
+      niche: null,
+      min_multiplier: 0,
+      only_short: req.filters.isShort ?? null,
+    });
+    if (error || !matches?.length) return null;
+    const ids = (matches as { id: string }[]).map((m) => m.id);
+    // Niş bölgesi + kullanıcının diğer filtreleri + sıralaması
+    return await searchSupabase(
+      { ...req, filters: { ...req.filters, nicheRelevant: undefined }, idSet: ids },
+      opts,
+    );
+  } catch {
+    return null;
+  }
+}
+
 export async function search(
   req: SearchRequest,
   opts?: SearchOpts,
 ): Promise<SearchResponse> {
   if (isSupabaseConfigured()) {
+    // Nişime uygun (profil tabanlı) — en öncelikli kişiselleştirme
+    if (req.filters.nicheRelevant && req.profileVector?.length) {
+      const niche = await searchByProfile(req, opts);
+      if (niche) return niche;
+    }
     const blend = req.filters.semanticBlend ?? 0;
     if (blend > 0.25 && req.filters.q) {
       const semantic = await searchSemantic(req, opts);
