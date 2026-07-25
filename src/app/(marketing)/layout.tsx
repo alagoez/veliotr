@@ -22,7 +22,7 @@ export default function MarketingLayout({
             <p className="mt-5 max-w-xs text-sm leading-7 text-muted">Global creator&apos;ların kanıtlanmış viral video fikirlerini ve trendleri veriyle bulmasına yardım ediyoruz.</p>
           </div>
           <div><p className="text-sm font-semibold">Yasal</p><div className="mt-4 grid gap-3 text-sm text-muted"><Link href="/gizlilik" className="hover:text-ink">Gizlilik Politikası</Link><Link href="/kosullar" className="hover:text-ink">Kullanım Koşulları</Link></div></div>
-          <div><p className="text-sm font-semibold">Hızlı bağlantılar</p><div className="mt-4 grid gap-3 text-sm text-muted"><Link href="/" className="hover:text-ink">Ana sayfa</Link><Link href="/iletisim" className="hover:text-ink">İletişim</Link><Link href="/ozellikler" className="hover:text-ink">Özellikler</Link><Link href="/ortaklik" className="hover:text-ink">Ortaklık Programı</Link></div></div>
+          <div><p className="text-sm font-semibold">Hızlı bağlantılar</p><div className="mt-4 grid gap-3 text-sm text-muted"><Link href="/" className="hover:text-ink">Ana sayfa</Link><Link href="/iletisim" className="hover:text-ink">İletişim</Link><Link href="/ozellikler" className="hover:text-ink">Özellikler</Link><Link href="/ortaklik" className="hover:text-ink">Ortaklık Programı</Link><Link href="/blog" className="hover:text-ink">Blog</Link></div></div>
           <div><p className="text-sm font-semibold">Bize ulaş</p><p className="mt-4 text-sm leading-7 text-muted">{brand.supportEmail}</p></div>
         </div>
         <div className="border-t border-edge-soft py-5 text-center text-xs text-faint">{brand.name} © {new Date().getFullYear()} · Tüm hakları saklıdır.</div>

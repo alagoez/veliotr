@@ -1,0 +1,33 @@
+# pSEO motoru — her gece 1 TR makale üretir ve commit'ler.
+# Gerekli repo secret: GEMINI_API_KEY (yoksa iş sessizce atlanır)
+name: pseo
+
+on:
+  schedule:
+    - cron: "45 0 * * *" # her gece 00:45 UTC (Velio'yla aynı saat 😉)
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run pseo
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+      - name: Commit new article
+        run: |
+          git config user.name "viralab-pseo[bot]"
+          git config user.email "pseo@viralab.dev"
+          git add content/blog
+          git diff --cached --quiet || git commit -m "pseo: yeni makale ($(date +%F))"
+          git push

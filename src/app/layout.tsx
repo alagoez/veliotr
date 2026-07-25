@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import {
   Bricolage_Grotesque,
   Geist_Mono,
@@ -7,6 +7,7 @@ import {
 } from "next/font/google";
 import "./globals.css";
 import { brand } from "@/config/brand";
+import { PwaRegister } from "@/components/PwaRegister";
 
 const bricolage = Bricolage_Grotesque({
   variable: "--font-bricolage",
@@ -35,6 +36,11 @@ export const metadata: Metadata = {
     template: `%s — ${brand.name}`,
   },
   description: brand.subTagline,
+  appleWebApp: { capable: true, title: brand.name, statusBarStyle: "black-translucent" },
+};
+
+export const viewport: Viewport = {
+  themeColor: "#08090a",
 };
 
 export default function RootLayout({
@@ -47,7 +53,10 @@ export default function RootLayout({
       lang="tr"
       className={`${bricolage.variable} ${instrumentSans.variable} ${geistMono.variable} ${instrumentSerif.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">
+        <PwaRegister />
+        {children}
+      </body>
     </html>
   );
 }

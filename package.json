@@ -11,7 +11,9 @@
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage",
     "ingest": "tsx --env-file-if-exists=.env.local scripts/ingest.ts",
-    "ingest:mock": "tsx --env-file-if-exists=.env.local scripts/ingest.ts --mock"
+    "ingest:mock": "tsx --env-file-if-exists=.env.local scripts/ingest.ts --mock",
+    "embed": "tsx --env-file-if-exists=.env.local scripts/embed.ts",
+    "pseo": "tsx --env-file-if-exists=.env.local scripts/pseo.ts"
   },
   "dependencies": {
     "@google/genai": "^2.13.0",

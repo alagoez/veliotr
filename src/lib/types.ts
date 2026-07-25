@@ -69,6 +69,8 @@ export type SearchFilters = {
   excludeChannels?: string[];
   /** Bu video ID'sine benzer videoları getir ("Benzer videoları gör") */
   similarTo?: string;
+  /** Birebir↔Geniş: 0 = tam eşleşme, 1 = tamamen anlamsal (Gemini embedding) */
+  semanticBlend?: number;
 };
 
 export type SearchSort = "outlier" | "upload-date" | "relevance";
@@ -79,6 +81,8 @@ export type SearchRequest = {
   page: number; // 0 tabanlı
   pageSize?: number;
   seed?: number; // rastgele butonu için
+  /** Dahili: sonuçları bu ID kümesiyle sınırla (semantik arama; API'den gelmez) */
+  idSet?: string[];
 };
 
 export type SearchResponse = {

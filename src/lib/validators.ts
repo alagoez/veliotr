@@ -21,6 +21,7 @@ export const SearchRequestSchema = z.object({
     excludeKeywords: z.array(z.string().trim().min(1).max(80)).max(10).optional(),
     excludeChannels: z.array(z.string().trim().min(1).max(80)).max(10).optional(),
     similarTo: z.string().trim().max(100).optional(),
+    semanticBlend: z.number().min(0).max(1).optional(),
   }).default({}),
   sort: z.enum(["outlier", "upload-date", "relevance"]).default("outlier"),
   page: z.number().int().min(0).max(10_000).default(0),

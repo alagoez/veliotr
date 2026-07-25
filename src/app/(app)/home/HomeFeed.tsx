@@ -156,6 +156,27 @@ export function HomeFeed({ initialFilters, heading, subheading }: Props = {}) {
             <span className="kbd">⌘K</span>
           </form>
 
+          {/* Birebir ↔ Geniş (semantik karışım — Gemini anahtarıyla aktifleşir) */}
+          <label
+            className="flex h-11 items-center gap-2 rounded-2xl border border-edge-soft bg-surface px-3.5 text-[11px] font-semibold text-faint"
+            title="Birebir: tam kelime eşleşmesi · Geniş: anlamsal arama (Gemini)"
+          >
+            Birebir
+            <input
+              type="range"
+              min={0}
+              max={1}
+              step={0.5}
+              value={filters.semanticBlend ?? 0}
+              onChange={(e) => {
+                setSeed(undefined);
+                setFilters((f) => ({ ...f, semanticBlend: Number(e.target.value) || undefined }));
+              }}
+              className="!pointer-events-auto !static h-1 w-16 cursor-pointer appearance-none rounded-full bg-raised accent-brand"
+            />
+            Geniş
+          </label>
+
           <div className="segmented" role="group" aria-label="Sıralama">
             {SORTS.map((s) => (
               <button

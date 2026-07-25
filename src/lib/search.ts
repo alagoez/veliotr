@@ -70,13 +70,24 @@ export function extractKeywords(title: string, max = 3): string[] {
     .slice(0, max);
 }
 
+/** RLS'siz service-role erişimi gerekiyor mu? (MCP gibi oturumsuz sunucu bağlamları) */
+export type SearchOpts = { admin?: boolean };
+
+async function getClient(opts?: SearchOpts) {
+  if (opts?.admin && process.env.SUPABASE_SERVICE_ROLE_KEY) {
+    const { createAdminSupabase } = await import("@/lib/supabase/admin");
+    return createAdminSupabase();
+  }
+  const { createServerSupabase } = await import("@/lib/supabase/server");
+  return createServerSupabase();
+}
+
 /** Tek video getir (player + benzer kaynağı için). */
-export async function getVideoById(id: string): Promise<Video | null> {
+export async function getVideoById(id: string, opts?: SearchOpts): Promise<Video | null> {
   if (!isSupabaseConfigured()) {
     return getDemoDataset().videos.find((v) => v.id === id) ?? null;
   }
-  const { createServerSupabase } = await import("@/lib/supabase/server");
-  const supabase = await createServerSupabase();
+  const supabase = await getClient(opts);
   const { data } = await supabase
     .from("videos")
     .select(
@@ -210,9 +221,11 @@ export function searchDemo(req: SearchRequest): SearchResponse {
  * Supabase modu: videos tablosuna aynı filtrelerle sorgu atar.
  * (RLS: videos herkese okunur; yazma yalnızca service-role — bkz. migration)
  */
-export async function searchSupabase(req: SearchRequest): Promise<SearchResponse> {
-  const { createServerSupabase } = await import("@/lib/supabase/server");
-  const supabase = await createServerSupabase();
+export async function searchSupabase(
+  req: SearchRequest,
+  opts?: SearchOpts,
+): Promise<SearchResponse> {
+  const supabase = await getClient(opts);
   const f = req.filters;
   const pageSize = req.pageSize ?? PAGE_SIZE;
   const from = req.page * pageSize;
@@ -224,10 +237,12 @@ export async function searchSupabase(req: SearchRequest): Promise<SearchResponse
       { count: "exact" },
     );
 
+  if (req.idSet?.length) qb = qb.in("id", req.idSet);
+
   // Benzer videolar modu
   let similarSource: { id: string; title: string } | undefined;
   if (f.similarTo) {
-    const src = await getVideoById(f.similarTo);
+    const src = await getVideoById(f.similarTo, opts);
     if (src) {
       similarSource = { id: src.id, title: src.title };
       const kws = extractKeywords(src.title).map((k) => k.replace(/[%,()"]/g, ""));
@@ -324,7 +339,77 @@ export async function searchSupabase(req: SearchRequest): Promise<SearchResponse
   };
 }
 
-export async function search(req: SearchRequest): Promise<SearchResponse> {
-  if (isSupabaseConfigured()) return searchSupabase(req);
+/**
+ * Semantik arama: sorguyu embedding'e çevirip pgvector RPC ile en yakın
+ * videoları getirir. Gemini/Supabase yoksa veya embedding başarısızsa
+ * null döner → çağıran anahtar kelime aramasına düşer (zarif geri düşüş).
+ */
+async function searchSemantic(
+  req: SearchRequest,
+  opts?: SearchOpts,
+): Promise<SearchResponse | null> {
+  const f = req.filters;
+  if (!f.q) return null;
+  const { isGeminiConfigured } = await import("@/lib/env");
+  if (!isGeminiConfigured()) return null;
+
+  try {
+    const { embedText } = await import("@/lib/embeddings");
+    const vec = await embedText(f.q, "RETRIEVAL_QUERY");
+    if (!vec) return null;
+
+    const supabase = await getClient(opts);
+    const { data: matches, error } = await supabase.rpc("match_videos", {
+      query_embedding: JSON.stringify(vec),
+      match_count: 120,
+      min_multiplier: f.multiplier?.min ?? 0,
+      niche: f.niche ?? null,
+      only_short: f.isShort ?? null,
+    });
+    if (error || !matches?.length) return null;
+
+    const ids = (matches as { id: string; similarity: number }[]).map((m) => m.id);
+    const rank = new Map(ids.map((id, i) => [id, i]));
+
+    // Tam satırları çek, benzerlik sırasına geri diz
+    const full = await searchSupabase(
+      {
+        ...req,
+        filters: { ...f, q: undefined, semanticBlend: undefined },
+        page: 0,
+        pageSize: 48,
+        idSet: ids,
+      },
+      opts,
+    );
+    const ordered = [...full.videos].sort(
+      (a, b) => (rank.get(a.id) ?? 999) - (rank.get(b.id) ?? 999),
+    );
+    const pageSize = req.pageSize ?? 24;
+    const start = req.page * pageSize;
+    return {
+      videos: ordered.slice(start, start + pageSize),
+      total: ordered.length,
+      page: req.page,
+      hasMore: start + pageSize < ordered.length,
+      demo: false,
+    };
+  } catch {
+    return null; // her hata → anahtar kelime aramasına düş
+  }
+}
+
+export async function search(
+  req: SearchRequest,
+  opts?: SearchOpts,
+): Promise<SearchResponse> {
+  if (isSupabaseConfigured()) {
+    const blend = req.filters.semanticBlend ?? 0;
+    if (blend > 0.25 && req.filters.q) {
+      const semantic = await searchSemantic(req, opts);
+      if (semantic) return semantic;
+    }
+    return searchSupabase(req, opts);
+  }
   return searchDemo(req);
 }

@@ -359,6 +359,19 @@ body { position: relative; background: var(--color-base); color: var(--color-ink
   .side-upgrade::before, .price-hero::before, .radar-empty::after, .ai-orb, .mult-hot, .badge-pulse, .live-dot { animation: none; }
   .video-card::after { display: none; }
 }
+
+/* ── Blog gövdesi (pSEO makaleleri) ── */
+.blog-body { font-size: 15.5px; line-height: 1.85; color: color-mix(in oklab, var(--color-ink) 88%, transparent); }
+.blog-body h2 { margin: 2.2em 0 0.6em; font-family: var(--font-display); font-size: 24px; font-weight: 700; letter-spacing: -0.03em; color: var(--color-ink); }
+.blog-body h3 { margin: 1.8em 0 0.4em; font-family: var(--font-display); font-size: 17px; font-weight: 700; color: var(--color-ink); }
+.blog-body p { margin: 0.9em 0; }
+.blog-body ul { margin: 0.9em 0; padding-left: 1.3em; list-style: disc; }
+.blog-body li { margin: 0.35em 0; }
+.blog-body a { color: var(--color-glow); text-decoration: underline; text-underline-offset: 3px; }
+.blog-body strong { color: var(--color-ink); }
+.blog-body table { width: 100%; margin: 1.4em 0; border-collapse: collapse; font-size: 13.5px; }
+.blog-body th, .blog-body td { padding: 9px 12px; border: 1px solid var(--color-edge-soft); text-align: left; }
+.blog-body th { background: var(--color-surface); font-family: var(--font-display); font-weight: 600; color: var(--color-ink); }
 .hero-grid { background-color: #08090a; background-image: radial-gradient(circle at 76% 32%, rgba(255,138,0,.16), transparent 27%), radial-gradient(circle at 92% 8%, rgba(255,220,90,.12), transparent 22%), radial-gradient(circle at 22% 80%, rgba(116,50,255,.09), transparent 25%), conic-gradient(from 210deg at 70% 45%, transparent 0deg, rgba(255,185,30,.06) 55deg, transparent 110deg); background-size: 100% 100%; animation: ambient-shift 18s ease-in-out infinite alternate; }
 .hero-grid::after { content: ""; position: absolute; inset: auto 0 0; height: 180px; background: linear-gradient(transparent, #08090a); pointer-events: none; }.hero-art-layer { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }.hero-orb { position: absolute; right: 4%; top: 21%; width: min(47vw, 620px); aspect-ratio: 1; border-radius: 50%; background: radial-gradient(circle at 34% 28%, rgba(255,244,183,.98) 0 2%, rgba(255,194,40,.92) 10%, rgba(255,121,0,.72) 27%, rgba(82,29,3,.4) 56%, transparent 71%); filter: blur(1px); opacity: .68; box-shadow: inset -35px -30px 90px rgba(0,0,0,.72), 0 0 100px rgba(255,126,0,.26); animation: orb-drift 12s ease-in-out infinite; }.hero-ring { position: absolute; right: 4%; top: 26%; width: min(45vw, 600px); aspect-ratio: 1; border: 1px solid rgba(255,218,119,.52); border-radius: 48% 52% 45% 55%; transform: rotate(-26deg) skewX(-9deg); box-shadow: 0 0 28px rgba(255,177,23,.32), inset 0 0 22px rgba(255,188,33,.18); animation: ring-spin 18s linear infinite; }.hero-beam { position: absolute; right: -9%; top: 45%; width: 70%; height: 34%; border-radius: 50%; background: linear-gradient(90deg, transparent, rgba(255,166,20,.17), transparent); filter: blur(34px); transform: rotate(-17deg); animation: beam-pulse 8s ease-in-out infinite; }.hero-star { position: absolute; display: block; width: 5px; height: 5px; border-radius: 50%; background: #ffe79b; box-shadow: 0 0 18px 5px rgba(255,181,30,.8); animation: star-blink 3.8s ease-in-out infinite; }.star-one { right: 19%; top: 23%; }.star-two { right: 40%; top: 46%; animation-delay: 1.2s; }.star-three { right: 12%; top: 65%; animation-delay: 2.3s; }
 .hero-orb::before { content: ""; position: absolute; inset: 8% 14% 38% 9%; border-radius: 50%; background: radial-gradient(ellipse at 40% 30%, rgba(255,255,226,.72), transparent 44%); filter: blur(20px); opacity: .75; animation: orb-highlight 9s ease-in-out infinite; }.hero-orb::after { content: ""; position: absolute; inset: 4%; border-radius: inherit; border: 1px solid rgba(255,236,165,.22); transform: rotate(24deg); }
