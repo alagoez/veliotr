@@ -2,7 +2,19 @@ import { isDemoMode, isProductionReady, isSupabaseConfigured } from "@/lib/env";
 
 export const dynamic = "force-dynamic";
 
-export async function GET() {
+/**
+ * Ayrıntılı teşhis (indeks boyutu, eksik env adları) yalnızca yetkili
+ * çağrılara açıktır — bunlar rakip istihbaratı ve keşif bilgisidir.
+ * Anonim çağrı sadece ok/degraded durumunu görür.
+ */
+function isDetailAllowed(request: Request): boolean {
+  const key = process.env.HEALTH_API_KEY ?? process.env.MCP_API_KEY;
+  if (!key) return process.env.NODE_ENV !== "production";
+  return request.headers.get("authorization") === `Bearer ${key}`;
+}
+
+export async function GET(request: Request) {
+  const detailed = isDetailAllowed(request);
   const configured = isSupabaseConfigured();
   const productionReady = isProductionReady();
 
@@ -25,10 +37,14 @@ export async function GET() {
         status: "not_ready",
         database: "configured",
         demo: false,
-        missing: [
-          !process.env.SUPABASE_SERVICE_ROLE_KEY ? "SUPABASE_SERVICE_ROLE_KEY" : null,
-          !process.env.NEXT_PUBLIC_APP_URL ? "NEXT_PUBLIC_APP_URL" : null,
-        ].filter(Boolean),
+        ...(detailed
+          ? {
+              missing: [
+                !process.env.SUPABASE_SERVICE_ROLE_KEY ? "SUPABASE_SERVICE_ROLE_KEY" : null,
+                !process.env.NEXT_PUBLIC_APP_URL ? "NEXT_PUBLIC_APP_URL" : null,
+              ].filter(Boolean),
+            }
+          : {}),
         timestamp: new Date().toISOString(),
       },
       { status: 503 },
@@ -56,7 +72,7 @@ export async function GET() {
     return Response.json({
       status: count && count > 0 ? "ok" : "degraded",
       database: "connected",
-      videoCount: count ?? 0,
+      ...(detailed ? { videoCount: count ?? 0 } : {}),
       demo: false,
       timestamp: new Date().toISOString(),
     }, { status: count && count > 0 ? 200 : 503 });

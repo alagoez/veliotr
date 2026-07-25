@@ -11,6 +11,7 @@
 import { getVideoById, search } from "@/lib/search";
 import { COLLECTIONS } from "@/lib/collections";
 import { fmtCompact, fmtMultiplier } from "@/lib/format";
+import { checkRateLimit, RateLimitError, requestIdentifier } from "@/lib/rate-limit";
 import type { SearchFilters, SearchSort, Video } from "@/lib/types";
 
 const PROTOCOL_VERSION = "2025-03-26";
@@ -115,15 +116,58 @@ async function callTool(name: string, args: Record<string, unknown>): Promise<st
   }
 }
 
-function checkAuth(request: Request): boolean {
+/**
+ * Kimlik doğrulama — fail-closed.
+ * Bu uç nokta service-role ile okuma yapar; anahtarsız açık bırakılırsa
+ * tüm video indeksi (ürünün asıl varlığı) anonim olarak kazınabilir.
+ * Production'da MCP_API_KEY zorunludur; yoksa uç nokta kapalıdır.
+ */
+function checkAuth(request: Request): { ok: boolean; reason?: string } {
   const key = process.env.MCP_API_KEY;
-  if (!key) return true; // anahtar tanımlı değilse açık (demo)
-  return request.headers.get("authorization") === `Bearer ${key}`;
+  if (!key) {
+    if (process.env.NODE_ENV === "production") {
+      return { ok: false, reason: "mcp_disabled" };
+    }
+    return { ok: true }; // yalnızca yerel geliştirme
+  }
+  const header = request.headers.get("authorization") ?? "";
+  return { ok: timingSafeEqual(header, `Bearer ${key}`) };
+}
+
+/** Sabit süreli karşılaştırma — anahtar tahmininde zamanlama sızıntısını engeller. */
+function timingSafeEqual(a: string, b: string): boolean {
+  if (a.length !== b.length) return false;
+  let diff = 0;
+  for (let i = 0; i < a.length; i++) diff |= a.charCodeAt(i) ^ b.charCodeAt(i);
+  return diff === 0;
 }
 
 export async function POST(request: Request) {
-  if (!checkAuth(request)) {
-    return Response.json({ error: "unauthorized" }, { status: 401 });
+  const auth = checkAuth(request);
+  if (!auth.ok) {
+    return Response.json(
+      {
+        error: auth.reason ?? "unauthorized",
+        message:
+          auth.reason === "mcp_disabled"
+            ? "MCP uç noktası yapılandırılmamış (MCP_API_KEY gerekli)."
+            : "Geçersiz veya eksik Bearer anahtarı.",
+      },
+      { status: auth.reason === "mcp_disabled" ? 503 : 401 },
+    );
+  }
+
+  // Hız sınırı: kimlik doğrulanmış olsa da toplu kazımayı yavaşlat
+  try {
+    checkRateLimit(`mcp:${requestIdentifier(request)}`, 30);
+  } catch (e) {
+    if (e instanceof RateLimitError) {
+      return Response.json(
+        { error: e.message },
+        { status: 429, headers: { "Retry-After": String(Math.ceil((e.resetAt - Date.now()) / 1000)) } },
+      );
+    }
+    throw e;
   }
 
   let body: RpcRequest;

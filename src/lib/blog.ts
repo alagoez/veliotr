@@ -64,11 +64,28 @@ export function extractFaq(body: string): { q: string; a: string }[] {
 
 // ---- Mini markdown renderer (başlık, bold, link, liste, tablo, paragraf) ----
 
+/**
+ * Link hedefini güvenli hale getir. İçerik pSEO cron'uyla LLM'den gelip
+ * incelenmeden commit'lendiği için güvenilmez kabul edilir:
+ * - yalnızca http(s), mailto ve site içi (/) şemalarına izin ver
+ * - javascript:/data: gibi şemaları ve tırnak/açı kaçışlarını engelle
+ */
+function safeHref(raw: string): string {
+  const url = raw.trim();
+  const allowed =
+    /^https?:\/\//i.test(url) || /^mailto:/i.test(url) || /^\/(?!\/)/.test(url) || /^#/.test(url);
+  if (!allowed) return "#";
+  return url.replace(/["'<>`\s]/g, encodeURIComponent);
+}
+
 function inline(s: string): string {
   return s
     .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
     .replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>")
-    .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2">$1</a>');
+    .replace(
+      /\[([^\]]+)\]\(([^)]+)\)/g,
+      (_m, text: string, href: string) => `<a href="${safeHref(href)}">${text}</a>`,
+    );
 }
 
 export function renderMarkdown(body: string): string {
