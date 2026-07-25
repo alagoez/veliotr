@@ -49,6 +49,7 @@ if (batch.length === 0) {
 }
 
 const { GoogleGenAI } = await import("@google/genai");
+const { CHAT_MODEL } = await import("../src/config/ai");
 const ai = new GoogleGenAI({ apiKey: KEY });
 
 const today = new Date().toISOString().slice(0, 10);
@@ -71,7 +72,7 @@ TITLE: <55-65 karakterlik başlık>
 DESC: <140-155 karakterlik meta açıklama>`;
 
   const res = await ai.models.generateContent({
-    model: "gemini-2.5-flash",
+    model: CHAT_MODEL,
     contents: prompt,
     config: { temperature: 0.8, maxOutputTokens: 4096 },
   });

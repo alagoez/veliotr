@@ -1,6 +1,6 @@
 /**
  * Embedding doldurma — embedding'i olmayan videoların başlıklarını
- * Gemini text-embedding-004 ile vektörleştirip Supabase'e yazar.
+ * Gemini embedding modeliyle (src/config/ai.ts) vektörleştirip Supabase'e yazar.
  *
  * Gerekli env: GEMINI_API_KEY, NEXT_PUBLIC_SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY
  * Çalıştırma: npm run embed   (ingest sonrası; cron'a eklenebilir)
@@ -20,6 +20,7 @@ const db = createClient(
 );
 
 const { GoogleGenAI } = await import("@google/genai");
+const { EMBED_MODEL, EMBED_DIM } = await import("../src/config/ai");
 const ai = new GoogleGenAI({ apiKey: KEY });
 
 const BATCH = 100;
@@ -35,9 +36,9 @@ for (;;) {
   if (!rows?.length) break;
 
   const res = await ai.models.embedContent({
-    model: "text-embedding-004",
+    model: EMBED_MODEL,
     contents: rows.map((r) => r.title.slice(0, 1500)),
-    config: { taskType: "RETRIEVAL_DOCUMENT", outputDimensionality: 768 },
+    config: { taskType: "RETRIEVAL_DOCUMENT", outputDimensionality: EMBED_DIM },
   });
   const vectors = res.embeddings ?? [];
 

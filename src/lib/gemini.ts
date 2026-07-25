@@ -1,9 +1,10 @@
 import { isGeminiConfigured } from "@/lib/env";
 import { search } from "@/lib/search";
 import { fmtCompact, fmtMultiplier } from "@/lib/format";
+import { CHAT_MODEL } from "@/config/ai";
 import type { ChatMessage, Video } from "@/lib/types";
 
-const MODEL = "gemini-2.5-flash";
+const MODEL = CHAT_MODEL;
 
 /** Sorgu metninden niş çıkar (kullanıcı "finans nişinde..." derse bağlam daralır). */
 const NICHE_HINTS: [string, string][] = [
@@ -100,7 +101,7 @@ function mockAnswer(query: string, ctx: Video[]): string {
     )
     .join("\n");
   return [
-    `*(Demo modu — GEMINI_API_KEY eklendiğinde bu cevaplar Gemini 2.5 Flash ile üretilir.)*`,
+    `*(Demo modu — GEMINI_API_KEY eklendiğinde bu cevaplar gerçek yapay zekâ ile üretilir.)*`,
     ``,
     `"${query}" sorusu için indeksten çektiğim en güçlü sinyaller:`,
     ``,
