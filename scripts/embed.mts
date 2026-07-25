@@ -114,9 +114,13 @@ for (;;) {
 
 // 3) İndeksi yeniden kur
 console.log(`\n${done} embedding yazıldı. HNSW indeksi yeniden kuruluyor...`);
+// Ücretsiz kademe belleği paralel HNSW kurulumunu kaldırmaz → paralel kapalı,
+// düşük work_mem, hafif graf (m=8) ile kur.
 await withRetry(
   () =>
-    runSql("create index if not exists idx_videos_embedding on videos using hnsw (embedding vector_cosine_ops);"),
+    runSql(
+      "set max_parallel_maintenance_workers = 0; set maintenance_work_mem = '32MB'; set statement_timeout = 0; create index if not exists idx_videos_embedding on videos using hnsw (embedding vector_cosine_ops) with (m = 8, ef_construction = 32);",
+    ),
   "create index",
   4,
 );
