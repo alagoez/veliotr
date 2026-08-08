@@ -10,24 +10,14 @@
       "code": "US",
       "lang": "en",
       "minSubs": 50000
-    },
-    {
-      "code": "GB",
-      "lang": "en",
-      "minSubs": 50000
-    },
-    {
-      "code": "IN",
-      "lang": "en",
-      "minSubs": 50000
     }
   ],
-  "planSteps": 375,
-  "planFetched": 97,
-  "planSkipped": 278,
+  "planSteps": 225,
+  "planFetched": 51,
+  "planSkipped": 174,
   "quotaSpent": 0,
-  "cacheHits": 132,
-  "totalChannels": 799,
+  "cacheHits": 82,
+  "totalChannels": 745,
   "niches": [
     {
       "niche": "cocuk",
@@ -39,7 +29,7 @@
           "country": "US",
           "subscribers": 202000000,
           "videoCount": 2085,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCvlE5gTbOvjiolFlEm-c_Ow",
@@ -47,7 +37,7 @@
           "country": "US",
           "subscribers": 150000000,
           "videoCount": 1045,
-          "market": "IN"
+          "market": "US"
         },
         {
           "id": "UC4NALVCmcmL5ntpV0thoH6w",
@@ -55,7 +45,7 @@
           "country": "US",
           "subscribers": 62400000,
           "videoCount": 996,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCe6n0z9UbsxYCS8P83f84tw",
@@ -63,7 +53,7 @@
           "country": "CA",
           "subscribers": 53200000,
           "videoCount": 2492,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UC6gVx_vALsYT-z_u1djJbBQ",
@@ -87,7 +77,7 @@
           "country": "US",
           "subscribers": 43900000,
           "videoCount": 3124,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCBOmfqgTZi7yDp4-3Lr_3lA",
@@ -95,7 +85,7 @@
           "country": "IN",
           "subscribers": 39700000,
           "videoCount": 3903,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCi3onjs7UU2Z64i3RrVci-Q",
@@ -103,7 +93,7 @@
           "country": "US",
           "subscribers": 37200000,
           "videoCount": 2337,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UC-cY4X2sLECUhishGNiyofQ",
@@ -111,15 +101,7 @@
           "country": "US",
           "subscribers": 36600000,
           "videoCount": 1017,
-          "market": "GB"
-        },
-        {
-          "id": "UCLbyJSPEe2lx3jY-G0CFR3g",
-          "title": "VaniMani",
-          "country": "US",
-          "subscribers": 32600000,
-          "videoCount": 1826,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCaO6TYtlC8U5ttz62hTrZgg",
@@ -127,7 +109,7 @@
           "country": null,
           "subscribers": 32100000,
           "videoCount": 2865,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCYzEMRKqrh01-tauv7MYyVQ",
@@ -135,15 +117,7 @@
           "country": "US",
           "subscribers": 27200000,
           "videoCount": 1033,
-          "market": "GB"
-        },
-        {
-          "id": "UC50vBAtklUoJF1Wx5q0pmuw",
-          "title": "Maya and Mary",
-          "country": "US",
-          "subscribers": 27100000,
-          "videoCount": 1008,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCfLuT3JwLx8rvHjHfTymekw",
@@ -151,7 +125,7 @@
           "country": "IN",
           "subscribers": 26500000,
           "videoCount": 370,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCT6zcE-d5Rlc2xto-1lNjgA",
@@ -159,7 +133,7 @@
           "country": "CA",
           "subscribers": 25900000,
           "videoCount": 6604,
-          "market": "IN"
+          "market": "US"
         },
         {
           "id": "UCNG1X6SGHtlCtKtMKbg_ZpA",
@@ -167,7 +141,7 @@
           "country": "IN",
           "subscribers": 21600000,
           "videoCount": 924,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCG2CL6EUjG8TVT1Tpl9nJdg",
@@ -175,7 +149,7 @@
           "country": "US",
           "subscribers": 20800000,
           "videoCount": 125,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCVi_GtP-1stDmhPuWCCQ5KA",
@@ -183,7 +157,7 @@
           "country": "US",
           "subscribers": 20300000,
           "videoCount": 1398,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UC7JqmPfPHcfHKN7ZOZCflKQ",
@@ -191,7 +165,7 @@
           "country": "VN",
           "subscribers": 19000000,
           "videoCount": 1713,
-          "market": "IN"
+          "market": "US"
         },
         {
           "id": "UC6X7e7OYi44JpotGFHKr3YA",
@@ -199,7 +173,7 @@
           "country": "US",
           "subscribers": 13500000,
           "videoCount": 2015,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCpR7UgOOg9wA869TzwTco9Q",
@@ -207,7 +181,7 @@
           "country": "CA",
           "subscribers": 13400000,
           "videoCount": 5650,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UC5mNk1y0O1awxC8DucC8r0w",
@@ -215,7 +189,7 @@
           "country": "US",
           "subscribers": 13300000,
           "videoCount": 671,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCZ7HzTBmljSCMBNRoNgHuJA",
@@ -223,7 +197,7 @@
           "country": "US",
           "subscribers": 12700000,
           "videoCount": 2389,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCURSfY00AASuqKxT-V2Gi1g",
@@ -239,7 +213,7 @@
           "country": "US",
           "subscribers": 11000000,
           "videoCount": 8541,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UC1DY-gFnouXe065NMlLdvbA",
@@ -247,7 +221,7 @@
           "country": "US",
           "subscribers": 10800000,
           "videoCount": 792,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UC73OSCbHaqKlhHLBpQqHPrQ",
@@ -255,7 +229,7 @@
           "country": "US",
           "subscribers": 10700000,
           "videoCount": 1044,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCc0cGIbYYj79_IUI2A70UjQ",
@@ -263,7 +237,7 @@
           "country": "IN",
           "subscribers": 10000000,
           "videoCount": 405,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCClUG6pSeHUheedjN91DEYw",
@@ -271,7 +245,7 @@
           "country": "BR",
           "subscribers": 9650000,
           "videoCount": 1212,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UC3U1vy0Qk-UTkDrKEc07D1g",
@@ -287,7 +261,7 @@
           "country": "US",
           "subscribers": 7970000,
           "videoCount": 2693,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UC1EALOoYjviTgAakJ-phJFg",
@@ -295,7 +269,7 @@
           "country": "US",
           "subscribers": 7940000,
           "videoCount": 2029,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UC0gaQo_koRNiYSSblRyXC0g",
@@ -306,20 +280,12 @@
           "market": "TR"
         },
         {
-          "id": "UCifKuEAkZTQWreaRYDaG8NQ",
-          "title": "Elizabeth and Briceida Learning & Fun",
-          "country": "US",
-          "subscribers": 7500000,
-          "videoCount": 2968,
-          "market": "GB"
-        },
-        {
           "id": "UCqOM_3iLcX_xvt8U1B8PXcQ",
           "title": "Twin Twin",
           "country": "US",
           "subscribers": 6360000,
           "videoCount": 449,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCaDX8Eff3rzIBjycTGECLUQ",
@@ -327,7 +293,7 @@
           "country": "US",
           "subscribers": 6110000,
           "videoCount": 958,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCF5IUvgXe_3sHBuKpEz7Btw",
@@ -351,7 +317,7 @@
           "country": "US",
           "subscribers": 5040000,
           "videoCount": 688,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCy_DlTwLI812Lh-OIKYrwrQ",
@@ -359,7 +325,7 @@
           "country": "IN",
           "subscribers": 4630000,
           "videoCount": 993,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UC6KZBu5wlFeSQDwv9_078TA",
@@ -367,7 +333,7 @@
           "country": "ID",
           "subscribers": 4510000,
           "videoCount": 709,
-          "market": "IN"
+          "market": "US"
         },
         {
           "id": "UCAD2qpgNax9r6WLQ0HkCvvA",
@@ -375,15 +341,7 @@
           "country": "US",
           "subscribers": 4190000,
           "videoCount": 1552,
-          "market": "GB"
-        },
-        {
-          "id": "UC2GEPy0gRxeKe8Bx-Z9Z3Zg",
-          "title": "CM Kids - Cartoon and Kids Song",
-          "country": "US",
-          "subscribers": 4020000,
-          "videoCount": 167,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UColVB6zHVQoC9WTaQr59F2g",
@@ -394,60 +352,12 @@
           "market": "TR"
         },
         {
-          "id": "UC0fXNmjDoC7ckPyT6qM8Urw",
-          "title": "CBeebies",
-          "country": "GB",
-          "subscribers": 3920000,
-          "videoCount": 4570,
-          "market": "IN"
-        },
-        {
-          "id": "UC0_B5qoFp64gO3AbxTkJJtA",
-          "title": "Toddler Zoo - Nursery Rhymes",
-          "country": "US",
-          "subscribers": 3500000,
-          "videoCount": 789,
-          "market": "GB"
-        },
-        {
-          "id": "UC3-CVRgsaN8AAPDSRy6V7FA",
-          "title": "Chris kids show",
-          "country": "US",
-          "subscribers": 3470000,
-          "videoCount": 326,
-          "market": "GB"
-        },
-        {
           "id": "UCgGuCXWCHMf-chlvbQQzoTg",
           "title": "Can Bebek - Çocuk Şarkıları - Little Angel Türkçe",
           "country": "TR",
           "subscribers": 3410000,
           "videoCount": 1171,
           "market": "TR"
-        },
-        {
-          "id": "UC2fWLJgQUxRg-5Mv5A0cJMg",
-          "title": "Cocobi - Songs & Stories",
-          "country": "US",
-          "subscribers": 3160000,
-          "videoCount": 2182,
-          "market": "GB"
-        },
-        {
-          "id": "UC_jCXm9x_z9_kp8DNbIs6mQ",
-          "title": "Gabby's Dollhouse",
-          "country": "US",
-          "subscribers": 3040000,
-          "videoCount": 1103,
-          "market": "IN"
-        },
-        {
-          "id": "UCT-vkVJZwqIK4HBdDRPgkgg",
-          "title": "FunForKidsTV - Nursery Rhymes & Baby Songs",
-          "country": "US",
-          "subscribers": 3040000,
-          "videoCount": 309,
-          "market": "GB"
         },
         {
           "id": "UCyIC5rfXFuobah3RnFCxDfw",
@@ -458,36 +368,12 @@
           "market": "TR"
         },
         {
-          "id": "UClOf1XXinvZsy4wKPAkro2A",
-          "title": "PlayOverwatch",
-          "country": "US",
-          "subscribers": 3020000,
-          "videoCount": 1406,
-          "market": "US"
-        },
-        {
           "id": "UC7U7SAXBFM4-v88Zn68GoSA",
           "title": "alestrella",
           "country": "MX",
           "subscribers": 2950000,
           "videoCount": 1515,
-          "market": "GB"
-        },
-        {
-          "id": "UCxkXdmrIc5HG_ClUKrDMA_g",
-          "title": "Happy Songs",
-          "country": "US",
-          "subscribers": 2820000,
-          "videoCount": 233,
-          "market": "IN"
-        },
-        {
-          "id": "UCV21jNkPlAtyaJRlVO-xBog",
-          "title": "DarDar - SuperHero",
-          "country": "US",
-          "subscribers": 2760000,
-          "videoCount": 249,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCOsvKKA3QwPV2Wo05q2m8tg",
@@ -506,12 +392,116 @@
           "market": "TR"
         },
         {
-          "id": "UC2HyanUUwXGFRMfR7qydyqw",
-          "title": "Study K Videos",
-          "country": "IN",
+          "id": "UCUamVL0L_lgG720vqmdZqoA",
+          "title": "Noodle & Pals",
+          "country": "CA",
           "subscribers": 2570000,
-          "videoCount": 862,
-          "market": "GB"
+          "videoCount": 155,
+          "market": "US"
+        },
+        {
+          "id": "UCDPylDfcfzV_KqekSDRZ9Zg",
+          "title": "Joyful Jingles - Nursery Rhymes & Newborn Songs",
+          "country": "IN",
+          "subscribers": 2550000,
+          "videoCount": 1552,
+          "market": "US"
+        },
+        {
+          "id": "UCPfy3TqX6vl4ai5efWPuKtQ",
+          "title": "Nail Baba ve arkadaşları",
+          "country": "TR",
+          "subscribers": 2290000,
+          "videoCount": 1026,
+          "market": "TR"
+        },
+        {
+          "id": "UCYIJ4sWyxQEbWwsGKb9gIpg",
+          "title": "WATRstar - The learning hub",
+          "country": "IN",
+          "subscribers": 2190000,
+          "videoCount": 450,
+          "market": "US"
+        },
+        {
+          "id": "UCDOIqD6kZ42O8EzABDLseLA",
+          "title": "KUZEY ELİF",
+          "country": "TR",
+          "subscribers": 2140000,
+          "videoCount": 1156,
+          "market": "TR"
+        },
+        {
+          "id": "UC0CN1ejUDoFjMm8dLB7mHSg",
+          "title": "PamPam Ailesi",
+          "country": "TR",
+          "subscribers": 2090000,
+          "videoCount": 514,
+          "market": "TR"
+        },
+        {
+          "id": "UC_L7KnSL-vtVY_PdOz9Jt9g",
+          "title": "Selin Nila",
+          "country": "TR",
+          "subscribers": 1980000,
+          "videoCount": 690,
+          "market": "TR"
+        },
+        {
+          "id": "UC9wOm30AfLHPq_Bdq65BPSg",
+          "title": "Lion Family Türkçe",
+          "country": "TR",
+          "subscribers": 1960000,
+          "videoCount": 475,
+          "market": "TR"
+        },
+        {
+          "id": "UCUwOn6rugJcI6eS-cPUegMA",
+          "title": "HeyKids - Bebek Şarkıları Türkçe",
+          "country": null,
+          "subscribers": 1860000,
+          "videoCount": 338,
+          "market": "TR"
+        },
+        {
+          "id": "UC-WCouYqsCDnQTW3C5MzyiA",
+          "title": "Lah-Lah",
+          "country": "AU",
+          "subscribers": 1660000,
+          "videoCount": 220,
+          "market": "US"
+        },
+        {
+          "id": "UCFeYEx4ISl6TnxobHgOZcrQ",
+          "title": "Barbie Dünyası",
+          "country": "TR",
+          "subscribers": 1660000,
+          "videoCount": 965,
+          "market": "TR"
+        },
+        {
+          "id": "UCohvPtURKDZ6JnVjM-i_Pmw",
+          "title": "KUZEY OYUNDA",
+          "country": "TR",
+          "subscribers": 1660000,
+          "videoCount": 1219,
+          "market": "TR"
+        },
+        {
+          "id": "UCoBL6aCpzksBQNt5fDjr6ig",
+          "title": "YED SHOW",
+          "country": "TR",
+          "subscribers": 1470000,
+          "videoCount": 757,
+          "market": "TR"
+        },
+        {
+          "id": "UC0LuMArxzw0Gv3dn5BRzDNQ",
+          "title": "CoComelon and Little Angel Nursery Rhymes",
+          "country": null,
+          "subscribers": 1440000,
+          "videoCount": 770,
+          "market": "US"
         }
       ]
     },
@@ -520,20 +510,12 @@
       "count": 60,
       "channels": [
         {
-          "id": "UC-CSyyi47VX1lD9zyeABW3w",
-          "title": "Dhruv Rathee",
-          "country": "DE",
-          "subscribers": 32700000,
-          "videoCount": 784,
-          "market": "IN"
-        },
-        {
           "id": "UC6ERimtc5zFrn7x6Bk3HaHA",
           "title": "A2 Motivation by Arvind Arora",
           "country": "IN",
           "subscribers": 20700000,
           "videoCount": 6320,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCgoyBmLOMNWmsiVkj-MezyQ",
@@ -541,7 +523,7 @@
           "country": "IN",
           "subscribers": 12100000,
           "videoCount": 389,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCACU6FM4RgOgX0IHB7dudFA",
@@ -549,15 +531,7 @@
           "country": "IN",
           "subscribers": 9660000,
           "videoCount": 890,
-          "market": "GB"
-        },
-        {
-          "id": "UC415bOPUcGSamy543abLmRA",
-          "title": "Cleo Abram",
-          "country": null,
-          "subscribers": 8540000,
-          "videoCount": 604,
-          "market": "IN"
+          "market": "US"
         },
         {
           "id": "UC4rZpoEdeFLF4x9walsyoSw",
@@ -565,23 +539,7 @@
           "country": "IN",
           "subscribers": 8030000,
           "videoCount": 306,
-          "market": "GB"
-        },
-        {
-          "id": "UCBINYCmwE29fBXCpUI8DgTA",
-          "title": "MostAmazingTop10",
-          "country": "CA",
-          "subscribers": 7850000,
-          "videoCount": 13160,
-          "market": "GB"
-        },
-        {
-          "id": "UCqoAEDirJPjEUFcF2FklnBA",
-          "title": "StarTalk",
-          "country": "US",
-          "subscribers": 5830000,
-          "videoCount": 1835,
-          "market": "IN"
+          "market": "US"
         },
         {
           "id": "UCf2IESA8DmJYqFP7LfnphJw",
@@ -597,7 +555,15 @@
           "country": "IN",
           "subscribers": 4980000,
           "videoCount": 1478,
-          "market": "GB"
+          "market": "US"
+        },
+        {
+          "id": "UCJ3IEvcqG6v8N8zkCIuMaXg",
+          "title": "iSmart Shiva",
+          "country": "IN",
+          "subscribers": 3880000,
+          "videoCount": 421,
+          "market": "US"
         },
         {
           "id": "UCIQD6GdYGmx6N-65Y8iz1MA",
@@ -605,7 +571,7 @@
           "country": "IN",
           "subscribers": 3520000,
           "videoCount": 901,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCuR209e6K0T-QUcoIqJfrSw",
@@ -613,7 +579,7 @@
           "country": "IN",
           "subscribers": 3400000,
           "videoCount": 2916,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCcA-c8aCLG7HwZPS5znwSgA",
@@ -622,14 +588,6 @@
           "subscribers": 3070000,
           "videoCount": 1243,
           "market": "TR"
-        },
-        {
-          "id": "UCo3Uz96PEWjZCLiRiR1qY0A",
-          "title": "Disha Online Classes",
-          "country": "IN",
-          "subscribers": 2800000,
-          "videoCount": 3420,
-          "market": "GB"
         },
         {
           "id": "UCL39cMxZ9yCU8nv9-8eV7nA",
@@ -645,15 +603,7 @@
           "country": "IN",
           "subscribers": 1660000,
           "videoCount": 424,
-          "market": "GB"
-        },
-        {
-          "id": "UCkizxvF3YdQXuEUSklHpUmQ",
-          "title": "Anokhi Films",
-          "country": "IN",
-          "subscribers": 1190000,
-          "videoCount": 734,
-          "market": "IN"
+          "market": "US"
         },
         {
           "id": "UCRRmOsG2SPsWvNrUxBWhnRQ",
@@ -661,31 +611,7 @@
           "country": "IN",
           "subscribers": 1190000,
           "videoCount": 313,
-          "market": "GB"
-        },
-        {
-          "id": "UCiVwphwkwQINIEhghW0BvAg",
-          "title": "Apni Pathshala -Civil Services ",
-          "country": "IN",
-          "subscribers": 1030000,
-          "videoCount": 2831,
-          "market": "IN"
-        },
-        {
-          "id": "UCpxYSWgxVt3Pyn1ovXsGQ0g",
-          "title": "PBS Terra",
-          "country": "US",
-          "subscribers": 1020000,
-          "videoCount": 524,
-          "market": "IN"
-        },
-        {
-          "id": "UC1gcVBKxRtwgyoAZyn97hpg",
-          "title": "Mr Brother",
-          "country": "IN",
-          "subscribers": 986000,
-          "videoCount": 251,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UC9cpGw2hVv-6G-76HO22jQg",
@@ -693,7 +619,7 @@
           "country": "IN",
           "subscribers": 953000,
           "videoCount": 968,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCgkeXJ0beDGPUfbFkv1dDQA",
@@ -701,15 +627,7 @@
           "country": null,
           "subscribers": 938000,
           "videoCount": 318,
-          "market": "GB"
-        },
-        {
-          "id": "UCZb-NJXGqOKeve03Mhu6lzQ",
-          "title": "Hemu Fos",
-          "country": "IN",
-          "subscribers": 821000,
-          "videoCount": 955,
-          "market": "IN"
+          "market": "US"
         },
         {
           "id": "UC6_RR9GIqv_Q6IkwNpTFavA",
@@ -728,20 +646,12 @@
           "market": "TR"
         },
         {
-          "id": "UCLXOB1L_igScVvmrDPZNhig",
-          "title": "Sunny Yadav Sir Education ",
-          "country": "IN",
-          "subscribers": 717000,
-          "videoCount": 951,
-          "market": "IN"
-        },
-        {
           "id": "UCEBP7WnyKelLQZx5c9QggZg",
           "title": "Ashu Ghai 11th & 12th",
           "country": "IN",
           "subscribers": 677000,
           "videoCount": 250,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCRneOTmuWOMs4Nov_ZgMWQg",
@@ -765,7 +675,7 @@
           "country": "JP",
           "subscribers": 459000,
           "videoCount": 1615,
-          "market": "IN"
+          "market": "US"
         },
         {
           "id": "UCDsQ8PBOi0Nrq2s1NqOVSMg",
@@ -797,15 +707,7 @@
           "country": "US",
           "subscribers": 370000,
           "videoCount": 991,
-          "market": "GB"
-        },
-        {
-          "id": "UCH4HIEGhVcH8zvCuZA7J7Sg",
-          "title": "Chica Cute",
-          "country": null,
-          "subscribers": 334000,
-          "videoCount": 1362,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCdaIXUsF3ZGTfJWa0wY1bRg",
@@ -813,7 +715,7 @@
           "country": "IN",
           "subscribers": 301000,
           "videoCount": 198,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UC5MhII18uFfZIG384SBjIMg",
@@ -821,15 +723,7 @@
           "country": "US",
           "subscribers": 300000,
           "videoCount": 1237,
-          "market": "GB"
-        },
-        {
-          "id": "UCWkUOhxxMkBto_t_0yPrfcg",
-          "title": "The Bongo Flix",
-          "country": "BD",
-          "subscribers": 298000,
-          "videoCount": 822,
-          "market": "IN"
+          "market": "US"
         },
         {
           "id": "UCAVb8rMGjKgd2Ouvq-4U-1w",
@@ -838,14 +732,6 @@
           "subscribers": 258000,
           "videoCount": 561,
           "market": "TR"
-        },
-        {
-          "id": "UCK7HWaUqEVS3inwA2RG6Z8Q",
-          "title": "Infinite Desk",
-          "country": "KR",
-          "subscribers": 251000,
-          "videoCount": 41,
-          "market": "IN"
         },
         {
           "id": "UC28kupTc-n580PhgT1KT2uw",
@@ -861,7 +747,7 @@
           "country": "IN",
           "subscribers": 242000,
           "videoCount": 1196,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCe226-9kFQO3QkNGb_hBkow",
@@ -869,7 +755,7 @@
           "country": "IN",
           "subscribers": 228000,
           "videoCount": 2113,
-          "market": "IN"
+          "market": "US"
         },
         {
           "id": "UCWZa49qZEN2OQWiCnBAneXA",
@@ -877,7 +763,7 @@
           "country": "IN",
           "subscribers": 223000,
           "videoCount": 244,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCb8LajJYAafVAKefb_qWYIQ",
@@ -885,7 +771,7 @@
           "country": "IN",
           "subscribers": 204000,
           "videoCount": 526,
-          "market": "IN"
+          "market": "US"
         },
         {
           "id": "UCvOTX2-3c-J09SzP1IZsoqQ",
@@ -893,7 +779,7 @@
           "country": "IN",
           "subscribers": 194000,
           "videoCount": 132,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCEMrqCI1yjuUhaefYjNX5Og",
@@ -901,7 +787,7 @@
           "country": null,
           "subscribers": 192000,
           "videoCount": 72,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UClXrxVGj2V8as0Oqt4K0INg",
@@ -920,12 +806,12 @@
           "market": "TR"
         },
         {
-          "id": "UC6q8AI4WJbcmLR6bIQpgF-w",
-          "title": "Nova facts 1M",
+          "id": "UCJg1eiXrqgwLytQpXixrTVA",
+          "title": "Dinesh Kumar",
           "country": "IN",
-          "subscribers": 162000,
-          "videoCount": 68,
-          "market": "IN"
+          "subscribers": 166000,
+          "videoCount": 187,
+          "market": "US"
         },
         {
           "id": "UCCo08hz2NrpXbbvFqriIo9w",
@@ -936,12 +822,12 @@
           "market": "TR"
         },
         {
-          "id": "UCwP0VxmVBPPWO9GiMJKn3Vg",
-          "title": "Techie Sapien",
+          "id": "UCPosQp0A30FyYrBCl4fWiIg",
+          "title": "Ash Talks",
           "country": "IN",
-          "subscribers": 132000,
-          "videoCount": 995,
-          "market": "GB"
+          "subscribers": 154000,
+          "videoCount": 391,
+          "market": "US"
         },
         {
           "id": "UCfUpjvXL64juGG48Dzsk3cQ",
@@ -949,7 +835,7 @@
           "country": "US",
           "subscribers": 130000,
           "videoCount": 188,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCA3q4IjFFwQ-dBrmTzPn84A",
@@ -976,14 +862,6 @@
           "market": "TR"
         },
         {
-          "id": "UCZz0Hq5vJ6vE5JkCbW4OwXA",
-          "title": "Medico Patrick",
-          "country": "IN",
-          "subscribers": 115000,
-          "videoCount": 256,
-          "market": "IN"
-        },
-        {
           "id": "UCEhzR1lnrd9QmNdKMfYR8RQ",
           "title": "İngilizce Kelime Öğrenme - Hızlı İngilizce Eğitim",
           "country": "US",
@@ -992,12 +870,124 @@
           "market": "TR"
         },
         {
-          "id": "UC_LFu8cu81knASPASTKr_GA",
-          "title": "Process Decoder",
-          "country": "IN",
-          "subscribers": 111000,
-          "videoCount": 79,
-          "market": "GB"
+          "id": "UC_wbOE0dUjNPD35TVwtngBA",
+          "title": "Rose Chanel",
+          "country": "TR",
+          "subscribers": 109000,
+          "videoCount": 96,
+          "market": "TR"
+        },
+        {
+          "id": "UCMuzadWJkPrCj_sDlk5mnTw",
+          "title": "liz | studytube",
+          "country": null,
+          "subscribers": 108000,
+          "videoCount": 42,
+          "market": "US"
+        },
+        {
+          "id": "UC8n6mH88nZOLvAU896O1qlQ",
+          "title": "Psyche Elevate ",
+          "country": null,
+          "subscribers": 105000,
+          "videoCount": 105,
+          "market": "US"
+        },
+        {
+          "id": "UCaxcafbOkmr8FsO-y8SVZlg",
+          "title": "Berk Cihan",
+          "country": null,
+          "subscribers": 103000,
+          "videoCount": 281,
+          "market": "TR"
+        },
+        {
+          "id": "UCTh8K3RUR1v2_qTDlcnDbfw",
+          "title": "Nesrinden Tarifler",
+          "country": "TR",
+          "subscribers": 94700,
+          "videoCount": 825,
+          "market": "TR"
+        },
+        {
+          "id": "UCTGnFQbuvWHOTyayhE3AEyQ",
+          "title": "BarookiTv",
+          "country": "TR",
+          "subscribers": 83800,
+          "videoCount": 1898,
+          "market": "TR"
+        },
+        {
+          "id": "UCJNmPBG43Z_K4K0LvXQxWPg",
+          "title": "Ayten Yıldız",
+          "country": null,
+          "subscribers": 82700,
+          "videoCount": 1689,
+          "market": "TR"
+        },
+        {
+          "id": "UCvGBUFHrI1SM4k7a8e5RLLQ",
+          "title": "Luz Maialen",
+          "country": null,
+          "subscribers": 82100,
+          "videoCount": 928,
+          "market": "US"
+        },
+        {
+          "id": "UCLmAP-8njftvQtWJKDuBAkw",
+          "title": "What Happens If?",
+          "country": null,
+          "subscribers": 81500,
+          "videoCount": 202,
+          "market": "US"
+        },
+        {
+          "id": "UCsrIC6YMEkmBqqzEkDVIFhQ",
+          "title": "YorumHane",
+          "country": "TR",
+          "subscribers": 73900,
+          "videoCount": 1443,
+          "market": "TR"
+        },
+        {
+          "id": "UCBFhQgJ8sTwDW4Sh1ovL8yA",
+          "title": "Body Protocols",
+          "country": "US",
+          "subscribers": 72800,
+          "videoCount": 86,
+          "market": "US"
+        },
+        {
+          "id": "UC359rnzYXH-20Qq0-LXvHTw",
+          "title": "Discoveries Unexplained",
+          "country": "RS",
+          "subscribers": 70600,
+          "videoCount": 166,
+          "market": "US"
+        },
+        {
+          "id": "UCm733jIoQOa0fi_AjC-GcdA",
+          "title": "Furkan Çetin",
+          "country": "TR",
+          "subscribers": 69600,
+          "videoCount": 479,
+          "market": "TR"
+        },
+        {
+          "id": "UCW-OyyJRXjgBr-J2H9jIq1Q",
+          "title": "Jiemo‘s Puzzle",
+          "country": "US",
+          "subscribers": 63700,
+          "videoCount": 540,
+          "market": "US"
+        },
+        {
+          "id": "UCe9_sMG7UkrEQltlk_PBXIA",
+          "title": "pratikbilgi  ve temizlik önerileri",
+          "country": "TR",
+          "subscribers": 57700,
+          "videoCount": 1496,
+          "market": "TR"
         }
       ]
     },
@@ -1011,15 +1001,7 @@
           "country": "GB",
           "subscribers": 18900000,
           "videoCount": 851,
-          "market": "GB"
-        },
-        {
-          "id": "UCzwCEE_PchiBULMnAJqhGVg",
-          "title": "Raj Shamani",
-          "country": "US",
-          "subscribers": 18500000,
-          "videoCount": 2518,
-          "market": "IN"
+          "market": "US"
         },
         {
           "id": "UCEAAzv2OBqxsSczKJ2QZyGQ",
@@ -1027,7 +1009,7 @@
           "country": "IN",
           "subscribers": 15200000,
           "videoCount": 2715,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCaXkIU1QidjPwiAYu6GcHjg",
@@ -1035,7 +1017,7 @@
           "country": "US",
           "subscribers": 9940000,
           "videoCount": 118376,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCxgAuX3XZROujMmGphN_scA",
@@ -1043,7 +1025,7 @@
           "country": "GB",
           "subscribers": 8780000,
           "videoCount": 362,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCRzYN32xtBf3Yxsx5BvJWJw",
@@ -1051,7 +1033,7 @@
           "country": "IN",
           "subscribers": 7100000,
           "videoCount": 2444,
-          "market": "IN"
+          "market": "US"
         },
         {
           "id": "UCK7tptUDHh-RYDsdxO1-5QQ",
@@ -1059,7 +1041,7 @@
           "country": "US",
           "subscribers": 6650000,
           "videoCount": 28879,
-          "market": "IN"
+          "market": "US"
         },
         {
           "id": "UCQIycDaLsBpMKjOCeaKUYVg",
@@ -1067,7 +1049,7 @@
           "country": "IN",
           "subscribers": 6350000,
           "videoCount": 211829,
-          "market": "IN"
+          "market": "US"
         },
         {
           "id": "UCzaRorDlS1gd6EROE-xGm-Q",
@@ -1075,7 +1057,7 @@
           "country": "IN",
           "subscribers": 5530000,
           "videoCount": 3419,
-          "market": "IN"
+          "market": "US"
         },
         {
           "id": "UCVOTBwF0vnSxMRIbfSE_K_g",
@@ -1083,7 +1065,7 @@
           "country": "IN",
           "subscribers": 5460000,
           "videoCount": 2183,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCTR1Tk8SaMO9qw930kIOMHQ",
@@ -1091,15 +1073,7 @@
           "country": "IN",
           "subscribers": 4970000,
           "videoCount": 685,
-          "market": "GB"
-        },
-        {
-          "id": "UCJ3IEvcqG6v8N8zkCIuMaXg",
-          "title": "iSmart Shiva",
-          "country": "IN",
-          "subscribers": 3880000,
-          "videoCount": 421,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCwVEhEzsjLym_u1he4XWFkg",
@@ -1110,20 +1084,12 @@
           "market": "US"
         },
         {
-          "id": "UC6NK95qassTilrIVwD5oA7Q",
-          "title": "Theneer Idaivelai",
-          "country": "IN",
-          "subscribers": 3700000,
-          "videoCount": 3789,
-          "market": "GB"
-        },
-        {
           "id": "UCLe_q9axMaeTbjN0hy1Z9xA",
           "title": "Caleb Hammer",
           "country": "US",
           "subscribers": 3570000,
           "videoCount": 4621,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCigUBIf-zt_DA6xyOQtq2WA",
@@ -1131,7 +1097,7 @@
           "country": "US",
           "subscribers": 2890000,
           "videoCount": 174,
-          "market": "IN"
+          "market": "US"
         },
         {
           "id": "UCUMccND2H_CVS0dMZKCPCXA",
@@ -1139,7 +1105,7 @@
           "country": "IN",
           "subscribers": 2670000,
           "videoCount": 1775,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCQpPo9BNwezg54N9hMFQp6Q",
@@ -1147,15 +1113,7 @@
           "country": "GB",
           "subscribers": 2230000,
           "videoCount": 260,
-          "market": "GB"
-        },
-        {
-          "id": "UCSWSOS6YXUbNMzTH-tV7Pfw",
-          "title": "Biz Tak",
-          "country": "IN",
-          "subscribers": 2130000,
-          "videoCount": 36328,
-          "market": "IN"
+          "market": "US"
         },
         {
           "id": "UCFBpVaKCC0ajGps1vf0AgBg",
@@ -1163,7 +1121,7 @@
           "country": "US",
           "subscribers": 2070000,
           "videoCount": 1107,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCUvvj5lwue7PspotMDjk5UA",
@@ -1171,7 +1129,7 @@
           "country": "US",
           "subscribers": 2050000,
           "videoCount": 6393,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCJm2TgUqtK1_NLBrjNQ1P-w",
@@ -1195,7 +1153,7 @@
           "country": "IN",
           "subscribers": 1380000,
           "videoCount": 1909,
-          "market": "IN"
+          "market": "US"
         },
         {
           "id": "UCvqttS8EzhRq2YWg03qKRCQ",
@@ -1203,23 +1161,7 @@
           "country": "IN",
           "subscribers": 1350000,
           "videoCount": 1475,
-          "market": "GB"
-        },
-        {
-          "id": "UCQWi9o-W33aTTtFXm_tnZrg",
-          "title": "InvierteConPepe",
-          "country": "MX",
-          "subscribers": 1260000,
-          "videoCount": 1192,
-          "market": "GB"
-        },
-        {
-          "id": "UCVvNhq0766oOowpETDiCMQg",
-          "title": "Sagar Sinha Daily",
-          "country": "IN",
-          "subscribers": 1260000,
-          "videoCount": 1808,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UClhHB0_iXbn8Cc0x5YzcvIg",
@@ -1227,7 +1169,7 @@
           "country": "IN",
           "subscribers": 1210000,
           "videoCount": 9553,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCJgZJZZbnLFPr5GJdCuIwpA",
@@ -1235,7 +1177,7 @@
           "country": "US",
           "subscribers": 1190000,
           "videoCount": 6784,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCBqvATpjSubtNxpqUDj4_cA",
@@ -1243,15 +1185,7 @@
           "country": "IN",
           "subscribers": 936000,
           "videoCount": 857,
-          "market": "GB"
-        },
-        {
-          "id": "UCQlJ7XpBtiMLKNSd4RAJmRQ",
-          "title": "The Weekly Show with Jon Stewart",
-          "country": "US",
-          "subscribers": 842000,
-          "videoCount": 612,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCClO1RgRkaOcC9cLj-bLuEw",
@@ -1260,14 +1194,6 @@
           "subscribers": 838000,
           "videoCount": 4423,
           "market": "TR"
-        },
-        {
-          "id": "UCUUlw3anBIkbW9W44Y-eURw",
-          "title": "Zero1 by Zerodha",
-          "country": "US",
-          "subscribers": 819000,
-          "videoCount": 537,
-          "market": "GB"
         },
         {
           "id": "UCqU4fCu2zSL8gamk2CgvjCQ",
@@ -1283,7 +1209,7 @@
           "country": "IN",
           "subscribers": 793000,
           "videoCount": 602,
-          "market": "IN"
+          "market": "US"
         },
         {
           "id": "UCggPd3Vf9ooG2r4I_ZNWBzA",
@@ -1291,7 +1217,7 @@
           "country": "IN",
           "subscribers": 788000,
           "videoCount": 283,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCGBytjbMXiF1nbe6HD7iORQ",
@@ -1307,7 +1233,7 @@
           "country": "US",
           "subscribers": 709000,
           "videoCount": 1222,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCJtfma0mE_XrBAD9uakcjfA",
@@ -1315,15 +1241,7 @@
           "country": "US",
           "subscribers": 696000,
           "videoCount": 2711,
-          "market": "GB"
-        },
-        {
-          "id": "UC9vUu4vlIlMC0dHQCTvQPbg",
-          "title": "The Money Guy Show",
-          "country": "US",
-          "subscribers": 692000,
-          "videoCount": 5595,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCJwKCyEIFHwUOPQQ-4kC1Zw",
@@ -1331,7 +1249,7 @@
           "country": "US",
           "subscribers": 686000,
           "videoCount": 913,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCfxZbVW4Vfl5wpXdgMHm7Sw",
@@ -1339,7 +1257,7 @@
           "country": "IN",
           "subscribers": 667000,
           "videoCount": 455,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCKk2f4aRbSCifjCRgRj8Rkg",
@@ -1347,15 +1265,7 @@
           "country": "IN",
           "subscribers": 664000,
           "videoCount": 152,
-          "market": "GB"
-        },
-        {
-          "id": "UCmfl6VteCu880D8Txl4vEag",
-          "title": "Finance Boosan",
-          "country": "NL",
-          "subscribers": 646000,
-          "videoCount": 600,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCuK8RVis8mrjdp4Zf8lzf8A",
@@ -1371,7 +1281,7 @@
           "country": "CA",
           "subscribers": 621000,
           "videoCount": 177,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCGB7Qxwi2vTgmSfz5EOXZsg",
@@ -1382,20 +1292,20 @@
           "market": "TR"
         },
         {
+          "id": "UCAMDn1zjnCXJnG3piUL7VPQ",
+          "title": "Kowshik Maridi",
+          "country": "IN",
+          "subscribers": 561000,
+          "videoCount": 153,
+          "market": "US"
+        },
+        {
           "id": "UCrEZaK2_oBqffHZ-FJHXaMg",
           "title": "İSLAM MEMİŞ",
           "country": "TR",
           "subscribers": 561000,
           "videoCount": 1370,
           "market": "TR"
-        },
-        {
-          "id": "UCAMDn1zjnCXJnG3piUL7VPQ",
-          "title": "Kowshik Maridi",
-          "country": "IN",
-          "subscribers": 560000,
-          "videoCount": 153,
-          "market": "IN"
         },
         {
           "id": "UCHExW8VqaE0a3W0kwSe_BXg",
@@ -1406,28 +1316,12 @@
           "market": "TR"
         },
         {
-          "id": "UCvhU9qF1xtUsFXdKrcJxbFA",
-          "title": "Curious Freaks",
-          "country": null,
-          "subscribers": 478000,
-          "videoCount": 341,
-          "market": "GB"
-        },
-        {
-          "id": "UChiofp_leIyBYw6LESTjeJQ",
-          "title": "Telugu Assets",
-          "country": "IN",
-          "subscribers": 444000,
-          "videoCount": 1019,
-          "market": "GB"
-        },
-        {
           "id": "UC4V84y8cUtthXhRzLKSly7A",
           "title": "Dave Jorgenson",
           "country": null,
           "subscribers": 430000,
           "videoCount": 306,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCDpK7CRInNg2ldVrBuOCz0Q",
@@ -1443,15 +1337,7 @@
           "country": "IN",
           "subscribers": 419000,
           "videoCount": 278,
-          "market": "IN"
-        },
-        {
-          "id": "UC6noFszdNNC-LlsP9o-Dc2w",
-          "title": "Saloni Khanna",
-          "country": "IN",
-          "subscribers": 403000,
-          "videoCount": 343,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCdxGqN9_aBisOJHzIRTGLfg",
@@ -1459,7 +1345,7 @@
           "country": "US",
           "subscribers": 402000,
           "videoCount": 1810,
-          "market": "IN"
+          "market": "US"
         },
         {
           "id": "UCWsudnBrEOJLQ1JpkdloxKg",
@@ -1475,7 +1361,7 @@
           "country": "IN",
           "subscribers": 395000,
           "videoCount": 935,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCIZAopZ5SiAAxPc0cxKNYFQ",
@@ -1483,6 +1369,110 @@
           "country": "IT",
           "subscribers": 367000,
           "videoCount": 1580,
+          "market": "TR"
+        },
+        {
+          "id": "UCIsk_cJWVlZcaMFpcdduvZA",
+          "title": "Madurai Veeran Money Coach",
+          "country": "IN",
+          "subscribers": 356000,
+          "videoCount": 84,
+          "market": "US"
+        },
+        {
+          "id": "UCeLM6YONPA0v9494ZOyQLWw",
+          "title": "Artvin Tabiat",
+          "country": "TR",
+          "subscribers": 351000,
+          "videoCount": 2303,
+          "market": "TR"
+        },
+        {
+          "id": "UCangp_b14eyrFTGPqRe0APA",
+          "title": "Barış Soydan",
+          "country": "TR",
+          "subscribers": 342000,
+          "videoCount": 1652,
+          "market": "TR"
+        },
+        {
+          "id": "UCjWMVOKwlTZ3PfLvZymuXXw",
+          "title": "ForInvest",
+          "country": "TR",
+          "subscribers": 340000,
+          "videoCount": 1340,
+          "market": "TR"
+        },
+        {
+          "id": "UCqBkdAuMACt37Ek6p4BemVA",
+          "title": "Social Symone ♡",
+          "country": "US",
+          "subscribers": 335000,
+          "videoCount": 551,
+          "market": "US"
+        },
+        {
+          "id": "UCz8gqxNlHk_M8XlxEOvqfUA",
+          "title": "HBL",
+          "country": "PK",
+          "subscribers": 287000,
+          "videoCount": 1306,
+          "market": "US"
+        },
+        {
+          "id": "UCDou5HvsE1AgL8yXzijbfxg",
+          "title": "Devrim Akyıl",
+          "country": "TR",
+          "subscribers": 286000,
+          "videoCount": 1091,
+          "market": "TR"
+        },
+        {
+          "id": "UCI1_8JJ-ykLaA_4--vlX_Sg",
+          "title": "Simge Fıstıkoğlu",
+          "country": "TR",
+          "subscribers": 273000,
+          "videoCount": 3260,
+          "market": "TR"
+        },
+        {
+          "id": "UC-h5sZ-O_4KbdzPy6hxYd9g",
+          "title": "Ziet Invests",
+          "country": "MY",
+          "subscribers": 269000,
+          "videoCount": 690,
+          "market": "US"
+        },
+        {
+          "id": "UCW4Y4bPuafXwVEs0oly5vdw",
+          "title": "Mesele Ekonomi",
+          "country": "TR",
+          "subscribers": 266000,
+          "videoCount": 2523,
+          "market": "TR"
+        },
+        {
+          "id": "UCfCT7SSFEWyG4th9ZmaGYqQ",
+          "title": "Joseph Carlson After Hours",
+          "country": null,
+          "subscribers": 255000,
+          "videoCount": 504,
+          "market": "US"
+        },
+        {
+          "id": "UC0x0BVyBJB3Y9aW9H6bv12A",
+          "title": "Tuncay Turşucu",
+          "country": "TR",
+          "subscribers": 250000,
+          "videoCount": 534,
+          "market": "TR"
+        },
+        {
+          "id": "UCqCW6VeIOZ0DccGhuoukGFQ",
+          "title": "Yatırım Finansman",
+          "country": "TR",
+          "subscribers": 232000,
+          "videoCount": 2778,
           "market": "TR"
         }
       ]
@@ -1497,7 +1487,7 @@
           "country": "IN",
           "subscribers": 13000000,
           "videoCount": 732,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UChDKyKQ59fYz3JO2fl0Z6sg",
@@ -1505,7 +1495,7 @@
           "country": null,
           "subscribers": 5080000,
           "videoCount": 54712,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCN5t14BCdTIQ-116TxJuBMg",
@@ -1521,7 +1511,7 @@
           "country": "US",
           "subscribers": 3730000,
           "videoCount": 1638,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCuxth2BimHUigZ344JhcFPw",
@@ -1529,7 +1519,7 @@
           "country": "BD",
           "subscribers": 3530000,
           "videoCount": 3220,
-          "market": "IN"
+          "market": "US"
         },
         {
           "id": "UCM_zp2dVNflkGFWAFM_N7lg",
@@ -1537,15 +1527,7 @@
           "country": "CN",
           "subscribers": 3140000,
           "videoCount": 653,
-          "market": "GB"
-        },
-        {
-          "id": "UC8Av1tO-ha143nNYzxmf1Fg",
-          "title": "Pierre Dalati",
-          "country": "CA",
-          "subscribers": 2450000,
-          "videoCount": 1408,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCPdN4Vx2DogwmjDJCkyVcXQ",
@@ -1554,14 +1536,6 @@
           "subscribers": 2230000,
           "videoCount": 3674,
           "market": "TR"
-        },
-        {
-          "id": "UCAk_loXdoKqPXwnTMmCuDeQ",
-          "title": "LenaLifts",
-          "country": "US",
-          "subscribers": 1490000,
-          "videoCount": 433,
-          "market": "GB"
         },
         {
           "id": "UCNsSKuUoclUlWzRdbNq7D0w",
@@ -1577,7 +1551,15 @@
           "country": "CA",
           "subscribers": 1450000,
           "videoCount": 359,
-          "market": "GB"
+          "market": "US"
+        },
+        {
+          "id": "UChL_g9wFFy0SbHqxSW-rzuA",
+          "title": "Tejasvi Rajput",
+          "country": null,
+          "subscribers": 1300000,
+          "videoCount": 354,
+          "market": "US"
         },
         {
           "id": "UCJZ32YWoQ-4mk9MmACCByfw",
@@ -1585,7 +1567,7 @@
           "country": null,
           "subscribers": 914000,
           "videoCount": 712,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCCGlR1KlWDyGk_7zvWyDBKg",
@@ -1601,7 +1583,7 @@
           "country": "IN",
           "subscribers": 809000,
           "videoCount": 161,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UC8SFy66JbVwPcYhvplWPm1g",
@@ -1609,7 +1591,7 @@
           "country": "IN",
           "subscribers": 671000,
           "videoCount": 431,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCeevFpe3OG0vGYf9rkeTkfA",
@@ -1625,7 +1607,7 @@
           "country": null,
           "subscribers": 634000,
           "videoCount": 812,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCYVFeFY_4-755hqdPfB2qpw",
@@ -1633,7 +1615,7 @@
           "country": null,
           "subscribers": 628000,
           "videoCount": 243,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UC_t6-oNbYJ4DWfp7BRYrHIw",
@@ -1641,7 +1623,7 @@
           "country": "IN",
           "subscribers": 522000,
           "videoCount": 356,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCP1ethGXE7MD8B9MuVJ35ew",
@@ -1649,7 +1631,7 @@
           "country": "US",
           "subscribers": 515000,
           "videoCount": 178,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UC3YCsXJjxUY-nTbmQVQ3nSg",
@@ -1657,7 +1639,7 @@
           "country": null,
           "subscribers": 498000,
           "videoCount": 272,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCWSwub1biYJX59p3cSSxR5g",
@@ -1665,7 +1647,7 @@
           "country": "US",
           "subscribers": 476000,
           "videoCount": 635,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCUQlo2Xe-DCcYcDST132e_w",
@@ -1673,7 +1655,7 @@
           "country": null,
           "subscribers": 474000,
           "videoCount": 922,
-          "market": "IN"
+          "market": "US"
         },
         {
           "id": "UC32hMa80y9UK6yI6gQZzSww",
@@ -1689,7 +1671,7 @@
           "country": null,
           "subscribers": 453000,
           "videoCount": 58,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UC2r8FIjCvkYbcbxVe5koa_g",
@@ -1698,14 +1680,6 @@
           "subscribers": 412000,
           "videoCount": 8788,
           "market": "TR"
-        },
-        {
-          "id": "UC9KBMJwxMFC-7G6prUCpFhg",
-          "title": "Sab Yang",
-          "country": "CA",
-          "subscribers": 392000,
-          "videoCount": 100,
-          "market": "GB"
         },
         {
           "id": "UCYkgAEHwbBxSHxNH9411_sg",
@@ -1729,7 +1703,7 @@
           "country": "US",
           "subscribers": 313000,
           "videoCount": 831,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UC3iwAVSdUwFjuTh7RnMqR2g",
@@ -1737,7 +1711,7 @@
           "country": "US",
           "subscribers": 212000,
           "videoCount": 445,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCYzWcw1rUCncDc5LVNOoYKw",
@@ -1777,7 +1751,7 @@
           "country": "IN",
           "subscribers": 171000,
           "videoCount": 80,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCI4A0dSGeVAEbEYQ4jkcmBg",
@@ -1785,23 +1759,7 @@
           "country": "US",
           "subscribers": 169000,
           "videoCount": 588,
-          "market": "IN"
-        },
-        {
-          "id": "UCy6xvE5VPT0DkJvSuY82Z1A",
-          "title": "Starly's Diary",
-          "country": "US",
-          "subscribers": 167000,
-          "videoCount": 217,
-          "market": "IN"
-        },
-        {
-          "id": "UCJg1eiXrqgwLytQpXixrTVA",
-          "title": "Dinesh Kumar",
-          "country": "IN",
-          "subscribers": 166000,
-          "videoCount": 187,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UC6a2j5EancF4BIxy8eA4eXg",
@@ -1812,28 +1770,12 @@
           "market": "TR"
         },
         {
-          "id": "UCPosQp0A30FyYrBCl4fWiIg",
-          "title": "Ash Talks",
-          "country": "IN",
-          "subscribers": 154000,
-          "videoCount": 391,
-          "market": "US"
-        },
-        {
           "id": "UCvvG19THPxFXiUHbNIF78dg",
           "title": "@Aestheticsss-4u",
           "country": "IN",
           "subscribers": 144000,
           "videoCount": 470,
-          "market": "GB"
-        },
-        {
-          "id": "UCuX3sy0gjs4zsUNAH-VynsQ",
-          "title": "Mumbo but more Jumbo",
-          "country": "GB",
-          "subscribers": 142000,
-          "videoCount": 15,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UC-_k9QZAfuAM2jeuR-otINg",
@@ -1842,14 +1784,6 @@
           "subscribers": 140000,
           "videoCount": 1117,
           "market": "TR"
-        },
-        {
-          "id": "UClesVXqCkXOpMutvF4UhHAQ",
-          "title": "Yogesh Motivational 01M",
-          "country": "IN",
-          "subscribers": 134000,
-          "videoCount": 119,
-          "market": "IN"
         },
         {
           "id": "UCUKqie1LpTA3svAFsm6Ilxg",
@@ -1865,7 +1799,7 @@
           "country": "US",
           "subscribers": 128000,
           "videoCount": 51,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCE7i8Ac59OJ5mro_GOe9aZg",
@@ -1881,7 +1815,7 @@
           "country": "US",
           "subscribers": 112000,
           "videoCount": 537,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UC4oJQ0GkT7m8fwAKBBklVVA",
@@ -1889,23 +1823,7 @@
           "country": "IN",
           "subscribers": 107000,
           "videoCount": 88,
-          "market": "GB"
-        },
-        {
-          "id": "UCl81SOXrJMWrfYqL-t7HdBg",
-          "title": "Success InfluenceLab",
-          "country": "NG",
-          "subscribers": 105000,
-          "videoCount": 156,
-          "market": "GB"
-        },
-        {
-          "id": "UCRB91zoX10_bkf8D8YbgxuQ",
-          "title": "SamCambetis",
-          "country": "AU",
-          "subscribers": 99500,
-          "videoCount": 171,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCEnJNShLCXlHsYsmCkhOBvw",
@@ -1913,7 +1831,7 @@
           "country": "US",
           "subscribers": 93200,
           "videoCount": 437,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCOEMeSmH4Y7Uq43GX2-nO5A",
@@ -1945,23 +1863,23 @@
           "country": "IN",
           "subscribers": 70900,
           "videoCount": 537,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCRtjpi1GgVNLjdNJXO-X6ng",
           "title": "Z E N I T H",
           "country": null,
-          "subscribers": 64600,
-          "videoCount": 46,
-          "market": "GB"
+          "subscribers": 64700,
+          "videoCount": 47,
+          "market": "US"
         },
         {
           "id": "UClvEsGYN9hC1xjjJJjIJVKQ",
           "title": "Pawan Rauthan",
           "country": null,
-          "subscribers": 61900,
+          "subscribers": 62000,
           "videoCount": 264,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCQ2YrvXZgZG6zFs-_Iwvyag",
@@ -1969,6 +1887,78 @@
           "country": "TR",
           "subscribers": 59100,
           "videoCount": 30,
+          "market": "TR"
+        },
+        {
+          "id": "UCQ2Lbwq8KecJ9Wej2-I90lQ",
+          "title": "Ajay Inspiration",
+          "country": "IN",
+          "subscribers": 58900,
+          "videoCount": 362,
+          "market": "US"
+        },
+        {
+          "id": "UC-TbmaaZaaumjecrM_yrylw",
+          "title": "Motivasyon.duvarım",
+          "country": null,
+          "subscribers": 56900,
+          "videoCount": 1463,
+          "market": "TR"
+        },
+        {
+          "id": "UC3wkOJLacORuYIpujQJBxYw",
+          "title": "Baran Mind",
+          "country": "TR",
+          "subscribers": 52500,
+          "videoCount": 633,
+          "market": "TR"
+        },
+        {
+          "id": "UCUMRZE8NvDQg-9MtvYy1sbw",
+          "title": "Zeynep gök",
+          "country": null,
+          "subscribers": 44200,
+          "videoCount": 226,
+          "market": "TR"
+        },
+        {
+          "id": "UCM2288H1c5mSr-O8p1A4HvA",
+          "title": "Derin Su",
+          "country": null,
+          "subscribers": 40000,
+          "videoCount": 49,
+          "market": "TR"
+        },
+        {
+          "id": "UCMP82e27s7uYrc133KE05mA",
+          "title": "Muhibbi",
+          "country": "TR",
+          "subscribers": 37100,
+          "videoCount": 1265,
+          "market": "TR"
+        },
+        {
+          "id": "UCc_ToaEKq-R5s0kwccPMwNg",
+          "title": "Berkaylavlog",
+          "country": null,
+          "subscribers": 34500,
+          "videoCount": 65,
+          "market": "TR"
+        },
+        {
+          "id": "UCsICJ4Nnggd-elK78P4sGvQ",
+          "title": "TURMOB",
+          "country": "TR",
+          "subscribers": 31800,
+          "videoCount": 260,
+          "market": "TR"
+        },
+        {
+          "id": "UCP3Ty0p8irsAXzMtnfOkJNg",
+          "title": "mustafa",
+          "country": null,
+          "subscribers": 28900,
+          "videoCount": 201,
           "market": "TR"
         }
       ]
@@ -1983,7 +1973,7 @@
           "country": "US",
           "subscribers": 133000000,
           "videoCount": 1095,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCSiDGb0MnHFGjs4E2WKvShw",
@@ -1991,7 +1981,7 @@
           "country": "IN",
           "subscribers": 52500000,
           "videoCount": 1415,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCbGPgvNunvclTypPtL3sa0w",
@@ -1999,7 +1989,7 @@
           "country": "VN",
           "subscribers": 51300000,
           "videoCount": 12899,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCZcR0eG70cbq044cb_OH3Qw",
@@ -2015,7 +2005,7 @@
           "country": "IN",
           "subscribers": 23900000,
           "videoCount": 1464,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UClyw32fdzLCsqbkfzhdrtXA",
@@ -2023,15 +2013,7 @@
           "country": "IN",
           "subscribers": 22900000,
           "videoCount": 1082,
-          "market": "GB"
-        },
-        {
-          "id": "UC5k3-qwva5_gxzaDGfqk0pw",
-          "title": "Aanganwadi Ke Bacche",
-          "country": null,
-          "subscribers": 22300000,
-          "videoCount": 929,
-          "market": "IN"
+          "market": "US"
         },
         {
           "id": "UCWb3IZmrZhHAyUyUg9HDHjA",
@@ -2039,15 +2021,7 @@
           "country": "IN",
           "subscribers": 22000000,
           "videoCount": 270,
-          "market": "IN"
-        },
-        {
-          "id": "UCwIWAbIeu0xI0ReKWOcw3eg",
-          "title": "Unspeakable",
-          "country": "US",
-          "subscribers": 20000000,
-          "videoCount": 1131,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCOrE-2VgEOJ9LTNLYu5LeEw",
@@ -2055,7 +2029,7 @@
           "country": "IN",
           "subscribers": 19000000,
           "videoCount": 1547,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCTf3jU9tyfsq1ElmkTY_ztQ",
@@ -2087,15 +2061,7 @@
           "country": null,
           "subscribers": 16600000,
           "videoCount": 1684,
-          "market": "IN"
-        },
-        {
-          "id": "UCxi0dzokH2oIL6NfCgqmAsw",
-          "title": "Minku Tinku",
-          "country": null,
-          "subscribers": 14000000,
-          "videoCount": 3702,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCvi4a7mPeq1cv1EYQK4tzRA",
@@ -2103,15 +2069,7 @@
           "country": null,
           "subscribers": 13400000,
           "videoCount": 1236,
-          "market": "GB"
-        },
-        {
-          "id": "UCvgteBQjoaxE0bhFkpu8qAw",
-          "title": "Make Joke Of",
-          "country": "IN",
-          "subscribers": 13200000,
-          "videoCount": 122,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCtyltqstMm6iKnkk2Y9Zt8A",
@@ -2119,15 +2077,15 @@
           "country": "IN",
           "subscribers": 11500000,
           "videoCount": 514,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCO4zrFQxMZ1V2rN660ybvUQ",
           "title": "HiFunnie",
           "country": "US",
           "subscribers": 11400000,
-          "videoCount": 1765,
-          "market": "GB"
+          "videoCount": 1766,
+          "market": "US"
         },
         {
           "id": "UCqOMVYb-Op7j-3wYM7C5D6A",
@@ -2135,7 +2093,7 @@
           "country": "IN",
           "subscribers": 10900000,
           "videoCount": 1007,
-          "market": "IN"
+          "market": "US"
         },
         {
           "id": "UCh8ioEVA4OtR4T-Y2naE47Q",
@@ -2143,7 +2101,7 @@
           "country": "IN",
           "subscribers": 10500000,
           "videoCount": 9474,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCGE-L0dJpos3ut0N96H75Jw",
@@ -2151,7 +2109,7 @@
           "country": "IN",
           "subscribers": 10300000,
           "videoCount": 1036,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UC0Badcq36RBDHN-e3N1Papg",
@@ -2162,36 +2120,12 @@
           "market": "TR"
         },
         {
-          "id": "UCKCKHJ_GGUfSj-Z_bvTsswA",
-          "title": "Fdc company",
-          "country": null,
-          "subscribers": 8150000,
-          "videoCount": 2919,
-          "market": "IN"
-        },
-        {
-          "id": "UChzl8kr_veB-Ytb2zPMJtew",
-          "title": "Sneha Choudhary",
-          "country": "IN",
-          "subscribers": 7990000,
-          "videoCount": 1047,
-          "market": "GB"
-        },
-        {
           "id": "UCpAjFBZZ2AO-K_Ly10KIj1w",
           "title": "Adarsh Solanki",
           "country": "IN",
           "subscribers": 7670000,
           "videoCount": 522,
-          "market": "GB"
-        },
-        {
-          "id": "UCgOjLy9aHn5zyhcnY-pUY7w",
-          "title": "LouisAyy",
-          "country": "GB",
-          "subscribers": 7100000,
-          "videoCount": 387,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCEep3qY19FRU_nG3oBcNABA",
@@ -2199,7 +2133,7 @@
           "country": "US",
           "subscribers": 6990000,
           "videoCount": 759,
-          "market": "IN"
+          "market": "US"
         },
         {
           "id": "UCqgpJQrnaXE3ghhP25G2reQ",
@@ -2207,7 +2141,7 @@
           "country": null,
           "subscribers": 6170000,
           "videoCount": 403,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UC5JF4jPACfKYgFaHstgREGQ",
@@ -2223,7 +2157,7 @@
           "country": "IN",
           "subscribers": 5940000,
           "videoCount": 49,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCJhEfZoLs5P_idxX--yhWOA",
@@ -2239,7 +2173,7 @@
           "country": "IN",
           "subscribers": 5850000,
           "videoCount": 1350,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCMRCUUX3WilPAatJCAc0qZA",
@@ -2255,7 +2189,7 @@
           "country": "IN",
           "subscribers": 4750000,
           "videoCount": 44,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UC4i8eUwMFVpdNZGEkDrqU-Q",
@@ -2263,7 +2197,7 @@
           "country": "IN",
           "subscribers": 4550000,
           "videoCount": 102,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCinC8NNDpTF6Z8zYMHAuhUQ",
@@ -2271,7 +2205,7 @@
           "country": "IN",
           "subscribers": 4350000,
           "videoCount": 264,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCdlEXiVLTEvA280oyMvr8Kw",
@@ -2280,22 +2214,6 @@
           "subscribers": 4160000,
           "videoCount": 9403,
           "market": "TR"
-        },
-        {
-          "id": "UCnJh3egWOJoWMeP45TGxRBQ",
-          "title": "Roop Entertainment",
-          "country": "IN",
-          "subscribers": 4100000,
-          "videoCount": 673,
-          "market": "GB"
-        },
-        {
-          "id": "UCQNR0wPMDidnXqVgkXj6nUA",
-          "title": "Apachho Singh",
-          "country": "IN",
-          "subscribers": 3980000,
-          "videoCount": 497,
-          "market": "IN"
         },
         {
           "id": "UCy4fUFAFYuFciNFSAL2wo3g",
@@ -2319,7 +2237,7 @@
           "country": "US",
           "subscribers": 3620000,
           "videoCount": 277,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCEk90S8iuHt0eUzbK8Nkp_g",
@@ -2330,28 +2248,12 @@
           "market": "TR"
         },
         {
-          "id": "UCXp6Lje3TSxwWM4syrH3fEQ",
-          "title": "Della Septiani",
-          "country": "ID",
-          "subscribers": 3170000,
-          "videoCount": 3660,
-          "market": "GB"
-        },
-        {
-          "id": "UCZQKc9FMCvpmVzuhJueWpqw",
-          "title": "Barkha Tiwari official",
-          "country": "IN",
-          "subscribers": 3150000,
-          "videoCount": 1017,
-          "market": "GB"
-        },
-        {
           "id": "UCfXBwgh3SdioYHLu3khbHJQ",
           "title": "Laughingggodha",
           "country": "IN",
           "subscribers": 3130000,
           "videoCount": 336,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCJLOwrktwJjwdJPwSTxUqZQ",
@@ -2360,22 +2262,6 @@
           "subscribers": 3070000,
           "videoCount": 1453,
           "market": "TR"
-        },
-        {
-          "id": "UC9X97YaH_1_IR8wyZTCRe6A",
-          "title": "fun friend india",
-          "country": "IN",
-          "subscribers": 3050000,
-          "videoCount": 772,
-          "market": "IN"
-        },
-        {
-          "id": "UCJpwUX6KnGyqUVdlQIV3Odg",
-          "title": "Social Simran",
-          "country": "IN",
-          "subscribers": 2880000,
-          "videoCount": 203,
-          "market": "GB"
         },
         {
           "id": "UCoBVlp7YLhUS57ZCkbgphoA",
@@ -2391,7 +2277,7 @@
           "country": "IN",
           "subscribers": 2820000,
           "videoCount": 810,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCxYPu-wue2hpkVIFsZQU-6A",
@@ -2407,7 +2293,7 @@
           "country": "US",
           "subscribers": 2470000,
           "videoCount": 349,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCYNOlTMsLcgxQxXrtr5-fHA",
@@ -2447,7 +2333,7 @@
           "country": null,
           "subscribers": 2340000,
           "videoCount": 489,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCTlbz0GzJHCVAx4kiNTmLag",
@@ -2456,12 +2342,116 @@
           "subscribers": 2310000,
           "videoCount": 2010,
           "market": "TR"
+        },
+        {
+          "id": "UC2ZOArkabc2BQcCkkBjTIMg",
+          "title": "SM Media Story",
+          "country": "BD",
+          "subscribers": 2110000,
+          "videoCount": 1656,
+          "market": "US"
+        },
+        {
+          "id": "UCqjp1xj3gTox-T4V_JlMvTQ",
+          "title": "Bora Kontaş",
+          "country": "TR",
+          "subscribers": 1990000,
+          "videoCount": 739,
+          "market": "TR"
+        },
+        {
+          "id": "UC-Fs3Kt_CTIB19lc__hO72Q",
+          "title": "Edit Dünyam",
+          "country": "TR",
+          "subscribers": 1790000,
+          "videoCount": 2321,
+          "market": "TR"
+        },
+        {
+          "id": "UCUp5fUV3EptDJbfBPyGW1LQ",
+          "title": "TOLGA RESMİ",
+          "country": "TR",
+          "subscribers": 1710000,
+          "videoCount": 2184,
+          "market": "TR"
+        },
+        {
+          "id": "UCXXANjR77sHu3A5XvNX8s6A",
+          "title": "Muhammed Sönmez",
+          "country": "TR",
+          "subscribers": 1580000,
+          "videoCount": 2619,
+          "market": "TR"
+        },
+        {
+          "id": "UCedZvSQVma70F1O67NOuYZw",
+          "title": "MDM Sketch Comedy",
+          "country": "ZA",
+          "subscribers": 1570000,
+          "videoCount": 486,
+          "market": "US"
+        },
+        {
+          "id": "UCloAV6RV4VEgZIAo_0noqGw",
+          "title": "Kurgucu Profesör",
+          "country": "TR",
+          "subscribers": 1540000,
+          "videoCount": 456,
+          "market": "TR"
+        },
+        {
+          "id": "UCzIRLOlu8f4WfK_vSYSQ9WA",
+          "title": "Yusuf Manolya",
+          "country": "TR",
+          "subscribers": 1360000,
+          "videoCount": 3037,
+          "market": "TR"
+        },
+        {
+          "id": "UCrq11szgal4N031rzisp1rA",
+          "title": "Abhijeet Singhania",
+          "country": null,
+          "subscribers": 1050000,
+          "videoCount": 2128,
+          "market": "US"
+        },
+        {
+          "id": "UCqeUYBchlYzGm4R7FdaQX1g",
+          "title": "Preet Kaur",
+          "country": null,
+          "subscribers": 770000,
+          "videoCount": 199,
+          "market": "US"
+        },
+        {
+          "id": "UCT8fbPYycfhjYzLbsU1dl3Q",
+          "title": "ZDF Satire",
+          "country": "DE",
+          "subscribers": 704000,
+          "videoCount": 1918,
+          "market": "US"
+        },
+        {
+          "id": "UCr9WjyN6H0nDJtmelAABGcg",
+          "title": "Kaan Eren",
+          "country": "TR",
+          "subscribers": 639000,
+          "videoCount": 261,
+          "market": "TR"
+        },
+        {
+          "id": "UC-fJFFPSlw6ngBjHSspjgsA",
+          "title": "Go Facts",
+          "country": null,
+          "subscribers": 477000,
+          "videoCount": 163,
+          "market": "US"
         }
       ]
     },
     {
       "niche": "makyaj",
-      "count": 57,
+      "count": 58,
       "channels": [
         {
           "id": "UCucot-Zp428OwkyRm2I7v2Q",
@@ -2469,7 +2459,7 @@
           "country": "US",
           "subscribers": 23700000,
           "videoCount": 718,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCq_ZnPt9KqeqfjUOcj3m3gA",
@@ -2501,7 +2491,7 @@
           "country": null,
           "subscribers": 8660000,
           "videoCount": 221,
-          "market": "GB"
+          "market": "TR"
         },
         {
           "id": "UCXoY0ZeHZBe0p-ByCiYP_XQ",
@@ -2517,7 +2507,7 @@
           "country": "GB",
           "subscribers": 8010000,
           "videoCount": 2034,
-          "market": "GB"
+          "market": "TR"
         },
         {
           "id": "UClcSZi2W0ju8Aeo1XDxqB_A",
@@ -2525,7 +2515,7 @@
           "country": "KR",
           "subscribers": 4530000,
           "videoCount": 4693,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UC4RH7UBW2_c8qUP2qcF6zmQ",
@@ -2533,7 +2523,7 @@
           "country": "GB",
           "subscribers": 3110000,
           "videoCount": 544,
-          "market": "GB"
+          "market": "TR"
         },
         {
           "id": "UCSZbVOwGXulnuBXyxy_roAA",
@@ -2549,7 +2539,7 @@
           "country": "US",
           "subscribers": 2410000,
           "videoCount": 1028,
-          "market": "IN"
+          "market": "US"
         },
         {
           "id": "UCJd-bJjTp9zpDGZtTALWJmA",
@@ -2557,7 +2547,15 @@
           "country": null,
           "subscribers": 2000000,
           "videoCount": 1587,
-          "market": "GB"
+          "market": "TR"
+        },
+        {
+          "id": "UCz4yHVUr-h86dhA5nfq4HiQ",
+          "title": "emma & georgia ",
+          "country": null,
+          "subscribers": 1920000,
+          "videoCount": 1283,
+          "market": "US"
         },
         {
           "id": "UCJ4aoGjngwpIy5t0jMXIk9w",
@@ -2589,7 +2587,7 @@
           "country": "US",
           "subscribers": 1430000,
           "videoCount": 1039,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCqkPyuGwGOYU_AF3SjpqF8A",
@@ -2605,7 +2603,7 @@
           "country": "US",
           "subscribers": 1290000,
           "videoCount": 2051,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCJy0RHFC64EC-kqWOfhCb_g",
@@ -2613,7 +2611,7 @@
           "country": "US",
           "subscribers": 1280000,
           "videoCount": 449,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCQrEUJdM6Y8RSO47dCZW2lA",
@@ -2629,7 +2627,7 @@
           "country": "ID",
           "subscribers": 984000,
           "videoCount": 370,
-          "market": "GB"
+          "market": "TR"
         },
         {
           "id": "UCf_35VVsKHPmWAQjXrDOvtw",
@@ -2637,7 +2635,7 @@
           "country": null,
           "subscribers": 925000,
           "videoCount": 703,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCBTDAlFNciEA6_9nJgFfn8Q",
@@ -2645,7 +2643,7 @@
           "country": "IN",
           "subscribers": 876000,
           "videoCount": 537,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCmgaEzWAbBVrSS1jLnOyiuA",
@@ -2653,7 +2651,7 @@
           "country": "US",
           "subscribers": 814000,
           "videoCount": 3757,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UC3ocVSGRoapPsbG8QrFX5kA",
@@ -2669,15 +2667,7 @@
           "country": "IN",
           "subscribers": 803000,
           "videoCount": 1393,
-          "market": "GB"
-        },
-        {
-          "id": "UC5jrlZHzjJ7KJJUcpap-ilw",
-          "title": "Xanh Xàm Xí",
-          "country": "VN",
-          "subscribers": 796000,
-          "videoCount": 710,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCxlrWwvyH3YyKJAw6Is_vtQ",
@@ -2693,7 +2683,7 @@
           "country": "US",
           "subscribers": 713000,
           "videoCount": 47,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCuvYV78y7u78fMACxubnIJg",
@@ -2701,7 +2691,7 @@
           "country": "IN",
           "subscribers": 670000,
           "videoCount": 405,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCQAMUJ6gWGq2PoTaByX2F9A",
@@ -2717,7 +2707,7 @@
           "country": "IN",
           "subscribers": 612000,
           "videoCount": 1742,
-          "market": "GB"
+          "market": "TR"
         },
         {
           "id": "UCiQZxskSW5NCUafI3I4Dqlw",
@@ -2733,7 +2723,7 @@
           "country": null,
           "subscribers": 461000,
           "videoCount": 170,
-          "market": "GB"
+          "market": "TR"
         },
         {
           "id": "UCzuMmGXK3neDvXfmDXsMKWA",
@@ -2741,7 +2731,7 @@
           "country": null,
           "subscribers": 425000,
           "videoCount": 712,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCDKZvGE5oveW1lHNVghDuLg",
@@ -2749,7 +2739,7 @@
           "country": "PK",
           "subscribers": 396000,
           "videoCount": 445,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCYUCiN8CF73TXTpuVJGhEAQ",
@@ -2765,7 +2755,7 @@
           "country": "CA",
           "subscribers": 285000,
           "videoCount": 2256,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCp1uAhOivERr1tF8bKX2_hw",
@@ -2773,7 +2763,7 @@
           "country": "IN",
           "subscribers": 245000,
           "videoCount": 936,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCuzGzo-K5NATHwcmP0xDmEQ",
@@ -2821,7 +2811,7 @@
           "country": null,
           "subscribers": 109000,
           "videoCount": 1605,
-          "market": "GB"
+          "market": "TR"
         },
         {
           "id": "UCHTYxnH6zSf2hsE3owt-WTg",
@@ -2829,13 +2819,13 @@
           "country": null,
           "subscribers": 99400,
           "videoCount": 717,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCX296a5M65r4jdtuTpoNp5Q",
           "title": "Brianna April",
           "country": "US",
-          "subscribers": 68100,
+          "subscribers": 68200,
           "videoCount": 1135,
           "market": "TR"
         },
@@ -2845,7 +2835,7 @@
           "country": null,
           "subscribers": 60000,
           "videoCount": 150,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCGv84Bw-GbLBtTpzyxBZmyw",
@@ -2853,7 +2843,7 @@
           "country": "US",
           "subscribers": 56300,
           "videoCount": 355,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCqt52y0RZjVk0oB5a5tpjVA",
@@ -2861,7 +2851,7 @@
           "country": null,
           "subscribers": 55400,
           "videoCount": 969,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCR2iBMixTcSD_lxnNNl_Vhw",
@@ -2869,7 +2859,7 @@
           "country": "ID",
           "subscribers": 54900,
           "videoCount": 1446,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UC29BHnMgHFnOBfQn-S7V4jw",
@@ -2918,12 +2908,20 @@
           "subscribers": 11300,
           "videoCount": 221,
           "market": "TR"
+        },
+        {
+          "id": "UCmk6HFfe1uFIqxJYDmxT2Yg",
+          "title": "Suci | Birthmark in Beauty",
+          "country": null,
+          "subscribers": 11200,
+          "videoCount": 135,
+          "market": "TR"
         }
       ]
     },
     {
       "niche": "moda",
-      "count": 19,
+      "count": 18,
       "channels": [
         {
           "id": "UCasJxShZr_72Alv66KfIJXg",
@@ -2939,15 +2937,7 @@
           "country": "KR",
           "subscribers": 464000,
           "videoCount": 334,
-          "market": "GB"
-        },
-        {
-          "id": "UCSHc71ws0isP1IivKdKrrFA",
-          "title": "ろこ Roco",
-          "country": "JP",
-          "subscribers": 383000,
-          "videoCount": 283,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCdA7LslNVh7QVYhnZDk8K7A",
@@ -2955,7 +2945,7 @@
           "country": "AR",
           "subscribers": 157000,
           "videoCount": 67,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCBWQHxaG4LDtITFLxWhSUjg",
@@ -2963,7 +2953,7 @@
           "country": null,
           "subscribers": 154000,
           "videoCount": 1151,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCA18Np6IwjtMkYwty05kXDA",
@@ -2971,7 +2961,7 @@
           "country": "IN",
           "subscribers": 147000,
           "videoCount": 134,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCu4G4xA5WiqV50dI8QUzTMw",
@@ -2979,7 +2969,7 @@
           "country": "GH",
           "subscribers": 125000,
           "videoCount": 331,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UC-6nLN-fvfsjczJ1iAGN5IA",
@@ -2995,7 +2985,7 @@
           "country": "GH",
           "subscribers": 99500,
           "videoCount": 863,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCuPNWtTtawD2iTnJ9EJBnWA",
@@ -3003,7 +2993,7 @@
           "country": "GB",
           "subscribers": 68400,
           "videoCount": 60,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCER85EeShhgJbUZnq4LHwCQ",
@@ -3011,7 +3001,7 @@
           "country": null,
           "subscribers": 56100,
           "videoCount": 170,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCR1-du0X9TDHgfeR47tSnWw",
@@ -3081,23 +3071,15 @@
     },
     {
       "niche": "muzik",
-      "count": 60,
+      "count": 50,
       "channels": [
-        {
-          "id": "UC9zY_E8mcAo_Oq772LEZq8Q",
-          "title": "THE FIRST TAKE",
-          "country": "JP",
-          "subscribers": 12300000,
-          "videoCount": 1828,
-          "market": "IN"
-        },
         {
           "id": "UCLCdyRg3u5O-EVP5p46QxcQ",
           "title": "CG5",
           "country": "US",
           "subscribers": 10700000,
           "videoCount": 829,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCTjF8TNC7blVsBtWyMrsj4A",
@@ -3105,7 +3087,7 @@
           "country": "NL",
           "subscribers": 8890000,
           "videoCount": 288,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCJUvtdQr7FbySbrCM9lOnWA",
@@ -3124,22 +3106,6 @@
           "market": "US"
         },
         {
-          "id": "UCotnhpvYSd-pUAdrb0ceKZw",
-          "title": "Thầy Huy Kid Dance",
-          "country": "VN",
-          "subscribers": 7530000,
-          "videoCount": 2284,
-          "market": "IN"
-        },
-        {
-          "id": "UC8JLtamR2_3vRYqDkgIQ1eQ",
-          "title": "Camila Merchant",
-          "country": null,
-          "subscribers": 6890000,
-          "videoCount": 783,
-          "market": "IN"
-        },
-        {
           "id": "UCRBLdLVbiPnKYZ94qE4z3gg",
           "title": "Reynmen",
           "country": "TR",
@@ -3148,44 +3114,12 @@
           "market": "TR"
         },
         {
-          "id": "UCOOygHOTrUa4azanDQ9H80g",
-          "title": "Real Voice",
-          "country": "IN",
-          "subscribers": 5590000,
-          "videoCount": 2576,
-          "market": "GB"
-        },
-        {
-          "id": "UCTyJBpNC7mdjCT5aF5oulww",
-          "title": "Masoom Sharma",
-          "country": "IN",
-          "subscribers": 4020000,
-          "videoCount": 547,
-          "market": "IN"
-        },
-        {
-          "id": "UCrC_ZFYISEAUuCu00y52Evg",
-          "title": "Royal Music",
-          "country": "US",
-          "subscribers": 3070000,
-          "videoCount": 2423,
-          "market": "IN"
-        },
-        {
-          "id": "UCf5BpzjGuojYdpNs9HM1VNA",
-          "title": "The latest guru",
-          "country": "IN",
-          "subscribers": 1960000,
-          "videoCount": 1053,
-          "market": "GB"
-        },
-        {
           "id": "UC8PPjyqCQJtNfEwHBcq_uxw",
           "title": "LNGSHOT",
           "country": "KR",
           "subscribers": 1880000,
           "videoCount": 451,
-          "market": "IN"
+          "market": "US"
         },
         {
           "id": "UCgeHDGNAxySBHWaFw27JMjA",
@@ -3193,7 +3127,7 @@
           "country": "KR",
           "subscribers": 1610000,
           "videoCount": 795,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UC99YH1GwfhOmvLLNuVLpX4A",
@@ -3201,7 +3135,7 @@
           "country": null,
           "subscribers": 1340000,
           "videoCount": 353,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCxXnTTW4RuVOLPERKPePq-Q",
@@ -3209,15 +3143,7 @@
           "country": "US",
           "subscribers": 1310000,
           "videoCount": 1964,
-          "market": "GB"
-        },
-        {
-          "id": "UCj7i5zZ7UJy8NuRdrIe8DJA",
-          "title": "Dance with Mansi",
-          "country": "IN",
-          "subscribers": 1210000,
-          "videoCount": 676,
-          "market": "IN"
+          "market": "US"
         },
         {
           "id": "UCqTrW8bp0XnHb-ZwOF6AQ4A",
@@ -3226,14 +3152,6 @@
           "subscribers": 1020000,
           "videoCount": 2625,
           "market": "TR"
-        },
-        {
-          "id": "UCPjPtFHLvKdgjnAxCiqgeqQ",
-          "title": "Moritz Veronika Xaver",
-          "country": null,
-          "subscribers": 917000,
-          "videoCount": 463,
-          "market": "GB"
         },
         {
           "id": "UCouD8uM_hrbWtVdDIWf4LFg",
@@ -3249,23 +3167,7 @@
           "country": "IN",
           "subscribers": 903000,
           "videoCount": 239,
-          "market": "GB"
-        },
-        {
-          "id": "UCJB0-F02N-mL3G-FrQfb4CQ",
-          "title": "InstrumentManiac",
-          "country": "US",
-          "subscribers": 734000,
-          "videoCount": 482,
-          "market": "IN"
-        },
-        {
-          "id": "UCGtAi01m0fzwOC90gnsd7EA",
-          "title": "싱싱 - Sing Sing",
-          "country": "TH",
-          "subscribers": 509000,
-          "videoCount": 465,
-          "market": "IN"
+          "market": "US"
         },
         {
           "id": "UCKp6b4O3vDrI7Lssw34ocpw",
@@ -3273,23 +3175,7 @@
           "country": "US",
           "subscribers": 343000,
           "videoCount": 945,
-          "market": "GB"
-        },
-        {
-          "id": "UCnAlsQhWDIp_6b_pp52YlAg",
-          "title": "Vaani k singh",
-          "country": "IN",
-          "subscribers": 308000,
-          "videoCount": 621,
-          "market": "IN"
-        },
-        {
-          "id": "UCGiU55katgBKY2zZ9bZnYCw",
-          "title": "Music Kshetra",
-          "country": "IN",
-          "subscribers": 282000,
-          "videoCount": 585,
-          "market": "IN"
+          "market": "US"
         },
         {
           "id": "UC-IScyNs_YiknMfEs2TnEuw",
@@ -3305,7 +3191,7 @@
           "country": "US",
           "subscribers": 258000,
           "videoCount": 1126,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCS_BFAf-sIg9qj6O0G4ZHjw",
@@ -3313,7 +3199,7 @@
           "country": null,
           "subscribers": 195000,
           "videoCount": 1562,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCcsIQnUIXnlpRe57ys10eqQ",
@@ -3329,7 +3215,7 @@
           "country": "IN",
           "subscribers": 158000,
           "videoCount": 661,
-          "market": "GB"
+          "market": "TR"
         },
         {
           "id": "UC7LC1GEtL4C-pC8OIj69Unw",
@@ -3337,7 +3223,7 @@
           "country": "CA",
           "subscribers": 155000,
           "videoCount": 147,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCTz7lS7Pp7xEO4_j_tQ7oRA",
@@ -3345,7 +3231,7 @@
           "country": "US",
           "subscribers": 147000,
           "videoCount": 24,
-          "market": "GB"
+          "market": "TR"
         },
         {
           "id": "UCYgiOiEbHNTNa3q5eJI0Yjg",
@@ -3361,7 +3247,7 @@
           "country": "IN",
           "subscribers": 103000,
           "videoCount": 117,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCGtrHIVOvOa1QpZTWTHZWMQ",
@@ -3369,15 +3255,7 @@
           "country": "IN",
           "subscribers": 102000,
           "videoCount": 367,
-          "market": "GB"
-        },
-        {
-          "id": "UC2AuYj3LB5t9ULhFPoCZHjg",
-          "title": "Tabla World",
-          "country": null,
-          "subscribers": 99200,
-          "videoCount": 171,
-          "market": "IN"
+          "market": "TR"
         },
         {
           "id": "UCCo-90KEoSjCLdIeMeRpwmA",
@@ -3391,7 +3269,7 @@
           "id": "UCGWzlMvpFVxnws2vKpfLO8w",
           "title": "Semi Classical Vibez",
           "country": null,
-          "subscribers": 83000,
+          "subscribers": 83100,
           "videoCount": 603,
           "market": "TR"
         },
@@ -3409,23 +3287,7 @@
           "country": "US",
           "subscribers": 74300,
           "videoCount": 456,
-          "market": "GB"
-        },
-        {
-          "id": "UCn0NVTxZETp9t5_SOY2Cmeg",
-          "title": "Kyle Collins",
-          "country": "AU",
-          "subscribers": 71800,
-          "videoCount": 598,
-          "market": "GB"
-        },
-        {
-          "id": "UCRas4XQsGVYpUrOHRU_e9bA",
-          "title": "Mkviralsong ",
-          "country": "IN",
-          "subscribers": 71600,
-          "videoCount": 15,
-          "market": "GB"
+          "market": "TR"
         },
         {
           "id": "UCoTuvsiY06rdVgF1fOanklw",
@@ -3433,15 +3295,7 @@
           "country": "US",
           "subscribers": 71200,
           "videoCount": 94,
-          "market": "IN"
-        },
-        {
-          "id": "UChqQk19Il7pTGOG3USXI3PA",
-          "title": "HOP PRO",
-          "country": null,
-          "subscribers": 66800,
-          "videoCount": 231,
-          "market": "IN"
+          "market": "US"
         },
         {
           "id": "UCIPr8GRXBy4XoHqn4PF4A2w",
@@ -3449,7 +3303,7 @@
           "country": "US",
           "subscribers": 61700,
           "videoCount": 80,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCk7lnZQIsKTBHMppqh9QRdA",
@@ -3457,7 +3311,7 @@
           "country": "US",
           "subscribers": 59400,
           "videoCount": 156,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCYZM4nj35hGny8x_S1g2EOA",
@@ -3465,7 +3319,7 @@
           "country": null,
           "subscribers": 58200,
           "videoCount": 192,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCCpOPiptngr3zYOpePCJpjA",
@@ -3473,7 +3327,7 @@
           "country": null,
           "subscribers": 53400,
           "videoCount": 121,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCL1rGLcqO4JHFVVjhu63now",
@@ -3481,7 +3335,7 @@
           "country": "PK",
           "subscribers": 51400,
           "videoCount": 379,
-          "market": "IN"
+          "market": "TR"
         },
         {
           "id": "UCWAIoaDCyMhE8MAv-F3G_Pg",
@@ -3513,6 +3367,14 @@
           "country": null,
           "subscribers": 25100,
           "videoCount": 223,
+          "market": "TR"
+        },
+        {
+          "id": "UCHrBPMEa63pyvM6IW1D42ZQ",
+          "title": "Gama Covers ⭐",
+          "country": "US",
+          "subscribers": 25100,
+          "videoCount": 43,
           "market": "TR"
         },
         {
@@ -3556,18 +3418,66 @@
           "market": "TR"
         },
         {
+          "id": "UC4Mh7xZ1yjJXGJVWYnyEqOg",
+          "title": "MS Vibes Shorts ",
+          "country": null,
+          "subscribers": 13700,
+          "videoCount": 430,
+          "market": "TR"
+        },
+        {
           "id": "UCYxxLa7CSRm53gPoIfCyAww",
           "title": "𐙚 𝗩𝗲𝗹𝘃𝗲𝘁 𝗜𝗻𝗸",
           "country": null,
           "subscribers": 12200,
           "videoCount": 88,
           "market": "TR"
+        },
+        {
+          "id": "UC9oXMOq2jU_p6Z67hdyy22w",
+          "title": "Karben Official",
+          "country": null,
+          "subscribers": 11900,
+          "videoCount": 318,
+          "market": "TR"
+        },
+        {
+          "id": "UCmZeJpfkDnOUXyGKUerFo6Q",
+          "title": "Coffin Beat ID",
+          "country": "ID",
+          "subscribers": 11600,
+          "videoCount": 189,
+          "market": "TR"
+        },
+        {
+          "id": "UCF_3bI-ZHyz_Y1SwLUs2z-A",
+          "title": "Ro Cover SK",
+          "country": "BD",
+          "subscribers": 11400,
+          "videoCount": 18,
+          "market": "TR"
+        },
+        {
+          "id": "UCms2BQgO1IwGu334EFIOVKw",
+          "title": "Tiles Hop Color Quad",
+          "country": "US",
+          "subscribers": 11200,
+          "videoCount": 78,
+          "market": "TR"
+        },
+        {
+          "id": "UCnJc-DnjIuJ6g0BAjznd7mA",
+          "title": "saucebangkok",
+          "country": null,
+          "subscribers": 10700,
+          "videoCount": 103,
+          "market": "TR"
         }
       ]
     },
     {
       "niche": "oto",
-      "count": 48,
+      "count": 41,
       "channels": [
         {
           "id": "UCUhFaUpnq31m6TNX2VKVSVA",
@@ -3575,7 +3485,7 @@
           "country": "GB",
           "subscribers": 11100000,
           "videoCount": 3540,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCWFKCr40YwOZQx8FHU_ZqqQ",
@@ -3583,7 +3493,7 @@
           "country": "US",
           "subscribers": 10000000,
           "videoCount": 1583,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCjOl2AUblVmg2rA_cRgZkFg",
@@ -3591,7 +3501,7 @@
           "country": "GB",
           "subscribers": 9530000,
           "videoCount": 1875,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCSXOsOIzeJqJb4h0QlimDww",
@@ -3599,7 +3509,7 @@
           "country": "IN",
           "subscribers": 5270000,
           "videoCount": 4170,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCsqjHFMB_JYTaEnf_vmTNqg",
@@ -3607,15 +3517,7 @@
           "country": "US",
           "subscribers": 5090000,
           "videoCount": 2592,
-          "market": "GB"
-        },
-        {
-          "id": "UC9DXAsBD4-ITVuvpd68401Q",
-          "title": "AutoTopNL",
-          "country": "NL",
-          "subscribers": 4240000,
-          "videoCount": 7728,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCJla13cU_l6Itg8yEtOiAqQ",
@@ -3623,15 +3525,7 @@
           "country": "US",
           "subscribers": 3740000,
           "videoCount": 960,
-          "market": "GB"
-        },
-        {
-          "id": "UCjWs7BxyjO5SLqevxSmp4vQ",
-          "title": "Autocar India",
-          "country": "IN",
-          "subscribers": 2540000,
-          "videoCount": 6116,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCPF4bAZimS4T8w1TlbeIAYg",
@@ -3639,7 +3533,7 @@
           "country": "IN",
           "subscribers": 2360000,
           "videoCount": 3385,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCA2utdbkuY6PfX0Exi2Y16w",
@@ -3647,15 +3541,7 @@
           "country": "IN",
           "subscribers": 2140000,
           "videoCount": 1466,
-          "market": "GB"
-        },
-        {
-          "id": "UCzCNB69MgYJ_ahhbQZ2udFQ",
-          "title": "HER GARAGE",
-          "country": null,
-          "subscribers": 1990000,
-          "videoCount": 1276,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCQr2SA6sImMVi-dgamTlwpg",
@@ -3663,7 +3549,7 @@
           "country": "IN",
           "subscribers": 1820000,
           "videoCount": 1220,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UC2J-0g_nxlwcD9JBK1eTleQ",
@@ -3671,15 +3557,15 @@
           "country": null,
           "subscribers": 1270000,
           "videoCount": 143,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCzZG860wco0uK0J1GUJ1FkQ",
           "title": "sansCARi sumit",
           "country": "IN",
           "subscribers": 1250000,
-          "videoCount": 3319,
-          "market": "GB"
+          "videoCount": 3320,
+          "market": "US"
         },
         {
           "id": "UCxCNGZW9KcBOzLpYPCE_ouQ",
@@ -3687,23 +3573,7 @@
           "country": "IN",
           "subscribers": 997000,
           "videoCount": 2314,
-          "market": "GB"
-        },
-        {
-          "id": "UCV-CPspQhwTsaiftR4JvT0w",
-          "title": "Cars24",
-          "country": "IN",
-          "subscribers": 958000,
-          "videoCount": 1144,
-          "market": "GB"
-        },
-        {
-          "id": "UC_YkjNmg8VSCH4s5GNkS3Xg",
-          "title": "Sheikh Waseem",
-          "country": "IN",
-          "subscribers": 898000,
-          "videoCount": 428,
-          "market": "IN"
+          "market": "US"
         },
         {
           "id": "UCOMQHhKOG9fk4jGYw_uhVhA",
@@ -3711,7 +3581,7 @@
           "country": null,
           "subscribers": 718000,
           "videoCount": 278,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCozWuDDaYMaMUkIy5-NWGwQ",
@@ -3727,23 +3597,7 @@
           "country": "GB",
           "subscribers": 538000,
           "videoCount": 873,
-          "market": "GB"
-        },
-        {
-          "id": "UCMsnv0DP3iD4cEYRSSh3T0Q",
-          "title": "Mr Automotive Enthusiast ",
-          "country": "IN",
-          "subscribers": 514000,
-          "videoCount": 2047,
-          "market": "GB"
-        },
-        {
-          "id": "UCKAzZtxqNwZeUJiXTGSsaxw",
-          "title": "CLASSIC GEARS",
-          "country": "IN",
-          "subscribers": 395000,
-          "videoCount": 1646,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UC2U8Jmwgb7erTe0tgXSWYyA",
@@ -3751,7 +3605,7 @@
           "country": "IN",
           "subscribers": 248000,
           "videoCount": 2205,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCnakck1G8WY6myXXAEAA0yg",
@@ -3759,7 +3613,7 @@
           "country": null,
           "subscribers": 204000,
           "videoCount": 1448,
-          "market": "IN"
+          "market": "US"
         },
         {
           "id": "UCBZ6YFvdJh7mgrueoh2AKzQ",
@@ -3767,7 +3621,7 @@
           "country": "US",
           "subscribers": 189000,
           "videoCount": 822,
-          "market": "IN"
+          "market": "US"
         },
         {
           "id": "UCZ5eEAKKrCYIGN6PHnwuw4g",
@@ -3775,7 +3629,7 @@
           "country": "IN",
           "subscribers": 184000,
           "videoCount": 1401,
-          "market": "IN"
+          "market": "US"
         },
         {
           "id": "UCaPu9d9uYoYAWAVDT2rpCjA",
@@ -3807,7 +3661,7 @@
           "country": "MY",
           "subscribers": 139000,
           "videoCount": 290,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCOJRaH-zK6ugePrHfyz_FzA",
@@ -3839,7 +3693,7 @@
           "country": "IN",
           "subscribers": 99900,
           "videoCount": 2261,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UC74HLh0voVow3t9uo_P5J-Q",
@@ -3855,7 +3709,7 @@
           "country": "GB",
           "subscribers": 80400,
           "videoCount": 243,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCLetjKt4W6Qa7HNyJvhOReQ",
@@ -3871,7 +3725,7 @@
           "country": "IN",
           "subscribers": 75800,
           "videoCount": 2481,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCevFoLNe-6FFsj3VebLOYJw",
@@ -3879,7 +3733,7 @@
           "country": "US",
           "subscribers": 52700,
           "videoCount": 2199,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UC1EKS3f2iR6WAcLNyAm956g",
@@ -3957,23 +3811,15 @@
     },
     {
       "niche": "oyun",
-      "count": 60,
+      "count": 51,
       "channels": [
-        {
-          "id": "UCWsDFcIhY2DBi3GB5uykGXA",
-          "title": "IShowSpeed",
-          "country": "US",
-          "subscribers": 60400000,
-          "videoCount": 1958,
-          "market": "GB"
-        },
         {
           "id": "UCX8pnu3DYUnx8qy8V_c6oHg",
           "title": "Techno Gamerz",
           "country": "IN",
           "subscribers": 52700000,
           "videoCount": 1186,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UC7_YxT-KID8kRbqZo7MyscQ",
@@ -3981,39 +3827,7 @@
           "country": "US",
           "subscribers": 38800000,
           "videoCount": 5903,
-          "market": "GB"
-        },
-        {
-          "id": "UCLGHEUaREx_FtNrqfJ8gXIA",
-          "title": "Box Of Vengeance",
-          "country": "IN",
-          "subscribers": 34500000,
-          "videoCount": 518,
-          "market": "IN"
-        },
-        {
-          "id": "UCvz84_Q0BbvZThy75mbd-Dg",
-          "title": "Zack D. Films",
-          "country": null,
-          "subscribers": 28000000,
-          "videoCount": 3743,
-          "market": "IN"
-        },
-        {
-          "id": "UCv-yge5mA1i9P3ahJaOBWcQ",
-          "title": "Kajal Soni",
-          "country": null,
-          "subscribers": 27900000,
-          "videoCount": 1818,
-          "market": "IN"
-        },
-        {
-          "id": "UCx6F-rETGiz7xf_vkMmX2yQ",
-          "title": "Mythpat",
-          "country": "IN",
-          "subscribers": 17400000,
-          "videoCount": 435,
-          "market": "IN"
+          "market": "US"
         },
         {
           "id": "UCFwKgzKe-EdTz83r6wzhmOw",
@@ -4021,7 +3835,7 @@
           "country": "IN",
           "subscribers": 15400000,
           "videoCount": 750,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCj4hfQEWcGtF08SLEZCZc5Q",
@@ -4029,15 +3843,7 @@
           "country": "AU",
           "subscribers": 9760000,
           "videoCount": 1882,
-          "market": "GB"
-        },
-        {
-          "id": "UCh5mLn90vUaB1PbRRx_AiaA",
-          "title": "MoreSidemen",
-          "country": "GB",
-          "subscribers": 9750000,
-          "videoCount": 1501,
-          "market": "IN"
+          "market": "US"
         },
         {
           "id": "UCSncGB_s0tuWN-4l-58mmvQ",
@@ -4045,7 +3851,7 @@
           "country": "IN",
           "subscribers": 8960000,
           "videoCount": 439,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCzXwjTI6c6mVn6oui_p6oiw",
@@ -4053,7 +3859,7 @@
           "country": "CA",
           "subscribers": 8910000,
           "videoCount": 1422,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCS6oj2bPI--FRgmaQ4vRGZg",
@@ -4064,14 +3870,6 @@
           "market": "TR"
         },
         {
-          "id": "UC12ClG0_7aPLNdRNNl_4zTA",
-          "title": "AJTHEBOLD",
-          "country": "US",
-          "subscribers": 5460000,
-          "videoCount": 113,
-          "market": "IN"
-        },
-        {
           "id": "UCOAWn2qyufw-nal-evHdyOw",
           "title": "Sefa Kındır",
           "country": "TR",
@@ -4080,28 +3878,12 @@
           "market": "TR"
         },
         {
-          "id": "UCUeHUOy5fwWXaCJwzw-UiPw",
-          "title": "The Savage Square",
-          "country": "IN",
-          "subscribers": 4980000,
-          "videoCount": 253,
-          "market": "GB"
-        },
-        {
           "id": "UC0XkmvjewFNtVY7-FJHsBaA",
           "title": "Gaming Fun Army",
           "country": "IN",
           "subscribers": 4700000,
           "videoCount": 586,
-          "market": "GB"
-        },
-        {
-          "id": "UClqifC6Nd7v-IfTqce4k62A",
-          "title": "Carry Depie",
-          "country": "IN",
-          "subscribers": 4610000,
-          "videoCount": 664,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCHCwb6dKt4534vxX3F9OHKQ",
@@ -4109,7 +3891,7 @@
           "country": null,
           "subscribers": 4540000,
           "videoCount": 537,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCt59681zjcwtSJzAIVip93w",
@@ -4117,7 +3899,7 @@
           "country": "IN",
           "subscribers": 4110000,
           "videoCount": 546,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCnYP-Vc_kPNk--9h6MNI4rA",
@@ -4149,7 +3931,7 @@
           "country": "GB",
           "subscribers": 3370000,
           "videoCount": 88,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCi7wDE2ZTiR5QYYrUY5WhtA",
@@ -4157,7 +3939,7 @@
           "country": "US",
           "subscribers": 3080000,
           "videoCount": 4578,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCHio_VgmlVkqf0yK-8I8YtQ",
@@ -4181,7 +3963,7 @@
           "country": "IN",
           "subscribers": 2530000,
           "videoCount": 254,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCQfBN7Ut5TiZJAhMo_Rgfyw",
@@ -4189,7 +3971,7 @@
           "country": "IN",
           "subscribers": 2490000,
           "videoCount": 1617,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCZeKXaDbtL2GbfoB8hldseQ",
@@ -4197,7 +3979,7 @@
           "country": "US",
           "subscribers": 2430000,
           "videoCount": 2307,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCuqv5whXhwpDoO8Jpu8Ro0w",
@@ -4205,7 +3987,7 @@
           "country": "IN",
           "subscribers": 2400000,
           "videoCount": 151,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCkOAI9om5uKLj8QEVR0_b6w",
@@ -4245,7 +4027,7 @@
           "country": "CA",
           "subscribers": 1420000,
           "videoCount": 1446,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCk96Hkof6VkfgaSbJT7pKVQ",
@@ -4285,7 +4067,7 @@
           "country": null,
           "subscribers": 420000,
           "videoCount": 1223,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCe5HE5TPwJtXLUS44QWOWgg",
@@ -4309,7 +4091,7 @@
           "country": null,
           "subscribers": 331000,
           "videoCount": 620,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCtiSjtAk_2FYkDNOFMSCMdw",
@@ -4317,7 +4099,7 @@
           "country": null,
           "subscribers": 260000,
           "videoCount": 57,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCFweM7Bzt_DmS9PQVgKOxQg",
@@ -4325,7 +4107,7 @@
           "country": null,
           "subscribers": 254000,
           "videoCount": 118,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCb5SU9PWh9U369NvHH5zj5g",
@@ -4341,7 +4123,7 @@
           "country": "US",
           "subscribers": 145000,
           "videoCount": 400,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCtiWkKKzMrgVJ2msfEiW0Xg",
@@ -4349,7 +4131,7 @@
           "country": "US",
           "subscribers": 144000,
           "videoCount": 198,
-          "market": "IN"
+          "market": "US"
         },
         {
           "id": "UCTZUzgDhMKuoVRDDBEF1ILQ",
@@ -4397,7 +4179,7 @@
           "country": "US",
           "subscribers": 90100,
           "videoCount": 173,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UC0fa7jE9MkzMwDHzr6V9eYQ",
@@ -4405,7 +4187,7 @@
           "country": "CA",
           "subscribers": 88800,
           "videoCount": 845,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCs8L1jkXLz0jDVDYx3oHj0A",
@@ -4413,7 +4195,7 @@
           "country": null,
           "subscribers": 86100,
           "videoCount": 118,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCcvsddJy_KdiU-Zbnjs5XTQ",
@@ -4443,15 +4225,15 @@
     },
     {
       "niche": "saglik",
-      "count": 52,
+      "count": 47,
       "channels": [
         {
           "id": "UCUK49UvmYWYLiB7_bZFuFZQ",
           "title": "News18 Odia",
           "country": "IN",
           "subscribers": 6090000,
-          "videoCount": 375168,
-          "market": "GB"
+          "videoCount": 375170,
+          "market": "US"
         },
         {
           "id": "UCKRpf_HZfpLwxuIgyeYnsVw",
@@ -4459,7 +4241,7 @@
           "country": "IN",
           "subscribers": 3090000,
           "videoCount": 1366,
-          "market": "IN"
+          "market": "US"
         },
         {
           "id": "UCN4Xko08Id45SCgco3x8_9A",
@@ -4467,15 +4249,7 @@
           "country": null,
           "subscribers": 1740000,
           "videoCount": 1836,
-          "market": "GB"
-        },
-        {
-          "id": "UCimI17I9cM4ykd39M4xiy_A",
-          "title": "Yogam",
-          "country": "IN",
-          "subscribers": 1260000,
-          "videoCount": 6400,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UC8VLdElEtZK8wr_2YRbqyxw",
@@ -4491,7 +4265,7 @@
           "country": "IN",
           "subscribers": 991000,
           "videoCount": 3535,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCSMQomZLOHMfqZHzTccNrLQ",
@@ -4499,7 +4273,7 @@
           "country": "IN",
           "subscribers": 897000,
           "videoCount": 4259,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCyIMeWHd2rcjnHcmCK3eSBg",
@@ -4507,7 +4281,7 @@
           "country": "IN",
           "subscribers": 763000,
           "videoCount": 1118,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCTFC-b2d2FCBkCjU3onGpZw",
@@ -4515,15 +4289,7 @@
           "country": "FR",
           "subscribers": 529000,
           "videoCount": 191,
-          "market": "IN"
-        },
-        {
-          "id": "UCNJTKWiYJfuVoJbfqcrA-nQ",
-          "title": "healthxmunazir",
-          "country": "IN",
-          "subscribers": 342000,
-          "videoCount": 314,
-          "market": "IN"
+          "market": "US"
         },
         {
           "id": "UCiWzoeg06YHzJ0ifChqW5cQ",
@@ -4531,7 +4297,7 @@
           "country": "IN",
           "subscribers": 336000,
           "videoCount": 301,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCmDqep_Qv-syQ5lRR727rEg",
@@ -4547,7 +4313,7 @@
           "country": "IN",
           "subscribers": 270000,
           "videoCount": 3623,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCX5CYwe8asPGLzsGPik5TBw",
@@ -4555,15 +4321,7 @@
           "country": "IN",
           "subscribers": 263000,
           "videoCount": 8329,
-          "market": "GB"
-        },
-        {
-          "id": "UCrk9dxK-qdmgmOoY5mfN8-A",
-          "title": "SmartFit Shorts\n",
-          "country": "IN",
-          "subscribers": 258000,
-          "videoCount": 543,
-          "market": "IN"
+          "market": "US"
         },
         {
           "id": "UCpVsUe3jhjVKgwLUSKke-Hg",
@@ -4571,14 +4329,14 @@
           "country": null,
           "subscribers": 253000,
           "videoCount": 351,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCGl6HFRSlrklkrds1j9j5sw",
           "title": "Harika Bir Tavsiye",
           "country": "TR",
           "subscribers": 241000,
-          "videoCount": 1540,
+          "videoCount": 1541,
           "market": "TR"
         },
         {
@@ -4587,7 +4345,7 @@
           "country": "IN",
           "subscribers": 205000,
           "videoCount": 3572,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCdaeXiqExLg4DZQt_By-gbA",
@@ -4595,7 +4353,7 @@
           "country": "US",
           "subscribers": 196000,
           "videoCount": 770,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UC3YZsJiRBN1JVeQpUHu1YAg",
@@ -4603,7 +4361,7 @@
           "country": "IN",
           "subscribers": 188000,
           "videoCount": 1982,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UC8__1T7RvD2hV3YGgvZfUSQ",
@@ -4619,15 +4377,7 @@
           "country": "IN",
           "subscribers": 166000,
           "videoCount": 137,
-          "market": "IN"
-        },
-        {
-          "id": "UCPXz6I2HpOQHbhYh-vt9wuw",
-          "title": "Aradhya Motivation ",
-          "country": "IN",
-          "subscribers": 148000,
-          "videoCount": 289,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCvrzBhC6vYRkX3f1GgfyPww",
@@ -4635,15 +4385,7 @@
           "country": "IN",
           "subscribers": 142000,
           "videoCount": 2696,
-          "market": "GB"
-        },
-        {
-          "id": "UCglP-p6bOXnO5Bcg0cTNvrw",
-          "title": "Combine",
-          "country": null,
-          "subscribers": 130000,
-          "videoCount": 2309,
-          "market": "IN"
+          "market": "US"
         },
         {
           "id": "UCaHQTroMDbLRf8o_HyGjBmw",
@@ -4651,7 +4393,7 @@
           "country": "US",
           "subscribers": 128000,
           "videoCount": 1003,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UC3Sfd9IqgVcRVLY2RhOrQcA",
@@ -4659,7 +4401,7 @@
           "country": "IN",
           "subscribers": 123000,
           "videoCount": 282,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCc3Rct-kT69WAJ3vfsk6Zhg",
@@ -4675,7 +4417,7 @@
           "country": "IN",
           "subscribers": 113000,
           "videoCount": 2260,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UC5HaJmRjnx9p8t5UGIZsRZQ",
@@ -4683,7 +4425,7 @@
           "country": "IN",
           "subscribers": 109000,
           "videoCount": 86,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCxdSC6alehfs8pIXY4864ng",
@@ -4691,7 +4433,7 @@
           "country": "IN",
           "subscribers": 102000,
           "videoCount": 271,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCW9Ney_b8ii3KK01d-32GEQ",
@@ -4699,7 +4441,7 @@
           "country": null,
           "subscribers": 93100,
           "videoCount": 106,
-          "market": "IN"
+          "market": "US"
         },
         {
           "id": "UCrSkDGwja-T4mSXsb_xh8vA",
@@ -4715,7 +4457,7 @@
           "country": "IN",
           "subscribers": 70300,
           "videoCount": 2510,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCqpbFCHDvx9f2gk8eQW-SFQ",
@@ -4723,7 +4465,7 @@
           "country": "IN",
           "subscribers": 69800,
           "videoCount": 114,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCeNmVsA_Ovsd_g07ZN1SOdA",
@@ -4731,7 +4473,7 @@
           "country": "US",
           "subscribers": 68500,
           "videoCount": 178,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCmGUrjndRL5GjLwkAx3xHDg",
@@ -4739,15 +4481,15 @@
           "country": "US",
           "subscribers": 68100,
           "videoCount": 216,
-          "market": "IN"
+          "market": "US"
         },
         {
           "id": "UC2jbzdZwnStxkfHSPAai4GQ",
           "title": "Tamilmotivational1gm",
           "country": null,
-          "subscribers": 67200,
+          "subscribers": 67300,
           "videoCount": 281,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UC7hwVAy2wOp2FEdYNeuQsGg",
@@ -4771,7 +4513,7 @@
           "country": "IN",
           "subscribers": 57900,
           "videoCount": 74,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCf5kbV-sm3MGYR7N-vn59qA",
@@ -4787,15 +4529,15 @@
           "country": "IN",
           "subscribers": 56500,
           "videoCount": 32,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UC3gj0JNPBhf5XGd05WEgtog",
           "title": "The capital facts ",
           "country": "IN",
-          "subscribers": 56200,
+          "subscribers": 56300,
           "videoCount": 543,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UC_tA3TbHj6r1CYU6xwYYMAg",
@@ -4865,7 +4607,7 @@
     },
     {
       "niche": "spor",
-      "count": 26,
+      "count": 23,
       "channels": [
         {
           "id": "UC85MIJMcZNnhxx84BZMlJgg",
@@ -4873,7 +4615,7 @@
           "country": "IN",
           "subscribers": 6750000,
           "videoCount": 1209,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UC6nuYwp7V2f5iGYxLW8Qvlw",
@@ -4881,7 +4623,7 @@
           "country": "IN",
           "subscribers": 1780000,
           "videoCount": 3576,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCQnrrEf_tNszMZc0mv5P8_g",
@@ -4905,7 +4647,7 @@
           "country": null,
           "subscribers": 926000,
           "videoCount": 255,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCXH9dxtCeB3Gn_QnWnBJaTQ",
@@ -4921,31 +4663,15 @@
           "country": "DE",
           "subscribers": 781000,
           "videoCount": 1391,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCdrDArHfGoVuGAxCWVOCrCg",
           "title": "KaifGymLife",
           "country": "IN",
-          "subscribers": 370000,
+          "subscribers": 371000,
           "videoCount": 140,
-          "market": "GB"
-        },
-        {
-          "id": "UC8A_sScIu14gpM0CFmcYGBg",
-          "title": "Exercise Universe",
-          "country": "US",
-          "subscribers": 354000,
-          "videoCount": 1226,
-          "market": "GB"
-        },
-        {
-          "id": "UCTzMpe8EJtjSyIkraqUyVEQ",
-          "title": "🙄Dani4x fitness 💪",
-          "country": "US",
-          "subscribers": 333000,
-          "videoCount": 3232,
-          "market": "IN"
+          "market": "US"
         },
         {
           "id": "UCCrBGTXyJLX7UXqSEVXiQQQ",
@@ -4959,9 +4685,9 @@
           "id": "UCRg37b1H4ERmK7uKuQ11q7Q",
           "title": "MR Stephane ",
           "country": "AI",
-          "subscribers": 255000,
+          "subscribers": 256000,
           "videoCount": 316,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UC91sgTM7QnQWC_j9er1lAaQ",
@@ -4977,7 +4703,7 @@
           "country": "IN",
           "subscribers": 211000,
           "videoCount": 889,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCa_NRSB8AEcXmW52KvVj9UA",
@@ -4985,7 +4711,7 @@
           "country": "IN",
           "subscribers": 173000,
           "videoCount": 2399,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCDW2dtIuvjH5KHV54vUqWcA",
@@ -4993,7 +4719,7 @@
           "country": null,
           "subscribers": 170000,
           "videoCount": 794,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCHUtSdrmS1RqLA_oBMmrfBQ",
@@ -5001,7 +4727,7 @@
           "country": "AE",
           "subscribers": 150000,
           "videoCount": 185,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCyLiTvyt4orZK_e-X4OWv_Q",
@@ -5017,7 +4743,7 @@
           "country": "US",
           "subscribers": 141000,
           "videoCount": 2004,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCZtIu4afX24RcO-LzAGQOPg",
@@ -5025,7 +4751,7 @@
           "country": null,
           "subscribers": 125000,
           "videoCount": 2351,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCDbv27C-lqyIq718B73m3LQ",
@@ -5033,15 +4759,7 @@
           "country": "IN",
           "subscribers": 120000,
           "videoCount": 328,
-          "market": "GB"
-        },
-        {
-          "id": "UCJQbV1Dx4iz-VLFVrP02DlA",
-          "title": "BlazeForm",
-          "country": null,
-          "subscribers": 107000,
-          "videoCount": 27,
-          "market": "IN"
+          "market": "US"
         },
         {
           "id": "UC1xeOgXttbJnE69wgQbZ6pw",
@@ -5049,7 +4767,7 @@
           "country": "IN",
           "subscribers": 106000,
           "videoCount": 979,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UC3wkmYVkmIxM-yqeCKJfCLQ",
@@ -5057,7 +4775,7 @@
           "country": "TR",
           "subscribers": 100000,
           "videoCount": 413,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCZ8deBISX4aVcWlTjxfrA-g",
@@ -5065,7 +4783,7 @@
           "country": "AE",
           "subscribers": 55600,
           "videoCount": 523,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCos5syGcZJ5Bnhx_2CubFpw",
@@ -5079,7 +4797,7 @@
     },
     {
       "niche": "teknoloji",
-      "count": 57,
+      "count": 50,
       "channels": [
         {
           "id": "UCsTcErHg8oDvUnTzoqsYeNw",
@@ -5087,7 +4805,7 @@
           "country": null,
           "subscribers": 25600000,
           "videoCount": 2537,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCMiJRAwDNSNzuYeN2uWa0pA",
@@ -5095,7 +4813,7 @@
           "country": "GB",
           "subscribers": 22800000,
           "videoCount": 1924,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCBJycsmduvYEL83R_U4JriQ",
@@ -5103,7 +4821,7 @@
           "country": "US",
           "subscribers": 21100000,
           "videoCount": 1840,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCXuqSBlHAE6Xw-yeJA0Tunw",
@@ -5111,7 +4829,7 @@
           "country": "CA",
           "subscribers": 16900000,
           "videoCount": 7874,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UC1tVU8H153ZFO9eRsxdJlhA",
@@ -5119,7 +4837,7 @@
           "country": "IN",
           "subscribers": 16100000,
           "videoCount": 1459,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCEPL07qzVsOcHd3sMUws65g",
@@ -5127,15 +4845,7 @@
           "country": "IN",
           "subscribers": 15500000,
           "videoCount": 4592,
-          "market": "GB"
-        },
-        {
-          "id": "UC1dI4tO13ApuSX0QeX8pHng",
-          "title": "GadgetIn",
-          "country": "ID",
-          "subscribers": 14100000,
-          "videoCount": 1699,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCXUJJNoP1QupwsYIWFXmsZg",
@@ -5143,7 +4853,7 @@
           "country": "IN",
           "subscribers": 12500000,
           "videoCount": 1632,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCe8D5lo_zrqS8xtsNspeCgg",
@@ -5154,20 +4864,12 @@
           "market": "US"
         },
         {
-          "id": "UCXGgrKt94gR6lmN4aN3mYTg",
-          "title": "Austin Evans",
-          "country": "US",
-          "subscribers": 5820000,
-          "videoCount": 2755,
-          "market": "GB"
-        },
-        {
           "id": "UCdoDYkupTElV62K7ttA_E4w",
           "title": "TechBar",
           "country": "IN",
           "subscribers": 5760000,
           "videoCount": 2132,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCb-xXZ7ltTvrh9C6DgB9H-Q",
@@ -5175,7 +4877,7 @@
           "country": "IN",
           "subscribers": 5150000,
           "videoCount": 5378,
-          "market": "IN"
+          "market": "US"
         },
         {
           "id": "UC20sXo8ReewkzNKBFgzVCPA",
@@ -5183,7 +4885,7 @@
           "country": "IN",
           "subscribers": 4450000,
           "videoCount": 4042,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCkWQ0gDrqOCarmUKmppD7GQ",
@@ -5191,7 +4893,7 @@
           "country": "US",
           "subscribers": 4330000,
           "videoCount": 2727,
-          "market": "IN"
+          "market": "US"
         },
         {
           "id": "UCS261lQDXjMvc8Jck-2CQEg",
@@ -5199,7 +4901,7 @@
           "country": "IN",
           "subscribers": 4190000,
           "videoCount": 1763,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCvpfclapgcuJo0M_x65pfRw",
@@ -5207,7 +4909,7 @@
           "country": "IN",
           "subscribers": 3550000,
           "videoCount": 2111,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCddiUEpeqJcYeBxX1IVBKvQ",
@@ -5215,7 +4917,7 @@
           "country": "US",
           "subscribers": 3520000,
           "videoCount": 6297,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCnPUB-DTfgIO-p-xOPhV9jw",
@@ -5239,7 +4941,7 @@
           "country": "IN",
           "subscribers": 2910000,
           "videoCount": 1113,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCIxLxlan8q9WA7sjuq6LdTQ",
@@ -5247,7 +4949,7 @@
           "country": "GB",
           "subscribers": 2700000,
           "videoCount": 536,
-          "market": "IN"
+          "market": "US"
         },
         {
           "id": "UCdp6GUwjKscp5ST4M4WgIpw",
@@ -5255,7 +4957,7 @@
           "country": "IN",
           "subscribers": 2550000,
           "videoCount": 1918,
-          "market": "IN"
+          "market": "US"
         },
         {
           "id": "UCdBK94H6oZT2Q7l0-b0xmMg",
@@ -5263,7 +4965,7 @@
           "country": "CA",
           "subscribers": 2540000,
           "videoCount": 1314,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCvyZS6W6zMJCZBVzF-Ei6sw",
@@ -5271,7 +4973,7 @@
           "country": "IN",
           "subscribers": 2530000,
           "videoCount": 1524,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCzNu79N8Lq1wUY52MkhWKSA",
@@ -5282,28 +4984,12 @@
           "market": "TR"
         },
         {
-          "id": "UCkSVnUZq3q14lVajaQAlLpA",
-          "title": "Nathan Espinoza",
-          "country": "US",
-          "subscribers": 2130000,
-          "videoCount": 589,
-          "market": "GB"
-        },
-        {
-          "id": "UCBS1NUWY7oC6FFHaXQy4zAA",
-          "title": "Zach's Tech Turf",
-          "country": "US",
-          "subscribers": 1990000,
-          "videoCount": 4210,
-          "market": "GB"
-        },
-        {
           "id": "UC42qyCQM39vQ6bt_6iz-Z8A",
           "title": "TECHOOB",
           "country": "IN",
           "subscribers": 1870000,
           "videoCount": 1889,
-          "market": "IN"
+          "market": "US"
         },
         {
           "id": "UCsmU1_PYLtvSkCysDSnYrDw",
@@ -5351,7 +5037,7 @@
           "country": "IN",
           "subscribers": 406000,
           "videoCount": 3370,
-          "market": "IN"
+          "market": "US"
         },
         {
           "id": "UCHOBvDVA-q1ozIlLBpLgpEQ",
@@ -5359,7 +5045,7 @@
           "country": "MY",
           "subscribers": 367000,
           "videoCount": 1179,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCaP7goqKz7COhIi9Ar4n8kA",
@@ -5368,22 +5054,6 @@
           "subscribers": 365000,
           "videoCount": 863,
           "market": "TR"
-        },
-        {
-          "id": "UCMUnjdq-yLc_LkkPsIMTFug",
-          "title": "더신자 TheSINZA",
-          "country": "KR",
-          "subscribers": 349000,
-          "videoCount": 1592,
-          "market": "GB"
-        },
-        {
-          "id": "UCyw_mtuNzMhpNFBY8huBxIw",
-          "title": "Joe Cirillo",
-          "country": "US",
-          "subscribers": 312000,
-          "videoCount": 332,
-          "market": "GB"
         },
         {
           "id": "UCleIGRDEVSJnaK7wY7dG-MQ",
@@ -5399,7 +5069,7 @@
           "country": null,
           "subscribers": 267000,
           "videoCount": 342,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCPAemCrFbyhxhY1ZmpARGLA",
@@ -5431,7 +5101,7 @@
           "country": null,
           "subscribers": 174000,
           "videoCount": 253,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCYtRgz-5DVc6c_zjYEVSyCQ",
@@ -5455,7 +5125,7 @@
           "country": "IN",
           "subscribers": 134000,
           "videoCount": 428,
-          "market": "IN"
+          "market": "US"
         },
         {
           "id": "UC66qu9PElZvWua68KTqf3EQ",
@@ -5487,7 +5157,7 @@
           "country": null,
           "subscribers": 85400,
           "videoCount": 84,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCtlKpMqKqkAJHzRTyxodbow",
@@ -5528,20 +5198,12 @@
           "subscribers": 35500,
           "videoCount": 363,
           "market": "TR"
-        },
-        {
-          "id": "UCArqb-9alTkEhK5dischsdA",
-          "title": "Ercan Uğurlu",
-          "country": "TR",
-          "subscribers": 11000,
-          "videoCount": 1577,
-          "market": "TR"
         }
       ]
     },
     {
       "niche": "vlog",
-      "count": 60,
+      "count": 52,
       "channels": [
         {
           "id": "UCjvgGbPPn-FgYeguc5nxG4A",
@@ -5549,7 +5211,7 @@
           "country": "IN",
           "subscribers": 41500000,
           "videoCount": 2477,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCFcBAGR0drI3F15EhMFjuTg",
@@ -5568,14 +5230,6 @@
           "market": "TR"
         },
         {
-          "id": "UCUgvCC6iygghq-f2r96P-Jw",
-          "title": "Bindass Kavya",
-          "country": "IN",
-          "subscribers": 15600000,
-          "videoCount": 1390,
-          "market": "IN"
-        },
-        {
           "id": "UCcmQxZBJ2qTXWpOQCAODyNA",
           "title": "Dheeraj ke Vlogs",
           "country": "IN",
@@ -5589,7 +5243,7 @@
           "country": "IN",
           "subscribers": 13800000,
           "videoCount": 543,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCVPP_lAuPWl_tBZ8R7rQPxQ",
@@ -5600,12 +5254,20 @@
           "market": "TR"
         },
         {
+          "id": "UCgAq9LRKx0NUSZ0ZtB3DWIg",
+          "title": "Loveneet Valecha",
+          "country": "IN",
+          "subscribers": 12200000,
+          "videoCount": 185,
+          "market": "TR"
+        },
+        {
           "id": "UCH9aPskONv7sraQfL-UDxNQ",
           "title": "Swara Singh",
           "country": "IN",
           "subscribers": 10800000,
           "videoCount": 991,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCkn7QWNmJftBg-yHla3EJjw",
@@ -5621,7 +5283,7 @@
           "country": "CA",
           "subscribers": 8580000,
           "videoCount": 622,
-          "market": "IN"
+          "market": "US"
         },
         {
           "id": "UCsbFefxpne9aYgoQ7baNnRg",
@@ -5629,7 +5291,7 @@
           "country": "AU",
           "subscribers": 8490000,
           "videoCount": 822,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UC4_7Kh1iqmqwAL9ptljElJg",
@@ -5640,20 +5302,12 @@
           "market": "TR"
         },
         {
-          "id": "UCrcgsh0MlE06GPIhrGDdlAg",
-          "title": "Merossa Novega",
-          "country": "ID",
-          "subscribers": 6190000,
-          "videoCount": 1161,
-          "market": "IN"
-        },
-        {
           "id": "UCcC0Vg-luhmJErWbFmAtudQ",
           "title": "Pooh in Korea",
           "country": null,
           "subscribers": 6110000,
           "videoCount": 359,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCw-beSvrBJVHF4fXC_v6hLQ",
@@ -5661,15 +5315,7 @@
           "country": "IN",
           "subscribers": 5750000,
           "videoCount": 729,
-          "market": "GB"
-        },
-        {
-          "id": "UCkw1tYo7k8t-Y99bOXuZwhg",
-          "title": "KK Create",
-          "country": "IN",
-          "subscribers": 5450000,
-          "videoCount": 935,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCGapJkNOgRQhzWj6wFKd9ew",
@@ -5693,7 +5339,7 @@
           "country": "IN",
           "subscribers": 4000000,
           "videoCount": 2000,
-          "market": "IN"
+          "market": "US"
         },
         {
           "id": "UCMnJuJs9pBAYgY-3NPuWnbA",
@@ -5701,7 +5347,7 @@
           "country": "US",
           "subscribers": 3860000,
           "videoCount": 783,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCfcEuQbMpFCAuDW9yutxmbA",
@@ -5733,7 +5379,7 @@
           "country": "IN",
           "subscribers": 2440000,
           "videoCount": 314,
-          "market": "GB"
+          "market": "TR"
         },
         {
           "id": "UCbZ-t3qPLfKO6xncRqeT-lg",
@@ -5749,7 +5395,7 @@
           "country": "US",
           "subscribers": 2340000,
           "videoCount": 281,
-          "market": "IN"
+          "market": "US"
         },
         {
           "id": "UC8Ch40k7gSxNOCSnU-cmnwg",
@@ -5757,7 +5403,7 @@
           "country": "US",
           "subscribers": 2330000,
           "videoCount": 285,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCCnMZHIlExevrmTOm0CqOSw",
@@ -5773,15 +5419,7 @@
           "country": "NL",
           "subscribers": 2180000,
           "videoCount": 1079,
-          "market": "GB"
-        },
-        {
-          "id": "UCz4yHVUr-h86dhA5nfq4HiQ",
-          "title": "emma & georgia ",
-          "country": null,
-          "subscribers": 1920000,
-          "videoCount": 1283,
-          "market": "IN"
+          "market": "US"
         },
         {
           "id": "UCdvLFRoQD_Q-lCnw_IKFG0Q",
@@ -5792,20 +5430,12 @@
           "market": "TR"
         },
         {
-          "id": "UCAKAf5d5-O5t58gEjXhF3mg",
-          "title": "Creative Chaos",
-          "country": "RS",
-          "subscribers": 1780000,
-          "videoCount": 1928,
-          "market": "IN"
-        },
-        {
           "id": "UC9Awl_4qjLO8-SqJ2VkpMZg",
           "title": "Get Fit with SiGo",
           "country": "IN",
           "subscribers": 1760000,
           "videoCount": 967,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCwJMTdIyETmXGHTmDQSp1cA",
@@ -5813,7 +5443,7 @@
           "country": "US",
           "subscribers": 1690000,
           "videoCount": 1678,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCY3nSxSRpnpsjZ4p15iZxow",
@@ -5837,7 +5467,7 @@
           "country": "IN",
           "subscribers": 1480000,
           "videoCount": 1249,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UC4ZVkG3RQPzvZk7alIVjcCg",
@@ -5845,7 +5475,7 @@
           "country": null,
           "subscribers": 1370000,
           "videoCount": 426,
-          "market": "IN"
+          "market": "US"
         },
         {
           "id": "UCKCCvAFM4aDNVZAxF1xz4LQ",
@@ -5853,15 +5483,7 @@
           "country": null,
           "subscribers": 1360000,
           "videoCount": 818,
-          "market": "GB"
-        },
-        {
-          "id": "UChL_g9wFFy0SbHqxSW-rzuA",
-          "title": "Tejasvi Rajput",
-          "country": null,
-          "subscribers": 1300000,
-          "videoCount": 354,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCg-dUfq-_soMT53AOIP1QwA",
@@ -5872,20 +5494,12 @@
           "market": "TR"
         },
         {
-          "id": "UCGsOKlYVJbpt3BLsPdw7R_g",
-          "title": "Ally Purugganan",
-          "country": null,
-          "subscribers": 1100000,
-          "videoCount": 289,
-          "market": "GB"
-        },
-        {
           "id": "UC_Yr8fWTjAHd2qnamChfujA",
           "title": "brikiya shines",
           "country": null,
           "subscribers": 1070000,
           "videoCount": 366,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UC1EgiFrHCSCPT2-zHvRvF2A",
@@ -5893,7 +5507,7 @@
           "country": "IN",
           "subscribers": 1050000,
           "videoCount": 627,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCjbJL42rZLvr0TaBM3jKswg",
@@ -5901,23 +5515,7 @@
           "country": null,
           "subscribers": 971000,
           "videoCount": 286,
-          "market": "GB"
-        },
-        {
-          "id": "UCDIuIf4lKDneweAYP1ZhDiQ",
-          "title": "Ishaani Krishna",
-          "country": null,
-          "subscribers": 956000,
-          "videoCount": 299,
-          "market": "GB"
-        },
-        {
-          "id": "UCB0mJ4uPQzKbnHC2FSoq3DA",
-          "title": "SeeOk",
-          "country": "TR",
-          "subscribers": 935000,
-          "videoCount": 2002,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCnrrbLMsE2OohMQLsA78UpQ",
@@ -5933,15 +5531,7 @@
           "country": null,
           "subscribers": 708000,
           "videoCount": 318,
-          "market": "GB"
-        },
-        {
-          "id": "UCvoaNSUpcMXVrU1HTDa-SJg",
-          "title": "Akanksha Choudhary",
-          "country": null,
-          "subscribers": 663000,
-          "videoCount": 44,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCwvHLdNXSLU-ZE8jzRKBrKw",
@@ -5957,7 +5547,7 @@
           "country": "IN",
           "subscribers": 632000,
           "videoCount": 3455,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCfQrY2hBkTZd6sSYrlg83UA",
@@ -5965,15 +5555,7 @@
           "country": "IN",
           "subscribers": 591000,
           "videoCount": 309,
-          "market": "GB"
-        },
-        {
-          "id": "UCoFp-R3lrIvS7RUnK-RgLEg",
-          "title": "creative devu malayalam",
-          "country": "IN",
-          "subscribers": 568000,
-          "videoCount": 749,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCEWMpIp0hnOfacghl3Jxdqw",
@@ -5981,7 +5563,7 @@
           "country": null,
           "subscribers": 516000,
           "videoCount": 697,
-          "market": "IN"
+          "market": "US"
         },
         {
           "id": "UCX4xmjT0CJr8ISdxudQNcCQ",
@@ -5989,7 +5571,7 @@
           "country": "US",
           "subscribers": 465000,
           "videoCount": 373,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCEkqYwjvMu4bnPstvEZue0Q",
@@ -5997,37 +5579,53 @@
           "country": "US",
           "subscribers": 380000,
           "videoCount": 307,
-          "market": "GB"
+          "market": "US"
         },
         {
-          "id": "UCOxHRD8-XUUSmcGA9aDTcNA",
-          "title": "Abhignareddy Lakkireddy",
-          "country": "IN",
-          "subscribers": 379000,
-          "videoCount": 599,
-          "market": "GB"
-        },
-        {
-          "id": "UCu-30ULPizpyPPjJ1fDMOjg",
-          "title": "AshtuMee",
-          "country": "IN",
-          "subscribers": 315000,
-          "videoCount": 389,
-          "market": "GB"
-        },
-        {
-          "id": "UCwybFjsLN8poQ16tp7X7riA",
-          "title": "Natalya_Erbol",
+          "id": "UCOLBhVvL5dcJLMZeQBUu1Vw",
+          "title": "Ting-Daily life  in China",
           "country": "US",
-          "subscribers": 248000,
-          "videoCount": 460,
-          "market": "IN"
+          "subscribers": 150000,
+          "videoCount": 51,
+          "market": "US"
+        },
+        {
+          "id": "UC4tCAUHjsf_-5pEfTRp5CsQ",
+          "title": "Turtle Aviation",
+          "country": "US",
+          "subscribers": 104000,
+          "videoCount": 356,
+          "market": "US"
+        },
+        {
+          "id": "UCkuN-gJkFvP9uGGb-ed5m_A",
+          "title": "Alaa_Aarna tho😘",
+          "country": null,
+          "subscribers": 91600,
+          "videoCount": 444,
+          "market": "US"
+        },
+        {
+          "id": "UCPE5ZAGejViP1j3yV233CCQ",
+          "title": "查理的理性思维",
+          "country": "US",
+          "subscribers": 54600,
+          "videoCount": 40,
+          "market": "US"
+        },
+        {
+          "id": "UC5qvRodOBZrCBgypKgcsO4A",
+          "title": "Sula",
+          "country": "US",
+          "subscribers": 32600,
+          "videoCount": 84,
+          "market": "TR"
         }
       ]
     },
     {
       "niche": "yemek",
-      "count": 60,
+      "count": 55,
       "channels": [
         {
           "id": "UCk3JZr7eS3pg5AGEvBdEvFg",
@@ -6035,15 +5633,7 @@
           "country": "IN",
           "subscribers": 30800000,
           "videoCount": 279,
-          "market": "GB"
-        },
-        {
-          "id": "UCgAq9LRKx0NUSZ0ZtB3DWIg",
-          "title": "Loveneet Valecha",
-          "country": "IN",
-          "subscribers": 12200000,
-          "videoCount": 185,
-          "market": "TR"
+          "market": "US"
         },
         {
           "id": "UClWGlyUXBAS9QhaHmoZjEUA",
@@ -6051,7 +5641,7 @@
           "country": "IN",
           "subscribers": 12200000,
           "videoCount": 1556,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCeh3XQszWO6lLdKz_SZmm1Q",
@@ -6067,7 +5657,7 @@
           "country": "IN",
           "subscribers": 5980000,
           "videoCount": 260,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCF3jMqkgvFRb6KBbSfsFFtQ",
@@ -6075,7 +5665,7 @@
           "country": "US",
           "subscribers": 4840000,
           "videoCount": 405,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCnCmad9uJptG_OsmFlcJ6sg",
@@ -6083,7 +5673,7 @@
           "country": "IN",
           "subscribers": 4380000,
           "videoCount": 215,
-          "market": "GB"
+          "market": "TR"
         },
         {
           "id": "UCt0Ixx31xpbcDeX-UnK-Fyw",
@@ -6099,7 +5689,7 @@
           "country": "US",
           "subscribers": 3440000,
           "videoCount": 4880,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UC_fxGqhyryFnX3SwpbhHXiQ",
@@ -6107,7 +5697,7 @@
           "country": "IN",
           "subscribers": 3150000,
           "videoCount": 596,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCMpVQVKYRb_xXnevxQjYepQ",
@@ -6115,7 +5705,7 @@
           "country": null,
           "subscribers": 2520000,
           "videoCount": 589,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCve6vdn4A-FgiXpCrL69y-g",
@@ -6123,7 +5713,7 @@
           "country": "IN",
           "subscribers": 2430000,
           "videoCount": 136,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCM4JYhQH_87CEiVOKFKAeog",
@@ -6163,7 +5753,7 @@
           "country": "IN",
           "subscribers": 1300000,
           "videoCount": 373,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCOhdlL2Ho1uDQbeqHKcPT3A",
@@ -6179,23 +5769,7 @@
           "country": null,
           "subscribers": 740000,
           "videoCount": 252,
-          "market": "GB"
-        },
-        {
-          "id": "UCE81YzUkrvSDLgvDCnZFF1Q",
-          "title": "Virtual Banjara®",
-          "country": "IN",
-          "subscribers": 714000,
-          "videoCount": 796,
-          "market": "IN"
-        },
-        {
-          "id": "UCQObbMyA4UbSt2bQLFzsKmg",
-          "title": "Harsh Katkade Fitness",
-          "country": null,
-          "subscribers": 641000,
-          "videoCount": 778,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCciPwwq90mDDBokVhHN79-Q",
@@ -6206,20 +5780,12 @@
           "market": "TR"
         },
         {
-          "id": "UCU1kXy-Z2cOGrHBZoOpaZ2Q",
-          "title": "The Foodie Quila",
-          "country": "IN",
-          "subscribers": 552000,
-          "videoCount": 736,
-          "market": "GB"
-        },
-        {
           "id": "UCOV6YnQRY6_CqNITvdBAnXA",
           "title": "The Pahadi Family",
           "country": "IN",
-          "subscribers": 550000,
+          "subscribers": 551000,
           "videoCount": 210,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCbCrt8vmVUJXyGtBdmU8pZQ",
@@ -6227,7 +5793,7 @@
           "country": "IN",
           "subscribers": 513000,
           "videoCount": 175,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UC9DigiUqJmjH3ydSNHa9pBg",
@@ -6235,7 +5801,7 @@
           "country": "IN",
           "subscribers": 481000,
           "videoCount": 354,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UC40lFCI4HcfIehaRv1L847g",
@@ -6251,7 +5817,7 @@
           "country": "IN",
           "subscribers": 444000,
           "videoCount": 129,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCoyW99N1N8D1f_UetSXRQMA",
@@ -6259,15 +5825,7 @@
           "country": "IN",
           "subscribers": 440000,
           "videoCount": 215,
-          "market": "GB"
-        },
-        {
-          "id": "UCLY_Qq-huke_UT6clXPu1gw",
-          "title": "Chef Ashok Cooking And Vlog",
-          "country": "IN",
-          "subscribers": 438000,
-          "videoCount": 208,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCyVD8eRTFaxfHMETVmE0yQg",
@@ -6283,7 +5841,7 @@
           "country": null,
           "subscribers": 381000,
           "videoCount": 43,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCkHKI7ubB7LdKesnGPXAy5g",
@@ -6291,7 +5849,7 @@
           "country": "IN",
           "subscribers": 319000,
           "videoCount": 1381,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCen8JV_KeL01KY0VRNnbw_Q",
@@ -6299,7 +5857,7 @@
           "country": "IN",
           "subscribers": 246000,
           "videoCount": 124,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCluRrdUOXbRY9YDKQ4VsG1w",
@@ -6307,7 +5865,7 @@
           "country": "IN",
           "subscribers": 242000,
           "videoCount": 124,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UC_jC8ISjC1ISI0Or5yRlLPg",
@@ -6318,20 +5876,12 @@
           "market": "TR"
         },
         {
-          "id": "UClJIGJNcEskx6wCQo6ZAWdA",
-          "title": "Nani Eats & Cooks",
-          "country": "IN",
-          "subscribers": 217000,
-          "videoCount": 142,
-          "market": "IN"
-        },
-        {
           "id": "UC34kqoiPXi8XfecHuqTpN1Q",
           "title": "Chatoro ki rasoi ",
           "country": null,
           "subscribers": 203000,
           "videoCount": 45,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCRG-2eE55Y25JzsweRWEVjA",
@@ -6340,14 +5890,6 @@
           "subscribers": 180000,
           "videoCount": 625,
           "market": "TR"
-        },
-        {
-          "id": "UCQKsCznp3iOFMGFrGwN231A",
-          "title": "Yuti Agrawal",
-          "country": null,
-          "subscribers": 172000,
-          "videoCount": 212,
-          "market": "IN"
         },
         {
           "id": "UCyKTOI5oPtls4pkA3pjXS5w",
@@ -6363,7 +5905,7 @@
           "country": "IN",
           "subscribers": 146000,
           "videoCount": 345,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UC1yiU5Jz4xwaK_wgSU9fS6A",
@@ -6379,7 +5921,7 @@
           "country": "IN",
           "subscribers": 118000,
           "videoCount": 110,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCFvvsyuBgm5XdW8iEwMoEaw",
@@ -6387,7 +5929,7 @@
           "country": "IN",
           "subscribers": 114000,
           "videoCount": 27,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCdvFxFltPbgPYkbJ5elNZKg",
@@ -6411,13 +5953,13 @@
           "country": null,
           "subscribers": 111000,
           "videoCount": 37,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCXIt6xMVnc6ZpZoTlLrcYGw",
           "title": "gulun ellerinden",
           "country": null,
-          "subscribers": 98500,
+          "subscribers": 98600,
           "videoCount": 207,
           "market": "TR"
         },
@@ -6435,7 +5977,7 @@
           "country": "IN",
           "subscribers": 79900,
           "videoCount": 222,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UCk_2qCD00WFCojrQmh7fLJg",
@@ -6459,7 +6001,7 @@
           "country": null,
           "subscribers": 54500,
           "videoCount": 1006,
-          "market": "GB"
+          "market": "US"
         },
         {
           "id": "UC0RvnY1f1xnDFE1-Ksn4ZDw",
@@ -6478,19 +6020,11 @@
           "market": "TR"
         },
         {
-          "id": "UCqrRjXy8ORdE_DiC8xSY3Yg",
-          "title": "Fact'Gyan",
-          "country": "IN",
-          "subscribers": 50800,
-          "videoCount": 101,
-          "market": "GB"
-        },
-        {
           "id": "UCrkJIgwNDeA5QzZU0QiYl9A",
           "title": "Ayşe'nin Mutfağı",
           "country": "TR",
           "subscribers": 38700,
-          "videoCount": 762,
+          "videoCount": 763,
           "market": "TR"
         },
         {
@@ -6507,6 +6041,30 @@
           "country": null,
           "subscribers": 20900,
           "videoCount": 271,
+          "market": "TR"
+        },
+        {
+          "id": "UCl0MwlgkAT1ApUHcgujlIXg",
+          "title": "Beyza Zümrüt",
+          "country": "TR",
+          "subscribers": 17200,
+          "videoCount": 97,
+          "market": "TR"
+        },
+        {
+          "id": "UCRUGmd2irScbdrkGDqnIUOA",
+          "title": " Dünyanın Nefis Mutfağı",
+          "country": "TR",
+          "subscribers": 14200,
+          "videoCount": 643,
+          "market": "TR"
+        },
+        {
+          "id": "UCkTT482ZC17sVPNrArGb3VA",
+          "title": " lezzetli nefis tarifler mutfağı",
+          "country": null,
+          "subscribers": 11400,
+          "videoCount": 1281,
           "market": "TR"
         }
       ]

@@ -32,9 +32,14 @@ const MARKETS: Market[] = [
   // TR eşiği kasten düşük: küçük ama gerçek kanallar evrende kalsın
   // (küçük kanal outlier'ı ürünün ayırt edici özelliği).
   { code: "TR", lang: "tr", minSubs: 10_000 },
+  // İngilizce = global dil erişimi. regionCode sonuçları o ülkenin kanallarıyla
+  // SINIRLAMAZ, sadece orada öne çıkanları getirir — Koreli, Vietnamlı kanallar
+  // da bu pazardan geliyor.
+  //
+  // IN ve GB kasten yok: IN pazarı evrenin %31'ini Hintçe shorts kanallarıyla
+  // dolduruyordu (TR %20'de kalıyordu). İstenen belirli bir ülke ağırlığı değil,
+  // global dil erişimi. GB ise %2 getirip planı çeyrek oranında pahalılaştırıyordu.
   { code: "US", lang: "en", minSubs: 50_000 },
-  { code: "GB", lang: "en", minSubs: 50_000 },
-  { code: "IN", lang: "en", minSubs: 50_000 },
 ];
 
 /**
@@ -410,11 +415,40 @@ for (const id of candidateIds) {
 
 // ───────────────────────── çıktı ─────────────────────────
 
+/**
+ * Ülke kotası: tek bir ülke bir nişin slotlarının MAX_COUNTRY_SHARE'inden
+ * fazlasını alamaz.
+ *
+ * Neden gerekli: IN pazarını plandan çıkarmak yetmedi (%31 → %29). İngilizce
+ * arama sonuçlarında Hint kanalları organik olarak baskın — regionCode'la
+ * ilgisi yok. İstenen global çeşitlilikse, kotayı açıkça koymak gerekiyor.
+ *
+ * Ülkesi bilinmeyen kanallar (evrenin ~%18'i) kotaya tabi değil; YouTube
+ * o alanı çoğu kanal için döndürmüyor, tek kovaya doldurmak çeşitliliği
+ * yanlış yerden kısardı.
+ *
+ * Deterministik: liste zaten (abone azalan, id alfabetik) sıralı; kota
+ * bu sırada ilk gelenlere veriliyor.
+ */
+const MAX_COUNTRY_SHARE = Number(process.env.MAX_COUNTRY_SHARE ?? 0.35);
+const COUNTRY_CAP = Math.max(1, Math.ceil(MAX_PER_NICHE * MAX_COUNTRY_SHARE));
+
 const niches = [...buckets.keys()].sort().map((niche) => {
-  const rows = buckets
+  const sorted = buckets
     .get(niche)!
-    .sort((a, b) => (b.subscribers - a.subscribers) || a.id.localeCompare(b.id))
-    .slice(0, MAX_PER_NICHE);
+    .sort((a, b) => (b.subscribers - a.subscribers) || a.id.localeCompare(b.id));
+
+  const perCountry = new Map<string, number>();
+  const rows: Row[] = [];
+  for (const row of sorted) {
+    if (rows.length >= MAX_PER_NICHE) break;
+    if (row.country) {
+      const used = perCountry.get(row.country) ?? 0;
+      if (used >= COUNTRY_CAP) continue;
+      perCountry.set(row.country, used + 1);
+    }
+    rows.push(row);
+  }
   return { niche, count: rows.length, channels: rows };
 });
 
