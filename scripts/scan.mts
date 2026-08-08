@@ -320,22 +320,34 @@ async function phaseDeep() {
   const pages = Math.max(1, Math.ceil(DEEP_VIDEOS / 50));
   const perChannel = 1 + pages * 2; // ~1 playlistItems sayfası + videos partisi başına 1
 
-  const { data: todo } = await db
-    .from("channels")
-    .select("id, title, subscribers, uploads_playlist")
-    .not("uploads_playlist", "is", null)
-    .order("last_deep_at", { ascending: true, nullsFirst: true })
-    .order("subscribers", { ascending: false })
-    .limit(Math.ceil(BUDGET / perChannel) + 20);
+  // PostgREST tek sorguda en fazla 1000 satır döndürür (ucuz fazdaki aynı
+  // tuzak). Bütçe 1000 kanaldan fazlasına yetiyorsa kuyruk sayfa sayfa
+  // çekilmeli — yoksa tarama sessizce 1000'de durur ve kota boşta kalır.
+  const hedef = Math.ceil(BUDGET / perChannel) + 20;
+  const queue: { id: string; subscribers: number; uploads_playlist: string }[] = [];
+  for (let from = 0; from < hedef; from += 1000) {
+    const { data, error } = await db
+      .from("channels")
+      .select("id, subscribers, uploads_playlist")
+      .not("uploads_playlist", "is", null)
+      .order("last_deep_at", { ascending: true, nullsFirst: true })
+      .order("subscribers", { ascending: false })
+      .range(from, Math.min(from + 999, hedef - 1));
+    if (error) throw new Error(`deep kuyruk: ${error.message}`);
+    if (!data?.length) break;
+    queue.push(...(data as typeof queue));
+    if (data.length < 1000) break;
+  }
 
-  const queue = todo ?? [];
   if (!queue.length) {
     console.log("DEEP  → kuyruk boş (önce --cheap çalıştır, uploads_playlist gerekiyor).");
     return;
   }
+  console.log(`DEEP  → kuyrukta ${queue.length} kanal`);
 
   let done = 0;
   let totalVideos = 0;
+  let failed = 0;
   const now = Date.now();
   const DAY = 86_400_000;
 
@@ -346,6 +358,32 @@ async function phaseDeep() {
       break;
     }
 
+    // Tek kanalın hatası tüm çalıştırmayı öldürmemeli. En sık sebep: kanal
+    // ucuz taramayla derin tarama arasında silinmiş/gizlenmiş → uploads
+    // listesi 404. Kanal işaretlenip geçiliyor, kuyruk devam ediyor.
+    try {
+      await scanChannel(ch);
+      done++;
+    } catch (e) {
+      failed++;
+      const msg = e instanceof Error ? e.message.slice(0, 80) : String(e);
+      console.log(`\n  ⨯ ${ch.id}: ${msg}`);
+      await db
+        .from("channels")
+        .update({ last_deep_at: new Date().toISOString(), priority: -1 })
+        .eq("id", ch.id);
+    }
+    process.stdout.write(
+      `\rDEEP  → ${done} kanal · ${totalVideos} video · kota ${spent}/${BUDGET}   `,
+    );
+  }
+  console.log(
+    `\nDEEP  → ${done} kanal, ${totalVideos} video işlendi` +
+      (failed ? ` · ${failed} kanal hata verdi (priority=-1)` : "") +
+      ` · kota ${spent}`,
+  );
+
+  async function scanChannel(ch: { id: string; subscribers: number; uploads_playlist: string }) {
     const videoIds: string[] = [];
     let pageToken: string | undefined;
     for (let p = 0; p < pages; p++) {
@@ -427,17 +465,13 @@ async function phaseDeep() {
       totalVideos += rows.length;
     }
 
+    // median_views burada geçici: nihai medyan ve çarpanlar scripts/score.mts
+    // ile format bazında yeniden hesaplanıyor (docs/sistem.md §6).
     await db
       .from("channels")
       .update({ median_views: med, last_deep_at: new Date().toISOString() })
       .eq("id", ch.id);
-
-    done++;
-    process.stdout.write(
-      `\rDEEP  → ${done} kanal · ${totalVideos} video · kota ${spent}/${BUDGET}   `,
-    );
   }
-  console.log(`\nDEEP  → ${done} kanal, ${totalVideos} video işlendi · kota ${spent}`);
 }
 
 // ───────────────────────── çalıştır ─────────────────────────
