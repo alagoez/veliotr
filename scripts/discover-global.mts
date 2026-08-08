@@ -12,7 +12,7 @@
  * Çalıştırma:
  *   npx tsx --env-file=.env.local scripts/discover-global.mts
  *   npx tsx ... scripts/discover-global.mts --plan          (sadece maliyet raporu, çağrı yok)
- *   npx tsx ... scripts/discover-global.mts --offset=25     (plandaki 25. adımdan devam)
+ *   npx tsx ... scripts/discover-global.mts --budget=5000   (bu çalıştırmanın kota tavanı)
  *   npx tsx ... scripts/discover-global.mts --budget=5000   (bu çalıştırmanın kota tavanı)
  *   npx tsx ... scripts/discover-global.mts --since=2026-07-09
  *
@@ -108,7 +108,7 @@ const NICHE_QUERIES: Record<string, Record<string, string[]>> = {
 
 /** Her pazarda elenen: marka / kurum / plak şirketi / TV — creator değiller. */
 const BLOCK_GLOBAL =
-  /vevo|records|record label|official artist|topic$|\bnetwork\b|news\b|\btv\b|television|broadcasting|entertainment inc|studios?$|\bfc\b|official channel|\bltd\b|\binc\.?$|\bgmbh\b|corporation/i;
+  /vevo|records|record label|\blabels?\b|music group|sony music|universal music|warner music|\bhybe\b|official artist|topic$|\bnetwork\b|news\b|\btv\b|television|broadcasting|entertainment inc|studios?$|\bfc\b|official channel|\bltd\b|\binc\.?$|\bgmbh\b|corporation/i;
 
 /** Yalnızca TR pazarında ek eleme. */
 const BLOCK_TR =
@@ -129,7 +129,6 @@ function arg(name: string): string | undefined {
   return hit?.slice(name.length + 3);
 }
 const PLAN_ONLY = process.argv.includes("--plan");
-const OFFSET = Number(arg("offset") ?? process.env.PLAN_OFFSET ?? 0);
 const BUDGET = Number(arg("budget") ?? process.env.QUOTA_BUDGET ?? 2500);
 
 /**
@@ -230,8 +229,8 @@ type Step = { niche: string; market: Market; query: string };
 
 /**
  * Determinizm 3/4 — sabit plan sırası.
- * (niş, pazar, sorgu) üçlüleri her zaman aynı sırada. Böylece --offset ile
- * güne yayılan çalıştırmalar birbirini tekrar etmez ve atlamaz.
+ * (niş, pazar, sorgu) üçlüleri her zaman aynı sırada. Plan baştan gezilir;
+ * önbellek sayesinde güne yayılan çalıştırmalar birbirini tekrar etmez.
  *
  * Sıra ENİNE: önce her nişin 1. sorgusu, sonra her nişin 2. sorgusu...
  * Niş-önce sıralasaydık, yarım kalan bir çalıştırma tek nişi doldurup
@@ -261,7 +260,7 @@ const fullCost = plan.length * COST.search;
 
 console.log(`Plan: ${plan.length} arama · tam tarama ${fullCost.toLocaleString("tr-TR")} birim`);
 console.log(`      günlük 10.000 birimle ~${Math.ceil(fullCost / 10_000)} gün`);
-console.log(`Bütçe: ${BUDGET} birim · başlangıç adımı: ${OFFSET}`);
+console.log(`Bütçe: ${BUDGET} birim (detay payı ${DETAIL_RESERVE})`);
 console.log(`Pencere: ${SINCE_DATE} sonrası · pazarlar: ${MARKETS.map((m) => m.code).join(", ")}\n`);
 
 if (PLAN_ONLY) {
@@ -284,9 +283,16 @@ const hits = new Map<string, Map<string, number>>();
 const seenIn = new Map<string, string>();
 
 let executed = 0;
-let stoppedAt = OFFSET;
+let skipped = 0;
 
-for (let i = OFFSET; i < plan.length; i++) {
+/**
+ * Plan HER ZAMAN baştan gezilir — atlanarak değil.
+ * Önbellekteki adımlar bedava okunur, yalnızca yeni adımlar kotadan harcar.
+ * Böylece çıktı her çalıştırmada BİRİKİMLİ ve eksiksiz olur. (Adım atlayarak
+ * çalıştırdığımızda çıktı dosyası önceki turun nişlerini kaybetti.)
+ * Bütçe bittiğinde durulmaz; kalan adımlar önbellekte varsa yine de okunur.
+ */
+for (let i = 0; i < plan.length; i++) {
   const step = plan[i];
   const res = await yt<{ items: SearchItem[] }>(
     "search",
@@ -304,13 +310,10 @@ for (let i = OFFSET; i < plan.length; i++) {
     "search",
   );
   if (res === null) {
-    stoppedAt = i;
-    console.log(`\n⏸  Bütçe doldu — plan adımı ${i}'de durdu.`);
-    console.log(`   Devam: --offset=${i}`);
-    break;
+    skipped++;
+    continue; // bütçe yok + önbellekte yok → bu adım bir sonraki çalıştırmaya kalsın
   }
   executed++;
-  stoppedAt = i + 1;
 
   for (const it of res.items ?? []) {
     const id = it.snippet.channelId;
@@ -421,8 +424,8 @@ const out = {
   since: SINCE_DATE,
   markets: MARKETS.map((m) => ({ code: m.code, lang: m.lang, minSubs: m.minSubs })),
   planSteps: plan.length,
-  planOffset: OFFSET,
-  planNext: stoppedAt,
+  planFetched: executed,
+  planSkipped: skipped,
   quotaSpent: ledger.spent,
   cacheHits: ledger.cached,
   totalChannels: niches.reduce((a, n) => a + n.count, 0),
@@ -441,4 +444,4 @@ console.log(`Elenen             : ${rejected}  (abone ${rejectReasons.subs} · v
 console.log(`Kabul edilen       : ${out.totalChannels}`);
 for (const n of niches) console.log(`  ${n.niche.padEnd(12)} ${n.count}`);
 console.log(`\nYazıldı: seeds/discovered.json`);
-if (stoppedAt < plan.length) console.log(`Devam için: --offset=${stoppedAt}`);
+if (skipped) console.log(`Bütçesi yetmeyen adım: ${skipped} — yarın tekrar çalıştır, önbellektekiler bedava.`);
