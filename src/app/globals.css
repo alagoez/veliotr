@@ -459,28 +459,37 @@ input[type="range"]::-moz-range-thumb { pointer-events: auto; width: 12px; heigh
    bloğu + ödül şeridi + destek ızgarası taşıyordu ve görsellerin hepsi 404
    dönüyordu (public/velio-assets/ gitignore'da). Mesaj kalabalıkta kayboluyordu. */
 
-.lp-hero { max-width: 780px; margin: 0 auto; padding: 108px 24px 88px; text-align: center; }
+/* Tipografi ölçeği ve boşluk ritmi viewstats.com/info'dan ölçüldü: başlık
+   geniş ve iri, alt metin dar ve orta boy, aralar cömert. Huni şekli kasten —
+   göz yukarıdan aşağı daralarak butona iniyor. */
+.lp-hero { max-width: 980px; margin: 0 auto; padding: 148px 24px 116px; text-align: center; }
 .lp-hero h1 {
-  margin-top: 22px;
+  margin: 24px auto 0;
+  max-width: 900px;
   font-family: var(--font-display);
-  font-size: clamp(2.6rem, 6vw, 4.4rem);
+  font-size: clamp(2.9rem, 6.6vw, 4.9rem);
   font-weight: 800;
-  line-height: 1.04;
-  letter-spacing: -0.045em;
+  line-height: 1.06;
+  letter-spacing: -0.042em;
   text-wrap: balance;
 }
-.lp-lede { margin: 26px auto 0; max-width: 620px; color: var(--color-muted); font-size: 17px; line-height: 1.68; }
-.lp-cta { margin-top: 38px; display: flex; align-items: center; justify-content: center; gap: 22px; flex-wrap: wrap; }
-.lp-secondary { color: var(--color-muted); font-size: 14px; text-decoration: underline; text-underline-offset: 5px; transition: color .2s; }
+/* Alt metin başlıktan DAR: huninin ikinci kademesi. */
+.lp-lede { margin: 38px auto 0; max-width: 660px; color: var(--color-muted); font-size: 19.5px; line-height: 1.6; text-wrap: pretty; }
+/* İkincil bağlantı butonun ALTINDA, yanında değil — yan yana olunca ikisi
+   eşit ağırlıkta görünüyor ve birincil eylem gücünü kaybediyor. */
+.lp-cta { margin-top: 60px; display: flex; flex-direction: column; align-items: center; gap: 22px; }
+.lp-hero .orange-button { border-radius: 12px; padding: 17px 30px; font-size: 15px; letter-spacing: 0; }
+.lp-secondary { color: var(--color-muted); font-size: 15px; transition: color .2s; }
 .lp-secondary:hover { color: var(--color-ink); }
 
-.lp-proof, .lp-steps, .lp-price { max-width: 1080px; margin: 0 auto; padding: 0 24px 104px; }
+.lp-proof, .lp-steps, .lp-price { max-width: 1080px; margin: 0 auto; padding: 0 24px 124px; }
 .lp-proof h2, .lp-steps h2, .lp-price h2 {
-  margin-top: 14px;
+  margin-top: 16px;
   font-family: var(--font-display);
-  font-size: clamp(1.75rem, 3.4vw, 2.6rem);
+  font-size: clamp(2rem, 4vw, 3.1rem);
   font-weight: 800;
-  letter-spacing: -0.035em;
+  line-height: 1.1;
+  letter-spacing: -0.038em;
   text-align: center;
 }
 .lp-price h2, .lp-price .section-kicker { text-align: center; }
@@ -525,6 +534,8 @@ input[type="range"]::-moz-range-thumb { pointer-events: auto; width: 12px; heigh
 .lp-price-fine { margin-top: 14px; font-size: 12px; color: var(--color-faint); }
 
 @media (max-width: 640px) {
-  .lp-hero { padding: 64px 20px 56px; }
-  .lp-proof, .lp-steps, .lp-price { padding-bottom: 68px; }
+  .lp-hero { padding: 76px 20px 60px; }
+  .lp-lede { margin-top: 26px; font-size: 17px; }
+  .lp-cta { margin-top: 40px; }
+  .lp-proof, .lp-steps, .lp-price { padding-bottom: 72px; }
 }
