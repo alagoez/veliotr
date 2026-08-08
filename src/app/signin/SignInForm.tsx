@@ -30,7 +30,16 @@ export function SignInForm() {
       : await supabase.auth.signUp({ email, password, options: { data: { display_name: name } } });
     if (result.error) setMessage(result.error.message);
     else if (mode === "signup") setMessage("Kayıt başarılı. E-posta doğrulamasını kontrol edin.");
-    else router.push("/getting-started");
+    else {
+      // `next`'i onurlandır: /home'dan yönlendirilen kullanıcı giriş sonrası
+      // /home'a dönmeli. Aksi halde onboarding'e düşüp istediği yere hiç
+      // ulaşamıyordu. Yalnızca uygulama içi yollar kabul ediliyor — açık
+      // yönlendirme (open redirect) açığı doğmasın.
+      const next = new URLSearchParams(window.location.search).get("next");
+      const safe = next && next.startsWith("/") && !next.startsWith("//") ? next : null;
+      router.push(safe ?? "/getting-started");
+      router.refresh();
+    }
     setBusy(false);
   }
 
