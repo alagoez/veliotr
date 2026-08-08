@@ -703,3 +703,72 @@ body:has(.lp-light) { background: var(--lp-bg); }
   .lp-window-grid { grid-template-columns: repeat(2, 1fr); }
   .lp-window-grid > :nth-child(3) { display: none; }
 }
+
+/* ═══════════════════════════════════════════════════════════════════════
+   PAZARLAMA TASARIM SİSTEMİ
+   ═══════════════════════════════════════════════════════════════════════
+   Kök sorun buydu: 102 ayrı .lp-* sınıfı vardı ve her birinin ölçüsü elle
+   yazılmıştı (12px, 15px, 8px 13px, 9px 4px, 16px 20px...). Ölçek yoktu,
+   her bileşen kendi sayısını uyduruyordu.
+
+   Premium his tutarlılıktan gelir. Tutarlı olunacak bir sistem yoksa her
+   bölümü tek tek güzelleştirsen bile sayfa dağınık durur.
+
+   Buradan sonra hiçbir pazarlama sınıfı çıplak px yazmaz; hepsi bu
+   değişkenleri kullanır. */
+
+.lp-light {
+  /* ── Boşluk ölçeği (4px tabanlı, 1.5x'e yakın adımlar) ── */
+  --s-1: 4px;
+  --s-2: 8px;
+  --s-3: 12px;
+  --s-4: 16px;
+  --s-5: 24px;
+  --s-6: 32px;
+  --s-7: 48px;
+  --s-8: 64px;
+  --s-9: 96px;
+  --s-10: 128px;
+
+  /* ── Bölüm aralığı: tek bir kural, her bölüm aynı ritmi kullanır ── */
+  --section-y: clamp(72px, 8vw, 136px);
+  --section-gap: clamp(40px, 4.5vw, 72px);   /* başlık bloğu → içerik */
+
+  /* ── Kapsayıcı ölçeği: üç ayrı sistem yerine üç ADLI genişlik ── */
+  --w-page: 1200px;    /* bölüm kapsayıcısı */
+  --w-wide: 1080px;    /* geniş içerik (ızgaralar, görseller) */
+  --w-text: 720px;     /* okunabilir metin satırı */
+  --w-title: 1040px;   /* büyük başlık — metinden geniş, sayfadan dar */
+  --gutter: clamp(20px, 3.4vw, 40px);
+
+  /* ── Tipografi ölçeği (1.28 oran, akışkan) ── */
+  --t-display: clamp(2.6rem, 5.2vw, 4.75rem);  /* hero başlık */
+  --t-h2: clamp(1.9rem, 3.4vw, 2.9rem);        /* bölüm başlığı */
+  --t-h3: clamp(1.15rem, 1.5vw, 1.4rem);       /* özellik başlığı */
+  --t-lede: clamp(16.5px, 1.25vw, 20px);       /* açıklama */
+  --t-body: 15.5px;
+  --t-small: 13.5px;
+  --t-micro: 11.5px;
+
+  --lh-display: 1.02;
+  --lh-tight: 1.12;
+  --lh-body: 1.65;
+
+  /* ── Kenar yumuşaklığı: "çok hafif" — üç değer yeter ── */
+  --r-sm: 8px;
+  --r-md: 12px;
+  --r-lg: 18px;
+
+  /* ── Gölge: ince, tek katman. Ağır gölge ucuz gösterir. ── */
+  --sh-card: 0 1px 2px rgba(16, 16, 20, .04);
+  --sh-lift: 0 18px 44px rgba(16, 16, 20, .10);
+}
+
+/* Bölüm iskeleti — her bölüm bunu kullanır, kendi ölçüsünü uydurmaz. */
+.lp-section { padding-block: var(--section-y); }
+.lp-container { max-width: var(--w-page); margin-inline: auto; padding-inline: var(--gutter); }
+.lp-measure { max-width: var(--w-text); }
+
+/* Başlık bloğu: bölüm başlığı + açıklama. Tek yerde tanımlı. */
+.lp-head h2 { font-size: var(--t-h2); font-weight: 800; line-height: var(--lh-tight); letter-spacing: -0.035em; }
+.lp-head p { margin-top: var(--s-4); max-width: var(--w-text); font-size: var(--t-lede); line-height: var(--lh-body); color: var(--lp-muted); }
