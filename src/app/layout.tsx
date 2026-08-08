@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import {
+  Plus_Jakarta_Sans,
   Bricolage_Grotesque,
   Geist_Mono,
   Instrument_Sans,
@@ -8,6 +9,14 @@ import {
 import "./globals.css";
 import { brand } from "@/config/brand";
 import { PwaRegister } from "@/components/PwaRegister";
+
+// Pazarlama başlıkları: geniş, yuvarlak, sakin geometrik sans. Bricolage
+// karakterli ama sıkışık ve tuhaf harf açıklıkları var — 78px başlıkta o
+// tuhaflıklar büyüyor. Uygulama içinde Bricolage kalıyor.
+const jakarta = Plus_Jakarta_Sans({
+  variable: "--font-jakarta",
+  subsets: ["latin", "latin-ext"],
+});
 
 const bricolage = Bricolage_Grotesque({
   variable: "--font-bricolage",
@@ -51,7 +60,7 @@ export default function RootLayout({
   return (
     <html
       lang="tr"
-      className={`${bricolage.variable} ${instrumentSans.variable} ${geistMono.variable} ${instrumentSerif.variable} h-full antialiased`}
+      className={`${bricolage.variable} ${jakarta.variable} ${instrumentSans.variable} ${geistMono.variable} ${instrumentSerif.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
         <PwaRegister />

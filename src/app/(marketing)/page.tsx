@@ -85,13 +85,12 @@ export default async function LandingPage() {
 
   return (
     <main>
+      {/* Başlığın üstünde etiket YOK: referansta da yok. Etiket dikkati
+          bölüyor ve başlığı aşağı itiyor — sayfayı açan ilk gördüğü şey
+          mesajın kendisi olmalı. Gradyan da kaldırıldı; düz siyah metin
+          büyük puntoda daha keskin ve daha güvenli duruyor. */}
       <section className="lp-hero">
-        <p className="section-kicker">{brand.name.toUpperCase()}</p>
-        <h1>
-          Hangi videonun patladığını gör.
-          <br />
-          <span className="gradient-text">Aynısını sen çek.</span>
-        </h1>
+        <h1>Hangi videonun patladığını gör. Aynısını sen çek.</h1>
         <p className="lp-lede">
           Viralab her videoyu kendi kanalının normaliyle kıyaslar. 16 bin aboneli bir kanalın
           9 milyon izlenen videosunu bulur — ve senin nişinde işe yaramış fikirleri önüne koyar.

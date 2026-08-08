@@ -539,3 +539,70 @@ input[type="range"]::-moz-range-thumb { pointer-events: auto; width: 12px; heigh
   .lp-cta { margin-top: 40px; }
   .lp-proof, .lp-steps, .lp-price { padding-bottom: 72px; }
 }
+
+/* ── Pazarlama sayfaları: AÇIK tema ───────────────────────────────────────
+   Uygulama koyu kalıyor (saatlerce veri inceleniyor, göz yorulmasın).
+   Pazarlama sayfası farklı bir iş yapıyor: 5 saniyede ikna etmek. Beyaz
+   zemin + siyah yazı elde edilebilecek en yüksek kontrast; aynı puntoda
+   yazı daha iri ve keskin hissettiriyor. */
+
+.lp-light {
+  --lp-bg: #ffffff;
+  --lp-bg-soft: #f7f7f5;
+  --lp-ink: #0d0d0e;
+  --lp-muted: #55585c;
+  --lp-faint: #86898e;
+  --lp-line: #e6e6e3;
+  --lp-accent: #ff5c00;
+  background: var(--lp-bg);
+  color: var(--lp-ink);
+}
+
+/* Gren dokusu kalktı: body::before tüm sayfaya sabit bir SVG noise seriyordu
+   (mix-blend-mode: screen). Beyaz zeminde kirli görünüyor ve harflerin
+   kenarlarını yumuşatıp yazıyı küçük gösteriyordu. */
+body:has(.lp-light)::before { display: none; }
+body:has(.lp-light) { background: var(--lp-bg); }
+
+.lp-light a { color: inherit; }
+.lp-light .section-kicker { color: var(--lp-faint); letter-spacing: .18em; }
+
+/* Başlıklar: nötr geometrik sans. Bricolage uygulama içinde kalıyor. */
+.lp-light h1, .lp-light h2, .lp-light h3 { font-family: var(--font-jakarta), var(--font-instrument-sans), sans-serif; color: var(--lp-ink); }
+.lp-light .lp-lede, .lp-light .lp-steps-grid p, .lp-light .lp-card-unit { color: var(--lp-muted); }
+.lp-light .lp-card-meta, .lp-light .lp-card-jump, .lp-light .lp-price-note, .lp-light .lp-price-fine, .lp-light .lp-secondary { color: var(--lp-faint); }
+.lp-light .lp-secondary:hover { color: var(--lp-ink); }
+.lp-light .lp-card-jump strong { color: var(--lp-ink); }
+
+/* Buton: DÜZ renk, gradyan ve ışık gölgesi yok. Referansta da düz — gradyan
+   ve glow büyük butonda ucuz duruyor, düz renk daha kararlı. */
+.lp-light .orange-button {
+  background: var(--lp-accent);
+  color: #fff;
+  box-shadow: none;
+  font-weight: 700;
+}
+.lp-light .orange-button:hover { background: #e65200; transform: none; box-shadow: none; }
+
+.lp-header { position: sticky; top: 0; z-index: 40; border-bottom: 1px solid var(--lp-line); background: rgba(255,255,255,.85); backdrop-filter: blur(14px); }
+.lp-header-actions { display: flex; align-items: center; gap: 14px; }
+.lp-login { color: var(--lp-muted); font-size: 14px; font-weight: 600; padding: 9px 4px; }
+.lp-login:hover { color: var(--lp-ink); }
+.lp-signup { border-radius: 10px; background: var(--lp-ink); padding: 10px 18px; color: #fff !important; font-size: 14px; font-weight: 600; transition: background .2s; }
+.lp-signup:hover { background: #33343a; }
+.lp-light .brand-logo { filter: none; }
+
+.lp-light .lp-card { border-color: var(--lp-line); background: var(--lp-bg); }
+.lp-light .lp-card-thumb { background: var(--lp-bg-soft); }
+.lp-light .lp-card-size { border-color: rgba(124,58,237,.3); background: rgba(124,58,237,.12); color: #5b34c7; }
+.lp-light .lp-card-mult { border-color: rgba(4,150,90,.3); background: rgba(4,150,90,.12); color: #04965a; }
+.lp-light .lp-step-no { color: var(--lp-accent); }
+.lp-light .lp-steps-grid article { border-top-color: var(--lp-line); }
+.lp-light .lp-price-card { border-color: var(--lp-line); background: var(--lp-bg-soft); }
+.lp-light .lp-price-card li { color: var(--lp-muted); }
+.lp-light .lp-price-card li svg { color: #04965a; }
+
+.lp-footer { border-top: 1px solid var(--lp-line); background: var(--lp-bg-soft); color: var(--lp-muted); }
+.lp-footer-head { font-size: 14px; font-weight: 700; color: var(--lp-ink); }
+.lp-footer a:hover { color: var(--lp-ink); }
+.lp-footer-base { border-top: 1px solid var(--lp-line); padding: 20px 0; text-align: center; font-size: 12px; color: var(--lp-faint); }
