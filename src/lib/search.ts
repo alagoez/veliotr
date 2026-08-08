@@ -100,7 +100,7 @@ export async function getVideoById(id: string, opts?: SearchOpts): Promise<Video
   const { data } = await supabase
     .from("videos")
     .select(
-      "id, channel_id, title, thumb_url, published_at, duration_sec, is_short, views, likes, comments, engagement, outlier_score, views_per_day, views_to_subs, channels!inner(title, handle, subscribers, median_views, niche_slug)",
+      "id, channel_id, title, thumb_url, published_at, duration_sec, is_short, views, likes, comments, engagement, outlier_score, views_per_day, views_to_subs, channels!inner(title, handle, subscribers, median_views, median_views_short, median_views_long, niche_slug)",
     )
     .eq("id", id)
     .maybeSingle();
@@ -110,7 +110,7 @@ export async function getVideoById(id: string, opts?: SearchOpts): Promise<Video
     published_at: string; duration_sec: number; is_short: boolean;
     views: number; likes: number; comments: number; engagement: number;
     outlier_score: number; views_per_day: number; views_to_subs: number;
-    channels: { title: string; handle: string; subscribers: number; median_views: number; niche_slug: string };
+    channels: { title: string; handle: string; subscribers: number; median_views: number; median_views_short: number; median_views_long: number; niche_slug: string };
   };
   return {
     id: r.id,
@@ -118,7 +118,10 @@ export async function getVideoById(id: string, opts?: SearchOpts): Promise<Video
     channelTitle: r.channels.title,
     channelHandle: r.channels.handle,
     subscribers: r.channels.subscribers,
-    medianViews: r.channels.median_views,
+    // Videonun KENDİ formatının medyanı — çarpan bununla hesaplandı (score.mts).
+    // Genel medyan dönseydi kartın çubuğu rozetteki çarpanla tutmazdı.
+    medianViews: (r.is_short ? r.channels.median_views_short : r.channels.median_views_long)
+      || r.channels.median_views,
     nicheSlug: r.channels.niche_slug,
     title: r.title,
     thumbUrl: r.thumb_url,
@@ -242,7 +245,7 @@ export async function searchSupabase(
   let qb = supabase
     .from("videos")
     .select(
-      "id, channel_id, title, thumb_url, published_at, duration_sec, is_short, views, likes, comments, engagement, outlier_score, views_per_day, views_to_subs, channels!inner(title, handle, subscribers, median_views, niche_slug)",
+      "id, channel_id, title, thumb_url, published_at, duration_sec, is_short, views, likes, comments, engagement, outlier_score, views_per_day, views_to_subs, channels!inner(title, handle, subscribers, median_views, median_views_short, median_views_long, niche_slug)",
       // "exact" her aramada tam tarama yaptırır (derin sayfalamayla pahalı).
       // "estimated": küçük sonuç kümelerinde kesin sayar, büyükte planlayıcı
       // tahminine düşer — UI doğruluğu korunur, maliyet sınırlanır.
@@ -322,7 +325,7 @@ export async function searchSupabase(
     published_at: string; duration_sec: number; is_short: boolean;
     views: number; likes: number; comments: number; engagement: number;
     outlier_score: number; views_per_day: number; views_to_subs: number;
-    channels: { title: string; handle: string; subscribers: number; median_views: number; niche_slug: string };
+    channels: { title: string; handle: string; subscribers: number; median_views: number; median_views_short: number; median_views_long: number; niche_slug: string };
   };
 
   const videos: Video[] = ((data ?? []) as unknown as Row[]).map((r) => ({
@@ -331,7 +334,10 @@ export async function searchSupabase(
     channelTitle: r.channels.title,
     channelHandle: r.channels.handle,
     subscribers: r.channels.subscribers,
-    medianViews: r.channels.median_views,
+    // Videonun KENDİ formatının medyanı — çarpan bununla hesaplandı (score.mts).
+    // Genel medyan dönseydi kartın çubuğu rozetteki çarpanla tutmazdı.
+    medianViews: (r.is_short ? r.channels.median_views_short : r.channels.median_views_long)
+      || r.channels.median_views,
     nicheSlug: r.channels.niche_slug,
     title: r.title,
     thumbUrl: r.thumb_url,
