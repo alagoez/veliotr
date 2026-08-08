@@ -639,16 +639,15 @@ body:has(.lp-light) { background: var(--lp-bg); }
 
 .lp-showcase { position: relative; max-width: 1240px; margin: 0 auto; padding: 0 32px 132px; }
 
-/* Zikzak çizgi stilleri kaldırıldı: sabit viewBox ile esneyip bölümden
-   taşıyordu, alttaki başlığın içinden geçiyordu. */
+.lp-showcase-line { position: absolute; inset: 0 32px auto; width: calc(100% - 64px); height: 620px; pointer-events: none; }
+.lp-showcase-line polyline { fill: none; stroke: var(--lp-accent); stroke-width: 3; stroke-linejoin: round; opacity: .9; }
+.lp-showcase-line circle { fill: var(--lp-accent); }
 
 /* Uygulama penceresi */
 .lp-window {
   position: relative; z-index: 2;
   display: flex; gap: 0;
-  /* 880 → 740px: kenar boşluğu (1240−64−genişlik)÷2 ile 148px'ten 218px'e
-     çıkıyor. Kartlar 200px; önceden sığmayıp pencerenin üstüne biniyorlardı. */
-  max-width: 740px; margin: 0 auto;
+  max-width: 880px; margin: 0 auto;
   border: 1px solid var(--lp-line); border-radius: 18px;
   background: var(--lp-bg); overflow: hidden;
   box-shadow: 0 26px 70px rgba(15, 15, 20, .10);
@@ -679,24 +678,24 @@ body:has(.lp-light) { background: var(--lp-bg); }
 .lp-float--dark .lp-float-label { color: rgba(255,255,255,.62); }
 .lp-float--accent { background: var(--lp-accent); border-color: var(--lp-accent); color: #fff; padding: 12px 18px; font-size: 13.5px; font-weight: 700; box-shadow: 0 14px 34px rgba(255, 92, 0, .26); }
 
-.lp-float--outlier { left: 0; top: 14px; width: 200px; padding: 12px; transform: rotate(-2.5deg); }
+.lp-float--outlier { left: 0; top: 8px; width: 210px; padding: 12px; transform: rotate(-3deg); }
 .lp-float--outlier figcaption { font-size: 12px; font-weight: 700; margin-bottom: 9px; }
 .lp-float--outlier img { width: 100%; aspect-ratio: 16/9; object-fit: cover; border-radius: 8px; display: block; }
 .lp-float-mult { display: inline-block; margin-top: 10px; border-radius: 999px; background: var(--lp-ink); padding: 5px 13px; color: #fff; font-family: var(--font-mono); font-size: 13px; font-weight: 700; }
 
-.lp-float--kanal { left: 8px; top: 268px; width: 172px; }
-.lp-float--video { left: 8px; top: 208px; }
-
-
-.lp-float--grafik { right: 0; top: 40px; width: 200px; padding: 16px 18px; }
-
+.lp-float--kanal { left: 12px; top: 300px; }
+.lp-float--video { left: 106px; top: 232px; }
+.lp-float--izlenme { right: 0; top: 34px; padding: 16px 20px; }
+.lp-float--izlenme .lp-float-num { font-size: 21px; }
+.lp-float--grafik { right: 8px; top: 300px; width: 232px; padding: 16px 18px; }
+.lp-float--kategori { right: 176px; top: 232px; padding: 11px 17px; font-size: 13px; font-weight: 700; }
 
 .lp-bars { margin-top: 12px; display: flex; align-items: flex-end; gap: 3px; height: 56px; }
 .lp-bars i { flex: 1; border-radius: 2px 2px 0 0; background: var(--lp-accent); opacity: .82; }
 
 /* Yüzenler dar ekranda üst üste biner → gizle, pencere tek başına kalsın. */
 @media (max-width: 1180px) {
-  .lp-float { display: none; }
+  .lp-float, .lp-showcase-lines { display: none; }
   .lp-showcase { padding-bottom: 96px; }
 }
 @media (max-width: 640px) {

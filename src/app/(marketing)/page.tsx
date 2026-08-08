@@ -141,10 +141,19 @@ export default async function LandingPage() {
           yüzenler gizleniyor (CSS), pencere tek başına kalıyor. */}
       {stats && list.length > 0 && (
         <section className="lp-showcase" aria-label="Viralab ekran önizlemesi ve indeks büyüklüğü">
-          {/* Zikzak bağlantı çizgisi KALDIRILDI. viewBox sabit 1240×620'ydi ve
-              preserveAspectRatio="none" ile esniyordu: bölümden taşıp alttaki
-              başlığın ve kartların içinden geçiyordu. Saf süstü, taşıyınca
-              sayfanın en büyük gürültü kaynağı oldu. */}
+          {/* Çizgi artık kapsayıcının içinde kalıyor. Önceden sabit 620px
+              yüksekliğindeydi ama bölüm daha kısaydı: taşıp alttaki başlığın
+              ve kanıt kartlarının içinden geçiyordu. Sarmalayıcı overflow ile
+              kesiyor, SVG de bölüm yüksekliğine göre ölçekleniyor. */}
+          <div className="lp-showcase-lines" aria-hidden>
+            <svg viewBox="0 0 1240 620" preserveAspectRatio="none">
+              <polyline points="60,560 200,470 200,120 470,120" />
+              <polyline points="1180,90 1050,190 1050,510 830,510" />
+              <circle cx="60" cy="560" r="7" />
+              <circle cx="1180" cy="90" r="7" />
+            </svg>
+          </div>
+
           <div className="lp-window" role="img" aria-label="Keşfet ekranı önizlemesi">
             <div className="lp-window-rail">
               <span className="lp-window-dot lp-window-dot--on" />
@@ -178,10 +187,6 @@ export default async function LandingPage() {
             </div>
           </div>
 
-          {/* Dört yüzen kart — altıydı, ikisi çıkarıldı. Pencere 880 → 740px
-              daraltıldı: kenar boşluğu 148px'ten 218px'e çıktı, kartlar (200px)
-              artık pencereye binmeden sığıyor. Önceden sığmıyorlardı, üstüne
-              çıkıyorlardı. */}
           <figure className="lp-float lp-float--outlier">
             <figcaption>En yüksek çarpan</figcaption>
             {list[0].thumb && (
@@ -191,15 +196,20 @@ export default async function LandingPage() {
             <span className="lp-float-mult">{fmtMultiplier(list[0].score)}</span>
           </figure>
 
-          {/* Tam sayı, kısaltma değil: fmtCompact 1.755'i "1,8 B"ye yuvarlıyordu
-              ve bu hem yanlış hem de küçük bir sayı için anlamsız. */}
+          {/* Tam sayı, kısaltma değil: fmtCompact 1.755'i "1,8 B"ye yuvarlıyordu.
+              Hem yanlış hem de bu büyüklükte bir sayı için anlamsız. */}
           <div className="lp-float lp-float--dark lp-float--kanal">
             <p className="lp-float-num">{stats.kanallar.toLocaleString("tr-TR")}</p>
-            <p className="lp-float-label">kanal takipte</p>
+            <p className="lp-float-label">takip edilen kanal</p>
           </div>
 
           <div className="lp-float lp-float--accent lp-float--video">
-            ↗ {stats.videolar.toLocaleString("tr-TR")} video
+            ↗ {stats.videolar.toLocaleString("tr-TR")} video taranıyor
+          </div>
+
+          <div className="lp-float lp-float--izlenme">
+            <p className="lp-float-label">indekslenen toplam izlenme</p>
+            <p className="lp-float-num">{stats.izlenme.toLocaleString("tr-TR")}</p>
           </div>
 
           {stats.nisler.length > 0 && (
@@ -212,6 +222,8 @@ export default async function LandingPage() {
               </div>
             </div>
           )}
+
+          <div className="lp-float lp-float--dark lp-float--kategori">{stats.nisler.length} kategori</div>
         </section>
       )}
 
