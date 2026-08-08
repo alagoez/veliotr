@@ -50,63 +50,78 @@ const MARKETS: Market[] = [
  */
 const NICHE_QUERIES: Record<string, Record<string, string[]>> = {
   oyun: {
-    tr: ["oyun", "minecraft türkçe", "valorant türkçe", "roblox türkçe", "gta 5 türkçe", "cs2 türkçe", "mobil oyun", "oyun inceleme", "pubg türkçe", "fifa fc türkçe"],
+    tr: ["oyun", "minecraft türkçe", "valorant türkçe", "roblox türkçe", "gta 5 türkçe", "cs2 türkçe", "mobil oyun", "oyun inceleme", "pubg türkçe", "fifa fc türkçe",
+         "korku oyunu türkçe", "strateji oyunu", "oyun rehberi", "indie oyun türkçe", "metin2", "zula", "araba oyunu türkçe", "simülasyon oyun", "e-spor türkiye", "oyun montaj"],
     en: ["gaming", "gameplay", "game review", "minecraft", "lets play"],
   },
   finans: {
-    tr: ["borsa", "yatırım", "dolar altın", "kripto para", "temettü hisse", "ekonomi analiz", "girişimcilik", "e-ticaret para kazanma", "emeklilik birikim", "faiz enflasyon"],
+    tr: ["borsa", "yatırım", "dolar altın", "kripto para", "temettü hisse", "ekonomi analiz", "girişimcilik", "e-ticaret para kazanma", "emeklilik birikim", "faiz enflasyon",
+         "bitcoin analiz", "hisse analizi", "para kazanma yolları", "finansal okuryazarlık", "gayrimenkul yatırım", "vergi rehberi", "bütçe yönetimi", "pasif gelir", "kredi kartı borç", "döviz analiz"],
     en: ["investing", "personal finance", "stock market", "crypto", "side hustle"],
   },
   yemek: {
-    tr: ["yemek tarifi", "kolay tarif", "tatlı tarifi", "hamur işi", "et yemekleri", "çorba tarifi", "diyet yemek", "kahvaltılık", "pratik yemek", "sokak lezzetleri"],
+    tr: ["yemek tarifi", "kolay tarif", "tatlı tarifi", "hamur işi", "et yemekleri", "çorba tarifi", "diyet yemek", "kahvaltılık", "pratik yemek", "sokak lezzetleri",
+         "makarna tarifi", "kek tarifi", "börek tarifi", "salata tarifi", "mangal tarifi", "ev yemekleri", "vegan tarif", "dünya mutfağı", "fırın yemekleri", "sağlıklı tarif"],
     en: ["recipe", "cooking", "easy dinner", "baking", "street food"],
   },
   vlog: {
-    tr: ["vlog", "gezi", "günlük vlog", "kamp vlog", "yurtdışı yaşam", "ev turu", "minimalizm", "seyahat rehberi", "köy hayatı", "günlük rutin"],
+    tr: ["vlog", "gezi", "günlük vlog", "kamp vlog", "yurtdışı yaşam", "ev turu", "minimalizm", "seyahat rehberi", "köy hayatı", "günlük rutin",
+         "üniversite hayatı", "yurt dışı gezi", "istanbul gezilecek yerler", "alışveriş vlog", "taşınma vlog", "ev dekorasyon", "doğa yürüyüşü", "karavan hayatı", "yaşam tarzı", "aile vlog"],
     en: ["day in my life", "travel vlog", "morning routine", "van life", "apartment tour"],
   },
   teknoloji: {
-    tr: ["telefon inceleme", "yapay zeka", "bilgisayar toplama", "laptop inceleme", "yazılım öğrenme", "kulaklık inceleme", "akıllı ev", "kamera inceleme", "teknoloji haber", "oyun bilgisayarı"],
+    tr: ["telefon inceleme", "yapay zeka", "bilgisayar toplama", "laptop inceleme", "yazılım öğrenme", "kulaklık inceleme", "akıllı ev", "kamera inceleme", "teknoloji haber", "oyun bilgisayarı",
+         "yapay zeka araçları", "python öğrenme", "web tasarım", "android ipuçları", "iphone inceleme", "tablet inceleme", "elektronik proje", "siber güvenlik", "veri bilimi", "yazılım kariyeri"],
     en: ["tech review", "ai tools", "smartphone review", "pc build", "coding tutorial"],
   },
   egitim: {
-    tr: ["nasıl yapılır", "ingilizce öğrenme", "matematik konu anlatımı", "yks hazırlık", "tarih anlatımı", "fizik dersi", "kimya dersi", "üniversite tercih", "bilim belgesel", "kodlama dersi"],
+    tr: ["nasıl yapılır", "ingilizce öğrenme", "matematik konu anlatımı", "yks hazırlık", "tarih anlatımı", "fizik dersi", "kimya dersi", "üniversite tercih", "bilim belgesel", "kodlama dersi",
+         "biyoloji dersi", "coğrafya konu anlatımı", "edebiyat dersi", "lgs hazırlık", "ders çalışma teknikleri", "almanca öğrenme", "felsefe anlatımı", "uzay belgesel", "psikoloji dersi", "geometri konu anlatımı"],
     en: ["study tips", "science explained", "how it works", "history documentary", "math tutorial"],
   },
   makyaj: {
-    tr: ["makyaj", "cilt bakımı", "makyaj önerileri", "günlük makyaj", "makyaj ürünleri", "saç bakımı", "kaş şekillendirme", "ruj denemesi", "cilt bakım rutini", "kozmetik inceleme"],
+    tr: ["makyaj", "cilt bakımı", "makyaj önerileri", "günlük makyaj", "makyaj ürünleri", "saç bakımı", "kaş şekillendirme", "ruj denemesi", "cilt bakım rutini", "kozmetik inceleme",
+         "gelin makyajı", "göz makyajı", "makyaj çantası", "akne bakımı", "saç boyama", "oje tasarımı", "parfüm önerileri", "makyaj dönüşümü", "cilt tipi", "eczane kozmetik"],
     en: ["makeup tutorial", "skincare routine", "grwm", "beauty haul", "hair tutorial"],
   },
   oto: {
-    tr: ["araba inceleme", "otomobil test", "modifiye araba", "sıfır araba", "ikinci el araba", "motosiklet inceleme", "araç bakımı", "otomobil fiyatları", "elektrikli araba", "araba tamiri"],
+    tr: ["araba inceleme", "otomobil test", "modifiye araba", "sıfır araba", "ikinci el araba", "motosiklet inceleme", "araç bakımı", "otomobil fiyatları", "elektrikli araba", "araba tamiri",
+         "araba karşılaştırma", "otomobil haber", "off road", "klasik otomobil", "araba detaylı temizlik", "lastik önerisi", "yakıt tüketimi", "araba aksesuar", "kamyon tır", "sürüş teknikleri"],
     en: ["car review", "car mods", "ev review", "motorcycle review", "car restoration"],
   },
   spor: {
-    tr: ["antrenman programı", "evde spor", "fitness", "kas geliştirme", "koşu antrenman", "yoga dersi", "futbol analiz", "basketbol antrenman", "kilo verme egzersiz", "spor beslenmesi"],
+    tr: ["antrenman programı", "evde spor", "fitness", "kas geliştirme", "koşu antrenman", "yoga dersi", "futbol analiz", "basketbol antrenman", "kilo verme egzersiz", "spor beslenmesi",
+         "kalistenik", "vücut geliştirme", "esneme hareketleri", "boks antrenman", "bisiklet turu", "yüzme teknikleri", "voleybol", "dövüş sanatları", "sakatlık önleme", "spor salonu programı"],
     en: ["home workout", "gym training", "fitness transformation", "yoga class", "running tips"],
   },
   komedi: {
-    tr: ["komedi skeç", "komik video", "eğlence", "stand up", "parodi video", "komik anlar", "şaka videosu", "eğlenceli challenge", "mizah", "komik montaj"],
+    tr: ["komedi skeç", "komik video", "eğlence", "stand up", "parodi video", "komik anlar", "şaka videosu", "eğlenceli challenge", "mizah", "komik montaj",
+         "skeç video", "komik kısa film", "doğaçlama komedi", "youtuber şakaları", "eğlenceli deneyler", "komik seslendirme", "gülme krizi", "absürt komedi", "sokak röportajı", "komik derleme"],
     en: ["comedy sketch", "funny video", "stand up comedy", "prank", "parody"],
   },
   muzik: {
-    tr: ["cover şarkı", "gitar dersi", "akustik", "piyano dersi", "şarkı sözleri", "türkü", "rap müzik", "müzik prodüksiyon", "bağlama dersi", "canlı performans"],
+    tr: ["cover şarkı", "gitar dersi", "akustik", "piyano dersi", "şarkı sözleri", "türkü", "rap müzik", "müzik prodüksiyon", "bağlama dersi", "canlı performans",
+         "akor dersi", "beat yapımı", "arabesk", "pop müzik", "enstrümantal", "davul dersi", "keman dersi", "şarkı yorumu", "müzik teorisi", "remix"],
     en: ["song cover", "music tutorial", "guitar lesson", "music production", "live session"],
   },
   saglik: {
-    tr: ["sağlıklı beslenme", "diyet", "kilo verme", "doktor tavsiyeleri", "uyku düzeni", "psikoloji sağlık", "bitkisel tedavi", "vitamin takviye", "hamilelik", "diş sağlığı"],
+    tr: ["sağlıklı beslenme", "diyet", "kilo verme", "doktor tavsiyeleri", "uyku düzeni", "psikoloji sağlık", "bitkisel tedavi", "vitamin takviye", "hamilelik", "diş sağlığı",
+         "bağışıklık güçlendirme", "mide sağlığı", "kalp sağlığı", "cilt hastalıkları", "göz sağlığı", "bel ağrısı", "stres yönetimi", "şeker hastalığı", "beslenme uzmanı", "fizik tedavi"],
     en: ["health tips", "nutrition", "weight loss", "mental health", "sleep better"],
   },
   moda: {
-    tr: ["kombin önerileri", "moda", "stil", "kıyafet alışverişi", "gardırop düzeni", "tesettür kombin", "ayakkabı önerileri", "moda trendleri", "vintage stil", "aksesuar"],
+    tr: ["kombin önerileri", "moda", "stil", "kıyafet alışverişi", "gardırop düzeni", "tesettür kombin", "ayakkabı önerileri", "moda trendleri", "vintage stil", "aksesuar",
+         "sonbahar kombin", "yazlık kombin", "erkek kombin", "abiye elbise", "çanta önerileri", "beden tipi kıyafet", "ikinci el alışveriş", "takı tasarım", "saç modelleri", "düğün kıyafeti"],
     en: ["fashion lookbook", "outfit ideas", "thrift haul", "style guide", "capsule wardrobe"],
   },
   gelisim: {
-    tr: ["kişisel gelişim", "motivasyon", "verimlilik", "kariyer tavsiyeleri", "kitap özeti", "zaman yönetimi", "iletişim becerileri", "hedef belirleme", "özgüven", "alışkanlık"],
+    tr: ["kişisel gelişim", "motivasyon", "verimlilik", "kariyer tavsiyeleri", "kitap özeti", "zaman yönetimi", "iletişim becerileri", "hedef belirleme", "özgüven", "alışkanlık",
+         "odaklanma teknikleri", "para yönetimi", "girişimci tavsiyeleri", "mülakat hazırlık", "cv hazırlama", "liderlik", "duygusal zeka", "meditasyon", "disiplin", "networking"],
     en: ["self improvement", "productivity", "book summary", "career advice", "habits"],
   },
   cocuk: {
-    tr: ["çocuk şarkıları", "eğitici çocuk videoları", "çocuk oyunları", "masal anlatımı", "çocuk etkinlikleri", "bebek bakımı", "çocuk gelişimi", "boyama etkinliği", "okul öncesi eğitim", "aile çocuk"],
+    tr: ["çocuk şarkıları", "eğitici çocuk videoları", "çocuk oyunları", "masal anlatımı", "çocuk etkinlikleri", "bebek bakımı", "çocuk gelişimi", "boyama etkinliği", "okul öncesi eğitim", "aile çocuk",
+         "çizgi film türkçe", "oyuncak tanıtım", "çocuk deneyleri", "parmak boyama", "çocuk yemekleri", "ebeveyn tavsiyeleri", "bebek şarkıları", "çocuk kitapları", "el işi çocuk", "montessori"],
     en: ["nursery rhymes", "kids learning", "kids songs", "toddler activities", "story time"],
   },
 };
