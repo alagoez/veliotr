@@ -43,3 +43,6 @@ next-env.d.ts
 
 # Velio telifli materyali — repoya girmez
 public/velio-assets/
+
+# Ham API cevap önbelleği (keşif tekrar çalıştırmaları kota yemesin)
+.cache/

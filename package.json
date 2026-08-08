@@ -16,6 +16,7 @@
     "pseo": "tsx --env-file-if-exists=.env.local scripts/pseo.mts",
     "migrate": "tsx --env-file-if-exists=.env.local scripts/migrate.mts",
     "discover": "tsx --env-file-if-exists=.env.local scripts/discover-channels.mts",
+    "discover:global": "tsx --env-file-if-exists=.env.local scripts/discover-global.mts",
     "sync-niches": "tsx --env-file-if-exists=.env.local scripts/sync-niches.mts",
     "demo-user": "tsx --env-file-if-exists=.env.local scripts/create-demo-user.mts",
     "verify-niches": "tsx --env-file-if-exists=.env.local scripts/verify-niches.mts"
