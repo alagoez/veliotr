@@ -1,6 +1,7 @@
 "use client";
 
 import { RotateCcw } from "lucide-react";
+import { CHANNEL_SIZES } from "@/config/channel-size";
 import { NICHE_CATALOG as NICHES } from "@/config/niches";
 import type { RangeFilter, SearchFilters } from "@/lib/types";
 
@@ -119,6 +120,34 @@ export function FilterPanel({ filters, onChange }: Props) {
           onChange={(v) => patch({ multiplier: v })}
           step={0.5}
         />
+      </div>
+
+      {/* Kanal boyutu — ürünün vaadi "küçük kanal patladı" olduğu için tek
+          tıkla seçilebilir olmalı. Aşağıdaki Abone aralığıyla aynı alanı
+          yazıyor; çip, o aralığın hazır ayarı. */}
+      <div>
+        <p className="mb-1.5 text-xs font-medium text-muted">Kanal boyutu</p>
+        <div className="flex flex-wrap gap-1.5">
+          {CHANNEL_SIZES.map((s) => {
+            const active =
+              filters.subscribers?.min === s.min && filters.subscribers?.max === s.max;
+            return (
+              <button
+                key={s.key}
+                onClick={() =>
+                  patch({ subscribers: active ? undefined : { min: s.min, max: s.max } })
+                }
+                className={`rounded-full border px-2.5 py-1 text-xs font-medium transition-colors ${
+                  active
+                    ? "border-brand/60 bg-brand/15 text-brand-soft"
+                    : "border-edge bg-raised text-muted hover:text-ink"
+                }`}
+              >
+                {s.label}
+              </button>
+            );
+          })}
+        </div>
       </div>
 
       {/* Niş */}

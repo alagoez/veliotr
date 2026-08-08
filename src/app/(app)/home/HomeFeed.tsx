@@ -122,6 +122,13 @@ export function HomeFeed({ initialFilters, heading, subheading }: Props = {}) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [effKey, sort, seed, fetchPage, usesVector]);
 
+  // Şerit yalnızca varsayılan görünümde: arama yapılmamış, outlier sıralaması,
+  // benzer modunda değil ve gösterilecek yeterli sonuç var.
+  const showHero =
+    sort === "outlier" && !filters.q && !similarSource && videos.length >= 9;
+  const hero = showHero ? videos.slice(0, 3) : [];
+  const rest = showHero ? videos.slice(3) : videos;
+
   const togglePersonalize = () => {
     setSeed(undefined);
     setOverride(!personalize);
@@ -307,6 +314,32 @@ export function HomeFeed({ initialFilters, heading, subheading }: Props = {}) {
               Filtreleri gevşetmeyi veya farklı bir anahtar kelime denemeyi düşün.
             </p>
           </div>
+        ) : showHero ? (
+          <>
+            {/* "Bugün ne patladı" şeridi: kullanıcı siteyi açtığı an cevabı
+                görsün, filtre kurcalamak zorunda kalmasın. Yalnızca varsayılan
+                görünümde (arama yok, outlier sıralaması) çıkıyor — kullanıcı
+                kendi sorusunu sorduğunda araya girmesi anlamsız olurdu. */}
+            <section className="mt-4">
+              <div className="mb-2.5 flex items-baseline gap-2">
+                <h2 className="font-display text-sm font-semibold">En çok patlayanlar</h2>
+                <span className="text-xs text-faint">kanalının normalini en çok aşan videolar</span>
+              </div>
+              <div className="video-grid grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+                {hero.map((v) => (
+                  <VideoCard key={v.id} video={v} />
+                ))}
+              </div>
+            </section>
+
+            <div className="mt-7 border-t border-edge-soft pt-5">
+              <div className="video-grid grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-3">
+                {rest.map((v) => (
+                  <VideoCard key={v.id} video={v} />
+                ))}
+              </div>
+            </div>
+          </>
         ) : (
           <div className="video-grid mt-4 grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-3">
             {videos.map((v) => (

@@ -2,9 +2,10 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { Bookmark, BookmarkCheck, Radar, ExternalLink, Flame, Copy } from "lucide-react";
+import { Bookmark, BookmarkCheck, Radar, ExternalLink, Flame, Copy, ArrowRight } from "lucide-react";
 import { Thumb } from "@/components/app/Thumb";
 import { SaveMenu } from "@/components/app/SaveMenu";
+import { channelSize, isSmallChannel } from "@/config/channel-size";
 import { fmtCompact, fmtMultiplier, fmtRelative } from "@/lib/format";
 import { isSaved, isTracked, useStore } from "@/lib/store";
 import type { Video } from "@/lib/types";
@@ -23,53 +24,56 @@ export function VideoCard({ video }: { video: Video }) {
   const tracked = isTracked(store.tracked, video.channelId);
 
   const ytSearch = `https://www.youtube.com/results?search_query=${encodeURIComponent(video.title)}`;
-
-  // Medyan kıyas çubuğu: log ölçekte izlenme / (medyan × 50) → 0-100%
-  // (50x = çubuk dolu; işaret çizgisi = medyanın konumu)
-  const ratio = video.medianViews > 0 ? video.views / video.medianViews : 0;
-  const fillPct = Math.min(100, Math.max(4, (Math.log10(Math.max(ratio, 0.1)) + 1) * (100 / (Math.log10(50) + 1))));
-  const medianPct = (1 * 100) / (Math.log10(50) + 1); // ratio=1 noktası
+  const size = channelSize(video.subscribers);
 
   return (
     <div className="video-card group relative flex flex-col gap-2.5 rounded-2xl border border-edge-soft bg-surface p-2.5">
-      <Link href={`/player/${video.id}`} aria-label={`${video.title} — incele`}>
-        <Thumb video={video} />
-      </Link>
-
-      <div className="flex items-start justify-between gap-2 px-0.5">
-        <h3 className="line-clamp-2 text-[13.5px] font-semibold leading-snug" title={video.title}>
-          <Link href={`/player/${video.id}`} className="hover:text-brand-soft">
-            {video.title}
-          </Link>
-        </h3>
+      {/* Rozetler thumbnail'a biniyor: göz zaten oraya gidiyor, başlık satırı
+          da metinle yarışmaktan kurtuluyor. */}
+      <div className="relative">
+        <Link href={`/player/${video.id}`} aria-label={`${video.title} — incele`}>
+          <Thumb video={video} />
+        </Link>
+        {isSmallChannel(video.subscribers) && (
+          <span className="size-badge" title={`${size.label} kanal · ${fmtCompact(video.subscribers)} abone`}>
+            {size.label} kanal
+          </span>
+        )}
         <span
-          className={`mult-badge shrink-0 ${multiplierTier(video.outlierScore)}`}
-          title="Çarpan: izlenme ÷ kanal medyanı"
+          className={`mult-badge mult-on-thumb ${multiplierTier(video.outlierScore)}`}
+          title="Çarpan: bu video, kanalın normalinin kaç katı"
         >
           {video.outlierScore >= 50 && <Flame size={11} />}
           {fmtMultiplier(video.outlierScore)}
         </span>
       </div>
 
-      <div className="px-0.5 text-xs text-muted">
-        <span className="font-medium text-ink/85">{video.channelTitle}</span>
-        <span className="mx-1 text-faint">·</span>
-        <span className="num">{fmtCompact(video.subscribers)}</span> abone
+      {/* Kartın kahramanı: küçük kanal → dev izlenme. Ürünün tek cümlesi bu,
+          o yüzden tek satırda ve tipografiyle kontrastlı kuruluyor. */}
+      <div className="flex items-baseline gap-1.5 px-0.5">
+        <span className="num text-xs text-faint">{fmtCompact(video.subscribers)} abone</span>
+        <ArrowRight size={13} className="shrink-0 text-faint" aria-hidden />
+        <span className="num text-[19px] font-semibold leading-none text-ink">
+          {fmtCompact(video.views)}
+        </span>
+        <span className="text-xs text-muted">izlenme</span>
       </div>
 
-      {/* Medyan kıyası: bu video, kanal normalinin neresinde? */}
-      <div className="px-0.5" title={`Kanal medyanı: ${fmtCompact(video.medianViews)} izlenme`}>
-        <div className="vs-bar">
-          <i style={{ width: `${fillPct}%` }} />
-          <b style={{ left: `${medianPct}%` }} />
-        </div>
-        <div className="mt-1.5 flex items-center justify-between text-xs text-muted">
-          <span>
-            <span className="num font-semibold text-ink/90">{fmtCompact(video.views)}</span> izlenme
+      <div className="px-0.5">
+        <h3 className="line-clamp-2 text-[13.5px] font-semibold leading-snug" title={video.title}>
+          <Link href={`/player/${video.id}`} className="hover:text-brand-soft">
+            {video.title}
+          </Link>
+        </h3>
+        <div className="mt-1 flex items-center justify-between gap-2 text-xs text-muted">
+          {/* "medyan" istatistik jargonu — hedef kitle YouTuber. "normali" aynı
+              bilgiyi sıfır öğrenme maliyetiyle veriyor ve çarpanı açıklıyor. */}
+          <span className="truncate">
+            <span className="font-medium text-ink/85">{video.channelTitle}</span>
             <span className="mx-1 text-faint">·</span>
-            <span className="num text-faint">{fmtCompact(video.medianViews)} medyan</span>
+            <span className="text-faint">normali <span className="num">{fmtCompact(video.medianViews)}</span></span>
           </span>
-          <span className="text-faint">{fmtRelative(video.publishedAt)}</span>
+          <span className="shrink-0 text-faint">{fmtRelative(video.publishedAt)}</span>
         </div>
       </div>
 
@@ -89,6 +93,9 @@ export function VideoCard({ video }: { video: Video }) {
           {menuOpen && <SaveMenu video={video} onClose={() => setMenuOpen(false)} />}
         </div>
 
+        {/* Takip / Benzer / YouTube ikon oldu: akışta 20 kart × 3 buton = 60
+            buton görsel gürültüsü yaratıyordu. Ana eylem "Kaydet" metin kalıyor,
+            gerisi sağa yaslı ikon. */}
         <button
           onClick={() => {
             if (tracked) {
@@ -113,32 +120,32 @@ export function VideoCard({ video }: { video: Video }) {
               });
             }
           }}
-          className={`flex items-center gap-1.5 rounded-lg border px-2.5 py-1.5 text-xs font-semibold transition-all active:scale-95 ${
-            tracked
-              ? "border-glow/40 bg-glow/10 text-glow"
-              : "border-edge bg-raised text-muted hover:border-glow/40 hover:text-ink"
+          className={`ml-auto rounded-lg p-1.5 transition-all active:scale-95 ${
+            tracked ? "text-glow" : "text-faint hover:text-ink"
           }`}
           title={tracked ? "Takibi bırak" : "Kanalı takip et"}
+          aria-label={tracked ? "Takibi bırak" : "Kanalı takip et"}
         >
-          <Radar size={14} />
-          {tracked ? "Takipte" : "Takip et"}
+          <Radar size={15} />
         </button>
 
         <Link
           href={`/home?similar=${encodeURIComponent(video.id)}`}
-          className="ml-auto flex items-center gap-1 rounded-lg border border-edge bg-raised px-2 py-1.5 text-xs text-muted transition-all hover:border-brand/40 hover:text-ink active:scale-95"
+          className="rounded-lg p-1.5 text-faint transition-all hover:text-ink active:scale-95"
           title="Benzer videoları gör"
+          aria-label="Benzer videoları gör"
         >
-          <Copy size={13} />
+          <Copy size={15} />
         </Link>
         <a
           href={ytSearch}
           target="_blank"
           rel="noreferrer"
-          className="flex items-center gap-1 rounded-lg border border-edge bg-raised px-2 py-1.5 text-xs text-muted transition-all hover:text-ink active:scale-95"
+          className="rounded-lg p-1.5 text-faint transition-all hover:text-ink active:scale-95"
           title="YouTube'da aç"
+          aria-label="YouTube'da aç"
         >
-          <ExternalLink size={13} />
+          <ExternalLink size={15} />
         </a>
       </div>
     </div>
