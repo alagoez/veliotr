@@ -65,6 +65,41 @@ async function ornekler(): Promise<Ornek[]> {
   }
 }
 
+type Vitrin = {
+  videolar: number;
+  kanallar: number;
+  izlenme: number;
+  nisler: number[];
+};
+
+/**
+ * Hero altındaki vitrin rakamları — hepsi canlı veritabanından.
+ *
+ * Referans sitelerde bu alan tanıtım görseliyle doldurulur. Bizde gerek yok:
+ * indeks gerçekten bu büyüklükte ve gerçek sayıyı göstermek uydurmadan daha
+ * ikna edici. Çubuk grafik de süs değil — niş başına gerçek video dağılımı.
+ */
+async function vitrin(): Promise<Vitrin | null> {
+  if (!isSupabaseConfigured() || !process.env.SUPABASE_SERVICE_ROLE_KEY) return null;
+  try {
+    const db = createAdminSupabase();
+    const [ozet, bars] = await Promise.all([
+      db.from("landing_stats").select("videolar, kanallar, izlenme, nisler").maybeSingle(),
+      db.from("landing_niche_bars").select("adet").limit(15),
+    ]);
+    if (!ozet.data) return null;
+    const s = ozet.data as { videolar: number; kanallar: number; izlenme: number; nisler: number };
+    return {
+      videolar: Number(s.videolar),
+      kanallar: Number(s.kanallar),
+      izlenme: Number(s.izlenme),
+      nisler: (bars.data ?? []).map((b) => Number((b as { adet: number }).adet)),
+    };
+  } catch {
+    return null;
+  }
+}
+
 function Cta({ children = "Ücretsiz başla" }: { children?: string }) {
   return (
     <Link href="/signin" className="orange-button">
@@ -81,7 +116,7 @@ const ADIMLAR = [
 ] as const;
 
 export default async function LandingPage() {
-  const list = await ornekler();
+  const [list, stats] = await Promise.all([ornekler(), vitrin()]);
 
   return (
     <main>
@@ -100,6 +135,89 @@ export default async function LandingPage() {
           <Link href="/ozellikler" className="lp-secondary">Nasıl çalıştığını gör</Link>
         </div>
       </section>
+
+      {/* Vitrin: ortada uygulamanın kendisi, etrafında canlı rakamlar.
+          Yüzen kartlar süs değil — hepsi veritabanından geliyor. Dar ekranda
+          yüzenler gizleniyor (CSS), pencere tek başına kalıyor. */}
+      {stats && list.length > 0 && (
+        <section className="lp-showcase" aria-label="Viralab ekran önizlemesi ve indeks büyüklüğü">
+          <svg className="lp-showcase-line" viewBox="0 0 1240 620" preserveAspectRatio="none" aria-hidden>
+            <polyline points="60,560 200,470 200,120 470,120" />
+            <polyline points="1180,90 1050,190 1050,510 830,510" />
+            <circle cx="60" cy="560" r="7" />
+            <circle cx="1180" cy="90" r="7" />
+          </svg>
+
+          <div className="lp-window" role="img" aria-label="Keşfet ekranı önizlemesi">
+            <div className="lp-window-rail">
+              <span className="lp-window-dot lp-window-dot--on" />
+              <span className="lp-window-dot" />
+              <span className="lp-window-dot" />
+              <span className="lp-window-dot" />
+            </div>
+            <div className="lp-window-body">
+              <div className="lp-window-head">
+                <span className="lp-window-title">Keşfet</span>
+                <span className="lp-window-chip">Outlier ↓</span>
+                <span className="lp-window-chip">10x+</span>
+                <span className="lp-window-chip">Mikro</span>
+              </div>
+              <div className="lp-window-grid">
+                {list.map((v) => (
+                  <div key={v.id} className="lp-window-card">
+                    <div className="lp-window-thumb">
+                      {v.thumb && (
+                        // eslint-disable-next-line @next/next/no-img-element
+                        <img src={v.thumb} alt="" loading="lazy" />
+                      )}
+                      <span>{fmtMultiplier(v.score)}</span>
+                    </div>
+                    <p className="lp-window-jump">
+                      {fmtCompact(v.subs)} → <strong>{fmtCompact(v.views)}</strong>
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          <figure className="lp-float lp-float--outlier">
+            <figcaption>En yüksek çarpan</figcaption>
+            {list[0].thumb && (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img src={list[0].thumb} alt="" loading="lazy" />
+            )}
+            <span className="lp-float-mult">{fmtMultiplier(list[0].score)}</span>
+          </figure>
+
+          <div className="lp-float lp-float--dark lp-float--kanal">
+            <p className="lp-float-num">{fmtCompact(stats.kanallar)}</p>
+            <p className="lp-float-label">takip edilen kanal</p>
+          </div>
+
+          <div className="lp-float lp-float--accent lp-float--video">
+            ↗ {stats.videolar.toLocaleString("tr-TR")} video taranıyor
+          </div>
+
+          <div className="lp-float lp-float--izlenme">
+            <p className="lp-float-label">indekslenen toplam izlenme</p>
+            <p className="lp-float-num">{stats.izlenme.toLocaleString("tr-TR")}</p>
+          </div>
+
+          {stats.nisler.length > 0 && (
+            <div className="lp-float lp-float--grafik">
+              <p className="lp-float-label">niş başına video</p>
+              <div className="lp-bars">
+                {stats.nisler.map((n, i) => (
+                  <i key={i} style={{ height: `${Math.max(14, (n / Math.max(...stats.nisler)) * 100)}%` }} />
+                ))}
+              </div>
+            </div>
+          )}
+
+          <div className="lp-float lp-float--dark lp-float--kategori">{stats.nisler.length} kategori</div>
+        </section>
+      )}
 
       {list.length > 0 && (
         <section className="lp-proof">
