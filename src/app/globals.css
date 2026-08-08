@@ -454,256 +454,6 @@ input[type="range"]::-moz-range-thumb { pointer-events: auto; width: 12px; heigh
   video { display: none; }
 }
 
-/* ── Ana sayfa (sade giriş) ───────────────────────────────────────────────
-   İlke: tek mesaj, bol boşluk, tek vurgu rengi. Önceki sayfa dört görsel
-   bloğu + ödül şeridi + destek ızgarası taşıyordu ve görsellerin hepsi 404
-   dönüyordu (public/velio-assets/ gitignore'da). Mesaj kalabalıkta kayboluyordu. */
-
-/* Tipografi ölçeği ve boşluk ritmi viewstats.com/info'dan ölçüldü: başlık
-   geniş ve iri, alt metin dar ve orta boy, aralar cömert. Huni şekli kasten —
-   göz yukarıdan aşağı daralarak butona iniyor. */
-/* Kapsayıcı geniş, satır uzunluğu dar: ikisi ayrı iş yapıyor.
-   Kapsayıcı 1240px olunca içerik geniş ekranlarda sayfanın ortasına sıkışmış
-   dar bir kolon gibi durmuyor; başlık 980px'te tutulunca da satırlar
-   okunabilir uzunlukta kalıyor. Önceden ikisi de 980/900'dü ve hero dar bir
-   şerit gibi görünüyordu. */
-.lp-hero {
-  max-width: 1240px;
-  margin: 0 auto;
-  padding: clamp(84px, 10.5vw, 176px) 32px clamp(76px, 9vw, 140px);
-  text-align: center;
-}
-.lp-hero h1 {
-  margin: 0 auto;
-  max-width: 1000px;
-  /* Punto tavanı kutuya göre ölçüldü, keyfî değil: 84px'te bu başlık 1440 ve
-     1920'de 14/16/17 karakterlik ÜÇ kısa satıra kırılıyordu — "ortaya
-     yığılmış" hissi tam olarak buradan geliyordu. 76px + sıkı harf aralığı
-     ile 1000px kutuda iki dengeli satır çıkıyor (~24 karakter, ~880px). */
-  font-size: clamp(2.5rem, 5.3vw, 4.75rem);
-  font-weight: 800;
-  line-height: 1.0;
-  letter-spacing: -0.04em;
-  /* balance: satırların görsel ağırlığını eşitler — son satırda tek kelime
-     kalıp dengesiz görünmesin. */
-  text-wrap: balance;
-}
-/* Alt metin başlıktan hem DAR hem belirgin şekilde KÜÇÜK: huninin ikinci
-   kademesi. Göz yukarıdan aşağı daralarak butona iniyor. */
-.lp-lede {
-  margin: 32px auto 0;
-  max-width: 720px;
-  color: var(--color-muted);
-  font-size: clamp(16.5px, 1.25vw, 20px);
-  line-height: 1.65;
-  text-wrap: pretty;
-}
-/* İkincil bağlantı butonun ALTINDA, yanında değil — yan yana olunca ikisi
-   eşit ağırlıkta görünüyor ve birincil eylem gücünü kaybediyor. */
-.lp-cta { margin-top: 36px; display: flex; flex-direction: column; align-items: center; gap: 18px; }
-.lp-hero .orange-button { border-radius: 12px; padding: 17px 32px; font-size: 15px; letter-spacing: 0; }
-.lp-secondary { color: var(--color-muted); font-size: 15px; transition: color .2s; }
-.lp-secondary:hover { color: var(--color-ink); }
-
-.lp-proof, .lp-steps, .lp-price { max-width: 1080px; margin: 0 auto; padding: 0 24px 124px; }
-.lp-proof h2, .lp-steps h2, .lp-price h2 {
-  margin-top: 16px;
-  font-family: var(--font-display);
-  font-size: clamp(2rem, 4vw, 3.1rem);
-  font-weight: 800;
-  line-height: 1.1;
-  letter-spacing: -0.038em;
-  text-align: center;
-}
-.lp-price h2, .lp-price .section-kicker { text-align: center; }
-
-.lp-proof-grid { margin-top: 40px; display: grid; gap: 22px; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
-.lp-card { border: 1px solid var(--color-edge-soft); border-radius: 18px; background: var(--color-surface); padding: 12px; }
-.lp-card-thumb { position: relative; aspect-ratio: 16/9; border-radius: 12px; overflow: hidden; background: var(--color-raised); }
-.lp-card-thumb img { width: 100%; height: 100%; object-fit: cover; }
-.lp-card-thumb-empty { width: 100%; height: 100%; }
-.lp-card-size {
-  position: absolute; left: 8px; top: 8px; padding: 3px 9px; border-radius: 999px;
-  border: 1px solid rgba(124, 58, 237, .45); background: rgba(124, 58, 237, .28);
-  backdrop-filter: blur(6px); font-size: 11px; font-weight: 600; color: #d3c4ff;
-}
-.lp-card-mult {
-  position: absolute; right: 8px; bottom: 8px; padding: 4px 11px; border-radius: 999px;
-  border: 1px solid rgba(94, 231, 160, .45); background: rgba(94, 231, 160, .18);
-  backdrop-filter: blur(6px); font-family: var(--font-mono); font-size: 12.5px;
-  font-weight: 700; color: var(--color-pos);
-}
-/* Kartın kahramanı: küçük kanal → dev izlenme. Uygulama içindeki kartla aynı dil. */
-.lp-card-jump { margin-top: 13px; display: flex; align-items: baseline; gap: 7px; color: var(--color-faint); }
-.lp-card-jump strong { font-family: var(--font-mono); font-size: 21px; font-weight: 700; color: var(--color-ink); letter-spacing: -0.02em; }
-.lp-card-subs { font-family: var(--font-mono); font-size: 12.5px; }
-.lp-card-unit { font-size: 12px; color: var(--color-muted); }
-.lp-card-title { margin-top: 9px; font-size: 13.5px; font-weight: 600; line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
-.lp-card-meta { margin-top: 5px; font-size: 12px; color: var(--color-faint); }
-
-.lp-steps-grid { margin-top: 40px; display: grid; gap: 30px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
-.lp-steps-grid article { border-top: 1px solid var(--color-edge); padding-top: 18px; }
-.lp-step-no { font-family: var(--font-mono); font-size: 12px; font-weight: 700; color: #ffb51b; letter-spacing: .1em; }
-.lp-steps-grid h3 { margin-top: 10px; font-size: 17px; font-weight: 700; letter-spacing: -0.02em; }
-.lp-steps-grid p { margin-top: 8px; color: var(--color-muted); font-size: 14px; line-height: 1.65; }
-
-.lp-price-card { margin: 38px auto 0; max-width: 400px; border: 1px solid var(--color-edge); border-radius: 22px; background: var(--color-surface); padding: 32px; text-align: center; }
-.lp-price-tag { font-family: var(--font-display); font-size: 46px; font-weight: 800; letter-spacing: -0.04em; }
-.lp-price-tag span { font-size: 16px; font-weight: 500; color: var(--color-muted); }
-.lp-price-note { margin-top: 4px; font-size: 13px; color: var(--color-faint); }
-.lp-price-card ul { margin: 26px 0 28px; display: grid; gap: 13px; text-align: left; }
-.lp-price-card li { display: flex; align-items: center; gap: 10px; font-size: 14px; color: var(--color-muted); }
-.lp-price-card li svg { flex-shrink: 0; color: var(--color-pos); }
-.lp-price-fine { margin-top: 14px; font-size: 12px; color: var(--color-faint); }
-
-/* Mobilde punto ve dikey boşluk zaten clamp ile ölçekleniyor; burada
-   yalnızca yanal dolgu daraltılıyor (32px dar ekranda satırı boğuyor). */
-@media (max-width: 640px) {
-  .lp-hero { padding-left: 20px; padding-right: 20px; }
-  .lp-lede { margin-top: 24px; }
-  .lp-cta { margin-top: 30px; }
-  .lp-proof, .lp-steps, .lp-price { padding-bottom: 72px; }
-}
-
-/* ── Pazarlama sayfaları: AÇIK tema ───────────────────────────────────────
-   Uygulama koyu kalıyor (saatlerce veri inceleniyor, göz yorulmasın).
-   Pazarlama sayfası farklı bir iş yapıyor: 5 saniyede ikna etmek. Beyaz
-   zemin + siyah yazı elde edilebilecek en yüksek kontrast; aynı puntoda
-   yazı daha iri ve keskin hissettiriyor. */
-
-.lp-light {
-  --lp-bg: #ffffff;
-  --lp-bg-soft: #f7f7f5;
-  --lp-ink: #0d0d0e;
-  --lp-muted: #55585c;
-  --lp-faint: #86898e;
-  --lp-line: #e6e6e3;
-  --lp-accent: #ff5c00;
-  background: var(--lp-bg);
-  color: var(--lp-ink);
-}
-
-/* Gren dokusu kalktı: body::before tüm sayfaya sabit bir SVG noise seriyordu
-   (mix-blend-mode: screen). Beyaz zeminde kirli görünüyor ve harflerin
-   kenarlarını yumuşatıp yazıyı küçük gösteriyordu. */
-body:has(.lp-light)::before { display: none; }
-body:has(.lp-light) { background: var(--lp-bg); }
-
-.lp-light a { color: inherit; }
-.lp-light .section-kicker { color: var(--lp-faint); letter-spacing: .18em; }
-
-/* Başlıklar: nötr geometrik sans. Bricolage uygulama içinde kalıyor. */
-.lp-light h1, .lp-light h2, .lp-light h3 { font-family: var(--font-jakarta), var(--font-instrument-sans), sans-serif; color: var(--lp-ink); }
-.lp-light .lp-lede, .lp-light .lp-steps-grid p, .lp-light .lp-card-unit { color: var(--lp-muted); }
-.lp-light .lp-card-meta, .lp-light .lp-card-jump, .lp-light .lp-price-note, .lp-light .lp-price-fine, .lp-light .lp-secondary { color: var(--lp-faint); }
-.lp-light .lp-secondary:hover { color: var(--lp-ink); }
-.lp-light .lp-card-jump strong { color: var(--lp-ink); }
-
-/* Buton: DÜZ renk, gradyan ve ışık gölgesi yok. Referansta da düz — gradyan
-   ve glow büyük butonda ucuz duruyor, düz renk daha kararlı. */
-.lp-light .orange-button {
-  background: var(--lp-accent);
-  color: #fff;
-  box-shadow: none;
-  font-weight: 700;
-}
-.lp-light .orange-button:hover { background: #e65200; transform: none; box-shadow: none; }
-
-.lp-header { position: sticky; top: 0; z-index: 40; border-bottom: 1px solid var(--lp-line); background: rgba(255,255,255,.85); backdrop-filter: blur(14px); }
-.lp-header-actions { display: flex; align-items: center; gap: 14px; }
-.lp-login { color: var(--lp-muted); font-size: 14px; font-weight: 600; padding: 9px 4px; }
-.lp-login:hover { color: var(--lp-ink); }
-.lp-signup { border-radius: 10px; background: var(--lp-ink); padding: 10px 18px; color: #fff !important; font-size: 14px; font-weight: 600; transition: background .2s; }
-.lp-signup:hover { background: #33343a; }
-.lp-light .brand-logo { filter: none; }
-
-.lp-light .lp-card { border-color: var(--lp-line); background: var(--lp-bg); }
-.lp-light .lp-card-thumb { background: var(--lp-bg-soft); }
-.lp-light .lp-card-size { border-color: rgba(124,58,237,.3); background: rgba(124,58,237,.12); color: #5b34c7; }
-.lp-light .lp-card-mult { border-color: rgba(4,150,90,.3); background: rgba(4,150,90,.12); color: #04965a; }
-.lp-light .lp-step-no { color: var(--lp-accent); }
-.lp-light .lp-steps-grid article { border-top-color: var(--lp-line); }
-.lp-light .lp-price-card { border-color: var(--lp-line); background: var(--lp-bg-soft); }
-.lp-light .lp-price-card li { color: var(--lp-muted); }
-.lp-light .lp-price-card li svg { color: #04965a; }
-
-.lp-footer { border-top: 1px solid var(--lp-line); background: var(--lp-bg-soft); color: var(--lp-muted); }
-.lp-footer-head { font-size: 14px; font-weight: 700; color: var(--lp-ink); }
-.lp-footer a:hover { color: var(--lp-ink); }
-.lp-footer-base { border-top: 1px solid var(--lp-line); padding: 20px 0; text-align: center; font-size: 12px; color: var(--lp-faint); }
-
-/* ── Hero altı vitrin ─────────────────────────────────────────────────────
-   Ortada uygulamanın kendisi, etrafında canlı rakamlar. Yüzen kartlar süs
-   değil, hepsi veritabanından. Dar ekranda yüzenler gizlenip pencere tek
-   başına kalıyor — üst üste binmeleri kaosa dönüşürdü. */
-
-.lp-showcase { position: relative; max-width: 1240px; margin: 0 auto; padding: 0 32px 132px; }
-
-.lp-showcase-line { position: absolute; inset: 0 32px auto; width: calc(100% - 64px); height: 620px; pointer-events: none; }
-.lp-showcase-line polyline { fill: none; stroke: var(--lp-accent); stroke-width: 3; stroke-linejoin: round; opacity: .9; }
-.lp-showcase-line circle { fill: var(--lp-accent); }
-
-/* Uygulama penceresi */
-.lp-window {
-  position: relative; z-index: 2;
-  display: flex; gap: 0;
-  max-width: 880px; margin: 0 auto;
-  border: 1px solid var(--lp-line); border-radius: 18px;
-  background: var(--lp-bg); overflow: hidden;
-  box-shadow: 0 26px 70px rgba(15, 15, 20, .10);
-}
-.lp-window-rail { display: flex; flex-direction: column; gap: 14px; align-items: center; padding: 22px 14px; border-right: 1px solid var(--lp-line); background: var(--lp-bg-soft); }
-.lp-window-dot { width: 8px; height: 8px; border-radius: 3px; background: #d3d3cf; }
-.lp-window-dot--on { background: var(--lp-accent); }
-.lp-window-body { flex: 1; padding: 20px 22px 24px; min-width: 0; }
-.lp-window-head { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
-.lp-window-title { font-family: var(--font-jakarta), sans-serif; font-size: 15px; font-weight: 700; margin-right: 4px; }
-.lp-window-chip { border: 1px solid var(--lp-line); border-radius: 999px; padding: 3px 10px; font-size: 11px; font-weight: 600; color: var(--lp-muted); }
-.lp-window-grid { margin-top: 16px; display: grid; gap: 12px; grid-template-columns: repeat(3, 1fr); }
-.lp-window-thumb { position: relative; aspect-ratio: 16/9; border-radius: 8px; overflow: hidden; background: var(--lp-bg-soft); }
-.lp-window-thumb img { width: 100%; height: 100%; object-fit: cover; }
-.lp-window-thumb span {
-  position: absolute; right: 5px; bottom: 5px; padding: 2px 7px; border-radius: 999px;
-  background: rgba(4, 150, 90, .92); color: #fff; font-family: var(--font-mono);
-  font-size: 10.5px; font-weight: 700;
-}
-.lp-window-jump { margin-top: 7px; font-family: var(--font-mono); font-size: 11.5px; color: var(--lp-faint); }
-.lp-window-jump strong { color: var(--lp-ink); font-size: 13px; }
-
-/* Yüzen kartlar */
-.lp-float { position: absolute; z-index: 3; border-radius: 14px; background: var(--lp-bg); border: 1px solid var(--lp-line); box-shadow: 0 16px 40px rgba(15, 15, 20, .12); }
-.lp-float-num { font-family: var(--font-jakarta), sans-serif; font-size: 26px; font-weight: 800; letter-spacing: -0.03em; line-height: 1; }
-.lp-float-label { margin-top: 5px; font-size: 11.5px; color: var(--lp-faint); }
-.lp-float--dark { background: #16171a; border-color: #16171a; color: #fff; padding: 16px 20px; }
-.lp-float--dark .lp-float-label { color: rgba(255,255,255,.62); }
-.lp-float--accent { background: var(--lp-accent); border-color: var(--lp-accent); color: #fff; padding: 12px 18px; font-size: 13.5px; font-weight: 700; box-shadow: 0 14px 34px rgba(255, 92, 0, .26); }
-
-.lp-float--outlier { left: 0; top: 8px; width: 210px; padding: 12px; transform: rotate(-3deg); }
-.lp-float--outlier figcaption { font-size: 12px; font-weight: 700; margin-bottom: 9px; }
-.lp-float--outlier img { width: 100%; aspect-ratio: 16/9; object-fit: cover; border-radius: 8px; display: block; }
-.lp-float-mult { display: inline-block; margin-top: 10px; border-radius: 999px; background: var(--lp-ink); padding: 5px 13px; color: #fff; font-family: var(--font-mono); font-size: 13px; font-weight: 700; }
-
-.lp-float--kanal { left: 12px; top: 300px; }
-.lp-float--video { left: 106px; top: 232px; }
-.lp-float--izlenme { right: 0; top: 34px; padding: 16px 20px; }
-.lp-float--izlenme .lp-float-num { font-size: 21px; }
-.lp-float--grafik { right: 8px; top: 300px; width: 232px; padding: 16px 18px; }
-.lp-float--kategori { right: 176px; top: 232px; padding: 11px 17px; font-size: 13px; font-weight: 700; }
-
-.lp-bars { margin-top: 12px; display: flex; align-items: flex-end; gap: 3px; height: 56px; }
-.lp-bars i { flex: 1; border-radius: 2px 2px 0 0; background: var(--lp-accent); opacity: .82; }
-
-/* Yüzenler dar ekranda üst üste biner → gizle, pencere tek başına kalsın. */
-@media (max-width: 1180px) {
-  .lp-float, .lp-showcase-lines { display: none; }
-  .lp-showcase { padding-bottom: 96px; }
-}
-@media (max-width: 640px) {
-  .lp-showcase { padding: 0 20px 76px; }
-  .lp-window-grid { grid-template-columns: repeat(2, 1fr); }
-  .lp-window-grid > :nth-child(3) { display: none; }
-}
-
 /* ═══════════════════════════════════════════════════════════════════════
    PAZARLAMA TASARIM SİSTEMİ
    ═══════════════════════════════════════════════════════════════════════
@@ -772,3 +522,194 @@ body:has(.lp-light) { background: var(--lp-bg); }
 /* Başlık bloğu: bölüm başlığı + açıklama. Tek yerde tanımlı. */
 .lp-head h2 { font-size: var(--t-h2); font-weight: 800; line-height: var(--lh-tight); letter-spacing: -0.035em; }
 .lp-head p { margin-top: var(--s-4); max-width: var(--w-text); font-size: var(--t-lede); line-height: var(--lh-body); color: var(--lp-muted); }
+
+/* ═══════════════════════════════════════════════════════════════════════
+   PAZARLAMA SAYFALARI — açık tema + bileşenler
+   ═══════════════════════════════════════════════════════════════════════
+   Uygulama koyu kalıyor (saatlerce veri inceleniyor, göz yorulmasın).
+   Pazarlama sayfası farklı bir iş yapıyor: 5 saniyede ikna etmek. Beyaz
+   zemin + siyah yazı elde edilebilecek en yüksek kontrast.
+
+   Buradaki hiçbir kural çıplak px yazmaz — hepsi yukarıdaki ölçeği kullanır. */
+
+.lp-light {
+  --lp-bg: #ffffff;
+  --lp-bg-soft: #f7f7f5;
+  --lp-ink: #0d0d0e;
+  --lp-muted: #55585c;
+  --lp-faint: #86898e;
+  --lp-line: #e7e7e4;
+  --lp-accent: #ff5c00;
+  --lp-pos: #04965a;
+  background: var(--lp-bg);
+  color: var(--lp-ink);
+  font-family: var(--font-jakarta), var(--font-instrument-sans), sans-serif;
+}
+
+/* Gren dokusu kapalı: beyaz zeminde kirli görünüyor ve harflerin kenarlarını
+   yumuşatıp yazıyı küçük gösteriyor. */
+body:has(.lp-light)::before { display: none; }
+body:has(.lp-light) { background: var(--lp-bg); }
+
+.lp-light a { color: inherit; }
+.lp-light h1, .lp-light h2, .lp-light h3 { color: var(--lp-ink); }
+.lp-eyebrow { font-size: var(--t-micro); font-weight: 700; letter-spacing: .16em; color: var(--lp-faint); }
+
+/* ── Butonlar: iki ağırlık, ikisi de düz renk ── */
+.lp-btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: var(--s-2);
+  border-radius: var(--r-md); padding: 15px 26px;
+  font-size: var(--t-body); font-weight: 700; white-space: nowrap;
+  transition: background .18s ease, border-color .18s ease, color .18s ease;
+}
+.lp-btn--primary { background: var(--lp-ink); color: #fff; }
+.lp-btn--primary:hover { background: #2a2b30; }
+.lp-btn--ghost { border: 1px solid var(--lp-line); color: var(--lp-ink); background: var(--lp-bg); }
+.lp-btn--ghost:hover { border-color: var(--lp-ink); }
+
+/* ── 1 · NAVBAR ── */
+.lp-header { position: sticky; top: 0; z-index: 40; border-bottom: 1px solid var(--lp-line); background: rgba(255,255,255,.86); backdrop-filter: blur(14px); }
+.lp-header > div { min-height: 74px; }
+.lp-header-actions { display: flex; align-items: center; gap: var(--s-4); }
+.lp-login { color: var(--lp-muted); font-size: var(--t-small); font-weight: 600; }
+.lp-login:hover { color: var(--lp-ink); }
+.lp-signup { border-radius: var(--r-md); background: var(--lp-ink); padding: 10px 18px; color: #fff !important; font-size: var(--t-small); font-weight: 700; }
+.lp-signup:hover { background: #2a2b30; }
+.lp-light .brand-logo { filter: none; }
+
+/* ── 2 · HERO ── */
+.lp-hero { padding-block: clamp(76px, 9vw, 152px) clamp(44px, 5vw, 80px); text-align: center; }
+.lp-hero h1 {
+  margin-inline: auto; max-width: var(--w-title);
+  font-size: var(--t-display); font-weight: 800;
+  line-height: var(--lh-display); letter-spacing: -0.04em;
+  text-wrap: balance;
+}
+.lp-lede {
+  margin: var(--s-6) auto 0; max-width: var(--w-text);
+  font-size: var(--t-lede); line-height: var(--lh-body); color: var(--lp-muted);
+  text-wrap: pretty;
+}
+.lp-cta { margin-top: var(--s-7); display: flex; align-items: center; justify-content: center; gap: var(--s-3); flex-wrap: wrap; }
+
+/* ── 3 · ÜRÜN GÖRSELİ ── */
+.lp-stage { padding-bottom: var(--section-y); }
+.lp-window {
+  display: flex; max-width: var(--w-wide); margin-inline: auto;
+  border: 1px solid var(--lp-line); border-radius: var(--r-lg);
+  background: var(--lp-bg); overflow: hidden; box-shadow: var(--sh-lift);
+}
+.lp-window--dar { max-width: 100%; box-shadow: var(--sh-card); }
+.lp-window-rail { display: flex; flex-direction: column; gap: var(--s-3); align-items: center; padding: var(--s-5) var(--s-3); border-right: 1px solid var(--lp-line); background: var(--lp-bg-soft); }
+.lp-window-dot { width: 8px; height: 8px; border-radius: 3px; background: #d5d5d1; }
+.lp-window-dot--on { background: var(--lp-accent); }
+.lp-window-body { flex: 1; min-width: 0; padding: var(--s-5); }
+.lp-window-head { display: flex; align-items: center; gap: var(--s-2); flex-wrap: wrap; }
+.lp-window-title { font-size: var(--t-body); font-weight: 700; margin-right: var(--s-1); }
+.lp-window-chip { border: 1px solid var(--lp-line); border-radius: 999px; padding: 4px 11px; font-size: var(--t-micro); font-weight: 600; color: var(--lp-muted); }
+.lp-window-grid { margin-top: var(--s-4); display: grid; gap: var(--s-3); grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.lp-window-thumb { position: relative; aspect-ratio: 16/9; border-radius: var(--r-sm); overflow: hidden; background: var(--lp-bg-soft); }
+.lp-window-thumb img { width: 100%; height: 100%; object-fit: cover; }
+.lp-window-thumb span { position: absolute; right: 6px; bottom: 6px; padding: 3px 8px; border-radius: 999px; background: var(--lp-pos); color: #fff; font-family: var(--font-mono); font-size: 11px; font-weight: 700; }
+.lp-window-jump { margin-top: var(--s-2); font-size: var(--t-micro); color: var(--lp-faint); }
+.lp-window-jump i { font-style: normal; margin: 0 3px; }
+.lp-window-jump strong { color: var(--lp-ink); font-size: var(--t-small); }
+
+/* Canlı rakamlar — kart değil, ince çizgiyle ayrılmış dört sütun. */
+.lp-stats { margin-top: var(--s-8); display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--s-5); border-top: 1px solid var(--lp-line); padding-top: var(--s-6); }
+.lp-stats dt { font-size: var(--t-small); color: var(--lp-faint); }
+.lp-stats dd { margin-top: var(--s-2); font-size: clamp(1.35rem, 2.2vw, 1.95rem); font-weight: 800; letter-spacing: -0.03em; }
+
+/* ── 4 · ÖZELLİKLER — dönüşümlü ── */
+.lp-features .lp-head { margin-bottom: var(--section-gap); }
+.lp-feature { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr); gap: clamp(32px, 5vw, 80px); align-items: center; }
+.lp-feature + .lp-feature { margin-top: clamp(64px, 7vw, 120px); }
+.lp-feature--ters .lp-feature-text { order: 2; }
+.lp-feature h3 { margin-top: var(--s-3); font-size: var(--t-h2); font-weight: 800; line-height: var(--lh-tight); letter-spacing: -0.035em; }
+.lp-feature-desc { margin-top: var(--s-4); font-size: var(--t-lede); line-height: var(--lh-body); color: var(--lp-muted); }
+.lp-ticks { margin-top: var(--s-5); display: grid; gap: var(--s-3); }
+.lp-ticks li { display: flex; align-items: center; gap: var(--s-2); font-size: var(--t-body); color: var(--lp-muted); }
+.lp-ticks li svg { flex-shrink: 0; color: var(--lp-pos); }
+
+.lp-panel { border: 1px solid var(--lp-line); border-radius: var(--r-lg); background: var(--lp-bg); padding: var(--s-5); box-shadow: var(--sh-card); }
+.lp-panel-title { font-size: var(--t-small); font-weight: 700; color: var(--lp-faint); }
+.lp-row { display: flex; align-items: center; gap: var(--s-3); padding: var(--s-3) 0; border-bottom: 1px solid var(--lp-line); }
+.lp-row-name { font-size: var(--t-body); font-weight: 600; flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.lp-row-sub { font-size: var(--t-micro); color: var(--lp-faint); white-space: nowrap; }
+.lp-row-badge { border-radius: 999px; background: rgba(4,150,90,.12); padding: 3px 9px; color: var(--lp-pos); font-family: var(--font-mono); font-size: var(--t-micro); font-weight: 700; }
+.lp-alert { margin-top: var(--s-4); border-radius: var(--r-md); background: var(--lp-bg-soft); padding: var(--s-3) var(--s-4); font-size: var(--t-small); color: var(--lp-muted); }
+.lp-alert b { color: var(--lp-accent); margin-right: var(--s-1); }
+
+.lp-panel--chat { display: grid; gap: var(--s-3); }
+.lp-bubble { border-radius: var(--r-md); background: var(--lp-bg-soft); padding: var(--s-4); font-size: var(--t-body); line-height: var(--lh-body); color: var(--lp-muted); }
+.lp-bubble--user { justify-self: end; max-width: 78%; background: var(--lp-ink); color: #fff; }
+.lp-bubble b { color: var(--lp-ink); }
+
+/* ── 5 · FARKLILAŞMA ── */
+.lp-diff { background: var(--lp-bg-soft); }
+.lp-diff .lp-head { margin-bottom: var(--section-gap); }
+.lp-diff-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--s-6); }
+.lp-diff-num { font-size: clamp(2rem, 3.2vw, 2.9rem); font-weight: 800; letter-spacing: -0.04em; line-height: 1; color: var(--lp-accent); }
+.lp-diff-label { margin-top: var(--s-2); font-size: var(--t-small); font-weight: 700; }
+.lp-diff-desc { margin-top: var(--s-3); font-size: var(--t-small); line-height: var(--lh-body); color: var(--lp-muted); }
+.lp-bars { margin-top: var(--s-3); display: flex; align-items: flex-end; gap: 3px; height: 52px; }
+.lp-bars i { flex: 1; border-radius: 2px 2px 0 0; background: var(--lp-accent); opacity: .8; }
+
+/* ── 7 · FİYAT ── */
+.lp-head--orta { text-align: center; }
+.lp-head--orta p { margin-inline: auto; }
+.lp-plans { margin-top: var(--section-gap); display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s-5); max-width: 860px; margin-inline: auto; }
+.lp-plan { position: relative; border: 1px solid var(--lp-line); border-radius: var(--r-lg); background: var(--lp-bg); padding: var(--s-7) var(--s-6); display: flex; flex-direction: column; }
+.lp-plan--one { border-color: var(--lp-ink); }
+.lp-plan-badge { position: absolute; top: calc(var(--s-4) * -1); left: var(--s-6); border-radius: 999px; background: var(--lp-accent); padding: 5px 12px; color: #fff; font-size: var(--t-micro); font-weight: 700; }
+.lp-plan-name { font-size: var(--t-small); font-weight: 700; color: var(--lp-faint); }
+.lp-plan-price { margin-top: var(--s-3); font-size: clamp(2.2rem, 3.6vw, 3rem); font-weight: 800; letter-spacing: -0.04em; line-height: 1; }
+.lp-plan-price span { font-size: var(--t-lede); font-weight: 600; color: var(--lp-muted); }
+.lp-plan-note { margin-top: var(--s-2); font-size: var(--t-small); color: var(--lp-faint); }
+.lp-plan .lp-ticks { margin-bottom: var(--s-6); }
+.lp-plan .lp-btn { margin-top: auto; }
+
+/* ── 8 · SSS ── */
+.lp-faq .lp-head { margin-bottom: var(--section-gap); }
+.lp-faq-list { max-width: 860px; border-top: 1px solid var(--lp-line); }
+.lp-faq-item { border-bottom: 1px solid var(--lp-line); }
+.lp-faq-item button { display: flex; align-items: center; justify-content: space-between; gap: var(--s-5); width: 100%; padding: var(--s-5) 0; text-align: left; font-size: var(--t-h3); font-weight: 700; letter-spacing: -0.02em; }
+.lp-faq-item button svg { flex-shrink: 0; color: var(--lp-faint); transition: transform .22s ease; }
+.lp-faq-item.is-open button svg { transform: rotate(45deg); }
+/* grid-template-rows ile açılış: max-height numarasının aksine içeriğin
+   gerçek yüksekliğini bilmeye gerek yok, sıçrama olmuyor. */
+.lp-faq-panel { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .24s ease; }
+.lp-faq-item.is-open .lp-faq-panel { grid-template-rows: 1fr; }
+.lp-faq-panel > div { overflow: hidden; }
+.lp-faq-panel p { padding-bottom: var(--s-5); max-width: var(--w-text); font-size: var(--t-body); line-height: var(--lh-body); color: var(--lp-muted); }
+
+/* ── 10 · FİNAL CTA ── */
+.lp-final { border-top: 1px solid var(--lp-line); padding-block: clamp(80px, 9vw, 148px); text-align: center; }
+.lp-final h2 { max-width: var(--w-title); margin-inline: auto; font-size: var(--t-h2); font-weight: 800; line-height: var(--lh-tight); letter-spacing: -0.035em; }
+.lp-final p { margin: var(--s-4) auto 0; max-width: var(--w-text); font-size: var(--t-lede); color: var(--lp-muted); }
+.lp-cta--orta { justify-content: center; }
+
+/* ── 11 · FOOTER ── */
+.lp-footer { border-top: 1px solid var(--lp-line); background: var(--lp-bg-soft); color: var(--lp-muted); font-size: var(--t-small); }
+.lp-footer-head { font-size: var(--t-small); font-weight: 700; color: var(--lp-ink); }
+.lp-footer a:hover { color: var(--lp-ink); }
+.lp-footer-base { border-top: 1px solid var(--lp-line); padding: var(--s-5) 0; text-align: center; font-size: var(--t-micro); color: var(--lp-faint); }
+
+/* ── DUYARLI ── */
+@media (max-width: 1024px) {
+  .lp-feature { grid-template-columns: minmax(0, 1fr); gap: var(--s-6); }
+  .lp-feature--ters .lp-feature-text { order: 0; }
+  .lp-diff-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 768px) {
+  .lp-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s-5) var(--s-4); }
+  .lp-plans { grid-template-columns: minmax(0, 1fr); }
+  .lp-window-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .lp-window-grid > :nth-child(3) { display: none; }
+}
+@media (max-width: 480px) {
+  .lp-diff-grid { grid-template-columns: minmax(0, 1fr); }
+  .lp-window-rail { display: none; }
+  .lp-cta { flex-direction: column; align-items: stretch; }
+  .lp-btn { width: 100%; }
+}
