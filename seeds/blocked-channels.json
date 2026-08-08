@@ -1,0 +1,16 @@
+{
+  "_aciklama": "Evrene ALINMAYACAK kanallar. scan.mts --load bunları atlar, yoksa her yüklemede geri gelirler. Kurum/yayıncı/plak şirketi/gazete: creator değiller, taklit edilebilir bir şey üretmiyorlar ve kanal medyanına göre uçuk çarpanlar yaptıkları için outlier sıralamasının tepesini işgal ediyorlar. Şüpheli ama emin olunamayan kanallar buraya YAZILMAZ — yanlışlıkla gerçek creator silmek, birkaç kurumsal kanalı tutmaktan kötüdür.",
+  "blocked": [
+    { "id": "UCaO6TYtlC8U5ttz62hTrZgg", "title": "JYP Entertainment", "sebep": "K-pop plak şirketi" },
+    { "id": "UCZSNzBgFub_WWil6TOTYwAg", "title": "Netflix India", "sebep": "yayın platformu, dizi fragmanları" },
+    { "id": "UC1VU-FHvhbom5tPSCEB-e4g", "title": "Amazon Prime Video Sport", "sebep": "yayın platformu" },
+    { "id": "UCExvTU_fo2_bIRo93rAwx7A", "title": "BirGün TV", "sebep": "gazete / haber kuruluşu" },
+    { "id": "UCPKFFLAjURTjAq4pdE3cRTg", "title": "Oksijen TV", "sebep": "haber yayıncısı" },
+    { "id": "UCbaLyHJp6S9Lsj6oT9aJsQw", "title": "Akit TV", "sebep": "haber yayıncısı" },
+    { "id": "UCAGVKxpAKwXMWdmcHbrvcwQ", "title": "EKOTÜRK TV", "sebep": "ekonomi televizyonu" },
+    { "id": "UCgKdEcj85RUNUEmpwsXBVog", "title": "Nasıl Bir Ekonomi TV", "sebep": "televizyon programı" },
+    { "id": "UCFjxzKcD2vIyUmhsCXNkXuw", "title": "gdh TV", "sebep": "dijital haber kuruluşu" },
+    { "id": "UCrDBfmHBBftwDVx05HDXhiQ", "title": "Libero TV", "sebep": "spor medyası" },
+    { "id": "UCrbpHJy8GQjdTNNjuLWbVgQ", "title": "Kadınca TV", "sebep": "dergi markası" }
+  ]
+}

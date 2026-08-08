@@ -135,15 +135,27 @@ async function phaseLoad() {
     }
   }
 
+  // Kara liste: kurum/yayıncı/plak şirketi. DB'den silmek yetmez — tohum
+  // dosyalarında durdukları için her --load'da geri gelirler.
+  const blockPath = join(process.cwd(), "seeds", "blocked-channels.json");
+  const blocked = existsSync(blockPath)
+    ? new Set(
+        (JSON.parse(readFileSync(blockPath, "utf8")) as { blocked: { id: string }[] }).blocked.map(
+          (b) => b.id,
+        ),
+      )
+    : new Set<string>();
+
   // niches tablosundaki slug'lara uymayan nişler FK'ya takılır — önce süz.
   const { data: nicheRows } = await db.from("niches").select("slug");
   const known = new Set((nicheRows ?? []).map((n) => n.slug as string));
   const rows = [...universe.entries()]
-    .filter(([, niche]) => known.has(niche))
+    .filter(([id, niche]) => known.has(niche) && !blocked.has(id))
     .sort((a, b) => a[0].localeCompare(b[0]))
     .map(([id, niche]) => ({ id, title: id, niche_slug: niche }));
 
-  const dropped = universe.size - rows.length;
+  const blockedHits = [...universe.keys()].filter((id) => blocked.has(id)).length;
+  const dropped = universe.size - rows.length - blockedHits;
   // title zorunlu (not null) ama henüz bilinmiyor — ucuz tarama dolduracak.
   // ignoreDuplicates: mevcut kanalların title/istatistiklerini EZME.
   for (let i = 0; i < rows.length; i += 500) {
@@ -153,9 +165,15 @@ async function phaseLoad() {
     if (error) throw new Error(`channels upsert: ${error.message}`);
   }
 
+  // Kara listedekiler daha önce yüklenmiş olabilir — tabloda kalmasınlar.
+  if (blocked.size) {
+    await db.from("channels").delete().in("id", [...blocked]); // videolar cascade siliniyor
+  }
+
   const { count } = await db.from("channels").select("id", { count: "exact", head: true });
   console.log(`LOAD  → tohum ${universe.size} · yazıldı ${rows.length}` +
-    (dropped ? ` · bilinmeyen niş yüzünden atlanan ${dropped}` : "") +
+    (blockedHits ? ` · kara liste ${blockedHits}` : "") +
+    (dropped ? ` · bilinmeyen niş ${dropped}` : "") +
     ` · tablodaki toplam ${count}`);
 }
 
