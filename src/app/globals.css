@@ -462,23 +462,46 @@ input[type="range"]::-moz-range-thumb { pointer-events: auto; width: 12px; heigh
 /* Tipografi ölçeği ve boşluk ritmi viewstats.com/info'dan ölçüldü: başlık
    geniş ve iri, alt metin dar ve orta boy, aralar cömert. Huni şekli kasten —
    göz yukarıdan aşağı daralarak butona iniyor. */
-.lp-hero { max-width: 980px; margin: 0 auto; padding: 148px 24px 116px; text-align: center; }
+/* Kapsayıcı geniş, satır uzunluğu dar: ikisi ayrı iş yapıyor.
+   Kapsayıcı 1240px olunca içerik geniş ekranlarda sayfanın ortasına sıkışmış
+   dar bir kolon gibi durmuyor; başlık 980px'te tutulunca da satırlar
+   okunabilir uzunlukta kalıyor. Önceden ikisi de 980/900'dü ve hero dar bir
+   şerit gibi görünüyordu. */
+.lp-hero {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: clamp(84px, 10.5vw, 176px) 32px clamp(76px, 9vw, 140px);
+  text-align: center;
+}
 .lp-hero h1 {
-  margin: 24px auto 0;
-  max-width: 900px;
-  font-family: var(--font-display);
-  font-size: clamp(2.9rem, 6.6vw, 4.9rem);
+  margin: 0 auto;
+  max-width: 1000px;
+  /* Punto tavanı kutuya göre ölçüldü, keyfî değil: 84px'te bu başlık 1440 ve
+     1920'de 14/16/17 karakterlik ÜÇ kısa satıra kırılıyordu — "ortaya
+     yığılmış" hissi tam olarak buradan geliyordu. 76px + sıkı harf aralığı
+     ile 1000px kutuda iki dengeli satır çıkıyor (~24 karakter, ~880px). */
+  font-size: clamp(2.5rem, 5.3vw, 4.75rem);
   font-weight: 800;
-  line-height: 1.06;
-  letter-spacing: -0.042em;
+  line-height: 1.0;
+  letter-spacing: -0.04em;
+  /* balance: satırların görsel ağırlığını eşitler — son satırda tek kelime
+     kalıp dengesiz görünmesin. */
   text-wrap: balance;
 }
-/* Alt metin başlıktan DAR: huninin ikinci kademesi. */
-.lp-lede { margin: 38px auto 0; max-width: 660px; color: var(--color-muted); font-size: 19.5px; line-height: 1.6; text-wrap: pretty; }
+/* Alt metin başlıktan hem DAR hem belirgin şekilde KÜÇÜK: huninin ikinci
+   kademesi. Göz yukarıdan aşağı daralarak butona iniyor. */
+.lp-lede {
+  margin: 32px auto 0;
+  max-width: 720px;
+  color: var(--color-muted);
+  font-size: clamp(16.5px, 1.25vw, 20px);
+  line-height: 1.65;
+  text-wrap: pretty;
+}
 /* İkincil bağlantı butonun ALTINDA, yanında değil — yan yana olunca ikisi
    eşit ağırlıkta görünüyor ve birincil eylem gücünü kaybediyor. */
-.lp-cta { margin-top: 60px; display: flex; flex-direction: column; align-items: center; gap: 22px; }
-.lp-hero .orange-button { border-radius: 12px; padding: 17px 30px; font-size: 15px; letter-spacing: 0; }
+.lp-cta { margin-top: 36px; display: flex; flex-direction: column; align-items: center; gap: 18px; }
+.lp-hero .orange-button { border-radius: 12px; padding: 17px 32px; font-size: 15px; letter-spacing: 0; }
 .lp-secondary { color: var(--color-muted); font-size: 15px; transition: color .2s; }
 .lp-secondary:hover { color: var(--color-ink); }
 
@@ -533,10 +556,12 @@ input[type="range"]::-moz-range-thumb { pointer-events: auto; width: 12px; heigh
 .lp-price-card li svg { flex-shrink: 0; color: var(--color-pos); }
 .lp-price-fine { margin-top: 14px; font-size: 12px; color: var(--color-faint); }
 
+/* Mobilde punto ve dikey boşluk zaten clamp ile ölçekleniyor; burada
+   yalnızca yanal dolgu daraltılıyor (32px dar ekranda satırı boğuyor). */
 @media (max-width: 640px) {
-  .lp-hero { padding: 76px 20px 60px; }
-  .lp-lede { margin-top: 26px; font-size: 17px; }
-  .lp-cta { margin-top: 40px; }
+  .lp-hero { padding-left: 20px; padding-right: 20px; }
+  .lp-lede { margin-top: 24px; }
+  .lp-cta { margin-top: 30px; }
   .lp-proof, .lp-steps, .lp-price { padding-bottom: 72px; }
 }
 
