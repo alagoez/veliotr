@@ -24,23 +24,39 @@ export function SignInForm() {
       setMessage("Demo modu aktif. Gerçek hesap için Supabase env değişkenlerini ekleyin.");
       setBusy(false); return;
     }
-    const supabase = createClientSupabase();
-    const result = mode === "signin"
-      ? await supabase.auth.signInWithPassword({ email, password })
-      : await supabase.auth.signUp({ email, password, options: { data: { display_name: name } } });
-    if (result.error) setMessage(result.error.message);
-    else if (mode === "signup") setMessage("Kayıt başarılı. E-posta doğrulamasını kontrol edin.");
-    else {
+    try {
+      const supabase = createClientSupabase();
+      // Ağ takılırsa buton sonsuza kadar "Hazırlanıyor..." kalmasın: 15 sn
+      // sonra yarış biter ve kullanıcı ne olduğunu öğrenir.
+      const timeout = new Promise<never>((_, reject) =>
+        setTimeout(() => reject(new Error("Sunucuya ulaşılamadı. Bağlantını kontrol edip tekrar dene.")), 15_000),
+      );
+      const result = await Promise.race([
+        mode === "signin"
+          ? supabase.auth.signInWithPassword({ email, password })
+          : supabase.auth.signUp({ email, password, options: { data: { display_name: name } } }),
+        timeout,
+      ]);
+      if (result.error) setMessage(result.error.message);
+      else if (mode === "signup") setMessage("Kayıt başarılı. E-posta doğrulamasını kontrol edin.");
+      else {
       // `next`'i onurlandır: /home'dan yönlendirilen kullanıcı giriş sonrası
       // /home'a dönmeli. Aksi halde onboarding'e düşüp istediği yere hiç
       // ulaşamıyordu. Yalnızca uygulama içi yollar kabul ediliyor — açık
       // yönlendirme (open redirect) açığı doğmasın.
-      const next = new URLSearchParams(window.location.search).get("next");
-      const safe = next && next.startsWith("/") && !next.startsWith("//") ? next : null;
-      router.push(safe ?? "/getting-started");
-      router.refresh();
+        const next = new URLSearchParams(window.location.search).get("next");
+        const safe = next && next.startsWith("/") && !next.startsWith("//") ? next : null;
+        router.push(safe ?? "/getting-started");
+        router.refresh();
+      }
+    } catch (e) {
+      // try/catch YOKTU: signInWithPassword hata fırlattığında (ağ hatası,
+      // yapılandırma sorunu) setBusy(false) hiç çalışmıyordu — buton sonsuza
+      // kadar "Hazırlanıyor..." kalıyor, kullanıcı hiçbir mesaj görmüyordu.
+      setMessage(e instanceof Error ? e.message : "Beklenmeyen bir hata oluştu.");
+    } finally {
+      setBusy(false);
     }
-    setBusy(false);
   }
 
   async function signInWithGoogle() {
@@ -49,11 +65,17 @@ export function SignInForm() {
       setMessage("Demo modu aktif. Google girişi için Supabase env değişkenlerini ekleyin.");
       setBusy(false); return;
     }
-    const supabase = createClientSupabase();
-    const next = new URLSearchParams(window.location.search).get("next") || "/getting-started";
-    const redirectTo = `${window.location.origin}/auth/callback?next=${encodeURIComponent(next)}`;
-    const { error } = await supabase.auth.signInWithOAuth({ provider: "google", options: { redirectTo } });
-    if (error) { setMessage(error.message); setBusy(false); }
+    try {
+      const supabase = createClientSupabase();
+      const next = new URLSearchParams(window.location.search).get("next") || "/getting-started";
+      const redirectTo = `${window.location.origin}/auth/callback?next=${encodeURIComponent(next)}`;
+      const { error } = await supabase.auth.signInWithOAuth({ provider: "google", options: { redirectTo } });
+      if (error) { setMessage(error.message); setBusy(false); }
+      // Hata yoksa tarayıcı Google'a gidiyor; busy true kalması doğru.
+    } catch (e) {
+      setMessage(e instanceof Error ? e.message : "Google girişi başlatılamadı.");
+      setBusy(false);
+    }
   }
 
   return (
