@@ -59,8 +59,33 @@ const MATURE_DAYS = 30;
  * açıkça anormal kanallar elensin. %0,5'te 14 Shorts + 31 uzun kanal eleniyor.
  */
 const MIN_MEDIAN_SUB_RATIO = Number(
-  process.argv.find((a) => a.startsWith("--ratio="))?.slice(8) ?? 0.5,
+  process.argv.find((a) => a.startsWith("--ratio="))?.slice(8) ?? 2,
 );
+
+/**
+ * KANAL İÇİ YAYILIM tavanı: p90(izlenme) / ortanca(izlenme).
+ *
+ * Neden gerekli: göreli taban tek başına yetmedi. Eşiği %0,5'ten %2'ye
+ * çıkardık, Borusan Next elendi — ama yerine Cklass geldi (Meksikalı doğrudan
+ * satış markası), tam %2,0'da durup süzgeci geçiyor. Eşiği yükselttikçe bir
+ * üstünde başka marka beliriyor: semptom tedavisi.
+ *
+ * Yayılım farklı bir şey ölçüyor: markanın videolarının ÇOĞU ölü, birkaçı
+ * satın alınmış izlenmeyle patlıyor — dağılım iki tepeli. Gerçek üreticinin
+ * kitlesi videolarının çoğunu izler, dağılım pürüzsüzdür.
+ *
+ * Ölçüm (en az 20 videolu 1.746 kanal):
+ *   ortanca 4,5 · %90: 14,1 · %95: 22,9 · %99: 58,2
+ *   Cklass 1747 · Bioxcin 154  ←  patoloji
+ *   Buildtech 42 · RasoiOpus 30 · Ferah Kitchen 12  ←  gerçek üretici
+ *
+ * Eşik 100: 99. yüzdeliğin neredeyse iki katı, 1.746 kanalın 8'ini eliyor.
+ * Kasten temkinli — bir videosu viral olmuş gerçek üreticiyi elemektense
+ * birkaç markayı tutmak yeğdir.
+ */
+const MAX_SPREAD = Number(process.argv.find((a) => a.startsWith("--spread="))?.slice(9) ?? 100);
+/** Yayılımın anlamlı olması için gereken asgari video sayısı. */
+const SPREAD_MIN_VIDEOS = 20;
 
 async function sql<T = Record<string, unknown>>(query: string): Promise<T[]> {
   const res = await fetch(SQL_API, {
@@ -102,17 +127,32 @@ const MEDIAN_CTE = `
     from tumu t
     left join olgun o on o.channel_id = t.channel_id and o.is_short = t.is_short
   ),
-  -- Göreli taban: medyan abonenin %${MIN_MEDIAN_SUB_RATIO}'inden azsa kanal
-  -- skorlanmaz. med=0 yazılıyor, aşağıdaki MIN_MEDIAN_BASE kontrolü sıfırlıyor.
+  -- Kanal içi yayılım: p90 / ortanca. İki tepeli dağılım = satın alınmış izlenme.
+  yayilim as (
+    select channel_id,
+           count(*) n,
+           percentile_cont(0.9) within group (order by views)
+             / nullif(percentile_cont(0.5) within group (order by views), 0) oran
+    from videos
+    group by channel_id
+  ),
+  -- İki kanal-kalitesi süzgeci birlikte:
+  --   1. medyan, abonenin %${MIN_MEDIAN_SUB_RATIO}'inden azsa → organik taban yok
+  --   2. yayılım ${MAX_SPREAD}'ün üstündeyse → dağılım iki tepeli, izlenme satın alınmış
+  -- İkisinden biri tutarsa med=0 yazılıyor, video skorları sıfırlanıyor.
   medyan as (
     select h.channel_id, h.is_short,
            case
              when c.subscribers > 0
               and h.med < c.subscribers * ${MIN_MEDIAN_SUB_RATIO} / 100.0
              then 0::bigint
+             when y.n >= ${SPREAD_MIN_VIDEOS} and y.oran > ${MAX_SPREAD}
+             then 0::bigint
              else h.med
            end med
-    from ham h join channels c on c.id = h.channel_id
+    from ham h
+    join channels c on c.id = h.channel_id
+    left join yayilim y on y.channel_id = h.channel_id
   )`;
 
 console.log(DRY ? "SKORLAMA (dry — yazma yok)\n" : "SKORLAMA\n");

@@ -135,12 +135,70 @@ izl:abone = izlenme / abone               ← boyuttan bağımsız sinyal
 etkileşim = (beğeni + yorum) / izlenme
 ```
 
+Skor **tarama sırasında değil**, `scripts/score.mts` ile toplu SQL olarak
+hesaplanıyor. Gerekçe: skor tarama sırasında hesaplansaydı formülün her
+değişikliği 1.754 kanalı yeniden çekmek (~7.000 birim, ~1 saat) demek olurdu.
+Skor için gereken her şey zaten tabloda. Ayrılınca formül denemesi **bedava**.
+
 | Sabit | Değer | Gerekçe |
 |---|---|---|
 | Medyan olgunluk eşiği | 30 gün | Yeni video henüz izlenmesini toplamamış; medyana katılırsa tabanı düşürür ve herkesi yapay outlier yapar |
 | Medyan için asgari video | 10 | 10 videonun altında medyan gürültü |
-| Medyan tabanı | 500 izlenme | Medyanı 200 olan kanalda tek video 5000x yapar ve sıralamayı kirletir. Taban altındaysa skor 0 |
+| Medyan tabanı (mutlak) | 500 izlenme | Dejenere durumları eler |
 | Shorts sınırı | ≤ 62 saniye | YouTube'un kendi tanımı |
+
+### Kanal kalitesi süzgeçleri — ikisi de ölçümle konuldu
+
+Marka kanalları satın alınmış izlenme aldığı için çarpanları anlamsız şişiyor
+ve sıralamanın tepesini işgal ediyorlardı. İki bağımsız sinyal birlikte eliyor:
+
+**1 · Göreli medyan tabanı — medyan ≥ abonenin %2'si**
+
+Mutlak taban (500) hiçbir şeyi elemiyordu ama absürt skorlar üretiyordu: `HBL`
+287.000 aboneli, Shorts medyanı 803 (abonesinin %0,28'i), bir Short'u 23 milyon
+almış → 29.006x. Mutlak tabanı yükseltmek yanlış çözüm — küçük kanalları
+cezalandırır, oysa "küçük kanal outlier'ı" ürünün ayırt edici özelliği.
+
+Ölçüm (1.389 kanal): medyan/abone oranı → 5. yüzdelik %0,83 · ortanca %19,3.
+
+| Eşik | Elenen kanal | 1000x üstü kalan |
+|---|---|---|
+| %0,5 | 0 | 27 |
+| %1 | 49 | 24 |
+| **%2** | **130** | **6** |
+| %3 | 203 | 5 |
+
+%2 kırılma noktası; sonrası azalan getiri.
+
+**2 · Kanal içi yayılım — p90(izlenme) ÷ ortanca ≤ 100**
+
+Göreli taban tek başına yetmedi: `Borusan Next` elendi ama yerine `Cklass`
+(Meksikalı doğrudan satış markası) geldi, tam %2,0'da durup süzgeci geçti.
+Eşiği yükselttikçe bir üstünde başka marka beliriyordu — semptom tedavisi.
+
+Yayılım farklı bir şey ölçüyor: **markanın videolarının çoğu ölü, birkaçı
+satın alınmış izlenmeyle patlıyor** — dağılım iki tepeli. Gerçek üreticinin
+kitlesi videolarının çoğunu izler, dağılım pürüzsüzdür.
+
+Ölçüm (en az 20 videolu 1.746 kanal):
+
+| | Yayılım |
+|---|---|
+| Ortanca | 4,5 |
+| %90 | 14,1 |
+| %99 | **58,2** |
+| `Cklass` (marka) | **1747** |
+| `Bioxcin` (marka) | **154** |
+| `Buildtech` (üretici) | 42 |
+| `RasoiOpus` (üretici) | 30 |
+
+Eşik **100** — 99. yüzdeliğin neredeyse iki katı, 1.746 kanalın yalnızca 8'ini
+eliyor. Kasten temkinli: bir videosu viral olmuş gerçek üreticiyi elemektense
+birkaç markayı tutmak yeğdir.
+
+**Sonuç:** 1000x üstü video 43 → 28. Sıralamanın tepesi marka reklamlarından
+gerçek üreticilere döndü — 16 bin aboneli bir yemek kanalının 9 milyon izlenen
+videosu gibi. Ürünün satacağı şey bu.
 
 ### Bilinen kusur: Shorts çarpanı şişiriyor
 
@@ -212,7 +270,10 @@ Ayrımı net tutmak için:
 
 **Ölçtüğümüz (deneyle doğrulanmış):**
 0,02 birim/kanal ucuz tarama · 3,98 birim/kanal derin tarama · 2,0 sn/kanal
-tarama hızı · 268 bayt/video · Shorts %47→%56 çarpıklığı · ülke dağılımı
+tarama hızı · 268 bayt/video · Shorts çarpıklığı · ülke dağılımı ·
+**göreli medyan tabanı %2** (kırılma noktası ölçüldü) · **yayılım tavanı 100**
+(99. yüzdeliğin iki katı) · **embedding örneklemesi** (768 boyut × 175.400 video
+= 539 MB > 500 MB tavan)
 
 **Google'ın fiyatı (bizim seçimimiz değil):**
 search.list 100 birim · diğerleri 1 birim · günlük 10.000 birim
