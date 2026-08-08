@@ -56,10 +56,39 @@ async function runSql(sql: string): Promise<void> {
 const okId = (id: string) => /^[A-Za-z0-9_-]+$/.test(id);
 const vecLit = (v: number[]) => `[${v.map((x) => (Number.isFinite(x) ? x : 0)).join(",")}]`;
 
+/**
+ * Hangi videolar vektörlenecek? Tümü DEĞİL — sığmıyor (migration 0008).
+ *
+ *   kanal başına son PER_CHANNEL video   → niş tespiti (verify-niches.mts)
+ *   çarpanı MIN_OUTLIER üstü tüm videolar → semantik arama
+ *
+ * Ölçüm: 768 boyut × 4 bayt = 3 kB/video. Tüm evren (175.400 video) 539 MB,
+ * Supabase ücretsiz tavanı 500 MB. Bu seçimle ~40.000 vektör ≈ 123 MB.
+ */
+const PER_CHANNEL = Number(process.argv.find((a) => a.startsWith("--per-channel="))?.slice(14) ?? 20);
+const MIN_OUTLIER = Number(process.argv.find((a) => a.startsWith("--min-outlier="))?.slice(14) ?? 10);
+
+async function markTargets(): Promise<void> {
+  await runSql(`
+    update videos set embed_target = false where embed_target;
+
+    with son_videolar as (
+      select id from (
+        select id, row_number() over (partition by channel_id order by published_at desc) sira
+        from videos
+      ) t where sira <= ${PER_CHANNEL}
+    )
+    update videos set embed_target = true
+    where id in (select id from son_videolar)
+       or outlier_score >= ${MIN_OUTLIER};
+  `);
+}
+
 async function processBatch(): Promise<number | null> {
   const { data, error } = await db
     .from("videos")
     .select("id, title")
+    .eq("embed_target", true)
     .is("embedding", null)
     .limit(25);
   if (error) throw new Error(error.message);
@@ -85,6 +114,20 @@ async function processBatch(): Promise<number | null> {
   }
   return values.length;
 }
+
+// 0) Hedefleri işaretle — hepsi değil, örneklem (yukarıdaki gerekçe)
+console.log(`Hedefler işaretleniyor (kanal başına son ${PER_CHANNEL} video + ${MIN_OUTLIER}x üstü)...`);
+await withRetry(markTargets, "mark targets");
+const { count: hedef } = await db
+  .from("videos")
+  .select("id", { count: "exact", head: true })
+  .eq("embed_target", true);
+const { count: kalan } = await db
+  .from("videos")
+  .select("id", { count: "exact", head: true })
+  .eq("embed_target", true)
+  .is("embedding", null);
+console.log(`Hedef: ${hedef} video · vektörlenecek: ${kalan} · tahmini boyut: ${Math.round((hedef ?? 0) * 3072 / 1e6)} MB\n`);
 
 // 1) İndeksi düşür
 console.log("HNSW indeksi düşürülüyor...");
