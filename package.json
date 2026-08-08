@@ -18,6 +18,7 @@
     "discover": "tsx --env-file-if-exists=.env.local scripts/discover-channels.mts",
     "discover:global": "tsx --env-file-if-exists=.env.local scripts/discover-global.mts",
     "scan": "tsx --env-file-if-exists=.env.local scripts/scan.mts",
+    "score": "tsx --env-file-if-exists=.env.local scripts/score.mts",
     "sync-niches": "tsx --env-file-if-exists=.env.local scripts/sync-niches.mts",
     "demo-user": "tsx --env-file-if-exists=.env.local scripts/create-demo-user.mts",
     "verify-niches": "tsx --env-file-if-exists=.env.local scripts/verify-niches.mts"
