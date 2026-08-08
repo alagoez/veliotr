@@ -58,13 +58,27 @@ function reserve(units: number): boolean {
   return true;
 }
 
+/** Günlük kota gerçekten bittiğinde (bizim defterimiz değil, Google'ınki). */
+let apiQuotaExhausted = false;
+
 async function yt<T>(path: string, params: Record<string, string>, units: number): Promise<T | null> {
   if (!KEY) throw new Error("YOUTUBE_API_KEY gerekli.");
+  if (apiQuotaExhausted) return null;
   if (!reserve(units)) return null;
   const qs = new URLSearchParams({ ...params, key: KEY });
   const res = await fetch(`${API}/${path}?${qs}`);
   if (!res.ok) {
-    throw new Error(`${path} ${res.status}: ${(await res.text()).slice(0, 300)}`);
+    const body = await res.text();
+    // Google'ın günlük kotası bizim bütçemizden önce bitebilir (aynı anahtar
+    // discover-global tarafından da kullanılıyor). Bu bir hata değil, sınır:
+    // çökmek yerine dur — işlenen kanallar last_deep_at ile korunuyor, sonraki
+    // çalıştırma kaldığı yerden devam eder.
+    if (res.status === 403 && /quotaExceeded|dailyLimitExceeded/i.test(body)) {
+      apiQuotaExhausted = true;
+      console.log("\n⏸  Google günlük kotası doldu — durduruldu. Yarın kaldığı yerden devam eder.");
+      return null;
+    }
+    throw new Error(`${path} ${res.status}: ${body.slice(0, 300)}`);
   }
   return res.json() as Promise<T>;
 }
@@ -84,8 +98,18 @@ function parseDuration(iso: string): number {
   return Number(m[1] ?? 0) * 3600 + Number(m[2] ?? 0) * 60 + Number(m[3] ?? 0);
 }
 
-/** Supabase yazma: HNSW indeksi büyük upsert'lerde timeout'a düşüyor (ingest.ts notu). */
-const WRITE_CHUNK = 20;
+/**
+ * Supabase yazma parti boyutu.
+ *
+ * ingest.ts 20'ye sabitlemiş; gerekçesi videos tablosundaki HNSW embedding
+ * indeksinin büyük upsert'lerde statement timeout'a düşmesi. Ama bu ancak
+ * embedding kolonu DOLUYSA geçerli — indeks boşken güncelleme maliyeti yok.
+ *
+ * Ölçüm: 20'lik partilerle kanal başına 5 yazma turu → ~7,5 sn/kanal, 1.680
+ * kanal için 3,5 saat. embed.mts çalıştırıldıktan (embedding'ler dolduktan)
+ * sonra bu değeri düşürmek gerekebilir; --chunk ile ayarlanabilir.
+ */
+const WRITE_CHUNK = Number(arg("chunk") ?? 100);
 async function writeChunked<T>(
   rows: T[],
   fn: (chunk: T[]) => PromiseLike<{ error: { message: string } | null }>,
