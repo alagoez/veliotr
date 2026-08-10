@@ -97,10 +97,21 @@ function Cta({ children = "Ücretsiz başla", tone = "primary" }: { children?: s
   );
 }
 
-/** Uygulamanın Keşfet ekranı — gerçek thumbnail, gerçek çarpan. */
-function Pencere({ list, dar = false }: { list: Ornek[]; dar?: boolean }) {
+/**
+ * Uygulamanın Keşfet ekranı — gerçek thumbnail, gerçek çarpan.
+ *
+ * `zengin` modu vitrin için: karşılama satırı, araç kısayolları ve ikinci
+ * video sırası eklenir. Sahte ekran görüntüsü değil, kendi arayüzümüz kendi
+ * verimizle yeniden kurulmuş hâli.
+ */
+function Pencere({ list, dar = false, zengin = false }: { list: Ornek[]; dar?: boolean; zengin?: boolean }) {
+  const araclar = ["Keşfet", "Kanallarım", "Kaydedilenler", "Uyarılar", "Fikir AI"];
   return (
-    <div className={`lp-window${dar ? " lp-window--dar" : ""}`} role="img" aria-label="Keşfet ekranı önizlemesi">
+    <div
+      className={`lp-window${dar ? " lp-window--dar" : ""}${zengin ? " lp-window--zengin" : ""}`}
+      role="img"
+      aria-label="Keşfet ekranı önizlemesi"
+    >
       <div className="lp-window-rail">
         <span className="lp-window-dot lp-window-dot--on" />
         <span className="lp-window-dot" />
@@ -108,12 +119,23 @@ function Pencere({ list, dar = false }: { list: Ornek[]; dar?: boolean }) {
         <span className="lp-window-dot" />
       </div>
       <div className="lp-window-body">
+        {zengin && (
+          <div className="lp-window-welcome">
+            <span className="lp-window-avatar" aria-hidden />
+            <b>Hoş geldin.</b>
+            <span className="lp-window-dots" aria-hidden>
+              <i /><i /><i />
+            </span>
+          </div>
+        )}
+
         <div className="lp-window-head">
           <span className="lp-window-title">Keşfet</span>
           <span className="lp-window-chip">Outlier ↓</span>
           <span className="lp-window-chip">10x+</span>
           <span className="lp-window-chip">Mikro</span>
         </div>
+
         <div className="lp-window-grid">
           {list.map((v) => (
             <div key={v.id} className="lp-window-card">
@@ -130,6 +152,14 @@ function Pencere({ list, dar = false }: { list: Ornek[]; dar?: boolean }) {
             </div>
           ))}
         </div>
+
+        {zengin && (
+          <div className="lp-window-tools">
+            {araclar.map((a, i) => (
+              <span key={a} className={i === 0 ? "is-on" : undefined}>{a}</span>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );
@@ -188,30 +218,84 @@ export default async function LandingPage() {
       {/* ── 3 · ÜRÜN GÖRSELİ ─────────────────────────────────────────────
           Sahte ekran görüntüsü değil: uygulamanın kendi arayüzü, kendi
           verisiyle yeniden kuruldu. Altında canlı rakamlar. */}
-      {ilk3.length === 3 && (
-        <section className="lp-stage">
+      {ilk3.length === 3 && stats && (
+        <section className="lp-stage" aria-label="Viralab ekranı ve indeks büyüklüğü">
+          <div className="lp-stage-inner">
+            {/* Zikzak çizgiler: overflow:hidden sarmalayıcının içinde. Geçen
+                sefer sabit yükseklikli SVG bölümden taşıp alttaki başlığın
+                içinden geçiyordu — sarmalayıcı bunu imkânsız kılıyor. */}
+            <div className="lp-lines" aria-hidden>
+              <svg viewBox="0 0 1200 620" preserveAspectRatio="xMidYMid slice">
+                <polyline points="40,600 150,470 150,150 330,150" />
+                <polyline points="1160,60 1050,180 1050,470 900,470" />
+                <circle cx="40" cy="600" r="8" />
+                <circle cx="1160" cy="60" r="8" />
+              </svg>
+            </div>
+
+            <Pencere list={ilk3} zengin />
+
+            {/* Kartların pencereye binmesi KASITLI — referansta da öyle,
+                derinlik hissi oradan geliyor. */}
+            <figure className="lp-fl lp-fl--outlier">
+              <figcaption>Outlier</figcaption>
+              {ilk3[0].thumb && (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img src={ilk3[0].thumb} alt="" loading="lazy" />
+              )}
+              <span className="lp-fl-pill">{fmtMultiplier(ilk3[0].score)}</span>
+            </figure>
+
+            <div className="lp-fl lp-fl--yesil">↗ {fmtCompact(ilk3[0].views)} izlenme</div>
+
+            <div className="lp-fl lp-fl--koyu lp-fl--kanal">
+              <p className="lp-fl-num">{stats.kanallar.toLocaleString("tr-TR")}</p>
+              <p className="lp-fl-alt">Kanal takipte</p>
+            </div>
+
+            <div className="lp-fl lp-fl--grafik">
+              <p className="lp-fl-ust">Niş başına video</p>
+              <div className="lp-bars">
+                {stats.nisler.map((n, i) => (
+                  <i key={i} style={{ height: `${Math.max(12, (n / Math.max(...stats.nisler)) * 100)}%` }} />
+                ))}
+              </div>
+              <p className="lp-fl-alt">{stats.nisler.length} kategori · dengeli dağılım</p>
+            </div>
+
+            <div className="lp-fl lp-fl--izlenme">
+              <p className="lp-fl-ust">İndekslenen izlenme</p>
+              <p className="lp-fl-num lp-fl-num--sm">{stats.izlenme.toLocaleString("tr-TR")}</p>
+            </div>
+
+            <div className="lp-fl lp-fl--turuncu">
+              <p className="lp-fl-num">{fmtCompact(stats.videolar)}</p>
+              <p className="lp-fl-alt">Video indekste</p>
+            </div>
+
+            <div className="lp-fl lp-fl--siyah">Küçük kanal radarı</div>
+          </div>
+
+          {/* Dar ekranda yüzenler gizlenir; rakamlar bu satırda görünür kalır. */}
           <div className="lp-container">
-            <Pencere list={ilk3} />
-            {stats && (
-              <dl className="lp-stats">
-                <div>
-                  <dt>video taranıyor</dt>
-                  <dd>{stats.videolar.toLocaleString("tr-TR")}</dd>
-                </div>
-                <div>
-                  <dt>kanal takipte</dt>
-                  <dd>{stats.kanallar.toLocaleString("tr-TR")}</dd>
-                </div>
-                <div>
-                  <dt>indekslenen izlenme</dt>
-                  <dd>{fmtCompact(stats.izlenme)}</dd>
-                </div>
-                <div>
-                  <dt>kategori</dt>
-                  <dd>{stats.nisler.length || 15}</dd>
-                </div>
-              </dl>
-            )}
+            <dl className="lp-stats">
+              <div>
+                <dt>video taranıyor</dt>
+                <dd>{stats.videolar.toLocaleString("tr-TR")}</dd>
+              </div>
+              <div>
+                <dt>kanal takipte</dt>
+                <dd>{stats.kanallar.toLocaleString("tr-TR")}</dd>
+              </div>
+              <div>
+                <dt>indekslenen izlenme</dt>
+                <dd>{fmtCompact(stats.izlenme)}</dd>
+              </div>
+              <div>
+                <dt>kategori</dt>
+                <dd>{stats.nisler.length || 15}</dd>
+              </div>
+            </dl>
           </div>
         </section>
       )}

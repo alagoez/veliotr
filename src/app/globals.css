@@ -597,8 +597,91 @@ body:has(.lp-light) { background: var(--lp-bg); }
 }
 .lp-cta { margin-top: var(--s-7); display: flex; align-items: center; justify-content: center; gap: var(--s-3); flex-wrap: wrap; }
 
-/* ── 3 · ÜRÜN GÖRSELİ ── */
+
+/* ── 3 · VİTRİN (yüzen kartlı kompozisyon) ────────────────────────────────
+   Referanstaki düzenin karşılığı: ortada ürün penceresi, etrafında yüzen
+   kartlar, arkada zikzak çizgi.
+
+   İki kural bu bölümü ayakta tutuyor:
+   1. Çizgi overflow:hidden bir sarmalayıcının içinde. Sabit yükseklikli SVG
+      daha önce bölümden taşıp alttaki başlığın içinden geçmişti.
+   2. Kartların pencereye BİNMESİ kasıtlı — derinlik hissi oradan geliyor.
+      Bunu hata sanıp pencereyi daraltmak kompozisyonu düzleştiriyor. */
+
 .lp-stage { padding-bottom: var(--section-y); }
+
+.lp-stage-inner {
+  position: relative;
+  max-width: 1200px;
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+  min-height: 620px;
+}
+
+.lp-lines { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+.lp-lines svg { width: 100%; height: 100%; display: block; }
+.lp-lines polyline { fill: none; stroke: var(--lp-accent); stroke-width: 3; stroke-linejoin: round; stroke-linecap: round; }
+.lp-lines circle { fill: var(--lp-accent); }
+
+/* Pencere: vitrinde daha geniş ve daha yüksek gölgeli. */
+/* position+z-index şart: .lp-lines mutlak konumlu, pencere statik kalırsa
+   çizgiler pencerenin ÜSTÜNE çizilir. Sıra: çizgi (arka) → pencere → kartlar. */
+.lp-window--zengin { position: relative; z-index: 2; max-width: 880px; box-shadow: 0 30px 80px rgba(16, 16, 20, .14); }
+.lp-window-welcome { display: flex; align-items: center; gap: var(--s-3); padding-bottom: var(--s-4); border-bottom: 1px solid var(--lp-line); margin-bottom: var(--s-4); }
+.lp-window-avatar { width: 26px; height: 26px; border-radius: 50%; background: var(--lp-bg-soft); border: 1px solid var(--lp-line); }
+.lp-window-welcome b { font-size: var(--t-body); font-weight: 700; }
+.lp-window-dots { margin-left: auto; display: flex; gap: 5px; }
+.lp-window-dots i { width: 5px; height: 5px; border-radius: 50%; background: #d5d5d1; }
+.lp-window-tools { margin-top: var(--s-5); padding-top: var(--s-4); border-top: 1px solid var(--lp-line); display: flex; gap: var(--s-2); flex-wrap: wrap; }
+.lp-window-tools span { border: 1px solid var(--lp-line); border-radius: 999px; padding: 5px 12px; font-size: var(--t-micro); font-weight: 600; color: var(--lp-faint); }
+.lp-window-tools span.is-on { border-color: var(--lp-ink); color: var(--lp-ink); }
+
+/* ── Yüzen kartlar ── */
+.lp-fl {
+  position: absolute; z-index: 3;
+  border-radius: var(--r-lg);
+  background: var(--lp-bg);
+  border: 1px solid var(--lp-line);
+  box-shadow: 0 18px 44px rgba(16, 16, 20, .13);
+}
+.lp-fl-num { font-size: 26px; font-weight: 800; letter-spacing: -0.035em; line-height: 1; }
+.lp-fl-num--sm { font-size: 19px; }
+.lp-fl-ust { font-size: var(--t-micro); color: var(--lp-faint); }
+.lp-fl-alt { margin-top: 5px; font-size: var(--t-micro); color: var(--lp-faint); }
+
+.lp-fl--koyu { background: #16171a; border-color: #16171a; color: #fff; padding: var(--s-4) var(--s-5); }
+.lp-fl--koyu .lp-fl-alt { color: rgba(255,255,255,.6); }
+.lp-fl--turuncu { background: var(--lp-accent); border-color: var(--lp-accent); color: #fff; padding: var(--s-4) var(--s-5); box-shadow: 0 18px 44px rgba(255, 92, 0, .28); }
+.lp-fl--turuncu .lp-fl-alt { color: rgba(255,255,255,.78); }
+.lp-fl--yesil { background: var(--lp-pos); border-color: var(--lp-pos); color: #fff; padding: 12px 18px; font-size: var(--t-body); font-weight: 700; box-shadow: 0 16px 38px rgba(4, 150, 90, .26); }
+.lp-fl--siyah { background: #16171a; border-color: #16171a; color: #fff; padding: 11px 18px; font-size: var(--t-small); font-weight: 700; border-radius: 999px; }
+
+/* Outlier kartı — referanstaki gibi hafif eğik, pencerenin sol kenarına biner. */
+.lp-fl--outlier { left: 0; top: 10px; width: 236px; padding: var(--s-3); transform: rotate(-3deg); }
+.lp-fl--outlier figcaption { font-size: var(--t-body); font-weight: 800; margin-bottom: var(--s-2); }
+.lp-fl--outlier img { width: 100%; aspect-ratio: 16/9; object-fit: cover; border-radius: var(--r-sm); display: block; }
+.lp-fl-pill { display: inline-block; margin-top: var(--s-3); border-radius: var(--r-md); background: var(--lp-ink); padding: 7px 16px; color: #fff; font-family: var(--font-mono); font-size: var(--t-body); font-weight: 700; }
+
+.lp-fl--yesil { left: 96px; top: 262px; transform: rotate(-2deg); }
+.lp-fl--kanal { left: 8px; top: 350px; }
+.lp-fl--grafik { left: 186px; top: 432px; width: 244px; padding: var(--s-4) var(--s-5); }
+.lp-fl--izlenme { right: 96px; top: 108px; padding: var(--s-4) var(--s-5); }
+.lp-fl--turuncu { right: 0; top: 18px; transform: rotate(4deg); }
+.lp-fl--siyah { right: 24px; top: 320px; }
+
+.lp-bars { margin-top: var(--s-3); display: flex; align-items: flex-end; gap: 3px; height: 48px; }
+.lp-bars i { flex: 1; border-radius: 2px 2px 0 0; background: var(--lp-accent); opacity: .8; }
+
+.lp-stage .lp-stats { margin-top: var(--s-8); }
+
+/* Dar ekran: yüzenler ve çizgiler gizlenir, pencere ortada tek başına kalır.
+   Üst üste binmeleri kaosa dönüşürdü; rakamlar alttaki satırda zaten var. */
+@media (max-width: 1180px) {
+  .lp-fl, .lp-lines { display: none; }
+  .lp-stage-inner { min-height: 0; }
+  .lp-window--zengin { box-shadow: var(--sh-lift); }
+}
+
 .lp-window {
   display: flex; max-width: var(--w-wide); margin-inline: auto;
   border: 1px solid var(--lp-line); border-radius: var(--r-lg);
@@ -619,8 +702,6 @@ body:has(.lp-light) { background: var(--lp-bg); }
 .lp-window-jump { margin-top: var(--s-2); font-size: var(--t-micro); color: var(--lp-faint); }
 .lp-window-jump i { font-style: normal; margin: 0 3px; }
 .lp-window-jump strong { color: var(--lp-ink); font-size: var(--t-small); }
-
-/* Canlı rakamlar — kart değil, ince çizgiyle ayrılmış dört sütun. */
 .lp-stats { margin-top: var(--s-8); display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--s-5); border-top: 1px solid var(--lp-line); padding-top: var(--s-6); }
 .lp-stats dt { font-size: var(--t-small); color: var(--lp-faint); }
 .lp-stats dd { margin-top: var(--s-2); font-size: clamp(1.35rem, 2.2vw, 1.95rem); font-weight: 800; letter-spacing: -0.03em; }
