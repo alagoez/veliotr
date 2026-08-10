@@ -1011,3 +1011,55 @@ body { background: var(--color-base); }
 /* Yan menü Pro kartı ve rozetlerdeki parlama animasyonları açıkta kapalı */
 .side-upgrade::before { opacity: .5; }
 .badge-pulse { animation: none; }
+
+/* ── VİDEO KARTI: YouTube sadeliği (kullanıcının 2. referans ss'i) ────────
+   Onceki denemede kart hala kutu icindeydi cunku genel acik-tema kurali
+   `.app-shell main .bg-surface { background:#fff }` (0,2,0 ozgulluk) kartin
+   `background: transparent` kuralini (0,1,0) eziyordu. Ayni ozgullukle ve
+   dosyanin daha gecinde yeniden tanimlaniyor.
+
+   YouTube duzeni: kutu yok, golge yok, hover buyutmesi yok. Eylem butonlari
+   akista yer kaplamaz — thumbnail'in ustune, sag uste biner (YT'nin uc nokta
+   menusu gibi) ve yalnizca hover'da gorunur. */
+.app-shell main .video-card {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  padding: 0;
+  border-radius: 0;
+}
+.video-card:hover img { transform: none; filter: none; }
+.video-card .relative.aspect-video { border-radius: 12px; }
+
+/* Alt bosluk kaynagi: gizli eylem satiri akista yer kapliyordu. Artik
+   thumbnail ustunde, akisin disinda. */
+.video-card .card-actions {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  z-index: 2;
+  margin: 0;
+  gap: 6px;
+}
+.video-card .card-actions button,
+.video-card .card-actions a {
+  background: rgba(255, 255, 255, .96);
+  border: none;
+  border-radius: 999px;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, .18);
+  color: var(--color-ink);
+}
+.video-card .card-actions button:hover,
+.video-card .card-actions a:hover { background: #fff; }
+/* "Kanal takipte" durumunun turuncusu beyaz pil ustunde de okunur kalsin */
+.video-card .card-actions .text-glow { color: var(--color-brand); }
+
+/* Boyut rozeti daha sessiz: YT'de thumbnail ustunde tek rozet olur (sure).
+   Mor cerceve yerine yari saydam koyu — sure rozetiyle ayni dil. */
+.size-badge {
+  border: none;
+  background: rgba(0, 0, 0, .68);
+  color: #fff;
+  font-weight: 600;
+  backdrop-filter: none;
+}
