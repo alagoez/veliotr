@@ -6,7 +6,7 @@ import { Bookmark, BookmarkCheck, Radar, ExternalLink, Flame, Copy, ArrowRight }
 import { Thumb } from "@/components/app/Thumb";
 import { SaveMenu } from "@/components/app/SaveMenu";
 import { channelSize, isSmallChannel } from "@/config/channel-size";
-import { fmtCompact, fmtMultiplier, fmtRelative } from "@/lib/format";
+import { fmtCompact, fmtDuration, fmtMultiplier, fmtRelative } from "@/lib/format";
 import { isSaved, isTracked, useStore } from "@/lib/store";
 import type { Video } from "@/lib/types";
 
@@ -28,8 +28,9 @@ export function VideoCard({ video }: { video: Video }) {
 
   return (
     <div className="video-card group relative flex flex-col gap-2.5 rounded-2xl border border-edge-soft bg-surface p-2.5">
-      {/* Rozetler thumbnail'a biniyor: göz zaten oraya gidiyor, başlık satırı
-          da metinle yarışmaktan kurtuluyor. */}
+      {/* YouTube düzeni (kullanıcının referans ss'i): thumbnail'da boyut
+          rozeti sol üstte, SÜRE sağ altta. Çarpan rozeti başlığın yanında —
+          ss'teki renkli pilin yeri orası. */}
       <div className="relative">
         <Link href={`/player/${video.id}`} aria-label={`${video.title} — incele`}>
           <Thumb video={video} />
@@ -39,8 +40,18 @@ export function VideoCard({ video }: { video: Video }) {
             {size.label} kanal
           </span>
         )}
+        {video.durationSec > 0 && <span className="dur-badge">{fmtDuration(video.durationSec)}</span>}
+      </div>
+
+      {/* Başlık önce (ss'teki gibi kalın), yanında çarpan pili. */}
+      <div className="flex items-start justify-between gap-2 px-0.5">
+        <h3 className="line-clamp-2 text-[15px] font-semibold leading-snug" title={video.title}>
+          <Link href={`/player/${video.id}`} className="hover:text-brand-soft">
+            {video.title}
+          </Link>
+        </h3>
         <span
-          className={`mult-badge mult-on-thumb ${multiplierTier(video.outlierScore)}`}
+          className={`mult-badge shrink-0 ${multiplierTier(video.outlierScore)}`}
           title="Çarpan: bu video, kanalın normalinin kaç katı"
         >
           {video.outlierScore >= 50 && <Flame size={11} />}
@@ -48,23 +59,15 @@ export function VideoCard({ video }: { video: Video }) {
         </span>
       </div>
 
-      {/* Kartın kahramanı: küçük kanal → dev izlenme. Ürünün tek cümlesi bu,
-          o yüzden tek satırda ve tipografiyle kontrastlı kuruluyor. */}
-      <div className="flex items-baseline gap-1.5 px-0.5">
-        <span className="num text-xs text-faint">{fmtCompact(video.subscribers)} abone</span>
-        <ArrowRight size={13} className="shrink-0 text-faint" aria-hidden />
-        <span className="num text-[19px] font-semibold leading-none text-ink">
-          {fmtCompact(video.views)}
-        </span>
-        <span className="text-xs text-muted">izlenme</span>
-      </div>
-
+      {/* Meta, ss'teki gri satır düzeninde. Metinler aynı: abone → izlenme,
+          kanal · normali, tarih. */}
       <div className="px-0.5">
-        <h3 className="line-clamp-2 text-[13.5px] font-semibold leading-snug" title={video.title}>
-          <Link href={`/player/${video.id}`} className="hover:text-brand-soft">
-            {video.title}
-          </Link>
-        </h3>
+        <div className="flex items-baseline gap-1.5 text-[13px] text-muted">
+          <span className="num text-faint">{fmtCompact(video.subscribers)} abone</span>
+          <ArrowRight size={12} className="shrink-0 text-faint" aria-hidden />
+          <span className="num font-semibold text-ink">{fmtCompact(video.views)}</span>
+          <span>izlenme</span>
+        </div>
         <div className="mt-1 flex items-center justify-between gap-2 text-xs text-muted">
           {/* "medyan" istatistik jargonu — hedef kitle YouTuber. "normali" aynı
               bilgiyi sıfır öğrenme maliyetiyle veriyor ve çarpanı açıklıyor. */}

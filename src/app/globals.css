@@ -1,27 +1,27 @@
 @import "tailwindcss";
 
 @theme {
-  --color-base: #08090a;
-  --color-surface: #111315;
-  --color-raised: #191b1d;
-  --color-hover: #222528;
-  --color-edge: #34383a;
-  --color-edge-soft: #202426;
-  --color-brand: #ff8a00;
-  --color-brand-soft: #ffad1f;
-  --color-glow: #ffe047;
-  --color-pos: #5ee7a0;
-  --color-warn: #ffd166;
-  --color-ink: #f5f5f0;
-  --color-muted: #9c9e9e;
-  --color-faint: #626769;
+  --color-base: #f7f7f5;
+  --color-surface: #ffffff;
+  --color-raised: #f1f1ee;
+  --color-hover: #e9e9e5;
+  --color-edge: #e2e2de;
+  --color-edge-soft: #ecece8;
+  --color-brand: #ff5c00;
+  --color-brand-soft: #e65200;
+  --color-glow: #b45309;
+  --color-pos: #04965a;
+  --color-warn: #b45309;
+  --color-ink: #0d0d0e;
+  --color-muted: #55585c;
+  --color-faint: #86898e;
   --font-sans: var(--font-instrument-sans), ui-sans-serif, system-ui, sans-serif;
   --font-display: var(--font-bricolage), var(--font-instrument-sans), sans-serif;
   --font-editorial: var(--font-instrument-serif), Georgia, serif;
   --font-mono: var(--font-geist-mono), ui-monospace, monospace;
 }
 
-:root { color-scheme: dark; }
+:root { color-scheme: light; }
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
 body { position: relative; background: var(--color-base); color: var(--color-ink); font-family: var(--font-sans); } body::before { content: ""; position: fixed; inset: 0; z-index: 50; pointer-events: none; opacity: .035; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 160 160' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.55'/%3E%3C/svg%3E"); mix-blend-mode: screen; }
@@ -858,3 +858,156 @@ body:has(.lp-light) { background: var(--lp-bg); }
   .lp-cta { flex-direction: column; align-items: stretch; }
   .lp-btn { width: 100%; }
 }
+
+/* ═══════════════════════════════════════════════════════════════════════
+   UYGULAMA AÇIK TEMA — sabit koyu blokların üzerine yazar
+   ═══════════════════════════════════════════════════════════════════════
+   Palet token'ları açığa çevrildi ama Stüdyo v2'nin ~27 yerinde koyu tema
+   sabit yazılmış (rgba(255,255,255,..) cam efektleri, koyu gradyanlar,
+   0 0 Npx sarı parlamalar). Bunlar tek tek düzenlenmedi: CSS'te sonra
+   gelen kazanır — bu blok aynı seçicileri açık değerlerle yeniden tanımlar.
+   Metin ve yerleşim DEĞİŞMEZ, yalnızca renk/ışık. */
+
+/* Gren dokusu tüm uygulamada kapalı — beyaz zeminde kir gibi duruyor. */
+body::before { display: none; }
+body { background: var(--color-base); }
+
+/* Zemin: koyu stüdyo ışığı yerine düz açık zemin + silik nokta ızgarası */
+.app-shell {
+  background-color: var(--color-base);
+  background-image: radial-gradient(rgba(0, 0, 0, 0.05) 1px, transparent 1px);
+  background-size: 26px 26px;
+}
+.app-shell main {
+  background: var(--color-base);
+}
+.app-shell input:not([type="range"]), .app-shell select, .app-shell textarea {
+  background: #ffffff;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, .04);
+  border-color: var(--color-edge);
+  color: var(--color-ink);
+}
+.app-shell input:not([type="range"]):focus, .app-shell select:focus, .app-shell textarea:focus {
+  border-color: var(--color-brand);
+  background: #ffffff;
+  box-shadow: 0 0 0 4px rgba(255, 92, 0, .1);
+}
+.app-shell main > div:not(.app-feed) > div:first-child { border-color: var(--color-edge-soft); }
+.app-shell main .rounded-xl.border, .app-shell main .rounded-2xl.border { box-shadow: 0 1px 2px rgba(16,16,20,.04); }
+.app-shell main .rounded-2xl.border { border-color: var(--color-edge-soft); }
+.app-shell main .bg-surface { background: #ffffff; }
+.app-shell main .text-muted { color: var(--color-muted); }
+.app-shell main .text-faint { color: var(--color-faint); }
+.app-shell main .bg-brand { box-shadow: 0 6px 18px rgba(255, 92, 0, .18); }
+
+/* Kenar çubuğu: koyu cam yerine beyaz panel */
+.app-sidebar {
+  border-right: 1px solid var(--color-edge-soft);
+  background: #ffffff;
+  backdrop-filter: none;
+  box-shadow: none;
+}
+.app-sidebar nav a:hover { border-color: var(--color-edge); }
+.app-sidebar nav a[aria-current="page"] {
+  border-color: rgba(255, 92, 0, .3);
+  background: rgba(255, 92, 0, .08);
+  box-shadow: none;
+}
+
+/* ── VİDEO KARTI — attığın YouTube görünümü ──────────────────────────────
+   Kutu yok: kart şeffaf, çerçevesiz, dolgusuz. Görsel ağırlık thumbnail'da,
+   altında kalın başlık, gri meta satırı. İçerik değişmedi, sadece kıyafeti. */
+.video-card {
+  border: none;
+  background: transparent;
+  padding: 0;
+  border-radius: 0;
+}
+.video-card .relative.aspect-video { border: none; box-shadow: none; border-radius: 14px; overflow: hidden; }
+.video-card::after { display: none; }
+
+/* Süre rozeti — referans ss'teki sağ alt köşe (57:51) */
+.dur-badge {
+  position: absolute; right: 7px; bottom: 7px; z-index: 1;
+  border-radius: 6px; background: rgba(0, 0, 0, .82);
+  padding: 2px 6px; color: #fff;
+  font-family: var(--font-mono); font-size: 11.5px; font-weight: 600;
+}
+
+/* Çarpan rozeti başlığın yanına döndü (ss'teki renkli pil) — thumbnail'ın
+   sağ altı artık süreye ait. */
+.mult-on-thumb { position: static; backdrop-filter: none; }
+.mult-cold { border-color: var(--color-edge); background: var(--color-raised); color: var(--color-muted); }
+.mult-warm { border-color: rgba(180, 83, 9, .25); background: rgba(180, 83, 9, .09); color: #b45309; }
+.mult-high { border-color: rgba(4, 150, 90, .3); background: rgba(4, 150, 90, .1); color: #04965a; }
+.mult-hot {
+  border-color: rgba(255, 92, 0, .4);
+  background: rgba(255, 92, 0, .12);
+  color: #e65200;
+  animation: none;
+  box-shadow: none;
+}
+
+.size-badge {
+  border-color: rgba(124, 58, 237, .3);
+  background: rgba(255, 255, 255, .88);
+  color: #5b34c7;
+}
+
+.vs-bar { background: rgba(0, 0, 0, .07); }
+.vs-bar > i { box-shadow: none; }
+.vs-bar > b { background: rgba(0, 0, 0, .35); }
+
+/* Filtre paneli ve boş durum */
+.filter-panel > div:not(:first-child) { border-top-color: var(--color-edge-soft); }
+.radar-empty { border-color: var(--color-edge); }
+.radar-empty::before { border-color: var(--color-edge-soft); }
+
+/* ── GİRİŞ EKRANI — koyu stüdyo yerine açık ── */
+.login-shell { background: var(--color-base); color: var(--color-ink); }
+.login-shell::before { display: none; }
+.login-blob, .login-spark { display: none; }
+.login-brand { color: var(--color-ink); }
+.login-intro h1 { color: var(--color-ink); }
+.login-intro h1 em { color: var(--color-brand); }
+.login-intro-copy { color: var(--color-muted); }
+.login-proof-grid strong { color: var(--color-brand); }
+.login-proof-grid span { color: var(--color-faint); }
+.login-card {
+  border: 1px solid var(--color-edge);
+  background: #ffffff;
+  box-shadow: 0 24px 70px rgba(16, 16, 20, .1);
+  backdrop-filter: none;
+}
+.login-card::before { display: none; }
+.login-card h2 { color: var(--color-ink); }
+.login-card-copy { color: var(--color-muted); }
+.login-card-status { color: var(--color-faint); }
+.login-fields label { color: var(--color-muted); }
+.login-fields input {
+  border-color: var(--color-edge);
+  background: #ffffff;
+  color: var(--color-ink);
+}
+.login-fields input::placeholder { color: var(--color-faint); }
+.login-fields input:focus {
+  border-color: var(--color-brand);
+  background: #ffffff;
+  box-shadow: 0 0 0 3px rgba(255, 92, 0, .12);
+}
+.login-google { border-color: var(--color-edge); background: #ffffff; color: var(--color-ink); }
+.login-google:hover { border-color: var(--color-brand); background: rgba(255, 92, 0, .05); box-shadow: none; }
+.login-divider { color: var(--color-faint); }
+.login-divider::before, .login-divider::after { background: var(--color-edge); }
+.login-submit { background: var(--color-brand); color: #fff; box-shadow: 0 10px 26px rgba(255, 92, 0, .2); }
+.login-submit:hover { box-shadow: 0 14px 32px rgba(255, 92, 0, .3); }
+.login-message { border-color: rgba(255, 92, 0, .3); background: rgba(255, 92, 0, .07); color: #b45309; }
+.login-switch { color: var(--color-faint); }
+.login-switch button, .login-terms a { color: var(--color-brand); }
+.login-terms, .login-back { color: var(--color-faint); }
+.login-back:hover { color: var(--color-ink); }
+.brand-logo { filter: none; }
+
+/* Yan menü Pro kartı ve rozetlerdeki parlama animasyonları açıkta kapalı */
+.side-upgrade::before { opacity: .5; }
+.badge-pulse { animation: none; }
