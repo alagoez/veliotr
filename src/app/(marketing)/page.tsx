@@ -208,9 +208,11 @@ export default async function LandingPage() {
             edin, rakiplerinizi analiz edin, sıra dışı videoları bulun ve nişinizde nelerin popüler
             olduğunu görün; bunların hepsi gerçek zamanlı YouTube verileriyle ve tek bir platformda.
           </p>
+          {/* Referans düzeni: renkli birincil buton, ALTINDA küçük düz metin
+              bağlantısı. İki buton yan yana değil. */}
           <div className="lp-cta">
             <Cta />
-            <Cta tone="ghost">Nasıl çalışır</Cta>
+            <Link href="/ozellikler" className="lp-plain">Nasıl çalıştığını gör</Link>
           </div>
         </div>
       </section>
