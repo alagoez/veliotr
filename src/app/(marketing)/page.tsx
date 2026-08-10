@@ -172,7 +172,7 @@ export default async function LandingPage() {
           yukarıdan aşağı daralarak butona insin diye. */}
       <section className="lp-hero">
         <div className="lp-container">
-          <h1>Hangi videonun patladığını gör. Aynısını sen çek.</h1>
+          <h1>Viral olmuş video fikirlerini, nişleri bulun. Sıradaki viral video sizinki olsun.</h1>
           <p className="lp-lede">
             Viralab her videoyu kendi kanalının normaliyle kıyaslar. 16 bin aboneli bir kanalın
             9 milyon izlenen videosunu bulur — ve senin nişinde işe yaramış fikirleri önüne koyar.
