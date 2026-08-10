@@ -174,8 +174,9 @@ export default async function LandingPage() {
         <div className="lp-container">
           <h1>Viral olmuş video fikirlerini, nişleri bulun. Sıradaki viral video sizinki olsun.</h1>
           <p className="lp-lede">
-            Viralab her videoyu kendi kanalının normaliyle kıyaslar. 16 bin aboneli bir kanalın
-            9 milyon izlenen videosunu bulur — ve senin nişinde işe yaramış fikirleri önüne koyar.
+            Video kaydına başlamadan önce hangi videoların viral olacağını öğrenin. Trendleri takip
+            edin, rakiplerinizi analiz edin, sıra dışı videoları bulun ve nişinizde nelerin popüler
+            olduğunu görün; bunların hepsi gerçek zamanlı YouTube verileriyle ve tek bir platformda.
           </p>
           <div className="lp-cta">
             <Cta />
