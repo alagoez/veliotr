@@ -497,7 +497,7 @@ input[type="range"]::-moz-range-thumb { pointer-events: auto; width: 12px; heigh
 
   /* ── Tipografi ölçeği (1.28 oran, akışkan) ── */
   /* Alt sınır 2,6rem → 2rem: uzun başlık 390px telefonda 6 satıra çıkıyordu. */
-  --t-display: clamp(2rem, 5.2vw, 4.75rem);
+  --t-display: clamp(1.9rem, 4.3vw, 3.9rem);
   --t-h2: clamp(1.9rem, 3.4vw, 2.9rem);        /* bölüm başlığı */
   --t-h3: clamp(1.15rem, 1.5vw, 1.4rem);       /* özellik başlığı */
   --t-lede: clamp(16.5px, 1.25vw, 20px);       /* açıklama */
@@ -588,13 +588,13 @@ body:has(.lp-light) { background: var(--lp-bg); }
 .lp-hero { padding-block: clamp(44px, 5vw, 68px) clamp(32px, 3.5vw, 48px); text-align: center; }
 .lp-hero h1 {
   margin-inline: auto; max-width: var(--w-title);
-  font-size: var(--t-display); font-weight: 800;
+  font-size: var(--t-display); font-weight: 700;
   line-height: var(--lh-display); letter-spacing: -0.04em;
   text-wrap: balance;
 }
 .lp-lede {
   margin: var(--s-5) auto 0; max-width: 780px;
-  font-size: clamp(17px, 1.35vw, 22px); line-height: 1.55; color: var(--lp-muted);
+  font-size: clamp(16px, 1.15vw, 19px); line-height: 1.6; color: var(--lp-muted);
   text-wrap: pretty;
 }
 .lp-cta { margin-top: var(--s-6); display: flex; flex-direction: column; align-items: center; gap: var(--s-4); }
