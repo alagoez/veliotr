@@ -308,3 +308,84 @@ Dürüstlük gereği: bunlar planda vardı, henüz yok.
   kısıtlıyor. Şu an istatistikler süresiz duruyor. Yayına çıkmadan çözülmeli.
 - **Niş doğrulama** — kod hazır (`verify-niches.mts`), embedding'ler üretilmedi.
   Evrende yanlış nişe düşmüş kanallar var (örn. bir lokanta kanalı "egitim"de).
+
+---
+
+# NİŞ MOTORU (10 Ağustos 2026)
+
+Ürünün sorusu değişti: *"hangi videoyu çekeyim"* → **"hangi nişe gireyim"**.
+Cevabın birimi de değişti: video değil **kanıt-kanal** — *"6 aydan genç,
+yüzünü göstermeyen, az emekle patlamış kanal"*.
+
+## Beş kapı
+
+| # | Kapı | Eşik | Gerekçe |
+|---|---|---|---|
+| 1 | Kanal yaşı | ≤ 6 ay | Genç kanal patlıyorsa patlama otoriteden değil FORMATTAN gelir — kopyalanabilir olan tek şey odur |
+| 2 | Marka/kurum değil | isim süzgeci | Satın alınmış izlenme sahte kanıt üretir |
+| 3 | Başlık dili | TR veya EN | Hintçe içerik Türk kullanıcıya bir şey öğretmez. Bölgeler: TR + US |
+| 4 | Format eşiği | Shorts ≥30 B **veya** uzun ≥50 B izlenme/video | **Biri yeterli** |
+| 5 | Yüzsüzlük | kapaklarda gerçek insan yüzü ≤ %10 | Animasyon/çizim yüz sayılmaz |
+
+## Kapı OLMAYANLAR — ve neden
+
+**Video sayısı.** İlk tasarımda "≤30 video" vardı. Ölçtük: 6 aydan genç 85
+kanalın **80'i (%94)** 30'dan fazla videoluydu. Yüzsüz kanalların klasik
+modeli günde 3-5 Shorts; kapı aradığımızın %94'ünü eliyordu. Verimliliği
+video sayısı değil, **video başına izlenme** ölçer. Video sayısı gösterge
+olarak kalır, kullanıcı filtreleyebilir.
+
+**Abone sayısı.** Ters metrik: 3 bin aboneli kanalın 3 milyon izlenmesi,
+kanıtın zayıflığı değil **gücüdür**. Gösterge, kapı değil.
+
+## Format ayrı yargılanır
+
+Bir kanal Shorts'ta boğulup uzun formatta patlamış olabilir — ya da tersi.
+Tek ortalamaya sıkıştırmak onu eler. Her kanal **iki ayrı karne** taşır;
+biri kapıyı geçerse kanal içeri girer ve **yalnız o formatın vitrininde**
+görünür.
+
+Yan fayda: "Shorts'ta boğulup uzun formatta patlayanlar" kendi başına
+değerli bir sinyal — *"bu nişte Shorts çalışmıyor"* dersini tek kanaldan
+öğretir.
+
+## Kalıcı kanıt defteri (`evidence`)
+
+`channels` tablosundaki sayılar **Google'ın verisi** — 30 günde tazelenir ya
+da silinir. Kanıt defterindeki satır ise **bizim hükmümüz**: *"3 Ağustos'ta
+keşfedildi, 8 günlüktü, 180x yapmıştı."* Türetilmiş veri olduğu için
+süresiz saklanır ve niş tarihçesini (*"bu niş üç haftadır yükseliyor"*)
+mümkün kılan tek şey budur.
+
+## 30 gün temizliği (`npm run temizlik`)
+
+Her gece: 30 günü dolan ve tazelenmemiş kayıtların **Google alanları
+boşaltılır** — başlık, kapak, izlenme, beğeni. **Kimlikler ve kanıt defteri
+dokunulmaz.** Satır silinmez, alan boşaltılır: ertesi gün aynı kimlikle
+yarım kuruşluk çağrıyla hepsi geri gelir.
+
+Çoğu kişi "sadece sayılar silinir" sanır — şartlar başlık, açıklama ve kapak
+gibi tanıtıcı alanları da kapsar.
+
+## Keşif ayarı: genç kanal avı
+
+| | Önce | Sonra | Neden |
+|---|---|---|---|
+| Arama penceresi | 30 gün | **7 gün** | 30 günde çok izlenen video yerleşik kanaldan gelir; 7 günde patlayan, kanalın da yeni olma ihtimalini büyütür |
+| Abone eşiği | 10-50 bin | **3 bin** | Altı aylık kanal çok abone toplayamaz — yüksek eşik tam aradığımızı eliyordu |
+| Bölgeler | TR, US, GB, IN | **TR + US** | ABD = en yüksek RPM pazarı; TR = yerel pazar. Gerisi gelir mantığını sulandırıyordu |
+
+## Boru hattı
+
+```
+1 BUL      arama (TR+US, 7 gün) + trend + açıklama linkleri
+2 TANI     channels.list — 0,02 birim/kanal, HERKESE
+3 KAPI     beş kapı (npm run kapi) — ucuz veriyle eleme
+4 ÖLÇ      geçenlerin son 20 videosu — 1 birim/kanal
+5 SUN      vitrin: format sekmeleri + niş karneleri
+6 TAZELE   battaniye yok: dokunulan + vitrindekiler
+7 TEMİZLE  her gece 30 gün kuralı
+```
+
+Eski tasarımda her kanala 4 birim harcanıyordu; yenisinde kapıyı geçmeyene
+**0,02 birim**. Kabaca 200 kat tasarruf — ödeme yapmadan ölçek büyütmenin yolu.

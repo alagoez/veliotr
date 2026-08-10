@@ -31,7 +31,7 @@ type Market = { code: string; lang: string; minSubs: number };
 const MARKETS: Market[] = [
   // TR eşiği kasten düşük: küçük ama gerçek kanallar evrende kalsın
   // (küçük kanal outlier'ı ürünün ayırt edici özelliği).
-  { code: "TR", lang: "tr", minSubs: 10_000 },
+  { code: "TR", lang: "tr", minSubs: 3_000 },
   // İngilizce = global dil erişimi. regionCode sonuçları o ülkenin kanallarıyla
   // SINIRLAMAZ, sadece orada öne çıkanları getirir — Koreli, Vietnamlı kanallar
   // da bu pazardan geliyor.
@@ -39,7 +39,10 @@ const MARKETS: Market[] = [
   // IN ve GB kasten yok: IN pazarı evrenin %31'ini Hintçe shorts kanallarıyla
   // dolduruyordu (TR %20'de kalıyordu). İstenen belirli bir ülke ağırlığı değil,
   // global dil erişimi. GB ise %2 getirip planı çeyrek oranında pahalılaştırıyordu.
-  { code: "US", lang: "en", minSubs: 50_000 },
+  /* Eşik 50.000 → 3.000: altı aylık kanal çok abone toplayamaz. Yüksek eşik
+     tam da aradığımız genç kanalları eliyordu. Filtre artık abone değil,
+     video başına izlenme (kapı şablonu). */
+  { code: "US", lang: "en", minSubs: 3_000 },
 ];
 
 /**
@@ -138,7 +141,11 @@ const MIN_VIDEO_COUNT = 15;
 /** Niş başına saklanacak kanal sayısı (abone sırasına göre en üstten). */
 const MAX_PER_NICHE = Number(process.env.MAX_PER_NICHE ?? 60);
 /** Arama penceresi (gün) — "aktif üretiyor" tanımı. */
-const WINDOW_DAYS = Number(process.env.WINDOW_DAYS ?? 30);
+/* Pencere 30 → 7 gün: nişe değil GENÇ KANALA avlanıyoruz. 30 günde çok
+   izlenen video yerleşik kanaldan gelir; 7 günde patlayan video, kanalın da
+   yeni olma ihtimalini büyütür. Ölçüm: mevcut evrenin %95i yaş kapısında
+   eleniyordu, sebebi buydu. */
+const WINDOW_DAYS = Number(process.env.WINDOW_DAYS ?? 7);
 
 const COST = { search: 100, channels: 1 } as const;
 
