@@ -221,24 +221,93 @@ export default async function LandingPage() {
       {ilk3.length === 3 && stats && (
         <section className="lp-stage" aria-label="Viralab ekranı ve indeks büyüklüğü">
           <div className="lp-stage-inner">
-            {/* Zikzak çizgiler: overflow:hidden sarmalayıcının içinde. Geçen
-                sefer sabit yükseklikli SVG bölümden taşıp alttaki başlığın
-                içinden geçiyordu — sarmalayıcı bunu imkânsız kılıyor. */}
+            {/* Zikzak çizgi — referanstaki gibi sol alt köşeden çıkıp sağ üst
+                köşeye ulaşıyor, her şeyin ARKASINDA. overflow:hidden
+                sarmalayıcı taşmayı imkânsız kılıyor. */}
             <div className="lp-lines" aria-hidden>
-              <svg viewBox="0 0 1200 620" preserveAspectRatio="xMidYMid slice">
-                <polyline points="40,600 150,470 150,150 330,150" />
-                <polyline points="1160,60 1050,180 1050,470 900,470" />
-                <circle cx="40" cy="600" r="8" />
-                <circle cx="1160" cy="60" r="8" />
+              <svg viewBox="0 0 1240 700" preserveAspectRatio="xMidYMid slice">
+                <polyline points="36,676 150,560 150,180 430,180" />
+                <polyline points="1204,52 1090,170 1090,520 940,520" />
+                <circle cx="36" cy="676" r="8" />
+                <circle cx="1204" cy="52" r="8" />
               </svg>
             </div>
 
-            <Pencere list={ilk3} zengin />
+            {/* ═ ORTA PANEL — referanstaki dashboard'un birebir yapısı:
+                karşılama satırı, 5 renkli araç kartı, altta video sırası.
+                İçerik bizim: araçlar uygulamada gerçekten var, thumbnail'lar
+                ve çarpanlar veritabanından. ═ */}
+            <div className="lp-panelw" role="img" aria-label="Viralab panel önizlemesi">
+              <div className="lp-panelw-rail">
+                <span className="lp-panelw-mark">V</span>
+                <span className="lp-panelw-ic is-on" />
+                <span className="lp-panelw-ic" />
+                <span className="lp-panelw-ic" />
+                <span className="lp-panelw-ic" />
+                <span className="lp-panelw-rail-alt" />
+              </div>
+              <div className="lp-panelw-main">
+                <div className="lp-panelw-top">
+                  <span className="lp-panelw-avatar" aria-hidden />
+                  <b>Hoş geldin, Fırat!</b>
+                  <span className="lp-panelw-topic" aria-hidden>⚙ ⧉ ↦</span>
+                </div>
 
-            {/* Kartların pencereye binmesi KASITLI — referansta da öyle,
-                derinlik hissi oradan geliyor. */}
+                <p className="lp-panelw-h">Tüm araçlara göz at</p>
+                <div className="lp-tools">
+                  <div className="lp-tool lp-tool--mavi">
+                    <span className="lp-tool-t">Rakip Takibi</span>
+                    <span className="lp-tool-vs"><i /> vs <i className="soru">?</i></span>
+                  </div>
+                  <div className="lp-tool lp-tool--beyaz">
+                    <span className="lp-tool-t lp-tool-t--koyu">Outlier&apos;lar</span>
+                    {ilk3[0].thumb && (
+                      // eslint-disable-next-line @next/next/no-img-element
+                      <img src={ilk3[0].thumb} alt="" loading="lazy" />
+                    )}
+                    <span className="lp-tool-rozet">{fmtMultiplier(ilk3[0].score)}</span>
+                  </div>
+                  <div className="lp-tool lp-tool--yesil">
+                    <span className="lp-tool-t">Niş Keşfi</span>
+                    <span className="lp-tool-ara">🔍 oyun, yemek, finans...</span>
+                  </div>
+                  <div className="lp-tool lp-tool--mor">
+                    <span className="lp-tool-t">Koleksiyonlar</span>
+                    {ilk3[1].thumb && (
+                      // eslint-disable-next-line @next/next/no-img-element
+                      <img src={ilk3[1].thumb} alt="" loading="lazy" />
+                    )}
+                  </div>
+                  <div className="lp-tool lp-tool--acik">
+                    <span className="lp-tool-t lp-tool-t--koyu">Uyarılar</span>
+                    <span className="lp-tool-chip">Eşik: 3x</span>
+                    <span className="lp-tool-chip lp-tool-chip--dolu">Yeni viral ●</span>
+                  </div>
+                </div>
+                <div className="lp-tools-alt">
+                  <div><b>Outlier&apos;lar</b><span>Kanal normalini aşan videoları yakala</span></div>
+                  <div><b>Niş Keşfi</b><span>15 kategoride neyin tuttuğunu gör</span></div>
+                  <div><b>Uyarılar</b><span>Takip ettiğin kanal patlayınca haber al</span></div>
+                </div>
+
+                <p className="lp-panelw-h">Öne çıkanlar</p>
+                <div className="lp-panelw-videos">
+                  {ilk3.map((v) => (
+                    <div key={v.id} className="lp-panelw-video">
+                      {v.thumb && (
+                        // eslint-disable-next-line @next/next/no-img-element
+                        <img src={v.thumb} alt="" loading="lazy" />
+                      )}
+                      <span className="lp-panelw-play" aria-hidden>▶</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* ═ SOL KÜME ═ */}
             <figure className="lp-fl lp-fl--outlier">
-              <figcaption>Outlier</figcaption>
+              <figcaption><span className="lp-fl-mark">V</span> Outlier</figcaption>
               {ilk3[0].thumb && (
                 // eslint-disable-next-line @next/next/no-img-element
                 <img src={ilk3[0].thumb} alt="" loading="lazy" />
@@ -246,34 +315,64 @@ export default async function LandingPage() {
               <span className="lp-fl-pill">{fmtMultiplier(ilk3[0].score)}</span>
             </figure>
 
-            <div className="lp-fl lp-fl--yesil">↗ {fmtCompact(ilk3[0].views)} izlenme</div>
+            <div className="lp-fl lp-fl--yesil">↗ +{fmtCompact(ilk3[0].views)} izlenme</div>
 
             <div className="lp-fl lp-fl--koyu lp-fl--kanal">
+              <p className="lp-fl-marka"><span className="lp-fl-mark">V</span> VİRALAB</p>
               <p className="lp-fl-num">{stats.kanallar.toLocaleString("tr-TR")}</p>
               <p className="lp-fl-alt">Kanal takipte</p>
             </div>
 
+            {/* Çizgi grafik kartı — referanstaki "Views (7D)". Eğri gerçek:
+                en yüksek 8 outlier videosunun izlenmeleri. */}
+            <div className="lp-fl lp-fl--cizgi">
+              <div className="lp-fl-cizgi-ust">
+                <div>
+                  <p className="lp-fl-ust">İzlenme <span>(en iyi outlier&apos;lar)</span></p>
+                  <p className="lp-fl-num lp-fl-num--md">
+                    {fmtCompact(ilk3[0].views)} <em>↗ {fmtMultiplier(ilk3[0].score)}</em>
+                  </p>
+                </div>
+                <span className="lp-panelw-avatar" aria-hidden />
+              </div>
+              <svg viewBox="0 0 280 80" preserveAspectRatio="none" aria-hidden>
+                <polyline
+                  points={list
+                    .slice(0, 6)
+                    .map((v, i, a) => {
+                      const max = Math.max(...a.map((x) => x.views));
+                      return `${10 + (i * 260) / Math.max(a.length - 1, 1)},${72 - (v.views / max) * 60}`;
+                    })
+                    .join(" ")}
+                />
+              </svg>
+              <div className="lp-fl-eksen"><span>1.</span><span>3.</span><span>6.</span></div>
+            </div>
+
+            {/* ═ SAĞ KÜME ═ */}
+            <div className="lp-fl lp-fl--izlenme">
+              <p className="lp-fl-marka lp-fl-marka--koyu"><span className="lp-fl-mark">V</span> VİRALAB</p>
+              <p className="lp-fl-num lp-fl-num--md">{stats.izlenme.toLocaleString("tr-TR")}</p>
+              <p className="lp-fl-alt">İzlenme (indeks)</p>
+            </div>
+
+            <div className="lp-fl lp-fl--turuncu">
+              <p className="lp-fl-marka">VİRALAB</p>
+              <p className="lp-fl-num">{fmtCompact(stats.videolar)}</p>
+              <p className="lp-fl-alt">Video indekste</p>
+            </div>
+
+            <div className="lp-fl lp-fl--siyah">Küçük kanal radarı <i className="lp-fl-nokta" /></div>
+
             <div className="lp-fl lp-fl--grafik">
-              <p className="lp-fl-ust">Niş başına video</p>
+              <p className="lp-fl-ust">Niş dağılımı <span>({stats.nisler.length} kategori)</span></p>
+              <p className="lp-fl-num lp-fl-num--md">{fmtCompact(stats.videolar)} <em>video</em></p>
               <div className="lp-bars">
                 {stats.nisler.map((n, i) => (
                   <i key={i} style={{ height: `${Math.max(12, (n / Math.max(...stats.nisler)) * 100)}%` }} />
                 ))}
               </div>
-              <p className="lp-fl-alt">{stats.nisler.length} kategori · dengeli dağılım</p>
             </div>
-
-            <div className="lp-fl lp-fl--izlenme">
-              <p className="lp-fl-ust">İndekslenen izlenme</p>
-              <p className="lp-fl-num lp-fl-num--sm">{stats.izlenme.toLocaleString("tr-TR")}</p>
-            </div>
-
-            <div className="lp-fl lp-fl--turuncu">
-              <p className="lp-fl-num">{fmtCompact(stats.videolar)}</p>
-              <p className="lp-fl-alt">Video indekste</p>
-            </div>
-
-            <div className="lp-fl lp-fl--siyah">Küçük kanal radarı</div>
           </div>
 
           {/* Dar ekranda yüzenler gizlenir; rakamlar bu satırda görünür kalır. */}

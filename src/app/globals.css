@@ -598,88 +598,139 @@ body:has(.lp-light) { background: var(--lp-bg); }
 .lp-cta { margin-top: var(--s-7); display: flex; align-items: center; justify-content: center; gap: var(--s-3); flex-wrap: wrap; }
 
 
-/* ── 3 · VİTRİN (yüzen kartlı kompozisyon) ────────────────────────────────
-   Referanstaki düzenin karşılığı: ortada ürün penceresi, etrafında yüzen
-   kartlar, arkada zikzak çizgi.
+/* ── 3 · VİTRİN — referans kompozisyonun birebir yapısı ──────────────────
+   Ortada zengin panel (karşılama + 5 renkli araç kartı + video sırası),
+   solda outlier kartı + yeşil pil + koyu kart + çizgi grafik, sağda izlenme
+   kartı + eğik turuncu kart + pil + bar grafik. Arkada zikzak çizgi.
 
-   İki kural bu bölümü ayakta tutuyor:
-   1. Çizgi overflow:hidden bir sarmalayıcının içinde. Sabit yükseklikli SVG
-      daha önce bölümden taşıp alttaki başlığın içinden geçmişti.
-   2. Kartların pencereye BİNMESİ kasıtlı — derinlik hissi oradan geliyor.
-      Bunu hata sanıp pencereyi daraltmak kompozisyonu düzleştiriyor. */
+   Marka ve veri bizim; düzen referanstan. İki kural ayakta tutuyor:
+   1. Çizgi overflow:hidden sarmalayıcıda — taşması imkânsız.
+   2. Kartların panele binmesi KASITLI: derinlik oradan geliyor. */
 
 .lp-stage { padding-bottom: var(--section-y); }
 
 .lp-stage-inner {
   position: relative;
-  max-width: 1200px;
+  max-width: 1240px;
   margin-inline: auto;
-  padding-inline: var(--gutter);
-  min-height: 620px;
+  padding: 24px var(--gutter) 0;
+  min-height: 700px;
 }
 
 .lp-lines { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
 .lp-lines svg { width: 100%; height: 100%; display: block; }
-.lp-lines polyline { fill: none; stroke: var(--lp-accent); stroke-width: 3; stroke-linejoin: round; stroke-linecap: round; }
+.lp-lines polyline { fill: none; stroke: var(--lp-accent); stroke-width: 3.5; stroke-linejoin: round; stroke-linecap: round; }
 .lp-lines circle { fill: var(--lp-accent); }
 
-/* Pencere: vitrinde daha geniş ve daha yüksek gölgeli. */
-/* position+z-index şart: .lp-lines mutlak konumlu, pencere statik kalırsa
-   çizgiler pencerenin ÜSTÜNE çizilir. Sıra: çizgi (arka) → pencere → kartlar. */
-.lp-window--zengin { position: relative; z-index: 2; max-width: 880px; box-shadow: 0 30px 80px rgba(16, 16, 20, .14); }
-.lp-window-welcome { display: flex; align-items: center; gap: var(--s-3); padding-bottom: var(--s-4); border-bottom: 1px solid var(--lp-line); margin-bottom: var(--s-4); }
-.lp-window-avatar { width: 26px; height: 26px; border-radius: 50%; background: var(--lp-bg-soft); border: 1px solid var(--lp-line); }
-.lp-window-welcome b { font-size: var(--t-body); font-weight: 700; }
-.lp-window-dots { margin-left: auto; display: flex; gap: 5px; }
-.lp-window-dots i { width: 5px; height: 5px; border-radius: 50%; background: #d5d5d1; }
-.lp-window-tools { margin-top: var(--s-5); padding-top: var(--s-4); border-top: 1px solid var(--lp-line); display: flex; gap: var(--s-2); flex-wrap: wrap; }
-.lp-window-tools span { border: 1px solid var(--lp-line); border-radius: 999px; padding: 5px 12px; font-size: var(--t-micro); font-weight: 600; color: var(--lp-faint); }
-.lp-window-tools span.is-on { border-color: var(--lp-ink); color: var(--lp-ink); }
+/* ═ ORTA PANEL ═ */
+.lp-panelw {
+  position: relative; z-index: 2;
+  display: flex;
+  max-width: 900px; margin-inline: auto;
+  border: 1px solid var(--lp-line); border-radius: 22px;
+  background: var(--lp-bg); overflow: hidden;
+  box-shadow: 0 34px 90px rgba(16, 16, 20, .16);
+}
+.lp-panelw-rail { display: flex; flex-direction: column; align-items: center; gap: var(--s-4); padding: var(--s-4) var(--s-3); border-right: 1px solid var(--lp-line); }
+.lp-panelw-mark { display: grid; place-items: center; width: 26px; height: 26px; border-radius: 8px; background: var(--lp-accent); color: #fff; font-size: 13px; font-weight: 800; }
+.lp-panelw-ic { width: 22px; height: 22px; border-radius: 6px; background: var(--lp-bg-soft); border: 1px solid var(--lp-line); }
+.lp-panelw-ic.is-on { background: #eef2ff; border-color: #c7d2fe; }
+.lp-panelw-rail-alt { margin-top: auto; width: 22px; height: 22px; border-radius: 50%; background: var(--lp-bg-soft); border: 1px solid var(--lp-line); }
+.lp-panelw-main { flex: 1; min-width: 0; padding: var(--s-4) var(--s-5) var(--s-5); }
 
-/* ── Yüzen kartlar ── */
+.lp-panelw-top { display: flex; align-items: center; gap: var(--s-3); padding-bottom: var(--s-3); }
+.lp-panelw-avatar { width: 28px; height: 28px; border-radius: 50%; background: linear-gradient(135deg, #e7e7e4, #cfcfcb); flex-shrink: 0; }
+.lp-panelw-top b { font-size: 16px; font-weight: 800; letter-spacing: -0.02em; }
+.lp-panelw-topic { margin-left: auto; font-size: 13px; color: var(--lp-faint); letter-spacing: 4px; }
+
+.lp-panelw-h { margin: var(--s-3) 0 var(--s-3); font-size: var(--t-body); font-weight: 800; letter-spacing: -0.01em; }
+
+/* 5 araç kartı — referanstaki renkli sıra. Araçların hepsi üründe var. */
+.lp-tools { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: var(--s-3); }
+.lp-tool { position: relative; aspect-ratio: 10/11; border-radius: var(--r-md); overflow: hidden; padding: var(--s-3); display: flex; flex-direction: column; }
+.lp-tool-t { font-size: 13px; font-weight: 800; color: #fff; line-height: 1.15; letter-spacing: -0.01em; }
+.lp-tool-t--koyu { color: var(--lp-ink); }
+.lp-tool--mavi { background: linear-gradient(140deg, #4f7df9, #8b5cf6); }
+.lp-tool--yesil { background: linear-gradient(140deg, #10b981, #6ee7b7); }
+.lp-tool--mor { background: linear-gradient(140deg, #312e81, #7c3aed); }
+.lp-tool--beyaz { background: var(--lp-bg); border: 1px solid var(--lp-line); }
+.lp-tool--acik { background: #eef2ff; }
+.lp-tool--beyaz img, .lp-tool--mor img { margin-top: auto; width: 100%; aspect-ratio: 16/10; object-fit: cover; border-radius: var(--r-sm); }
+.lp-tool-vs { margin: auto 0; display: flex; align-items: center; justify-content: center; gap: 7px; color: #fff; font-size: 13px; font-weight: 800; }
+.lp-tool-vs i { width: 30px; height: 30px; border-radius: 50%; background: rgba(255,255,255,.28); display: grid; place-items: center; font-style: normal; }
+.lp-tool-vs i.soru { background: #ec4899; }
+.lp-tool-ara { margin-top: auto; display: block; border-radius: 999px; background: rgba(255,255,255,.92); padding: 6px 10px; font-size: 10.5px; color: #475569; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.lp-tool-rozet { position: absolute; right: 9px; top: 9px; border-radius: 999px; background: var(--lp-pos); color: #fff; padding: 2px 8px; font-family: var(--font-mono); font-size: 10.5px; font-weight: 700; }
+.lp-tool-chip { margin-top: var(--s-2); display: inline-block; border-radius: 999px; background: #fff; border: 1px solid #c7d2fe; padding: 4px 9px; font-size: 10.5px; font-weight: 700; color: #4338ca; align-self: flex-start; }
+.lp-tool-chip--dolu { background: #4f46e5; border-color: #4f46e5; color: #fff; }
+.lp-tools-alt { margin-top: var(--s-3); display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--s-3); }
+.lp-tools-alt b { display: block; font-size: 12.5px; font-weight: 800; }
+.lp-tools-alt span { display: block; margin-top: 3px; font-size: 11px; line-height: 1.45; color: var(--lp-faint); }
+
+.lp-panelw-videos { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--s-3); }
+.lp-panelw-video { position: relative; aspect-ratio: 16/9; border-radius: var(--r-sm); overflow: hidden; background: var(--lp-bg-soft); }
+.lp-panelw-video img { width: 100%; height: 100%; object-fit: cover; }
+.lp-panelw-play { position: absolute; inset: 0; display: grid; place-items: center; color: #fff; font-size: 22px; text-shadow: 0 2px 10px rgba(0,0,0,.5); }
+
+/* ═ YÜZEN KARTLAR ═ */
 .lp-fl {
   position: absolute; z-index: 3;
   border-radius: var(--r-lg);
   background: var(--lp-bg);
   border: 1px solid var(--lp-line);
-  box-shadow: 0 18px 44px rgba(16, 16, 20, .13);
+  box-shadow: 0 18px 44px rgba(16, 16, 20, .14);
 }
-.lp-fl-num { font-size: 26px; font-weight: 800; letter-spacing: -0.035em; line-height: 1; }
-.lp-fl-num--sm { font-size: 19px; }
-.lp-fl-ust { font-size: var(--t-micro); color: var(--lp-faint); }
-.lp-fl-alt { margin-top: 5px; font-size: var(--t-micro); color: var(--lp-faint); }
+.lp-fl-num { font-size: 27px; font-weight: 800; letter-spacing: -0.035em; line-height: 1.05; }
+.lp-fl-num--md { font-size: 20px; }
+.lp-fl-num em { font-style: normal; font-size: 13px; font-weight: 700; color: var(--lp-pos); }
+.lp-fl-ust { font-size: var(--t-micro); font-weight: 600; color: var(--lp-faint); }
+.lp-fl-ust span { font-weight: 400; }
+.lp-fl-alt { margin-top: 4px; font-size: var(--t-micro); color: var(--lp-faint); }
+.lp-fl-marka { display: flex; align-items: center; gap: 6px; margin-bottom: var(--s-2); font-size: 10.5px; font-weight: 800; letter-spacing: .08em; color: rgba(255,255,255,.85); }
+.lp-fl-marka--koyu { color: var(--lp-ink); }
+.lp-fl-mark { display: inline-grid; place-items: center; width: 16px; height: 16px; border-radius: 5px; background: var(--lp-accent); color: #fff; font-size: 9px; font-weight: 800; }
 
-.lp-fl--koyu { background: #16171a; border-color: #16171a; color: #fff; padding: var(--s-4) var(--s-5); }
-.lp-fl--koyu .lp-fl-alt { color: rgba(255,255,255,.6); }
-.lp-fl--turuncu { background: var(--lp-accent); border-color: var(--lp-accent); color: #fff; padding: var(--s-4) var(--s-5); box-shadow: 0 18px 44px rgba(255, 92, 0, .28); }
-.lp-fl--turuncu .lp-fl-alt { color: rgba(255,255,255,.78); }
-.lp-fl--yesil { background: var(--lp-pos); border-color: var(--lp-pos); color: #fff; padding: 12px 18px; font-size: var(--t-body); font-weight: 700; box-shadow: 0 16px 38px rgba(4, 150, 90, .26); }
-.lp-fl--siyah { background: #16171a; border-color: #16171a; color: #fff; padding: 11px 18px; font-size: var(--t-small); font-weight: 700; border-radius: 999px; }
+/* Sol küme */
+.lp-fl--outlier { left: 0; top: 0; width: 240px; padding: var(--s-3); transform: rotate(-2.5deg); }
+.lp-fl--outlier figcaption { display: flex; align-items: center; gap: 7px; font-size: var(--t-body); font-weight: 800; margin-bottom: var(--s-2); }
+.lp-fl--outlier img { width: 100%; aspect-ratio: 16/10; object-fit: cover; border-radius: var(--r-sm); display: block; }
+.lp-fl-pill { display: inline-block; margin-top: var(--s-3); border-radius: 999px; background: #4f7df9; padding: 7px 18px; color: #fff; font-family: var(--font-mono); font-size: var(--t-body); font-weight: 700; }
 
-/* Outlier kartı — referanstaki gibi hafif eğik, pencerenin sol kenarına biner. */
-.lp-fl--outlier { left: 0; top: 10px; width: 236px; padding: var(--s-3); transform: rotate(-3deg); }
-.lp-fl--outlier figcaption { font-size: var(--t-body); font-weight: 800; margin-bottom: var(--s-2); }
-.lp-fl--outlier img { width: 100%; aspect-ratio: 16/9; object-fit: cover; border-radius: var(--r-sm); display: block; }
-.lp-fl-pill { display: inline-block; margin-top: var(--s-3); border-radius: var(--r-md); background: var(--lp-ink); padding: 7px 16px; color: #fff; font-family: var(--font-mono); font-size: var(--t-body); font-weight: 700; }
+.lp-fl--yesil { left: 118px; top: 300px; z-index: 4; transform: rotate(-2deg); background: #22c55e; border-color: #22c55e; color: #fff; padding: 13px 20px; font-size: 16px; font-weight: 800; border-radius: var(--r-md); box-shadow: 0 16px 38px rgba(34, 197, 94, .3); }
 
-.lp-fl--yesil { left: 96px; top: 262px; transform: rotate(-2deg); }
-.lp-fl--kanal { left: 8px; top: 350px; }
-.lp-fl--grafik { left: 186px; top: 432px; width: 244px; padding: var(--s-4) var(--s-5); }
-.lp-fl--izlenme { right: 96px; top: 108px; padding: var(--s-4) var(--s-5); }
-.lp-fl--turuncu { right: 0; top: 18px; transform: rotate(4deg); }
-.lp-fl--siyah { right: 24px; top: 320px; }
+.lp-fl--kanal { left: 6px; top: 396px; padding: var(--s-4) var(--s-5); background: #16171a; border-color: #16171a; color: #fff; text-align: center; }
+.lp-fl--kanal .lp-fl-alt { color: rgba(255,255,255,.6); }
 
-.lp-bars { margin-top: var(--s-3); display: flex; align-items: flex-end; gap: 3px; height: 48px; }
-.lp-bars i { flex: 1; border-radius: 2px 2px 0 0; background: var(--lp-accent); opacity: .8; }
+.lp-fl--cizgi { left: 196px; top: 358px; z-index: 4; width: 320px; padding: var(--s-4); }
+.lp-fl-cizgi-ust { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: var(--s-2); }
+.lp-fl--cizgi svg { width: 100%; height: 74px; display: block; }
+.lp-fl--cizgi polyline { fill: none; stroke: var(--lp-accent); stroke-width: 2.5; stroke-linejoin: round; }
+.lp-fl-eksen { display: flex; justify-content: space-between; margin-top: 4px; font-size: 10px; color: var(--lp-faint); }
+
+/* Sağ küme */
+.lp-fl--izlenme { right: 64px; top: 96px; z-index: 4; padding: var(--s-4) var(--s-5); }
+.lp-fl--turuncu { right: 0; top: 34px; z-index: 5; transform: rotate(5deg); background: var(--lp-accent); border-color: var(--lp-accent); color: #fff; padding: var(--s-4) var(--s-5); text-align: center; box-shadow: 0 18px 44px rgba(255, 92, 0, .3); }
+.lp-fl--turuncu .lp-fl-marka { justify-content: center; }
+.lp-fl--turuncu .lp-fl-alt { color: rgba(255,255,255,.8); }
+.lp-fl--siyah { right: 36px; top: 330px; background: #16171a; border-color: #16171a; color: #fff; padding: 12px 20px; font-size: 15px; font-weight: 800; border-radius: 999px; transform: rotate(-2deg); display: flex; align-items: center; gap: 8px; }
+.lp-fl-nokta { width: 7px; height: 7px; border-radius: 50%; background: var(--lp-accent); }
+.lp-fl--grafik { right: 0; top: 400px; width: 300px; padding: var(--s-4) var(--s-5); }
+
+.lp-bars { margin-top: var(--s-3); display: flex; align-items: flex-end; gap: 3px; height: 64px; }
+.lp-bars i { flex: 1; border-radius: 2px 2px 0 0; background: var(--lp-accent); opacity: .75; }
 
 .lp-stage .lp-stats { margin-top: var(--s-8); }
 
-/* Dar ekran: yüzenler ve çizgiler gizlenir, pencere ortada tek başına kalır.
-   Üst üste binmeleri kaosa dönüşürdü; rakamlar alttaki satırda zaten var. */
+/* Dar ekran: yüzenler ve çizgiler gizlenir, panel tek başına kalır. */
 @media (max-width: 1180px) {
   .lp-fl, .lp-lines { display: none; }
-  .lp-stage-inner { min-height: 0; }
-  .lp-window--zengin { box-shadow: var(--sh-lift); }
+  .lp-stage-inner { min-height: 0; padding-top: 0; }
+}
+@media (max-width: 768px) {
+  .lp-tools { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .lp-tools > :nth-child(n+4), .lp-tools-alt > :nth-child(n+3) { display: none; }
+  .lp-tools-alt { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .lp-panelw-rail { display: none; }
 }
 
 .lp-window {
